@@ -14,11 +14,10 @@
               <span>Craft</span>
             </div>
           </div>
-          <p class="text-white text-[14] md:text-[14]leading- max-w-xl">
+          <p class="text-white text-[14] md:text-[14]leading- max-w-sm text-justify">
             Papercraft menyediakan berbagai perlengkapan alat tulis kantor
-            <br />
-            dan bahan kerajinan kertas. Temukan kertas, pensil, pena, dan <br />
-            alat papercraft berkualitas tinggi untuk memenuhi kebutuhan <br />
+            dan bahan kerajinan kertas. Temukan kertas, pensil, pena, dan
+            alat papercraft berkualitas tinggi untuk memenuhi kebutuhan
             kantor dan hobi kreatif Anda.
           </p>
         </div>
