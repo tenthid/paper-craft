@@ -21,7 +21,7 @@
             kantor dan hobi kreatif Anda.
           </p>
         </div>
-
+        
         <!-- Contact Section -->
         <div class="space-y-3 mt-6 md:mt-0">
           <h3 class="text-white text-[20] md:text-[20] font-medium">Contact</h3>
