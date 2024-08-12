@@ -20,11 +20,11 @@
         </div>
 
         <!-- Contact Section -->
-        <div class="space-y-3 mt-6 md:mt-0">
-          <h3 class="text-white text-lg md:text-xl font-medium">Contact</h3>
-          <p class="text-white text-sm md:text-lg leading-7">
+        <div class="space-y-3">
+          <h3 class="text-white text-xl font-medium">Contact</h3>
+          <p class="text-white text-lg leading-7">
             Call now:
-            <span class="text-gray font-medium">(0361) 555-0115</span>
+            <span class="text-[#9199a3] font-medium">(0361) 555-0115</span>
           </p>
           <p class="text-white text-lg leading-7">
             Email:
