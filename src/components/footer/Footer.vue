@@ -1,5 +1,4 @@
 <template>
-  <footer>
     <div
       class="max-w-screen-[100%] px-[60px] py-[70px] bg-primary flex flex-col gap-10 font-inter"
     >
@@ -79,7 +78,7 @@
 
         <!-- Support Section -->
         <div class="space-y-4 mt-6 md:mt-0">
-          <h3 class="text-white text-[20] md:text-[20] font-medium">Support</h3>
+          <h3 class="text-white text-[20px] md:text-[20px] font-medium">Support</h3>
           <ul class="space-y-1">
             <a href="#"
               ><li class="text-gray text-[16px] md:text-[16px] mb-2">
@@ -150,7 +149,6 @@
         </div>
       </div>
     </div>
-  </footer>
 </template>
 
 <script setup></script>
