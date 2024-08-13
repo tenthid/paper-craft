@@ -17,7 +17,7 @@ export default {
     },
     fontFamily: {
       'inter': ['"Inter"', 'sans-sherif'],
-      'hand-write': ['"Vujahday Script"', 'cursive'],
+      'hand-write': ['"Edu VIC WA NT Beginner"', 'cursive'],
     }
   },
   plugins: [],
