@@ -15,7 +15,8 @@ export default {
       'danger' : '#CB3A31',
     },
     fontFamily: {
-      'inter': ['"Inter"', 'sans-sherif']
+      'inter': ['"Inter"', 'sans-sherif'],
+      'hand-write': ['"Vujahday Script"', 'cursive'],
     }
   },
   plugins: [],
