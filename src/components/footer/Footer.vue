@@ -7,7 +7,7 @@
         <!-- Desc Section -->
         <div class="space-y-6">
           <div
-            class="flex items-center space-x-2 text-white text-[20px] md:text-[20px] font-bold"
+            class="flex items-center space-x-2 text-white text-[30px] md:text-[30px] font-bold"
           >
             <div style="display: flex; gap: 0">
               <span>Paper</span>
