@@ -3,7 +3,7 @@
     <div
       class="max-w-screen-[100%] p-5 md:p-10 bg-primary flex flex-col gap-10 font-inter"
     >
-      <div class="flex flex-col md:flex-row justify-between">
+      <div class="flex justify-between">
         <!-- Desc Section -->
         <div class="space-y-6">
           <div
@@ -27,11 +27,11 @@
           <h3 class="text-white text-[20] md:text-[20] font-medium">Contact</h3>
           <p class="text-white text-[18] md:text-[18] leading-7">
             Call now:
-            <span class="text-gray font-medium">(0361) 555-0115</span>
+            <span class="text-[#9199a3] font-medium">(0361) 555-0115</span>
           </p>
           <p class="text-white text-[18] md:text-[18] leading-7">
             Email:
-            <span class="text-gray font-medium">papercraft@gmail.com</span>
+            <span class="text-[#9199a3] font-medium">papercraft@gmail.com</span>
           </p>
           <p class="text-white text-[18] leading-tight">
             Jln Singosari Gg.Bebek No.6
