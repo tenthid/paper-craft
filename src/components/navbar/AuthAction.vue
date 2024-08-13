@@ -1,7 +1,7 @@
 <template>
-    <div class="flex gap-[15px]">
+    <div class="flex gap-[15px] items-center">
         <router-link to="/login">
-            <div class="btn text-primary rounded-[25px] border-solid border-[1px] border-primary text-[14px] font-inter">
+            <div class="btn text-primary rounded-[25px] border-solid border-[1px] border-primary text-[14px] font-inter hover:bg-primary hover:text-[#FFFFFF] transition-all">
                 Login
             </div>
         </router-link>

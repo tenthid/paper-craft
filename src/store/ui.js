@@ -2,7 +2,8 @@ export default {
     namespaced: true,
     state () {
         return {
-            akuAdalah: 'manusia'
+            akuAdalah: 'manusia',
+            dropdownVisible: false
         }
     },
 
@@ -14,6 +15,9 @@ export default {
         ubahAkuAdalah(state, payload) {
             state.akuAdalah = payload
             console.log(state.akuAdalah)
+        },
+        changeDropdownVisibility(state, payload) {
+            state.dropdownVisible = payload
         }
     },
 
