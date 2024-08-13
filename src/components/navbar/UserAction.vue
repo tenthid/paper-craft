@@ -14,6 +14,10 @@
                 </div>
             </div>
         </div>
+        <div class="flex gap-[12px]">
+            <img width="40px" height="40px" class="rounded-full" src="" alt="profile-img">
+            <img width="16px" height="16px" src="/images/dropdown-icon.svg" alt="dropdown-icon">
+        </div>
     </div>
 </template>
 
