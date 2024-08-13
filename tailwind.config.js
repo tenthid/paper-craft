@@ -13,8 +13,6 @@ export default {
       'gray' : '#9199a3',
       'white' : '#ffffff',
       'danger' : '#CB3A31',
-      'white' : '#FFFFFF'
-
     },
     fontFamily: {
       'inter': ['"Inter"', 'sans-sherif']
