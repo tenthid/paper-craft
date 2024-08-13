@@ -1,5 +1,4 @@
 <template>
-  <footer>
     <div
       class="max-w-screen-[100%] px-[60px] py-[70px] bg-primary flex flex-col gap-10 font-inter"
     >
@@ -150,7 +149,6 @@
         </div>
       </div>
     </div>
-  </footer>
 </template>
 
 <script setup></script>
