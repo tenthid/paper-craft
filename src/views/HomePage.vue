@@ -1,12 +1,12 @@
 <template>
   <div
-    class="w-full relative h-[720px] overflow-hidden flex flex-col items-center justify-center gap-[30px] bg-cover bg-no-repeat text-center text-[50px] text-primary-1 font-inter"
+    class="w-full relative h-[720px] overflow-hidden flex flex-col items-center justify-center gap-[30px] bg-cover bg-no-repeat text-center text-[50px] "
     style="background-image: url('/images/banner-home.png')"
   >
     <div class="relative tracking-[0.1px]">
       <p class="m-0">
         <b class="text-primary">Temukan Perlengkapan <span class="font-figma-hand text-white2">Terbaik</span></b><br>
-        <b class="text-primary">Untuk Kinerja <span class="font-figma-hand text-white2">Terbaik</span></b>
+        <b class="text-primary ">Untuk Kinerja <span class="font-hand-write text-white2">Terbaik</span></b>
       </p>
     </div>
     <button

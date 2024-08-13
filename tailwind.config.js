@@ -12,6 +12,8 @@ export default {
       'primary-background' : 'ECF3F7',
       'gray' : '#9199a3',
       'danger' : '#CB3A31',
+      'white' : '#FFFFFF',
+      'white2' : '#F3F7EC',
     },
     fontFamily: {
       'inter': ['"Inter"', 'sans-sherif'],
