@@ -34,35 +34,104 @@
     <div
       class="self-stretch rounded-[15px] bg-primary-background overflow-hidden flex flex-row items-center justify-center p-[25px] gap-5 text-left text-xl text-primary font-inter"
     >
-      <div
-        class="flex-1 rounded-[10px] bg-white overflow-hidden flex flex-row items-center justify-center py-2.5 px-5"
+      <router-link
+        to="/category"
+        class="flex-1 rounded-[10px] bg-white overflow-hidden flex flex-row items-center justify-center py-2.5 px-5 relative leading-[120%] font-medium"
       >
-        <div class="relative leading-[120%] font-medium">Category name</div>
-      </div>
-      <div
-        class="flex-1 rounded-[10px] bg-white overflow-hidden flex flex-row items-center justify-center py-2.5 px-5"
-      >
-        <div class="relative leading-[120%] font-medium">Category name</div>
-      </div>
-      <div
-        class="flex-1 rounded-[10px] bg-white overflow-hidden flex flex-row items-center justify-center py-2.5 px-5"
-      >
-        <div class="relative leading-[120%] font-medium">Category name</div>
-      </div>
-      <div
-        class="flex-1 rounded-[10px] bg-white overflow-hidden flex flex-row items-center justify-center py-2.5 px-5"
-      >
-        <div class="relative leading-[120%] font-medium">Category name</div>
-      </div>
-      <router-link to="/category"
-        class="self-stretch rounded-[10px] bg-primary overflow-hidden flex flex-row items-center justify-center py-2.5 px-5 text-white btn"
-      >
-        <div class="relative leading-[120%] font-medium">View all</div>
+        Category name
       </router-link>
+      <router-link
+        to="/category"
+        class="flex-1 rounded-[10px] bg-white overflow-hidden flex flex-row items-center justify-center py-2.5 px-5 relative leading-[120%] font-medium"
+      >
+        Category name
+      </router-link>
+      <router-link
+        to="/category"
+        class="flex-1 rounded-[10px] bg-white overflow-hidden flex flex-row items-center justify-center py-2.5 px-5 relative leading-[120%] font-medium"
+      >
+        Category name
+      </router-link>
+      <router-link
+        to="/category"
+        class="flex-1 rounded-[10px] bg-white overflow-hidden flex flex-row items-center justify-center py-2.5 px-5 relative leading-[120%] font-medium"
+      >
+        Category name
+      </router-link>
+      <router-link
+        to="/category"
+        class="self-stretch rounded-[10px] bg-primary overflow-hidden flex flex-row items-center justify-center py-2.5 px-5 text-white btn relative leading-[120%] font-medium"
+      >
+        View all
+      </router-link>
+    </div>
+  </div>
+
+  <div class="container-page bg-primary-background">
+    <PopularProduct />
+  </div>
+
+  <div
+    class="w-full relative rounded-[20px] bg-primary-1 overflow-hidden flex flex-row items-center justify-center text-left text-[40px] text-white font-maitree"
+  >
+    <div
+      class="self-stretch bg-primary overflow-hidden flex flex-row items-center justify-center py-0 px-[30px]"
+    >
+      <div class="relative leading-[60px] font-medium">
+        <p class="m-0">Shop By</p>
+        <p class="m-0">Brand</p>
+      </div>
+    </div>
+    <div
+      class="flex-1 overflow-hidden flex flex-row items-start justify-start p-[50px] gap-[30px] text-[30px] text-black font-inter"
+    >
+      <div
+        class="self-stretch rounded-3xs bg-white overflow-hidden flex flex-col items-center justify-center py-[15px] px-[30px] gap-2.5"
+      >
+        <div class="w-[70px] relative bg-gainsboro h-[70px]" />
+        <div class="relative leading-[120%] font-medium">Brand name</div>
+      </div>
+      <div
+        class="flex-1 rounded-3xs overflow-hidden flex flex-col items-start justify-start gap-5 text-xl"
+      >
+        <div
+          class="self-stretch rounded-3xs overflow-hidden flex flex-row items-start justify-start gap-5"
+        >
+          <div
+            class="w-[300px] rounded-3xs bg-white overflow-hidden shrink-0 flex flex-row items-center justify-center py-[15px] px-[30px] box-border gap-2.5"
+          >
+            <div class="w-[50px] relative bg-gainsboro h-[50px]" />
+            <div class="relative leading-[120%] font-medium">Brand name</div>
+          </div>
+          <div
+            class="flex-1 rounded-3xs bg-white overflow-hidden flex flex-row items-center justify-center py-[15px] px-[30px] gap-2.5"
+          >
+            <div class="w-[50px] relative bg-gainsboro h-[50px]" />
+            <div class="relative leading-[120%] font-medium">Brand name</div>
+          </div>
+        </div>
+        <div
+          class="self-stretch rounded-3xs overflow-hidden flex flex-row items-start justify-start gap-5"
+        >
+          <div
+            class="flex-1 rounded-3xs bg-white overflow-hidden flex flex-row items-center justify-center py-[15px] px-[30px] gap-2.5"
+          >
+            <div class="w-[50px] relative bg-gainsboro h-[50px]" />
+            <div class="relative leading-[120%] font-medium">Brand name</div>
+          </div>
+          <div
+            class="w-[300px] rounded-3xs bg-white overflow-hidden shrink-0 flex flex-row items-center justify-center py-[15px] px-[30px] box-border gap-2.5"
+          >
+            <div class="w-[50px] relative bg-gainsboro h-[50px]" />
+            <div class="relative leading-[120%] font-medium">Brand name</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
-<script setup></script>
-
+<script setup>
+import PopularProduct from "../components/product/PopularProduct.vue";
+</script>
 <style scoped></style>
