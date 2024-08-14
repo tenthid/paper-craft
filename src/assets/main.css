@@ -1,6 +1,7 @@
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kaushan+Script&family=Pattaya&family=Syne&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@400..700&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kaushan+Script&family=Pattaya&family=Syne&family=Vujahday+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Noto+Serif+Khitan+Small+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Maitree:wght@200;300;400;500;600;700&family=Noto+Serif+Khitan+Small+Script&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -38,5 +39,9 @@ img {
 @layer utilities {
   .input-no-focus:focus {
     outline: none;
+  }
+  .container-page {
+    padding-left: 60px;
+    padding-right: 60px;
   }
 }

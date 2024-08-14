@@ -14,10 +14,12 @@ export default {
       'danger' : '#CB3A31',
       'white' : '#FFFFFF',
       'white2' : '#F3F7EC',
+      'white3' : '#D9D9D9'
     },
     fontFamily: {
       'inter': ['"Inter"', 'sans-sherif'],
-      'hand-write': ['"Edu VIC WA NT Beginner"', 'cursive'],
+      'hand-write': ['"Kalam"', 'sans-serif'],
+      'maitree': ['"Maitree"', 'serif']
     }
   },
   plugins: [],
