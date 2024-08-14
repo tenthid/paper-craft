@@ -2,7 +2,7 @@
     <nav class="w-[100%] bg-white fixed h-[65px] border-b-[0.5px] border-primary flex py-[10px] px-[50px] gap-[40px] z-[99999]">
         <img @click="router.push('/')" class=" w-[88px]" src="/images/logo-full.png" alt="logo">
         <div class="border-[1px] border-solid rounded-full border-[#E0E0E0] w-[100%] h-[40px] input-group">
-            <div class="flex items-center py-[8px] px-[14px]">
+            <div class="group-span">
                 <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
                 <img width="100%" height="auto" src="/images/magnify-glass.svg" alt="logo">
             </div>
@@ -17,7 +17,7 @@
     import UserAction from './UserAction.vue';
     import { useRouter } from 'vue-router';
 
-    const loginStatus = true
+    const loginStatus = false
     const router = useRouter()
 
     const components = {

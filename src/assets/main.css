@@ -24,24 +24,26 @@ img {
     justify-content: center;
     overflow: hidden;
     width: 100%;
+    padding: 8px 14px;
+    gap: 14px;
   }
 
   .group-span {
     display: flex;
     align-items: center;
-    padding: 8px 14px;
   }
 
   .group-controll {
     width: 100%;
-    padding: 8px 0px;
-    padding-right: 14px;
   }
 
   .form-card {
     padding: 24px;
     display: flex;
     flex-direction: column;
+    background: white;
+    border-radius: 8px;
+    align-items: center;
   }
 
   .form-card-body {
@@ -49,12 +51,40 @@ img {
     gap: 24px;
     flex-direction: column;
     width: 100%;
+    padding-top: 40px;
+    padding-bottom: 16px;
   }
 
   .form-card-footer {
     display: flex;
     gap: 30px;
     width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .input-check {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    vertical-align: top;
+    width: 16px;
+    height: 16px;
+    background-color: #ECF3F7;
+    border-radius: 3px;
+  }
+
+  
+  .input-check:checked {
+    background: #006989 ;
+    border-color: #006989 ;
+    content: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/></svg>");
+  }
+  
+  .input-check:focus {
+    border-color: #006989;
+    outline: 0 ;
+    box-shadow: 0 0 0 0.25rem rgba(0, 105, 137, 0.25);
   }
 }
 
