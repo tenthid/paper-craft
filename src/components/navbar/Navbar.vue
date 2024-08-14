@@ -6,7 +6,7 @@
                 <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
                 <img width="100%" height="auto" src="/images/magnify-glass.svg" alt="logo">
             </div>
-            <input type="text" class="flex w-[100%] py-[8px] pr-[16px] focus:outline-none" placeholder="Search for items">
+            <input type="text" class="flex w-[100%] py-[8px] pr-[16px] input-no-focus" placeholder="Search for items">
         </div>
         <component :is="components[loginStatus? 'userAction' : 'authAction']"></component>
     </nav>

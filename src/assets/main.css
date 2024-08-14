@@ -17,4 +17,26 @@ img {
     justify-content: center;
     align-items: center;
   }
+
+  .input-group {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .group-span {
+    display: flex;
+    align-items: center;
+    padding: 8px 14px;
+  }
+
+  .group-controll {
+    
+  }
+}
+
+@layer utilities {
+  .input-no-focus:focus {
+    outline: none;
+  }
 }
