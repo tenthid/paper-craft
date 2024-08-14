@@ -9,11 +9,13 @@
         ubah
     </button>
   </div>
+  <BaseInput :isPassword="true" :label="'Email'" :placeholder="'Enter your email'" :identity="'email'" :withSpan="false"></BaseInput>
 </template>
 
 <script setup>
     import { computed, reactive } from 'vue';
     import { useStore } from 'vuex';
+    import BaseInput from '@/components/ui/BaseInput.vue';
 
     const store = useStore()
 
