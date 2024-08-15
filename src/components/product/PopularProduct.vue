@@ -3,14 +3,14 @@
     class="w-full relative overflow-hidden flex flex-col items-start justify-start gap-5 text-center text-[35px] text-primary font-inter"
   >
     <div
-      class="w-full relative overflow-hidden flex flex-row justify-between text-primary font-inter my-[20px]"
+      class="w-full relative overflow-hidden flex flex-row justify-between text-primary font-inter mt-[20px]"
     >
       <div
         class="w-full relative flex flex-row justify-between text-center text-[35px] text-primary font-inter"
       >
         <h2 class="relative text-primary font-inter">Popular Product</h2>
         <router-link
-          to="/popproduct "
+          to="/pop-product "
           class="relative text-[20px] font-light text-primary-1"
           >View all</router-link
         >
