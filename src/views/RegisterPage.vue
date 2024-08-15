@@ -1,7 +1,10 @@
 <template>
-    <div class="flex bg-primary-background gap-[70px] px-[20px] phone-s:py-[50px] phone-l:py-[0px] phone-l:h-[100vh] justify-center items-center">
+    <div class="flex bg-primary-background gap-[70px] px-[20px] tablet:h-[100vh] phone-l:py-[0px]  justify-center items-center">
         <img class="phone-s:hidden laptop-l:block" width="692px" height="auto" src="/images/register-img.png" alt="img">
-        <div class="form-card w-[450px]">
+        <router-link to="/" class="absolute top-0 left-0 ml-[20px] mt-[20px] tablet:hidden">
+            <img width="30px" height="auto"  src="/images/arrow-left-circle.svg" alt="back-button">
+        </router-link>
+        <div class="form-card w-[450px] phone-s:my-[80px] tablet:my-0">
             <p class="text-primary text-[40px] font-maitree font-[600]">Get Started</p>
             <p class="text-gray text-[14px] font-maitree font-[600] text-center">Enter your personal information to make an account</p>
             <div class="form-card-body">

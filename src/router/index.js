@@ -4,6 +4,8 @@ import AuthLayout from '../layouts/AuthLayout.vue'
 import HomePage from '../views/HomePage.vue'
 import LoginPage from "@/views/LoginPage.vue"
 import RegisterPage from "@/views/RegisterPage.vue"
+import ForgotPasswordPage from '@/views/ForgotPasswordPage.vue'
+import ResetPasswordPage from '@/views/ResetPasswordPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +35,24 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: RegisterPage,
+    },
+
+    {
+      meta: {
+        layout: AuthLayout
+      },
+      path: '/forgot-password',
+      name: 'forgotPassword',
+      component: ForgotPasswordPage,
+    },
+
+    {
+      meta: {
+        layout: AuthLayout
+      },
+      path: '/reset-password',
+      name: 'resetPassword',
+      component: ResetPasswordPage,
     },
   ]
 })
