@@ -2,7 +2,7 @@
   <div
     class="w-full relative overflow-hidden flex flex-row items-center justify-start gap-5 text-left text-sm text-black font-inter"
   >
-    <div
+    <router-link to="/detailproduct"
       v-for="(product, index) in products"
       :key="index"
       class="self-stretch flex-1 rounded-3xs bg-white overflow-hidden flex flex-col items-center justify-start p-[15px] relative gap-2.5"
@@ -55,11 +55,11 @@
             />
           </router-link>
         </div>
-        <div
+        <router-link to="/checkout"
           class="self-stretch flex-1 rounded-8xs border-primary border-[1px] border-solid overflow-hidden flex flex-row items-center justify-center py-0.5 px-0"
         >
           <div class="relative leading-[16px] font-medium">Buy now</div>
-        </div>
+        </router-link>
       </div>
       <div
         class="w-[30px] !m-[0] absolute top-[12px] left-[13px] rounded-6xl bg-white h-[30px] flex flex-row items-center justify-center p-1 box-border z-[3]"
@@ -70,14 +70,18 @@
           src="/images/heart.svg"
         />
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
 
-<script setup>
+<script lang="ts">
 import { defineComponent } from "vue";
 
-const products = [
+export default defineComponent({
+  name: "ProductCardContainer",
+  data() {
+    return {
+      products: [
         {
           name: "This Product name bla bla ba ball",
           brand: "Brand name",
@@ -113,5 +117,8 @@ const products = [
           stock: 11,
           image: "/images/tas.jpg",
         },
-      ]
+      ],
+    };
+  },
+});
 </script>
