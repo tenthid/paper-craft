@@ -14,7 +14,6 @@ export default {
       'danger' : '#CB3A31',
       'white' : '#FFFFFF',
       'white2' : '#F3F7EC',
-      'white3' : '#D9D9D9',
       'primary1' : '#006989',
     },
     fontFamily: {

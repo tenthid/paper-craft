@@ -10,7 +10,7 @@
                 <base-input v-model="userInput.email" label="Email" placeholder="Enter your email" :withSpan="false" identity="password"></base-input>
             </div>
             <div class="form-card-footer mt-[30px]">
-                <div class="btn bg-primary rounded-[12px] text-white w-[100%]">Send</div>
+                <div class="btn bg-primary rounded-[12px] text-white w-[100%]">:text</div>
             </div>
         </div>
     </div>
@@ -19,6 +19,8 @@
 <script setup>
     import BaseInput from '@/components/ui/BaseInput.vue';
     import { reactive } from 'vue';
+
+    const text = 'haloooo'
 
     const userInput = reactive({
         email: ''
