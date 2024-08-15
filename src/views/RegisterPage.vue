@@ -3,7 +3,7 @@
         <img class="phone-s:hidden laptop-l:block" width="692px" height="auto" src="/images/register-img.png" alt="img">
         <div class="form-card w-[450px]">
             <p class="text-primary text-[40px] font-maitree font-[600]">Get Started</p>
-            <p class="text-gray text-[14px] font-maitree font-[600]">Enter your personal information to make an account</p>
+            <p class="text-gray text-[14px] font-maitree font-[600] text-center">Enter your personal information to make an account</p>
             <div class="form-card-body">
                 <base-input v-model="userInput.username" label="Username" placeholder="Enter your username" :withSpan="false" identity="username"></base-input>
                 <base-input v-model="userInput.email" label="Email" placeholder="Enter your email" :withSpan="false" identity="password"></base-input>

@@ -1,8 +1,8 @@
 <template>
 
-    <nav class="absolute pt-[50px] pl-[60px]">
+    <nav class="absolute pt-[50px] pl-[60px] phone-s:hidden tablet:block">
         <router-link to="/">
-            <img src="/images/arrow-left-circle.svg" alt="">
+            <img src="/images/arrow-left-circle.svg" alt="backbutton">
         </router-link>
     </nav>
 

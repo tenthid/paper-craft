@@ -2,8 +2,9 @@
     <div class="flex bg-primary-background gap-[70px] px-[20px] h-[100vh] justify-center items-center">
         <img class="phone-s:hidden laptop-l:block" width="692px" height="auto" src="/images/login-img.png" alt="img">
         <div class="form-card w-[450px]">
-            <p class="text-primary text-[40px] font-maitree font-[600]">Welcome back</p>
-            <p class="text-gray text-[14px] font-maitree font-[600]">Enter your email and password to access your account</p>
+            <!-- <img width="30px" height="auto" class=" self-start" src="/images/arrow-left-circle.svg" alt="back-button"> -->
+            <p class="text-primary phone-s:text-[35px] tablet:text-[40px] font-maitree font-[600] text-center">Welcome back</p>
+            <p class="text-gray text-[14px] font-maitree font-[600] text-center">Enter your email and password to access your account</p>
             <div class="form-card-body">
                 <base-input v-model="userInput.email" label="Email" placeholder="Enter your email" :withSpan="false" identity="password"></base-input>
                 <base-input v-model="userInput.password" type="password" label="Password" placeholder="Enter your password" :isPassword="true" :withSpan="false" identity="password"></base-input>
