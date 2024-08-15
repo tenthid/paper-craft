@@ -74,14 +74,10 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup>
 import { defineComponent } from "vue";
 
-export default defineComponent({
-  name: "ProductCardContainer",
-  data() {
-    return {
-      products: [
+const products = [
         {
           name: "This Product name bla bla ba ball",
           brand: "Brand name",
@@ -117,8 +113,5 @@ export default defineComponent({
           stock: 11,
           image: "/images/tas.jpg",
         },
-      ],
-    };
-  },
-});
+      ]
 </script>
