@@ -9,8 +9,10 @@ import ResetPasswordPage from "@/views/ResetPasswordPage.vue";
 import ProductsPage from "@/views/ProductsPage.vue";
 import HomeAdminPage from "@/views/HomeAdminPage.vue";
 import AdminLayout from "@/layouts/AdminLayout.vue";
+import BrandAdminPage from "@/views/BrandAdminPage.vue";
 import ProductAdminPage from "@/views/ProductAdminPage.vue";
 import CustomerAdminPage from "@/views/CustomerAdminPage.vue";
+import CategoryAdminPage from "@/views/CategoryAdminPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -106,7 +108,7 @@ const router = createRouter({
       },
       path: "/customer-admin",
       name: "CustomerAdmin",
-      component: CustomerAdminPageAdminPage,
+      component: CustomerAdminPage,
     },
   ],
 });
