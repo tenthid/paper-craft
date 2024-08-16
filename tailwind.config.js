@@ -21,7 +21,7 @@ export default {
       'inter': ['"Inter"', 'sans-sherif'],
       'hand-write': ['"Kalam"', 'sans-serif'],
       'maitree': ['"Maitree"', 'serif']
-    }
+    },
   },
   plugins: [],
 }
