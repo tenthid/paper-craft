@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full relative overflow-hidden flex flex-col items-start justify-start gap-5 text-center text-[35px] text-primary font-inter"
+    class="w-full relative overflow-hidden flex flex-col items-start justify-start text-center text-[35px] text-primary font-inter"
   >
     <div
       class="w-full relative overflow-hidden flex flex-row justify-between text-primary font-inter mb-[20px]"
