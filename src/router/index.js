@@ -7,6 +7,9 @@ import RegisterPage from "@/views/RegisterPage.vue"
 import ForgotPasswordPage from '@/views/ForgotPasswordPage.vue'
 import ResetPasswordPage from '@/views/ResetPasswordPage.vue'
 import ProductsPage from '@/views/ProductsPage.vue'
+import HomeAdminPage from '@/views/HomeAdminPage.vue'
+import AdminLayout from '@/layouts/AdminLayout.vue'
+import ProductAdminPage from '@/views/ProductAdminPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,6 +65,24 @@ const router = createRouter({
       path: '/products-page',
       name: 'Products',
       component: ProductsPage,
+    },
+
+    {
+      meta: {
+        layout: AdminLayout
+      },
+      path: '/home-admin',
+      name: 'HomeAdmin',
+      component: HomeAdminPage,
+    },
+
+    {
+      meta: {
+        layout: AdminLayout
+      },
+      path: '/products-admin',
+      name: 'ProductAdmin',
+      component: ProductAdminPage,
     },
   ]
 })
