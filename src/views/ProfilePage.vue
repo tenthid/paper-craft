@@ -7,16 +7,24 @@
                     {{ wichPage() }}
                 </p>
             </div>
-            <EditProfile></EditProfile>
+            <component :is="wichComponent[wichPage()]"></component>
         </div>
     </div>
 </template>
 
 <script setup>
     import ProfileNavigation from '@/components/profile/ProfileNavigation.vue';
+    import ChangePassword from '@/components/profile/ChangePassword.vue';
+    import TransactionHistory from '@/components/profile/TransactionHistory.vue';
     import { useRoute } from 'vue-router';
     import EditProfile from '@/components/profile/EditProfile.vue';
     const route = useRoute()
+
+    const wichComponent = {
+        'Profile' : EditProfile,
+        'Change Password' : ChangePassword,
+        'Transaction History' : TransactionHistory,
+    }
 
     const wichPage = () => {
         if (route.path === '/profile-details') {
