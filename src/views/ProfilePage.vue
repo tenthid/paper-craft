@@ -1,5 +1,5 @@
 <template>
-    <div class="container-page h-[100vh] !pt-[90px] bg-primary-background flex gap-[32px]">
+    <div class="container-page !pt-[90px] !pb-[50px] bg-primary-background flex gap-[32px]">
         <ProfileNavigation></ProfileNavigation>
         <div class="profile-card">
             <div class="profile-card-title">

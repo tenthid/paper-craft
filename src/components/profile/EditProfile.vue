@@ -1,6 +1,6 @@
 <template>
     <div class="profile-card-body">
-        <div class="rounded-full self-center overflow-hidden flex items-center justify-center flex-col bg-primary relative border-primary-background border-[4px]">
+        <div class="rounded-full self-center overflow-hidden flex items-center justify-center flex-col bg-gray relative border-primary-background border-[4px]">
             <img @click="insertFile()" class="" width="160px" height="160px" src="" alt="profileImage">
             <input ref="fileInput" type="file" class="hidden">
             <i class="fa-solid fa-camera absolute bottom-[-3px] text-primary-background"></i>
