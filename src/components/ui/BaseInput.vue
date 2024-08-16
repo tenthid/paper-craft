@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <label class="font-inter text-[14px]"> 
+    <div class="flex flex-col gap-[8px]">
+        <label class="font-inter text-[16px]"> 
             {{ label }} <span v-if="withSpan" class="text-danger" >*</span>
         </label>
 

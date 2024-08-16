@@ -7,6 +7,7 @@ import RegisterPage from "@/views/RegisterPage.vue"
 import ForgotPasswordPage from '@/views/ForgotPasswordPage.vue'
 import ResetPasswordPage from '@/views/ResetPasswordPage.vue'
 import ProductsPage from '@/views/ProductsPage.vue'
+import ProfilePage from '@/views/ProfilePage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -55,6 +56,7 @@ const router = createRouter({
       name: 'resetPassword',
       component: ResetPasswordPage,
     },
+
     {
       meta: {
         layout: MainLayout
@@ -62,6 +64,33 @@ const router = createRouter({
       path: '/products-page',
       name: 'Products',
       component: ProductsPage,
+    },
+
+    {
+      meta: {
+        layout: MainLayout
+      },
+      path: '/profile-details',
+      name: 'profileDetails',
+      component: ProfilePage,
+    },
+
+    {
+      meta: {
+        layout: MainLayout
+      },
+      path: '/change-password',
+      name: 'changePassword',
+      component: ProfilePage,
+    },
+
+    {
+      meta: {
+        layout: MainLayout
+      },
+      path: '/transaction-history',
+      name: 'transactionHistory',
+      component: ProfilePage,
     },
   ]
 })

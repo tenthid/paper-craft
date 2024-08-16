@@ -11,6 +11,13 @@ img {
   max-width: none;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    display: none;
+}
+
 @layer components {
   .btn {
     display: flex;
@@ -85,6 +92,35 @@ img {
     border-color: #006989;
     outline: 0 ;
     box-shadow: 0 0 0 0.25rem rgba(0, 105, 137, 0.25);
+  }
+
+  .profile-card {
+    border-radius: 10px;
+    overflow: hidden;
+    flex: 1;
+    background-color: white;
+    height: fit-content;
+  }
+
+  .profile-card-body {
+    padding: 23px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+  }
+  
+  .profile-card-title {
+    padding: 23px;
+    border-bottom: 0.5px solid lightgray;
+    font-size: 20px;
+    color: #005C78;
+  }
+  
+  .profile-card-footer {
+    border-top: 0.5px solid lightgray;
+    padding: 23px;
+    display: flex;
+    justify-content: end;
   }
 }
 
