@@ -1,6 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomePage from '../views/HomePage.vue'
 import MainLayout from '../layouts/MainLayout.vue'
+import AuthLayout from '../layouts/AuthLayout.vue'
+import HomePage from '../views/HomePage.vue'
+import LoginPage from "@/views/LoginPage.vue"
+import RegisterPage from "@/views/RegisterPage.vue"
+import ForgotPasswordPage from '@/views/ForgotPasswordPage.vue'
+import ResetPasswordPage from '@/views/ResetPasswordPage.vue'
 import ProductsPage from '@/views/ProductsPage.vue'
 
 const router = createRouter({
@@ -14,11 +19,47 @@ const router = createRouter({
       name: 'home',
       component: HomePage,
     },
+    
+    {
+      meta: {
+        layout: AuthLayout
+      },
+      path: '/login',
+      name: 'login',
+      component: LoginPage,
+    },
+
+    {
+      meta: {
+        layout: AuthLayout
+      },
+      path: '/register',
+      name: 'register',
+      component: RegisterPage,
+    },
+
+    {
+      meta: {
+        layout: AuthLayout
+      },
+      path: '/forgot-password',
+      name: 'forgotPassword',
+      component: ForgotPasswordPage,
+    },
+
+    {
+      meta: {
+        layout: AuthLayout
+      },
+      path: '/reset-password',
+      name: 'resetPassword',
+      component: ResetPasswordPage,
+    },
     {
       meta: {
         layout: MainLayout
       },
-      path: '/Products-page',
+      path: '/products-page',
       name: 'Products',
       component: ProductsPage,
     },
