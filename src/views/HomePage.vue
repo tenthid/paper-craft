@@ -20,7 +20,7 @@
       </p>
     </div>
     <router-link
-      to="/"
+      to="/products-page"
       class="w-[250px] h-[56px] rounded-[10px] bg-primary text-[30px] text-white font-semibold leading-[20px] btn px-[25px]"
     >
       Lets Shop
