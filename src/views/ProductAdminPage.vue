@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-primary-background mt-[50px] w-full container-page"  >
+    <div class="bg-primary-background mt-[50px] w-full container-page">
 
     </div>
 </template>
