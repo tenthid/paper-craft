@@ -2,7 +2,7 @@
   <div
     class="w-full relative overflow-hidden flex flex-row items-center justify-start gap-5 text-left text-sm text-black font-inter"
   >
-    <router-link
+    <router-link to="/detail-product"
       v-for="(product, index) in products"
       :key="index"
       class="self-stretch flex-1 rounded-3xs bg-white overflow-hidden flex flex-col items-center justify-start p-[15px] relative gap-2.5"
