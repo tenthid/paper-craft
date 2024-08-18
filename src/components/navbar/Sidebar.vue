@@ -11,19 +11,19 @@
         <div
           class="self-stretch bg-white overflow-hidden flex flex-col items-start justify-start gap-10 mt-[50px]"
         >
-          <router-link to="/home-admin" active-class="text-primary"
+          <router-link to="/home-admin" active-class="text-primary-1"
             >Home</router-link
           >
-          <router-link to="/products-admin" active-class="text-primary"
+          <router-link to="/products-admin" active-class="text-primary-1"
             >Products</router-link
           >
-          <router-link to="/category-admin" active-class="text-primary"
+          <router-link to="/category-admin" active-class="text-primary-1"
             >Categories</router-link
           >
-          <router-link to="/brand-admin" active-class="text-primary"
+          <router-link to="/brand-admin" active-class="text-primary-1"
             >Brands</router-link
           >
-          <router-link to="/customer-admin" active-class="text-primary"
+          <router-link to="/customer-admin" active-class="text-primary-1"
             >Customers</router-link
           >
         </div>
@@ -55,8 +55,3 @@ const logout = () => {
 };
 </script>
 
-<style scoped>
-.text-primary {
-  color: #3498db;
-}
-</style>

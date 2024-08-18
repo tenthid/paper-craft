@@ -1,23 +1,23 @@
 <template>
   <div class="bg-primary-background mt-[50px] w-full container-page">
     <div
-      class="pt-[50px] w-full relative bg-very-ligh-blue overflow-hidden flex flex-row items-start justify-start py-2.5 px-5 box-border gap-5 text-left text-sm text-black-100 font-regular"
+      class="pt-[50px] w-full relative bg-primaryy-background overflow-hidden flex flex-row items-start justify-start py-2.5 px-5 box-border gap-5 text-left text-sm text-black-100 font-regular"
     >
       <!-- Top Selling Products -->
       <div
-        class="w-[587px] bg-white flex flex-col p-6 box-border text-[20px] text-[#000] font-dm-sans"
+        class="w-[587px] bg-white flex flex-col p-6 box-border text-[20px] text-[#000] font-inter"
       >
-        <div class="flex flex-col gap-6">
-          <div class="font-medium">Top Selling Products</div>
-          <div class="flex flex-col gap-[15px] text-sm">
+        <div class="flex flex-col gap-6 font-inter">
+          <div class="font-semibold">Top Selling Products</div>
+          <div class="flex flex-col gap-[15px] text-sm ">
             <div class="w-[539px] relative h-[18px] text-gray">
               <div class="absolute left-[0px] font-medium">Product name</div>
               <div class="absolute left-[150px] font-medium">Price</div>
-              <div class="absolute left-[255px] font-medium">Sold</div>
-              <div class="absolute left-[360px] font-medium">Sales</div>
+              <div class="absolute left-[300px] font-medium">Sold</div>
+              <div class="absolute left-[420px] font-medium">Sales</div>
             </div>
             <div
-              class="w-[411px] relative border-gray border-t-[1px] border-solid box-border h-px"
+              class="w-[540px] relative border-gray border-t-[1px] border-solid box-border h-px"
             ></div>
             <div
               v-for="product in topSellingProducts"
@@ -26,15 +26,15 @@
             >
               <div class="absolute left-[0px] flex items-center gap-2">
                 <img
-                  class="w-6 h-6 rounded-xl object-cover"
+                  class="w-6 h-6 rounded-xl"
                   :src="product.image"
                   :alt="product.name"
                 />
                 <div>{{ product.name }}</div>
               </div>
               <div class="absolute left-[150px]">{{ product.price }}</div>
-              <div class="absolute left-[255px]">{{ product.sold }}</div>
-              <div class="absolute left-[360px]">{{ product.sales }}</div>
+              <div class="absolute left-[300px]">{{ product.sold }}</div>
+              <div class="absolute left-[420px]">{{ product.sales }}</div>
             </div>
           </div>
         </div>
@@ -42,12 +42,12 @@
 
       <!-- Latest Transactions -->
       <div
-        class="w-[555px] bg-white flex flex-col p-6 box-border text-[20px] text-[#000] font-dm-sans"
+        class="w-[555px] bg-white flex flex-col p-6 box-border text-[20px] text-[#000] font-inter"
       >
-        <div class="flex flex-col gap-6">
+        <div class="flex flex-col gap-6 font-inter">
           <div class="font-medium">Latest Transactions</div>
           <div class="flex flex-col gap-[15px] text-sm">
-            <div class="w-[498px] relative h-[18px] text-gray">
+            <div class="w-[500px] relative h-[18px] text-gray">
               <div class="absolute left-[0px] font-medium">Customer</div>
               <div class="absolute left-[147px] font-medium">Product</div>
               <div class="absolute left-[271px] font-medium">Brand</div>
