@@ -33,7 +33,7 @@
                         <img width="20px" height="auto" bg-primary src="/images/dropdown-icon.svg" alt="dropdown-icon">
                     </button>
                 </div>
-                <div class="absolute left-0 hidden bg-[#f1f1f1] w-[100%] border-b-[0.5px] border-primary shadow-lg z-10 group-hover:block">
+                <div class="absolute left-0 hidden bg-white w-[100%] border-b-[0.5px] border-primary shadow-lg z-10 group-hover:block">
                     <div class="flex flex-col items-center py-[20px] text-[var(--primary, #005C78)] font-inter text-[28px] font-bold">
                         <p>Brands</p>
                     </div>
@@ -55,7 +55,7 @@
                     <img width="24px" height="24px" src="/images/icon-filter.svg" alt="dropdown-icon">
                 </button>
             </div>
-            <div v-if="isOpen" class="rounded absolute bg-[#f1f1f1]  items-center w-auto shadow-lg z-10">
+            <div v-if="isOpen" class="rounded absolute bg-white  items-center w-auto shadow-lg z-10">
                 <div class="flex flex-col items-center gap-[25px] shrink-0 rounded-lg w-[520px] h-auto py-[30px] px-0 text-center font-inter text-[25px] font-medium">
                     <p>Filter Products</p>
                     <div class="flex w-[450px] h-[45px] justify-between items-center  text-[20px] flex-shrink-0">
@@ -87,7 +87,7 @@
                                     <button style="border: none; background: none; padding: 0; cursor: pointer; " onclick="handleClick()">
                                         <img width="18px" height="auto" bg-primary src="/images/dropdown-icon.svg" alt="dropdown-icon">
                                     </button>
-                                    <span class="absolute left-[150px] rounded text-start hidden bg-[#f1f1f1] mt-[31.5px] w-[335px] shadow-lg z-10 group-hover:block">
+                                    <span class="absolute left-[150px] rounded text-start hidden bg-[#f1f1f1] mt-[30px] w-[335px] shadow-lg z-10 group-hover:block">
                                         <a href="#" class="block px-3 py-3 text-black rounded hover:bg-[#ddd]">Brand A</a>
                                         <a href="#" class="block px-3 py-3 text-black rounded hover:bg-[#ddd]">Brand B</a>
                                         <a href="#" class="block px-3 py-3 text-black rounded hover:bg-[#ddd]">Brand C</a>
