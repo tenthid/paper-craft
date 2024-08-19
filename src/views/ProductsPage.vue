@@ -1,15 +1,15 @@
 <template>
-    <navbar class="w-[100%] bg-white fixed h-[120px] border-b-[0.5px] border-primary flex justify-center items-center text-[18px] font-medium text-primary pt-[65px] pr-[50px] pb-0 pl-[50px] gap-[80px] z-[9999] ">
+    <!-- <navbar class="w-[100%] bg-white fixed h-[120px] border-b-[0.5px] border-primary flex justify-center items-center text-[18px] font-medium text-primary pt-[65px] pr-[50px] pb-0 pl-[50px] gap-[80px] z-[9999] ">
         
-        <div class="flex justify-center items-center gap-[10px] py-[var(--sds-size-space-400)] px-0">
+        <div class="flex justify-center items-center gap-[10px] py-[var(--sds-size-space-400)] px-0 group cursor-pointer">
             Category
-            <div class="inline-block group ">
+            <div class="inline-block">
                 <div class="py-[15px] flex gap-[15px]">
                     <button style="border: none; background: none; padding: 0; cursor: pointer; " onclick="handleClick()">
                         <img width="20px" height="auto" bg-primary src="/images/dropdown-icon.svg" alt="dropdown-icon">
                     </button>
                 </div>
-                <div class="absolute left-0 hidden bg-[#f1f1f1] w-[100%] border-b-[0.5px] border-primary shadow-lg z-10 group-hover:block">
+                <div class="absolute left-0 hidden bg-white w-[100%] border-b-[0.5px] border-primary shadow-lg z-10 group-hover:block mt-[2px]">
                     <div class="flex flex-col items-center py-[20px] text-[var(--primary, #005C78)] font-inter text-[28px] font-bold">
                         <p>Our Category</p>
                     </div>
@@ -140,7 +140,7 @@
             </div>
         </div>
     
-    </navbar>
+    </navbar> -->
     
     <div class="w-[100%] h-auto flex flex-col items-center gap-[40px] py-[166px] px-[60px] pb-[50px] self-stretch">
         <div class="text-primary text-center font-[Maitree] text-[35px] font-normal leading-[120%]">
