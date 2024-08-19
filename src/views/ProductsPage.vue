@@ -147,6 +147,16 @@
             All Products
         </div>
 
+        <div class="container-page">
+            <ProductList></ProductList>
+        </div>
+        <div class="container-page">
+            <ProductList></ProductList>
+        </div>
+        <div class="container-page">
+            <ProductList></ProductList>
+        </div>
+
         <div
           class="flex flex-row items-center justify-center p-2.5 text-base text-text-default-default"
         >
@@ -187,6 +197,7 @@
 </template>
 
 <script setup>
+import ProductList from "../components/product/ProductList.vue";
 import { ref, onMounted } from 'vue';
 
 const isOpen = ref(false);
@@ -205,27 +216,7 @@ onMounted(() => {
   window.addEventListener('click', handleClickOutside);
 });
 
-const paginatedProducts = computed(() => {
-const start = (currentPage.value - 1) * itemsPerPage;
-const end = start + itemsPerPage;
-return products.value.slice(start, end);
-});
 
-function previousPage() {
-  if (currentPage.value > 1) {
-    currentPage.value--;
-  }
-}
-
-function nextPage() {
-  if (currentPage.value < totalPages.value) {
-    currentPage.value++;
-  }
-}
-
-function changePage(page) {
-  currentPage.value = page;
-}
 </script>
 
 <style lang="scss" scoped>
