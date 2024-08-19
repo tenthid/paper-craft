@@ -15,13 +15,22 @@ export default {
       'danger' : '#CB3A31',
       'white' : '#FFFFFF',
       'white2' : '#F3F7EC',
-      'white3' : '#D9D9D9'
+      'primary1' : '#006989',
+      'black' : '#000000'
     },
     fontFamily: {
       'inter': ['"Inter"', 'sans-sherif'],
       'hand-write': ['"Kalam"', 'sans-serif'],
       'maitree': ['"Maitree"', 'serif']
     },
+    screens: {
+      'phone-s' : '320px',
+      'phone-m' : '375px',
+      'phone-l' : '425px',
+      'tablet' : '768px',
+      'laptop' : '1024px',
+      'laptop-l' : '1440px',
+    }
   },
   plugins: [],
 }
