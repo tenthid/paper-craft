@@ -9,11 +9,11 @@
         </div>
         <hr class="border-gray">
         <div class="flex flex-col">
-            <router-link :to="item.path" class="p-[16px] text-[18px] font-[500]" v-for="item in [
+            <router-link :to="item.path" class="p-[16px] text-[18px] font-[500] text-gray" v-for="item in [
                 {text:'Profile Details', path: '/profile-details'},
                 {text:'Change Password', path: '/change-password'},
                 {text:'Transaction History', path: '/transaction-history'},
-                ]" :class="{'text-gray' : !(route.path === item.path)}">
+                ]" active-class="!text-black">
                 {{ item.text }}
             </router-link>
         </div>

@@ -4,7 +4,7 @@
             {{ label }} <span v-if="withSpan" class="text-danger" >*</span>
         </label>
 
-        <div class="input-group rounded-[12px] bg-primary-background flex gap-[6px] w-[100%]" v-if="isPassword">
+        <div class="input-group rounded-[12px] bg-primary-background flex gap-[6px] w-[100%]" v-if="isPassword || type === 'password'">
             <input
             class=" bg-[inherit] group-controll w-[100%]  input-no-focus text-[16px]" 
             :type="passIcon? 'text' : 'password'"
