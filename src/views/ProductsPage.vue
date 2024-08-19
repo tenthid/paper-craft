@@ -435,12 +435,31 @@ onMounted(() => {
 const itemsPerPage = 5; // Number of items per page
 const currentPage = ref(1); // Current page
 const totalPages = computed(() => Math.ceil(products.length / itemsPerPage)); // Total pages
+const maxPagesToShow = 5; // Maximum number of page buttons to show
 
 // Compute paginated products based on the current page
 const paginatedProducts = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage;
   const end = start + itemsPerPage;
   return products.slice(start, end);
+});
+
+// Compute pages to show
+const pagesToShow = computed(() => {
+  const pages = [];
+  const half = Math.floor(maxPagesToShow / 2);
+
+  for (let i = 1; i <= totalPages.value; i++) {
+    if (i <= maxPagesToShow) {
+      pages.push(i);
+    } else if (i >= totalPages.value - maxPagesToShow + 1) {
+      pages.push(i);
+    } else if (i === currentPage.value - half || i === currentPage.value + half) {
+      pages.push(i);
+    }
+  }
+
+  return pages;
 });
 
 // Methods to handle pagination
@@ -459,7 +478,6 @@ const nextPage = () => {
 const changePage = (page) => {
   currentPage.value = page;
 };
-
 
 </script>
 
