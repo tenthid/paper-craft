@@ -1,12 +1,12 @@
 <template>
   <div
-    class="relative bg-white w-50 h-[740px] overflow-hidden flex flex-col items-start justify-between p-5 box-border text-left text-base text-black font-maitree"
+    class="relative bg-white w-50 h-[740px] overflow-hidden flex flex-col justify-between items-start p-5 box-border text-left text-base font-maitree"
   >
     <div
-      class="w-[171px] bg-white overflow-hidden flex flex-col items-start justify-start gap-5"
+      class="w-[171px] bg-white overflow-hidden flex flex-col items-start gap-5"
     >
       <div
-        class="self-stretch bg-white overflow-hidden flex flex-row items-start justify-start font-lato"
+        class="self-stretch bg-white overflow-hidden flex flex-row items-start font-inter "
       >
         <div
           class="self-stretch bg-white overflow-hidden flex flex-col items-start justify-start gap-10 mt-[50px]"
@@ -30,7 +30,7 @@
       </div>
     </div>
     <button
-      class="bg-white overflow-hidden flex flex-row items-center justify-center py-[5px] gap-2.5 text-red-danger font-lato"
+      class=" bg-white overflow-hidden flex flex-row items-center justify-center py-auto gap-2.5 text-red-danger "
       @click="logout"
     >
       <img
@@ -54,4 +54,3 @@ const logout = () => {
   router.push('/login');
 };
 </script>
-

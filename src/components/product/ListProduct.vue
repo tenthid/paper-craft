@@ -1,105 +1,63 @@
 <template>
-  <div
-    class="w-full relative overflow-hidden flex flex-row items-center justify-start gap-5 text-left text-sm text-black font-inter"
-  >
-    <router-link
-      to="/detail-product"
-      v-for="(product, index) in products"
-      :key="index"
-      class="w-[250px] h-[385px] self-stretch flex-1 rounded-2xl bg-white overflow-hidden flex flex-col items-center justify-start p-[15px] relative gap-2.5"
+  <div class="w-full flex flex-col gap-5">
+    <div
+      v-for="(row, rowIndex) in rows"
+      :key="rowIndex"
+      class="flex flex-row gap-5"
     >
-      <img
-        class="self-stretch relative rounded-sm max-w-full overflow-hidden h-[250px] shrink-0 object-cover z-[0]"
-        :alt="product.name"
-        :src="product.image"
-      />
-      <div
-        class="self-stretch bg-white overflow-hidden flex flex-col items-start justify-start gap-[3px] z-[1]"
+      <router-link
+        v-for="(product, productIndex) in row"
+        :key="productIndex"
+        to="/detail-product"
+        class="w-[250px] h-[385px] flex-1 rounded-[10px] bg-white overflow-hidden flex flex-col items-center p-[15px] gap-2.5 font-inter"
       >
-        <div
-          class="text-[#000000] text-[14px] w-full relative tracking-[0.1px] leading-[24px] flex items-center h-[17px] shrink-0"
-        >
-          {{ product.name }}
-        </div>
-        <div
-          class="text-[#5B5B5B] w-full relative text-3xs tracking-[0.1px] text-[10px] text-dimgray flex items-center h-[15px] shrink-0"
-        >
-          {{ product.brand }}
-        </div>
-        <div
-          class="self-stretch bg-white overflow-hidden flex flex-row items-center justify-between text-base text-primary"
-        >
+        <img
+          class="rounded-sm max-w-full h-[240px] w-[218px] object-cover"
+          :alt="product.name"
+          :src="product.image"
+        />
+        <div class="flex flex-col items-start gap-[3px]">
+          <div class="text-[#000000] text-[14px]">{{ product.name }}</div>
+          <div class="text-[#5B5B5B] text-3xs">{{ product.brand }}</div>
           <div
-            class="w-[87px] relative tracking-[0.1px] leading-[24px] font-medium flex items-center h-[21px] shrink-0"
+            class="flex flex-row items-center justify-between text-base text-primary"
           >
-            {{ product.price }}
-          </div>
-          <div
-            class="relative text-xs tracking-[0.1px] leading-[24px] text-[12px] text-[#5B5B5B]"
-          >
-            <span>Stock </span>
-            <b class="text-[#000] text-[12px]">{{ product.stock }}</b>
+            <div class="font-medium mr-[80px]">{{ product.price }}</div>
+            <div class="text-xs text-[#5B5B5B]">
+              <span>Stock </span>
+              <b>{{ product.stock }}</b>
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        class="self-stretch bg-white overflow-hidden flex flex-row items-start justify-start gap-1.5 z-[2] text-primary"
-      >
-        <div
-          class="rounded-md bg-danger overflow-hidden flex flex-row items-center justify-center p-1.5"
-        >
-          <router-link to="/" class="flex flex-row items-center justify-center">
-            <img
-              class="w-5 relative h-5 overflow-hidden shrink-0"
-              alt="cart"
-              src="/images/trash.svg"
-            />
-          </router-link>
-        </div>
-        <router-link
-          to="/Edit-Product"
-          class="self-stretch flex-1 rounded-md bg-primary border-[1px] border-solid overflow-hidden flex flex-row items-center justify-center py-0.5 px-0"
-        >
-          <div
-            class="text-white font-inter relative leading-[16px] font-medium"
+        <div class="flex flex-row gap-1.5 text-primary">
+          <div class="rounded-md bg-danger p-1.5">
+            <router-link to="/" class="flex items-center justify-center">
+              <img class="w-5 h-5" alt="cart" src="/images/trash.svg" />
+            </router-link>
+          </div>
+          <router-link
+            to="/Edit-Product"
+            class="btn rounded-[5px] bg-primary text-white py-0.5 px-0 w-[174px] h-[33px] text-center font-inter text-[14px]"
           >
             Edit Product
-          </div>
-        </router-link>
-      </div>
-    </router-link>
+          </router-link>
+        </div>
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const products = [
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-];
+import { computed } from "vue";
+
+const props = defineProps<{ products: any[] }>();
+
+const rows = computed(() => {
+  const productsPerPage = 8;
+  const rows = [];
+  for (let i = 0; i < props.products.length; i += 4) {
+    rows.push(props.products.slice(i, i + 4));
+  }
+  return rows;
+});
 </script>
