@@ -14,12 +14,12 @@
                         <p>Our Category</p>
                     </div>
                     <span class="flex justify-left items-start gap-[10px] self-stretch px-[50px] pb-[20px]">
-                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ddd]">Category</a>
-                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ddd]">Category</a>
-                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ddd]">Category</a>
-                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ddd]">Category</a>
-                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ddd]">Category</a>
-                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ddd]">Category</a>
+                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ECF3F7]">Category</a>
+                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ECF3F7]">Category</a>
+                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ECF3F7]">Category</a>
+                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ECF3F7]">Category</a>
+                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ECF3F7]">Category</a>
+                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ECF3F7]">Category</a>
                     </span>
                 </div>
             </div>
@@ -38,12 +38,12 @@
                         <p>Brands</p>
                     </div>
                     <span class="flex justify-left items-start gap-[10px] self-stretch px-[50px] pb-[20px]">
-                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ddd]">Brand A</a>
-                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ddd]">Brand B</a>
-                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ddd]">Brand C</a>
-                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ddd]">Brand D</a>
-                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ddd]">Brand E</a>
-                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ddd]">Brand F</a>
+                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ECF3F7]">Brand A</a>
+                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ECF3F7]">Brand B</a>
+                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ECF3F7]">Brand C</a>
+                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ECF3F7]">Brand D</a>
+                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ECF3F7]">Brand E</a>
+                        <a href="#" class="block px-[76px] py-3 text-black rounded hover:bg-[#ECF3F7]">Brand F</a>
                     </span>
                 </div>
             </div>
@@ -142,10 +142,11 @@
     
     </navbar>
     
-    <div class="w-[100%] h-auto flex flex-col items-center gap-[40px] py-[166px] px-[60px] pb-[50px] self-stretch">
+    <div class="w-[100%] bg-[#ECF3F7] h-auto flex flex-col items-center gap-[40px] py-[166px] px-[60px] pb-[50px] self-stretch">
         <div class="text-primary text-center font-[Maitree] text-[35px] font-normal leading-[120%]">
             All Products
         </div>
+        
     </div>
 
 </template>
