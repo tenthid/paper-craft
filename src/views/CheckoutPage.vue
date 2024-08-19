@@ -17,13 +17,16 @@
 <script setup>
     import ProductCardCart from '@/components/checkout/ProductCardCart.vue';
     import SummaryCardCart from '@/components/checkout/SummaryCardCart.vue';
+    import ProductCardCheckout from '@/components/checkout/ProductCardCheckout.vue';
+    import SummaryCardCheckout from '@/components/checkout/SummaryCardCheckout.vue';
     import { useRoute } from 'vue-router';
 
     const route = useRoute()
     
     const components = {
         'checkout' : {
-
+            'productCard' : ProductCardCheckout,
+            'summaryCard' : SummaryCardCheckout
         },
         'cart' : {
             'productCard' : ProductCardCart,

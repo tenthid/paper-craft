@@ -33,7 +33,7 @@
             <button class="btn text-white bg-danger rounded-[10px]">
                 Remove
             </button>
-            <input type="checkbox" class="input-check h-[35px] w-[35px]">
+            <input type="checkbox" class="input-check input-no-focus h-[35px] w-[35px]">
         </div>
     </div>
 </template>

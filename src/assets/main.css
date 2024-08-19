@@ -123,12 +123,23 @@ input[type="number"]::-webkit-outer-spin-button {
     justify-content: end;
     flex-direction: column;
   }
+
+  .input-select {
+    border: solid 1px gray;
+    padding: 11px;
+  }
+
+  .input-select:focus {
+    outline: none;
+  }
 }
 
 @layer utilities {
   .input-no-focus:focus {
-    outline: none;
+    outline: none !important;
+    box-shadow: none !important;
   }
+
   .container-page {
     padding: 0px 60px;
   }
