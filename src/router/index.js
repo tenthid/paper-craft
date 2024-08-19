@@ -102,6 +102,15 @@ const router = createRouter({
       name: 'cart',
       component: CheckoutPage,
     },
+
+    {
+      meta: {
+        layout: MainLayout
+      },
+      path: '/checkout',
+      name: 'checkout',
+      component: CheckoutPage,
+    },
   ]
 })
 

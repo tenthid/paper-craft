@@ -4,7 +4,7 @@
             <p class="font-inter text-[14px] font-[400] text-gray">Product</p>
             <component :is="components[route.name].productCard"></component>
         </div>
-        <div class="p-[25px] rounded-[12px] bg-white w-[600px] flex flex-col h-[fit-content] gap-[20px]">
+        <div class="p-[25px] rounded-[12px] bg-white w-[600px] flex flex-col h-[fit-content] gap-[20px] sticky top-[85px]">
             <p class="font-inter text-[14px] font-[400] text-gray">Payment</p>
             <component :is="components[route.name].summaryCard"></component>
             <button class="btn bg-primary rounded-[5px] text-white font-inter">
