@@ -11,7 +11,7 @@
                     Categories
                 </p>
                 <div class="grid grid-cols-6 w-[100%] gap-y-[25px]">
-                    <router-link to="/" v-for="index in 10" class="text-center hover:underline font-inter font-[300]">
+                    <router-link to="/" v-for="index in 12" class="text-center hover:underline font-inter font-[300]">
                         Category name
                     </router-link>
                 </div>
@@ -19,7 +19,7 @@
         </div>
         
         <div class="flex gap-[5px] text-[20px] font-[500] font-inter group cursor-pointer h-[100%] items-center">
-            Category
+            Brand
             <img width="20px" height="auto" bg-primary src="/images/dropdown-icon.svg" alt="dropdown-icon">
             
             <!-- Dropdown -->
@@ -28,8 +28,8 @@
                     Brands
                 </p>
                 <div class="grid grid-cols-6 w-[100%] gap-y-[25px]">
-                    <router-link to="/" v-for="index in 10" class="text-center hover:underline font-inter font-[300]">
-                        Category name
+                    <router-link to="/" v-for="index in 12" class="text-center hover:underline font-inter font-[300]">
+                        Brand name
                     </router-link>
                 </div>
             </div>
