@@ -1,12 +1,12 @@
 <template>
-    <div>
-        <label class="font-inter text-[14px]"> 
+    <div class="flex flex-col gap-[8px]">
+        <label class="font-inter text-[16px]"> 
             {{ label }} <span v-if="withSpan" class="text-danger" >*</span>
         </label>
 
-        <div class="flex gap-[6px] w-[100%]" v-if="isPassword">
+        <div class="input-group rounded-[12px] bg-primary-background flex gap-[6px] w-[100%]" v-if="isPassword || type === 'password'">
             <input
-            class="bg-primary-background py-[8px] px-[12px]  rounded-[12px] w-[100%] text-primary input-no-focus text-[16px]" 
+            class=" bg-[inherit] group-controll w-[100%]  input-no-focus text-[16px]" 
             :type="passIcon? 'text' : 'password'"
             :id="identity" 
             :placeholder="placeholder" 
@@ -16,11 +16,11 @@
             @keyup="$emit('keyInput', $event.target.value)"
             @focus="$emit('totalTimeFocus', $event.target.value)"
             @change="$emit('fileInput', $event.target.value)"/>
-            <span class="input-group-text bg-white "><i style="cursor: pointer;" @click="passIconControl()" :class="passIcon? ['fa-solid fa-eye-slash'] : ['fa-solid fa-eye']"></i></span>
+            <span class="group-span"><i style="cursor: pointer;" @click="passIconControl()" :class="passIcon? ['fa-solid fa-eye-slash'] : ['fa-solid fa-eye']"></i></span>
         </div>
 
         <div v-else class="flex gap-[6px] w-[100%]">
-            <input class="bg-primary-background py-[8px] px-[12px]  rounded-[12px] w-[100%] text-primary input-no-focus text-[16px]"
+            <input class="bg-primary-background py-[8px] px-[12px]  rounded-[12px] w-[100%] input-no-focus text-[16px]"
             :type="type"
             :id="identity"
             :placeholder="placeholder" 

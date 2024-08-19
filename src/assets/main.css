@@ -11,6 +11,13 @@ img {
   max-width: none;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    display: none;
+}
+
 @layer components {
   .btn {
     display: flex;
@@ -23,25 +30,117 @@ img {
     display: flex;
     justify-content: center;
     overflow: hidden;
+    width: 100%;
+    padding: 8px 14px;
+    gap: 14px;
   }
 
   .group-span {
     display: flex;
     align-items: center;
-    padding: 8px 14px;
   }
 
   .group-controll {
-    
+    width: 100%;
+  }
+
+  .form-card {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 8px;
+    align-items: center;
+  }
+
+  .form-card-body {
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 16px;
+  }
+
+  .form-card-footer {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .input-check {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    vertical-align: top;
+    width: 16px;
+    height: 16px;
+    background-color: #ECF3F7;
+    border-radius: 3px;
+  }
+
+  
+  .input-check:checked {
+    background: #006989 ;
+    border-color: #006989 ;
+    content: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/></svg>");
+  }
+  
+  .input-check:focus {
+    border-color: #006989;
+    outline: 0 ;
+    box-shadow: 0 0 0 0.25rem rgba(0, 105, 137, 0.25);
+  }
+
+  .profile-card {
+    border-radius: 10px;
+    overflow: hidden;
+    flex: 1;
+    background-color: white;
+    height: fit-content;
+  }
+
+  .profile-card-body {
+    padding: 23px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+  }
+  
+  .profile-card-title {
+    padding: 23px;
+    border-bottom: 0.5px solid lightgray;
+    font-size: 20px;
+    color: #005C78;
+  }
+  
+  .profile-card-footer {
+    border-top: 0.5px solid lightgray;
+    padding: 23px;
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+  }
+
+  .input-select {
+    border: solid 1px gray;
+    padding: 11px;
+  }
+
+  .input-select:focus {
+    outline: none;
   }
 }
 
 @layer utilities {
   .input-no-focus:focus {
-    outline: none;
+    outline: none !important;
+    box-shadow: none !important;
   }
+
   .container-page {
-    padding-left: 60px;
-    padding-right: 60px;
+    padding: 0px 60px;
   }
 }
