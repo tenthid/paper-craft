@@ -8,7 +8,8 @@
         class="w-[1052px] h-12 flex justify-between text-center text-[35px] text-primary font-maitree"
       >
         <div class="leading-[120%]">Manage Products</div>
-        <router-link to="/create-product"
+        <router-link
+          to="/create-product"
           class="rounded-[10px] bg-primary-1 h-10 flex items-center justify-center py-2.5 text-white px-5 text-base font-medium font-inter"
         >
           Create Product
@@ -39,7 +40,12 @@
           <button
             @click="previousPage"
             :disabled="currentPage === 1"
-            class="bg-gray p-2 rounded-lg opacity-50"
+            :class="[
+              'p-2 rounded-lg mr-1',
+              currentPage === 1
+                ? 'bg-gray opacity-50 cursor-not-allowed'
+                : 'bg-primary',
+            ]"
           >
             <img class="w-4 h-4" src="/images/arrow-left.svg" alt="Previous" />
           </button>
@@ -62,7 +68,12 @@
           <button
             @click="nextPage"
             :disabled="currentPage === totalPages"
-            class="bg-primary text-white p-2 rounded-lg"
+            :class="[
+              'p-2 rounded-lg ml-1',
+              currentPage === totalPages
+                ? 'bg-gray opacity-50 cursor-not-allowed'
+                : 'bg-primary',
+            ]"
           >
             <img class="w-4 h-4" src="/images/arrow-right.svg" alt="Next" />
           </button>
@@ -75,7 +86,6 @@
 <script setup>
 import { ref, computed } from "vue";
 import ListProduct from "@/components/product/ListProduct.vue";
-import router from "@/router";
 
 const products = ref([
   {
@@ -92,421 +102,28 @@ const products = ref([
     stock: 11,
     image: "/images/tas.jpg",
   },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
 
-  
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
   {
     name: "This Product name bla bla ba ball",
     brand: "Brand name",
