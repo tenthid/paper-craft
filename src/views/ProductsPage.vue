@@ -148,57 +148,272 @@
         </div>
 
         <div class="container-page">
-            <ProductList></ProductList>
-        </div>
-        <div class="container-page">
-            <ProductList></ProductList>
-        </div>
-        <div class="container-page">
-            <ProductList></ProductList>
-        </div>
-
-        <div
-          class="flex flex-row items-center justify-center p-2.5 text-base text-text-default-default"
-        >
-          <button
-            @click="previousPage"
-            :disabled="currentPage === 1"
-            class="bg-gray p-2 rounded-lg opacity-50"
-          >
-            <img class="w-4 h-4" src="/images/arrow-left.svg" alt="Previous" />
-          </button>
-          <div class="flex flex-row items-center justify-start gap-2">
-            <button
-              v-for="page in totalPages"
-              :key="page"
-              @click="changePage(page)"
-              :class="[
-                'p-2 rounded-lg',
-                {
-                  'bg-primary text-white': page === currentPage,
-                  'bg-gray-200': page !== currentPage,
-                },
-              ]"
-            >
-              {{ page }}
-            </button>
-          </div>
-          <button
-            @click="nextPage"
-            :disabled="currentPage === totalPages"
-            class="bg-primary text-white p-2 rounded-lg"
-          >
-            <img class="w-4 h-4" src="/images/arrow-right.svg" alt="Next" />
-          </button>
-        </div>
-        
+      <ProductList :products="paginatedProducts" />
     </div>
+
+    <!-- Pagination -->
+    <div class="flex flex-row items-center justify-center p-2.5 text-base text-text-default-default">
+      <!-- Previous Button -->
+      <button
+        @click="previousPage"
+        :disabled="currentPage === 1"
+        class="flex items-center justify-center p-2 rounded-lg bg-gray-200 text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        <img class="w-4 h-4" src="/images/arrow-left.svg" alt="Previous" />
+      </button>
+
+      <!-- Page Numbers -->
+      <div class="flex flex-row items-center gap-2 mx-4">
+        <button
+          v-for="page in totalPages"
+          :key="page"
+          @click="changePage(page)"
+          :class="[
+            'p-2 rounded-lg',
+            {
+              'bg-primary text-white': page === currentPage,
+              'bg-gray-200 text-gray-700': page !== currentPage,
+            },
+          ]"
+        >
+          {{ page }}
+        </button>
+      </div>
+
+      <!-- Next Button -->
+      <button
+        @click="nextPage"
+        :disabled="currentPage === totalPages"
+        class="flex items-center justify-center p-2 rounded-lg bg-primary text-white disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        <img class="w-4 h-4" src="/images/arrow-right.svg" alt="Next" />
+      </button>
+    </div>
+  </div>
+        
+    
 
 </template>
 
 <script setup>
 import ProductList from "../components/product/ProductList.vue";
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
+
+const products = [
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        {
+          name: "This Product name bla bla ba ball",
+          brand: "Brand name",
+          price: "Rp200.000",
+          stock: 11,
+          image: "/images/tas.jpg",
+        },
+        
+        
+      ]
+
 
 const isOpen = ref(false);
 
@@ -215,6 +430,35 @@ const handleClickOutside = (event) => {
 onMounted(() => {
   window.addEventListener('click', handleClickOutside);
 });
+
+// Pagination setup
+const itemsPerPage = 5; // Number of items per page
+const currentPage = ref(1); // Current page
+const totalPages = computed(() => Math.ceil(products.length / itemsPerPage)); // Total pages
+
+// Compute paginated products based on the current page
+const paginatedProducts = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  return products.slice(start, end);
+});
+
+// Methods to handle pagination
+const previousPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--;
+  }
+};
+
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++;
+  }
+};
+
+const changePage = (page) => {
+  currentPage.value = page;
+};
 
 
 </script>
