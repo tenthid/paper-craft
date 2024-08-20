@@ -10,6 +10,9 @@ import ProductsPage from '@/views/ProductsPage.vue'
 import ProfilePage from '@/views/ProfilePage.vue'
 import CheckoutPage from '@/views/CheckoutPage.vue'
 import ProductLayout from '@/layouts/ProductLayout.vue'
+import FilterPage from '@/views/FilterPage.vue'
+
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -66,6 +69,15 @@ const router = createRouter({
       path: '/products-page',
       name: 'Products',
       component: ProductsPage,
+    },
+
+    {
+      meta: {
+        layout: ProductLayout
+      },
+      path: '/filter-page',
+      name: 'Filter',
+      component: FilterPage,
     },
 
     {
