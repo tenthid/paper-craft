@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="self-stretch bg-white overflow-hidden flex flex-row items-start justify-start gap-1.5 z-[2] text-primary">
-        <div class="rounded-8xs bg-primary overflow-hidden flex flex-row items-center justify-center p-1.5">
+        <div class="rounded bg-primary overflow-hidden flex flex-row items-center justify-center p-1.5 hover:opacity-80">
           <router-link to="/cart" class="flex flex-row items-center justify-center">
             <img
               class="w-5 relative h-5 overflow-hidden shrink-0"
@@ -33,7 +33,7 @@
             />
           </router-link>
         </div>
-        <router-link to="/checkout" class="self-stretch flex-1 rounded-8xs border-primary border-[1px] border-solid overflow-hidden flex flex-row items-center justify-center py-0.5 px-0">
+        <router-link to="/checkout" class="self-stretch flex-1 rounded border-primary border-[1px] border-solid overflow-hidden flex flex-row items-center justify-center py-0.5 px-0 hover:bg-primary hover:text-white">
           <div class="relative leading-[16px] font-medium">Buy now</div>
         </router-link>
       </div>
@@ -63,7 +63,6 @@
   }>();
   
   const rows = computed(() => {
-    const productsPerPage = 15;
     const rows = [];
     for (let i = 0; i < props.products.length; i += 5) {
       rows.push(props.products.slice(i, i + 5));

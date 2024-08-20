@@ -195,7 +195,7 @@ const products = ref([
     name: "This Product name bla bla ba ball",
     brand: "Brand name",
     price: "Rp200.000",
-    stock: 111,
+    stock: 11,
     image: "/images/tas.jpg",
   },
 ]);
