@@ -54,12 +54,15 @@
                             Sortby
                         </p>
                         <!-- dropdown -->
+                         <Sortby />
+
                     </div>
                     <div class="flex justify-between w-[100%]">
                         <p class="font-inter text-[18px] font-[400]">
                             Orderby
                         </p>
                         <!-- dropdown -->
+                        <Orderby />
     
                     </div>
                     <div class="flex justify-between w-[100%]">
@@ -67,6 +70,7 @@
                             Category
                         </p>
                         <!-- dropdown -->
+                         <FilterCategory />
     
                     </div>
                     <div class="flex justify-between w-[100%]">
@@ -74,6 +78,7 @@
                             Brand
                         </p>
                         <!-- dropdown -->
+                         <FilterBrand />
     
                     </div>
                     <button class="btn bg-primary text-white rounded-[5px] w-[100%] hover:opacity-[80%]">
@@ -87,6 +92,10 @@
 
 <script setup>
     import { ref, onMounted, onBeforeUnmount } from 'vue';
+    import FilterCategory from '../filter/FilterCategory.vue';
+    import FilterBrand from '../filter/FilterBrand.vue';
+    import Sortby from '../filter/Sortby.vue';
+    import Orderby from '../filter/Orderby.vue';
 
     const filterShow = ref(false)
     const filterModalContainer = ref(null)

@@ -65,7 +65,7 @@
 
 <script setup>
 import { ref, computed, reactive } from "vue";
-import FilterProduct from "@/components/product/FilterProduct.vue";
+import FilterProduct from "@/components/filter/FilterProduct.vue";
 import AllProduct from "@/components/product/AllProduct.vue";
 
 const itemsPerPage = 15; 
