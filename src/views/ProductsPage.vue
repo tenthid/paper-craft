@@ -245,8 +245,6 @@ function nextPage() {
 function changePage(page) {
   currentPage.value = page;
 }
-
-
 </script>
 
 <style lang="scss" scoped>
