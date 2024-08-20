@@ -26,7 +26,6 @@
     { label: 'Brand', value: 'Brand name' },
   ]);
   
-  // Method to remove filter
   const removeFilter = (index) => {
     filters.splice(index, 1);
   };

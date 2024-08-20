@@ -27,7 +27,7 @@
       <div v-else>
         <!-- Product List -->
         <div class="container-page">
-          <AllListProduct :products="paginatedProducts" />
+          <AllProduct :products="paginatedProducts" />
     
           <!-- Pagination -->
           <div class="flex flex-row items-center justify-center p-2.5 text-base text-text-default-default gap-2">
@@ -70,7 +70,7 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import AllListProduct from "@/components/product/AllListProduct.vue";
+import AllProduct from "@/components/product/AllProduct.vue";
 
 const itemsPerPage = 15; 
 const maxPagesToShow = 5; 
