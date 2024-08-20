@@ -11,7 +11,7 @@
 
       <!-- Pagination -->
       <div
-          class="flex flex-row items-center justify-center p-2.5 pt-[50px] text-base text-text-default-default gap-2"
+          class="flex flex-row items-center justify-center p-2.5 text-base text-text-default-default gap-2"
         >
           <button
             @click="previousPage"
@@ -128,10 +128,76 @@ const products = ref([
     stock: 11,
     image: "/images/tas.jpg",
   },
-  
-  
-  
-  
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 111,
+    image: "/images/tas.jpg",
+  },
 ]);
 
 const itemsPerPage = 15; 
