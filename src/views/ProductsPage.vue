@@ -7,7 +7,7 @@
 
     <!-- Product List -->
     <div class="container-page">
-      <ProductList :products="paginatedProducts" />
+      <ListProduct :products="paginatedProducts" />
 
       <!-- Pagination -->
       <div
@@ -55,7 +55,7 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import ProductList from "@/components/product/ProductList.vue";
+import ListProduct from "@/components/product/ListProduct.vue";
 
 const products = ref([
   {
@@ -93,9 +93,45 @@ const products = ref([
     stock: 11,
     image: "/images/tas.jpg",
   },
+  {
+    name: "This Pr88oduct name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
 ]);
 
-const itemsPerPage = 3;
+const itemsPerPage = 15;
+const maxPagesToShow = 5;
 const currentPage = ref(1);
 
 const totalPages = computed(() =>
