@@ -80,41 +80,51 @@
 </template>
 
 <script setup lang="ts">
-const products = [
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-];
+  import { useStore } from 'vuex';
+  import { computed } from 'vue';
+
+  const store = useStore()
+
+  const products = computed(() => {
+    return store.state.product.products
+  })
+  // const products = store.state.product.products
 </script>
+
+// const products = [
+//   {
+//     name: "This Product name bla bla ba ball",
+//     brand: "Brand name",
+//     price: "Rp200.000",
+//     stock: 11,
+//     image: "/images/tas.jpg",
+//   },
+//   {
+//     name: "This Product name bla bla ba ball",
+//     brand: "Brand name",
+//     price: "Rp200.000",
+//     stock: 11,
+//     image: "/images/tas.jpg",
+//   },
+//   {
+//     name: "This Product name bla bla ba ball",
+//     brand: "Brand name",
+//     price: "Rp200.000",
+//     stock: 11,
+//     image: "/images/tas.jpg",
+//   },
+//   {
+//     name: "This Product name bla bla ba ball",
+//     brand: "Brand name",
+//     price: "Rp200.000",
+//     stock: 11,
+//     image: "/images/tas.jpg",
+//   },
+//   {
+//     name: "This Product name bla bla ba ball",
+//     brand: "Brand name",
+//     price: "Rp200.000",
+//     stock: 11,
+//     image: "/images/tas.jpg",
+//   },
+// ];

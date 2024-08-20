@@ -3,16 +3,16 @@
     <div
       v-for="(row, rowIndex) in rows"
       :key="rowIndex"
-      class="flex flex-row gap-5"
+      class="flex flex-row justify-center gap-5"
     >
       <router-link
         v-for="(product, productIndex) in row"
         :key="productIndex"
         to="/detail-product"
-        class="w-[250px] h-[385px] flex-1 rounded-[10px] bg-white overflow-hidden flex flex-col items-center p-[15px] gap-2.5 font-inter"
+        class="product-card flex flex-col items-center p-[15px] gap-2.5 font-inter"
       >
         <img
-          class="rounded-sm max-w-full h-[240px] w-[218px] object-cover"
+          class="product-image rounded-sm object-cover"
           :alt="product.name"
           :src="product.image"
         />
@@ -61,3 +61,30 @@ const rows = computed(() => {
   return rows;
 });
 </script>
+
+<style>
+.product-card {
+  width: 250px;
+  height: 385px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 218px;
+  height: 240px;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: start;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+</style>

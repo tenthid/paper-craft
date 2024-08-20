@@ -42,7 +42,7 @@
       </div>
 
       <!-- Categories Section -->
-      <div class="space-y-4 mt-6 tablet:mt-0">
+      <div class="space-y-4 mt-6 tablet:mt-0 ">
         <h3 class="text-white text-[20px] tablet:text-[20px] font-medium mr-5">
           Categories
         </h3>

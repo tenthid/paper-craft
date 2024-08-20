@@ -13,6 +13,8 @@ import BrandAdminPage from "@/views/BrandAdminPage.vue";
 import ProductAdminPage from "@/views/ProductAdminPage.vue";
 import CustomerAdminPage from "@/views/CustomerAdminPage.vue";
 import CategoryAdminPage from "@/views/CategoryAdminPage.vue";
+import ProfilePage from '@/views/ProfilePage.vue'
+import CheckoutPage from '@/views/CheckoutPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -61,6 +63,7 @@ const router = createRouter({
       name: "resetPassword",
       component: ResetPasswordPage,
     },
+
     {
       meta: {
         layout: MainLayout,
@@ -110,7 +113,51 @@ const router = createRouter({
       name: "CustomerAdmin",
       component: CustomerAdminPage,
     },
-  ],
-});
+    {
+      meta: {
+        layout: MainLayout
+      },
+      path: '/profile-details',
+      name: 'profileDetails',
+      component: ProfilePage,
+    },
+
+    {
+      meta: {
+        layout: MainLayout
+      },
+      path: '/change-password',
+      name: 'changePassword',
+      component: ProfilePage,
+    },
+
+    {
+      meta: {
+        layout: MainLayout
+      },
+      path: '/transaction-history',
+      name: 'transactionHistory',
+      component: ProfilePage,
+    },
+
+    {
+      meta: {
+        layout: MainLayout
+      },
+      path: '/cart',
+      name: 'cart',
+      component: CheckoutPage,
+    },
+
+    {
+      meta: {
+        layout: MainLayout
+      },
+      path: '/checkout',
+      name: 'checkout',
+      component: CheckoutPage,
+    },
+  ]
+})
 
 export default router;
