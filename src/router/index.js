@@ -11,7 +11,7 @@ import ProfilePage from '@/views/ProfilePage.vue'
 import CheckoutPage from '@/views/CheckoutPage.vue'
 import ProductLayout from '@/layouts/ProductLayout.vue'
 import FilterPage from '@/views/FilterPage.vue'
-
+import FavoritePage from '@/views/FavoritePage.vue'
 
 
 const router = createRouter({
@@ -78,6 +78,15 @@ const router = createRouter({
       path: '/filter-page',
       name: 'Filter',
       component: FilterPage,
+    },
+
+    {
+      meta: {
+        layout: ProductLayout
+      },
+      path: '/favorite-page',
+      name: 'Favorite',
+      component: FavoritePage,
     },
 
     {

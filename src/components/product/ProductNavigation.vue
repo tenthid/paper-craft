@@ -76,7 +76,7 @@
                         <!-- dropdown -->
     
                     </div>
-                    <button class="btn bg-primary text-white rounded-[5px] w-[100%]">
+                    <button class="btn bg-primary text-white rounded-[5px] w-[100%] hover:opacity-[80%]">
                         Filter
                     </button>
                 </div>

@@ -9,10 +9,7 @@
           <FilterProduct />
         </div>
 
-        <div
-        v-if="products.length === 0"
-        class="w-[100%] h-[350px] flex flex-col items-center justify-center h-100"
-      >
+        <div v-if="products.length === 0" class="w-[100%] h-[425px] flex flex-col items-center justify-center h-100">
         <img class="h-[150px] w-auto pb-[10px]" src="/images/Empty-filtered-page.png" alt="" />
         <div class="text-center font-inter">
           <p class="font-medium text-[35px]">Cant Find Product Based on Your Filter</p>
@@ -28,9 +25,7 @@
           <AllListProduct :products="paginatedProducts" />
     
           <!-- Pagination -->
-          <div
-              class="flex flex-row items-center justify-center p-2.5 text-base text-text-default-default gap-2"
-            >
+          <div class="flex flex-row items-center justify-center p-2.5 text-base text-text-default-default gap-2">
               <button
                 @click="previousPage"
                 :disabled="currentPage === 1"
@@ -65,12 +60,7 @@
         </div>
       </div>
 
-
-   
   </div>
-        
-    
-
 </template>
 
 <script setup>

@@ -10,9 +10,7 @@
       <AllListProduct :products="paginatedProducts" />
 
       <!-- Pagination -->
-      <div
-          class="flex flex-row items-center justify-center p-2.5 text-base text-text-default-default gap-2"
-        >
+      <div class="flex flex-row items-center justify-center p-2.5 text-base text-text-default-default gap-2">
           <button
             @click="previousPage"
             :disabled="currentPage === 1"
@@ -46,11 +44,7 @@
         </div>
     </div>
 
-   
   </div>
-        
-    
-
 </template>
 
 <script setup>
