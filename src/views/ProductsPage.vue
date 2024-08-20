@@ -7,26 +7,26 @@
 
     <!-- Product List -->
     <div class="container-page">
-      <ListProduct :products="paginatedProducts" />
+      <AllListProduct :products="paginatedProducts" />
 
       <!-- Pagination -->
       <div
-          class="flex flex-row items-center justify-center p-2.5 text-base text-text-default-default"
+          class="flex flex-row items-center justify-center p-2.5 pt-[50px] text-base text-text-default-default gap-2"
         >
           <button
             @click="previousPage"
             :disabled="currentPage === 1"
-            class="bg-gray p-2 rounded-lg opacity-50"
+            class="bg-gray p-2 rounded-lg opacity-50 hover:bg-primary hover:opacity-100"
           >
-            <img class="w-4 h-4" src="/images/arrow-left.svg" alt="Previous" />
+            <img class="w-6 h-6" src="/images/arrow-left.svg" alt="Previous" />
           </button>
           <div class="flex flex-row items-center justify-start gap-2">
             <button
-              v-for="page in totalPages"
+              v-for="page in displayedPages"
               :key="page"
               @click="changePage(page)"
               :class="[
-                'p-2 rounded-lg',
+                'px-[15px] py-2 rounded-lg',
                 {
                   'bg-primary text-white': page === currentPage,
                   'bg-gray-200': page !== currentPage,
@@ -39,9 +39,9 @@
           <button
             @click="nextPage"
             :disabled="currentPage === totalPages"
-            class="bg-primary text-white p-2 rounded-lg"
+            class="bg-gray p-2 rounded-lg opacity-50 hover:bg-primary hover:opacity-100"
           >
-            <img class="w-4 h-4" src="/images/arrow-right.svg" alt="Next" />
+            <img class="w-6 h-6" src="/images/arrow-right.svg" alt="Next" />
           </button>
         </div>
     </div>
@@ -55,11 +55,32 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import ListProduct from "@/components/product/ListProduct.vue";
+import AllListProduct from "@/components/product/AllListProduct.vue";
 
 const products = ref([
   {
-    name: "This Pr88oduct name bla bla ba ball",
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
+    brand: "Brand name",
+    price: "Rp200.000",
+    stock: 11,
+    image: "/images/tas.jpg",
+  },
+  {
+    name: "This Product name bla bla ba ball",
     brand: "Brand name",
     price: "Rp200.000",
     stock: 11,
@@ -94,13 +115,6 @@ const products = ref([
     image: "/images/tas.jpg",
   },
   {
-    name: "This Pr88oduct name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
     name: "This Product name bla bla ba ball",
     brand: "Brand name",
     price: "Rp200.000",
@@ -114,25 +128,15 @@ const products = ref([
     stock: 11,
     image: "/images/tas.jpg",
   },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
+  
+  
+  
+  
 ]);
 
-const itemsPerPage = 15;
-const maxPagesToShow = 5;
-const currentPage = ref(1);
+const itemsPerPage = 15; 
+const maxPagesToShow = 5; 
+const currentPage = ref(1); 
 
 const totalPages = computed(() =>
   Math.ceil(products.value.length / itemsPerPage)
@@ -144,7 +148,6 @@ const paginatedProducts = computed(() => {
   return products.value.slice(start, end);
 });
 
-// Menghitung halaman yang ditampilkan
 const displayedPages = computed(() => {
   let startPage = Math.max(currentPage.value - Math.floor(maxPagesToShow / 2), 1);
   let endPage = startPage + maxPagesToShow - 1;
