@@ -59,7 +59,7 @@ import ProductList from "@/components/product/ProductList.vue";
 
 const products = ref([
   {
-    name: "This Product name bla bla ba ball",
+    name: "This Pr88oduct name bla bla ba ball",
     brand: "Brand name",
     price: "Rp200.000",
     stock: 11,
@@ -95,9 +95,7 @@ const products = ref([
   },
 ]);
 
-const itemsPerPage = 15;
-const maxPagesToShow = 5;
-
+const itemsPerPage = 3;
 const currentPage = ref(1);
 
 const totalPages = computed(() =>
@@ -108,6 +106,23 @@ const paginatedProducts = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage;
   const end = start + itemsPerPage;
   return products.value.slice(start, end);
+});
+
+// Menghitung halaman yang ditampilkan
+const displayedPages = computed(() => {
+  let startPage = Math.max(currentPage.value - Math.floor(maxPagesToShow / 2), 1);
+  let endPage = startPage + maxPagesToShow - 1;
+
+  if (endPage > totalPages.value) {
+    endPage = totalPages.value;
+    startPage = Math.max(endPage - maxPagesToShow + 1, 1);
+  }
+
+  const pages = [];
+  for (let i = startPage; i <= endPage; i++) {
+    pages.push(i);
+  }
+  return pages;
 });
 
 function previousPage() {
