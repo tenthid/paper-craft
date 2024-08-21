@@ -45,3 +45,7 @@ const products = ref([1]);
 
 const hasProduct = computed(() => products.value.length > 0);
 </script>
+
+<style lang="scss" scoped>
+
+</style>
