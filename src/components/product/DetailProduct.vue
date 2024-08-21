@@ -5,7 +5,7 @@
             <img :src="productImage" alt="Product Image" class="h-full w-auto rounded-[10px]" />
           </div>
         </div>
-        <div class="flex flex-col justify-center items-center w-[765px] h-[546px] p-[25px] gap-[18px] rounded-[10px] bg-white">
+        <div class="flex flex-col justify-center items-center w-[765px] h-[546px] py-[25px] px-[30px] gap-[18px] rounded-[10px] bg-white">
           <div class="flex flex-col items-start gap-[8px] self-stretch">
             <div class="flex justify-between items-start self-stretch">
               <div class="w-[650px] text-[#000] font-inter text-[25px] font-medium">
@@ -51,7 +51,7 @@
                 <input 
                   type="text" 
                   :value="quantity" 
-                  class="quantity-field w-[40px] h-[37px] text-center border-t-[2px] border-b-[2px] border-primary focus:outline-none"
+                  class="quantity-field w-[40px] h-[38px] text-center border-t-[2px] border-b-[2px] border-primary focus:outline-none"
                   readonly
                 />
                 
@@ -63,12 +63,12 @@
             </div>
           </div>
   
-          <div class="flex h-[45px] justify-center items-center gap-[10px] self-stretch rounded-[5px] bg-primary text-white font-inter text-[20px] font-normal hover:opacity-[70%]">
+          <router-link to="/cart" class="flex h-[45px] justify-center items-center gap-[10px] self-stretch rounded-[5px] bg-primary text-white font-inter text-[20px] font-normal hover:opacity-[70%]">
             Add to Cart
-          </div>
-          <div class="flex h-[45px] justify-center items-center gap-1 self-stretch rounded-[5px] border-[2px] border-primary text-primary font-inter text-[20px] font-normal hover:bg-primary hover:text-white">
+          </router-link>
+          <router-link to="/checkout" class="flex h-[45px] justify-center items-center gap-1 self-stretch rounded-[5px] border-[2px] border-primary text-primary font-inter text-[20px] font-normal hover:bg-primary hover:text-white">
             Buy Now
-          </div>
+          </router-link>
         </div>
       </div>
 </template>
