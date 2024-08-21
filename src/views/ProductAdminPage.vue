@@ -1,7 +1,7 @@
 <template>
   <div class="bg-primary-background mt-[50px] w-full">
     <div
-      class="mt-[50px] w-full flex flex-col items-center gap-5 text-left text-sm text-black-100 font-body-base-bold"
+      class="mt-[50px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold"
     >
       <!-- Header Section -->
       <div

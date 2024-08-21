@@ -21,7 +21,8 @@ export default {
     fontFamily: {
       'inter': ['"Inter"', 'sans-sherif'],
       'hand-write': ['"Kalam"', 'sans-serif'],
-      'maitree': ['"Maitree"', 'serif']
+      'maitree': ['"Maitree"', 'serif'],
+      'poppins': ['"Poppins"', 'serif']
     },
     screens: {
       'phone-s' : '320px',
