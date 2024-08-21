@@ -41,12 +41,7 @@ import { ref, computed } from 'vue';
 import DetailProduct from "@/components/product/DetailProduct.vue";
 import ProductList from "@/components/product/ProductList.vue";
 
-// Simulated data for demonstration
-const products = ref([true]); // Replace with actual product data
+const products = ref([1]); 
 
 const hasProduct = computed(() => products.value.length > 0);
-
-function goBack() {
-  // Logic to navigate back
-}
 </script>
