@@ -1,12 +1,14 @@
 <template>
   <div
-    class="max-w-screen-[100%] px-[60px] py-[70px] bg-primary flex flex-col gap-10 font-inter"
+    class="w-full px-[20px] tablet:px-[40px] laptop:px-[60px] py-[50px] bg-primary flex flex-col gap-10 font-inter"
   >
-    <div class="flex flex-col tablet:flex-row justify-between">
+    <div
+      class="flex flex-col tablet:flex-row justify-between gap-8 tablet:gap-10"
+    >
       <!-- Desc Section -->
-      <div class="space-y-6">
+      <div class="space-y-4 tablet:space-y-6 max-w-md">
         <div
-          class="flex items-center space-x-2 text-white text-[30px] tablet:text-[30px] font-bold"
+          class="flex items-center space-x-2 text-white text-[24px] phone-m:text-[26px] tablet:text-[30px] font-bold"
         >
           <div style="display: flex; gap: 0">
             <span>Paper</span>
@@ -14,7 +16,7 @@
           </div>
         </div>
         <p
-          class="text-white text-[14px] tablet:text-[14px] max-w-md text-justify mr-5"
+          class="text-white text-[14px] phone-m:text-[16px] tablet:text-[14px] text-justify"
         >
           Papercraft menyediakan berbagai perlengkapan alat tulis kantor dan
           bahan kerajinan kertas. Temukan kertas, pensil, pena, dan alat
@@ -24,15 +26,21 @@
       </div>
 
       <!-- Contact Section -->
-      <div class="space-y-3 mt-6 tablet:mt-0 mr-5">
-        <h3 class="text-white text-[20px] tablet:text-[20px] font-medium">
+      <div class="space-y-2 tablet:space-y-3 mt-6 tablet:mt-0">
+        <h3
+          class="text-white text-[18px] phone-m:text-[20px] tablet:text-[20px] font-medium"
+        >
           Contact
         </h3>
-        <p class="text-white text-[18px] tablet:text-[18px] leading-7">
+        <p
+          class="text-white text-[16px] phone-m:text-[18px] tablet:text-[18px] leading-7"
+        >
           Call now:
           <span class="text-gray font-medium">(0361) 555-0115</span>
         </p>
-        <p class="text-white text-[18px] tablet:text-[18px] leading-7">
+        <p
+          class="text-white text-[16px] phone-m:text-[18px] tablet:text-[18px] leading-7"
+        >
           Email:
           <span class="text-gray font-medium">papercraft@gmail.com</span>
         </p>
@@ -42,70 +50,78 @@
       </div>
 
       <!-- Categories Section -->
-      <div class="space-y-4 mt-6 tablet:mt-0 ">
-        <h3 class="text-white text-[20px] tablet:text-[20px] font-medium mr-5">
+      <div class="space-y-2 tablet:space-y-4 mt-6 tablet:mt-0">
+        <h3
+          class="text-white text-[18px] phone-m:text-[20px] tablet:text-[20px] font-medium"
+        >
           Categories
         </h3>
-        <ul class="space-y-3">
-          <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px] mb-2">
-              Alat Tulis
-            </li>
-          </router-link>
-          <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px] mb-2">
-              Perlengkapan Sekolah
-            </li>
-          </router-link>
-          <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px] mb-2">
-              Perlengkapan Pramuka
-            </li>
-          </router-link>
-          <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px] mb-2">
-              Perlengkapan Kantor
-            </li>
-          </router-link>
-          <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px] mb-2">
-              Perlengkapan Seni
-            </li>
-          </router-link>
-          <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px] mb-2">
-              Kertas dan Buku
-            </li>
-          </router-link>
+        <ul class="space-y-2">
+          <li
+            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
+          >
+            <router-link to="/">Alat Tulis</router-link>
+          </li>
+          <li
+            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
+          >
+            <router-link to="/">Perlengkapan Sekolah</router-link>
+          </li>
+          <li
+            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
+          >
+            <router-link to="/">Perlengkapan Pramuka</router-link>
+          </li>
+          <li
+            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
+          >
+            <router-link to="/">Perlengkapan Kantor</router-link>
+          </li>
+          <li
+            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
+          >
+            <router-link to="/">Perlengkapan Seni</router-link>
+          </li>
+          <li
+            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
+          >
+            <router-link to="/">Kertas dan Buku</router-link>
+          </li>
         </ul>
       </div>
 
       <!-- Support Section -->
-      <div class="space-y-4 mt-6 tablet:mt-0">
-        <h3 class="text-white text-[20px] tablet:text-[20px] font-medium">
+      <div class="space-y-2 tablet:space-y-4 mt-6 tablet:mt-0">
+        <h3
+          class="text-white text-[18px] phone-m:text-[20px] tablet:text-[20px] font-medium"
+        >
           Support
         </h3>
-        <ul class="space-y-1">
-          <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px] mb-2">
-              Privacy Policy
-            </li>
-          </router-link>
-          <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px]">
-              Terms & Conditions
-            </li>
-          </router-link>
+        <ul class="space-y-2">
+          <li
+            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
+          >
+            <router-link to="/">Privacy Policy</router-link>
+          </li>
+          <li
+            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
+          >
+            <router-link to="/">Terms & Conditions</router-link>
+          </li>
         </ul>
       </div>
     </div>
 
     <div class="border-t border-white"></div>
 
-    <div class="flex flex-col tablet:flex-row justify-between items-center">
-      <p class="text-white text-[20px] md:text-[20px]">© 2024 Papercraft</p>
+    <div
+      class="flex flex-col tablet:flex-row justify-between items-center space-y-4 tablet:space-y-0"
+    >
+      <p class="text-white text-[16px] phone-m:text-[18px] tablet:text-[20px]">
+        © 2024 Papercraft
+      </p>
       <div
-        class="flex flex-wrap tablet:flex-nowrap space-x-2 tablet:space-x-4 space-y-2 tablet:space-y-0 mt-4 tablet:mt-0"
+        class="flex flex-wrap justify-center tablet:justify-end space-x-2 tablet:space-x-4 mt-4 tablet:mt-0"
       >
         <!-- Social Media Icons with Links -->
         <a
