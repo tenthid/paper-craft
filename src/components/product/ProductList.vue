@@ -35,7 +35,7 @@
             {{ product.price }}
           </div>
           <div
-            class="relative text-xs tracking-[0.1px] leading-[24px] text-[12px] text-[#5B5B5B]"
+            class="ml-auto relative text-xs tracking-[0.1px] leading-[24px] text-[12px] text-[#5B5B5B]"
           >
             <span>Stock </span>
             <b class="text-[#000] text-[12px]">{{ product.stock }}</b>
@@ -61,11 +61,11 @@
         </div>
         <router-link
           to="/checkout"
-          class="self-stretch flex-1 rounded-md border-primary border-[1px] border-solid overflow-hidden flex flex-row items-center justify-center py-0.5 px-0"
+          class="self-stretch flex-1 rounded-md border-primary border-[1px] border-solid overflow-hidden py-0.5 px-0"
         >
-          <div class="relative leading-[16px] font-medium">Buy now</div>
+          <div class="btn relative leading-[16px] font-medium">Buy now</div>
         </router-link>
-      </div>  
+      </div>
       <div
         class="w-[30px] !m-[0] absolute top-[12px] left-[13px] rounded-6xl bg-white h-[30px] flex flex-row items-center justify-center p-1 box-border z-[3]"
       >
@@ -90,41 +90,3 @@
   })
   // const products = store.state.product.products
 </script>
-
-// const products = [
-//   {
-//     name: "This Product name bla bla ba ball",
-//     brand: "Brand name",
-//     price: "Rp200.000",
-//     stock: 11,
-//     image: "/images/tas.jpg",
-//   },
-//   {
-//     name: "This Product name bla bla ba ball",
-//     brand: "Brand name",
-//     price: "Rp200.000",
-//     stock: 11,
-//     image: "/images/tas.jpg",
-//   },
-//   {
-//     name: "This Product name bla bla ba ball",
-//     brand: "Brand name",
-//     price: "Rp200.000",
-//     stock: 11,
-//     image: "/images/tas.jpg",
-//   },
-//   {
-//     name: "This Product name bla bla ba ball",
-//     brand: "Brand name",
-//     price: "Rp200.000",
-//     stock: 11,
-//     image: "/images/tas.jpg",
-//   },
-//   {
-//     name: "This Product name bla bla ba ball",
-//     brand: "Brand name",
-//     price: "Rp200.000",
-//     stock: 11,
-//     image: "/images/tas.jpg",
-//   },
-// ];

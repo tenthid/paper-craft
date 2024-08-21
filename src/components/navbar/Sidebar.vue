@@ -23,9 +23,6 @@
           <router-link to="/brand-admin" active-class="text-primary-1"
             >Brands</router-link
           >
-          <router-link to="/customer-admin" active-class="text-primary-1"
-            >Customers</router-link
-          >
         </div>
       </div>
     </div>

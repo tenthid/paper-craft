@@ -11,7 +11,6 @@ import HomeAdminPage from "@/views/HomeAdminPage.vue";
 import AdminLayout from "@/layouts/AdminLayout.vue";
 import BrandAdminPage from "@/views/BrandAdminPage.vue";
 import ProductAdminPage from "@/views/ProductAdminPage.vue";
-import CustomerAdminPage from "@/views/CustomerAdminPage.vue";
 import CategoryAdminPage from "@/views/CategoryAdminPage.vue";
 import ProfilePage from '@/views/ProfilePage.vue'
 import CheckoutPage from '@/views/CheckoutPage.vue'
@@ -104,14 +103,6 @@ const router = createRouter({
       path: "/brand-admin",
       name: "BrandAdmin",
       component: BrandAdminPage,
-    },
-    {
-      meta: {
-        layout: AdminLayout,
-      },
-      path: "/customer-admin",
-      name: "CustomerAdmin",
-      component: CustomerAdminPage,
     },
     {
       meta: {
