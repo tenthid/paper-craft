@@ -8,7 +8,7 @@
         <div class="flex flex-col justify-center items-center w-[765px] h-[546px] py-[25px] px-[30px] gap-[18px] rounded-[10px] bg-white">
           <div class="flex flex-col items-start gap-[8px] self-stretch">
             <div class="flex justify-between items-start self-stretch">
-              <div class="w-[650px] text-[#000] font-inter text-[25px] font-medium">
+              <div class="w-[660px] text-[#000] font-inter text-[28px] font-medium">
                 {{ productName }} <!-- nama product -->
               </div>
               <img class="w-[30px] h-auto pt-[5px]" src="/images/heart.svg" alt="" />
@@ -27,7 +27,7 @@
               </div>
             </div>
   
-            <div class="text-[#005C78] font-inter text-[22px] font-medium leading-normal tracking-[0.1px]">
+            <div class="text-[#005C78] font-inter text-[25px] font-medium leading-normal tracking-[0.1px]">
               Rp {{ productPrice }} <!-- price -->
             </div>
   
@@ -40,7 +40,7 @@
           </div>
   
           <div class="flex w-full h-[34px] justify-between items-center flex-shrink-0 text-primary font-inter text-[18px] font-medium normal-case leading-normal">
-            Amount
+            <p class="text-[22px]">Amount</p>
             <div class="quantity-input flex items-center pr-[5px]">
                 <button 
                   class="decrement-btn px-2 py-1 border-[2px] border-primary rounded-l  hover:bg-primary hover:text-white"
