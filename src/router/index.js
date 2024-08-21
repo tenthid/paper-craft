@@ -12,6 +12,7 @@ import CheckoutPage from '@/views/CheckoutPage.vue'
 import HomeAdminPage from '@/views/HomeAdminPage.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import ProductAdminPage from '@/views/ProductAdminPage.vue'
+import ProductLayout from '@/layouts/ProductLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -63,7 +64,7 @@ const router = createRouter({
 
     {
       meta: {
-        layout: MainLayout
+        layout: ProductLayout
       },
       path: '/products-page',
       name: 'Products',
