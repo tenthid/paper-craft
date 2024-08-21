@@ -12,6 +12,8 @@ import CheckoutPage from '@/views/CheckoutPage.vue'
 import ProductLayout from '@/layouts/ProductLayout.vue'
 import FilterPage from '@/views/FilterPage.vue'
 import FavoritePage from '@/views/FavoritePage.vue'
+import CategoryPage from '@/views/CategoryPage.vue'
+import BrandPage from '@/views/BrandPage.vue'
 
 
 const router = createRouter({
@@ -78,6 +80,24 @@ const router = createRouter({
       path: '/filter-page',
       name: 'Filter',
       component: FilterPage,
+    },
+
+    {
+      meta: {
+        layout: ProductLayout
+      },
+      path: '/category-page',
+      name: 'CategoryName',
+      component: CategoryPage,
+    },
+
+    {
+      meta: {
+        layout: ProductLayout
+      },
+      path: '/brand-page',
+      name: 'BrandName',
+      component: BrandPage,
     },
 
     {
