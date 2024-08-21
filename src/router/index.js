@@ -9,6 +9,9 @@ import ResetPasswordPage from '@/views/ResetPasswordPage.vue'
 import ProductsPage from '@/views/ProductsPage.vue'
 import ProfilePage from '@/views/ProfilePage.vue'
 import CheckoutPage from '@/views/CheckoutPage.vue'
+import HomeAdminPage from '@/views/HomeAdminPage.vue'
+import AdminLayout from '@/layouts/AdminLayout.vue'
+import ProductAdminPage from '@/views/ProductAdminPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -110,6 +113,24 @@ const router = createRouter({
       path: '/checkout',
       name: 'checkout',
       component: CheckoutPage,
+    },
+
+    {
+      meta: {
+        layout: AdminLayout
+      },
+      path: '/home-admin',
+      name: 'HomeAdmin',
+      component: HomeAdminPage,
+    },
+
+    {
+      meta: {
+        layout: AdminLayout
+      },
+      path: '/products-admin',
+      name: 'ProductAdmin',
+      component: ProductAdminPage,
     },
   ]
 })

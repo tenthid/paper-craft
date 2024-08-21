@@ -20,7 +20,7 @@
       </p>
     </div>
     <router-link
-      to="/"
+      to="/products-page"
       class="w-[250px] h-[56px] rounded-[10px] bg-primary text-[30px] text-white font-semibold leading-[20px] btn px-[25px]"
     >
       Lets Shop
@@ -71,7 +71,7 @@
       >
         <router-link
           to="/brand-name"
-          class="self-stretch rounded-3xs bg-white overflow-hidden flex flex-col items-center justify-center py-[15px] px-[30px] gap-2.5"
+          class="self-stretch rounded-[10px] bg-white overflow-hidden flex flex-col items-center justify-center py-[15px] px-[30px] gap-2.5"
         >
           <img src="" alt="" class="w-[70px] relative bg-gray h-[70px]" />
           <div class="relative leading-[120%] font-medium text-[#000]">
@@ -79,14 +79,14 @@
           </div>
         </router-link>
         <div
-          class="flex-1 rounded-3xs overflow-hidden flex flex-col items-start justify-start gap-5 text-xl"
+          class="flex-1 rounded-[10px] overflow-hidden flex flex-col items-start justify-start gap-5 text-xl"
         >
           <div
-            class="self-stretch rounded-3xs overflow-hidden flex flex-row items-start justify-start gap-5"
+            class="self-stretch rounded-[10px] overflow-hidden flex flex-row items-start justify-start gap-5"
           >
             <router-link
               to="/brand-name"
-              class="w-[300px] rounded-3xs bg-white overflow-hidden shrink-0 flex flex-row items-center justify-center py-[15px] px-[30px] box-border gap-2.5"
+              class="w-[300px] rounded-[10px] bg-white overflow-hidden shrink-0 flex flex-row items-center justify-center py-[15px] px-[30px] box-border gap-2.5"
             >
               <img src="" alt="" class="w-[50px] relative bg-gray h-[50px]" />
               <div class="relative leading-[120%] font-medium text-[#000]">
@@ -95,7 +95,7 @@
             </router-link>
             <router-link
               to="/brand-name"
-              class="flex-1 rounded-3xs bg-white overflow-hidden flex flex-row items-center justify-center py-[15px] px-[30px] gap-2.5"
+              class="flex-1 rounded-[10px] bg-white overflow-hidden flex flex-row items-center justify-center py-[15px] px-[30px] gap-2.5"
             >
               <img src="" alt="" class="w-[50px] relative bg-gray h-[50px]" />
               <div class="relative leading-[120%] font-medium text-[#000]">
@@ -104,11 +104,11 @@
             </router-link>
           </div>
           <div
-            class="self-stretch rounded-3xs overflow-hidden flex flex-row items-start justify-start gap-5"
+            class="self-stretch rounded-[10px] overflow-hidden flex flex-row items-start justify-start gap-5"
           >
             <router-link
               to="/brand-name"
-              class="flex-1 rounded-3xs bg-white overflow-hidden flex flex-row items-center justify-center py-[15px] px-[30px] gap-2.5"
+              class="flex-1 rounded-[10px] bg-white overflow-hidden flex flex-row items-center justify-center py-[15px] px-[30px] gap-2.5"
             >
               <img src="" alt="" class="w-[50px] relative bg-gray h-[50px]" />
               <div class="relative leading-[120%] font-medium text-[#000]">
@@ -117,7 +117,7 @@
             </router-link>
             <router-link
               to="/brand-name"
-              class="w-[300px] rounded-3xs bg-white overflow-hidden shrink-0 flex flex-row items-center justify-center py-[15px] px-[30px] box-border gap-2.5"
+              class="w-[300px] rounded-[10px] bg-white overflow-hidden shrink-0 flex flex-row items-center justify-center py-[15px] px-[30px] box-border gap-2.5"
             >
               <img src="" alt="" class="w-[50px] relative bg-gray h-[50px]" />
               <div class="relative leading-[120%] font-medium text-[#000]">
