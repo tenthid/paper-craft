@@ -11,7 +11,7 @@
                     Categories
                 </p>
                 <div class="grid grid-cols-6 w-[100%] gap-y-[25px]">
-                    <router-link to="/" v-for="index in 10" class="text-center hover:underline font-inter font-[300]">
+                    <router-link to="/" v-for="index in 12" class="text-center hover:underline font-inter font-[300]">
                         Category name
                     </router-link>
                 </div>
@@ -19,7 +19,7 @@
         </div>
         
         <div class="flex gap-[5px] text-[20px] font-[500] font-inter group cursor-pointer h-[100%] items-center">
-            Category
+            Brand
             <img width="20px" height="auto" bg-primary src="/images/dropdown-icon.svg" alt="dropdown-icon">
             
             <!-- Dropdown -->
@@ -28,8 +28,8 @@
                     Brands
                 </p>
                 <div class="grid grid-cols-6 w-[100%] gap-y-[25px]">
-                    <router-link to="/" v-for="index in 10" class="text-center hover:underline font-inter font-[300]">
-                        Category name
+                    <router-link to="/" v-for="index in 12" class="text-center hover:underline font-inter font-[300]">
+                        Brand name
                     </router-link>
                 </div>
             </div>
@@ -54,12 +54,15 @@
                             Sortby
                         </p>
                         <!-- dropdown -->
+                         <Sortby />
+
                     </div>
                     <div class="flex justify-between w-[100%]">
                         <p class="font-inter text-[18px] font-[400]">
                             Orderby
                         </p>
                         <!-- dropdown -->
+                        <Orderby />
     
                     </div>
                     <div class="flex justify-between w-[100%]">
@@ -67,6 +70,7 @@
                             Category
                         </p>
                         <!-- dropdown -->
+                         <FilterCategory />
     
                     </div>
                     <div class="flex justify-between w-[100%]">
@@ -74,9 +78,10 @@
                             Brand
                         </p>
                         <!-- dropdown -->
+                         <FilterBrand />
     
                     </div>
-                    <button class="btn bg-primary text-white rounded-[5px] w-[100%]">
+                    <button class="btn bg-primary text-white rounded-[5px] w-[100%] hover:opacity-[80%]">
                         Filter
                     </button>
                 </div>
@@ -87,6 +92,10 @@
 
 <script setup>
     import { ref, onMounted, onBeforeUnmount } from 'vue';
+    import FilterCategory from '../filter/FilterCategory.vue';
+    import FilterBrand from '../filter/FilterBrand.vue';
+    import Sortby from '../filter/Sortby.vue';
+    import Orderby from '../filter/Orderby.vue';
 
     const filterShow = ref(false)
     const filterModalContainer = ref(null)

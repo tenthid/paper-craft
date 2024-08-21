@@ -13,6 +13,11 @@ import HomeAdminPage from '@/views/HomeAdminPage.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import ProductAdminPage from '@/views/ProductAdminPage.vue'
 import ProductLayout from '@/layouts/ProductLayout.vue'
+import FilterPage from '@/views/FilterPage.vue'
+import FavoritePage from '@/views/FavoritePage.vue'
+import CategoryPage from '@/views/CategoryPage.vue'
+import BrandPage from '@/views/BrandPage.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -69,6 +74,42 @@ const router = createRouter({
       path: '/products-page',
       name: 'Products',
       component: ProductsPage,
+    },
+
+    {
+      meta: {
+        layout: ProductLayout
+      },
+      path: '/filter-page',
+      name: 'Filter',
+      component: FilterPage,
+    },
+
+    {
+      meta: {
+        layout: ProductLayout
+      },
+      path: '/category-page',
+      name: 'CategoryName',
+      component: CategoryPage,
+    },
+
+    {
+      meta: {
+        layout: ProductLayout
+      },
+      path: '/brand-page',
+      name: 'BrandName',
+      component: BrandPage,
+    },
+
+    {
+      meta: {
+        layout: ProductLayout
+      },
+      path: '/favorite-page',
+      name: 'Favorite',
+      component: FavoritePage,
     },
 
     {
