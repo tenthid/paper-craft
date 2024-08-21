@@ -5,7 +5,7 @@
     <router-link to="/detail-product"
       v-for="(product, index) in products"
       :key="index"
-      class="self-stretch flex-1 rounded-3xs bg-white overflow-hidden flex flex-col items-center justify-start p-[15px] relative gap-2.5"
+      class="self-stretch flex-1 rounded-lg bg-white overflow-hidden flex flex-col items-center justify-start p-[15px] relative gap-2.5"
     >
       <img
         class="self-stretch relative rounded-sm max-w-full overflow-hidden h-[250px] shrink-0 object-cover z-[0]"
@@ -45,7 +45,7 @@
         class="self-stretch bg-white overflow-hidden flex flex-row items-start justify-start gap-1.5 z-[2] text-primary"
       >
         <div
-          class="rounded-8xs bg-primary overflow-hidden flex flex-row items-center justify-center p-1.5"
+          class="rounded bg-primary overflow-hidden flex flex-row items-center justify-center p-1.5 hover:opacity-[70%]"
         >
           <router-link to="/cart" class="flex flex-row items-center justify-center">
             <img
@@ -56,13 +56,13 @@
           </router-link>
         </div>
         <router-link to="/checkout"
-          class="self-stretch flex-1 rounded-8xs border-primary border-[1px] border-solid overflow-hidden flex flex-row items-center justify-center py-0.5 px-0"
+          class="self-stretch flex-1 rounded border-primary border-[1px] border-solid overflow-hidden flex flex-row items-center justify-center py-0.5 px-0 hover:bg-primary hover:text-white"
         >
           <div class="relative leading-[16px] font-medium">Buy now</div>
         </router-link>
       </div>
       <div
-        class="w-[30px] !m-[0] absolute top-[12px] left-[13px] rounded-6xl bg-white h-[30px] flex flex-row items-center justify-center p-1 box-border z-[3]"
+        class="w-[30px] !m-[0] absolute top-[12px] left-[13px] rounded-md bg-white h-[30px] flex flex-row items-center justify-center p-1 box-border z-[3]"
       >
         <img
           class="w-[22px] relative h-[22px] overflow-hidden shrink-0"

@@ -14,6 +14,7 @@ import FilterPage from '@/views/FilterPage.vue'
 import FavoritePage from '@/views/FavoritePage.vue'
 import CategoryPage from '@/views/CategoryPage.vue'
 import BrandPage from '@/views/BrandPage.vue'
+import DetailPage from '@/views/DetailPage.vue'
 
 
 const router = createRouter({
@@ -107,6 +108,15 @@ const router = createRouter({
       path: '/favorite-page',
       name: 'Favorite',
       component: FavoritePage,
+    },
+
+    {
+      meta: {
+        layout: ProductLayout
+      },
+      path: '/detail-page',
+      name: 'Detail',
+      component: DetailPage,
     },
 
     {
