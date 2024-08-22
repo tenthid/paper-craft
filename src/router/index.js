@@ -149,6 +149,24 @@ const router = createRouter({
       name: 'checkout',
       component: CheckoutPage,
     },
+
+    {
+      meta: {
+        layout: AdminLayout
+      },
+      path: '/home-admin',
+      name: 'HomeAdmin',
+      component: HomeAdminPage,
+    },
+
+    {
+      meta: {
+        layout: AdminLayout
+      },
+      path: '/products-admin',
+      name: 'ProductAdmin',
+      component: ProductAdminPage,
+    },
     {
       meta: {
         layout: AdminLayout

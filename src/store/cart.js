@@ -1,6 +1,6 @@
 export default {
     namespaced: true,
-    staate () {
+    state () {
         return {
             cart: [
                 {

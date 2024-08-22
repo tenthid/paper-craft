@@ -19,7 +19,7 @@
             <span class="group-span"><i style="cursor: pointer;" @click="passIconControl()" :class="passIcon? ['fa-solid fa-eye-slash'] : ['fa-solid fa-eye']"></i></span>
         </div>
 
-        <div v-else class="flex gap-[6px] w-[100%]">
+        <div v-else class="flex gap-[6px] w-[100%]">        
             <input class="bg-primary-background py-[8px] px-[12px]  rounded-[12px] w-[100%] input-no-focus text-[16px]"
             :type="type"
             :id="identity"
