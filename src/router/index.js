@@ -15,6 +15,7 @@ import FavoritePage from '@/views/FavoritePage.vue'
 import CategoryPage from '@/views/CategoryPage.vue'
 import BrandPage from '@/views/BrandPage.vue'
 import DetailPage from '@/views/DetailPage.vue'
+import InvoicePage from '@/views/InvoicePage.vue'
 
 
 const router = createRouter({
@@ -103,7 +104,7 @@ const router = createRouter({
 
     {
       meta: {
-        layout: ProductLayout
+        layout: MainLayout
       },
       path: '/favorite-page',
       name: 'Favorite',
@@ -112,7 +113,7 @@ const router = createRouter({
 
     {
       meta: {
-        layout: ProductLayout
+        layout: MainLayout
       },
       path: '/detail-page',
       name: 'Detail',
@@ -162,6 +163,15 @@ const router = createRouter({
       path: '/checkout',
       name: 'checkout',
       component: CheckoutPage,
+    },
+
+    {
+      meta: {
+        layout: MainLayout
+      },
+      path: '/invoice',
+      name: 'Invoice',
+      component: InvoicePage,
     },
   ]
 })
