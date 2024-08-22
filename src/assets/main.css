@@ -132,6 +132,11 @@ input[type="number"]::-webkit-outer-spin-button {
   .input-select:focus {
     outline: none;
   }
+
+  .disabled {
+    background-color: #9199a3;
+    color: white;
+  }
 }
 
 @layer utilities {
