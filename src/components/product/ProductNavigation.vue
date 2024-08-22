@@ -49,7 +49,7 @@
                     <p class="font-inter text-[24px] font-bold">
                         Filter Product
                     </p>
-                    <div class="flex justify-between w-[100%]">
+                    <div class="grid grid-cols-2 gap-y-[25px] w-[100%]">
                         <p class="font-inter text-[18px] font-[400]">
                             Sortby
                         </p>
@@ -60,8 +60,6 @@
                             {label: 'Stock'},
                          ]"/>
 
-                    </div>
-                    <div class="flex justify-between w-[100%]">
                         <p class="font-inter text-[18px] font-[400]">
                             Orderby
                         </p>
@@ -70,23 +68,18 @@
                             {label: 'Ascending'},
                             {label: 'Descending'},
                          ]"/>
-    
-                    </div>
-                    <div class="flex justify-between w-[100%]">
+
                         <p class="font-inter text-[18px] font-[400]">
                             Category
                         </p>
                         <!-- dropdown -->
-                         <BaseSelect label="Choose Category" :options="categories"/>
-    
-                    </div>
-                    <div class="flex justify-between w-[100%]">
+                        <BaseSelect label="Choose Category" :options="categories"/>
+
                         <p class="font-inter text-[18px] font-[400]">
                             Brand
                         </p>
                         <!-- dropdown -->
                          <BaseSelect label="Choose Brand" :options="brands"/>
-    
                     </div>
                     <button class="btn bg-primary text-white rounded-[5px] w-[100%] hover:opacity-[80%]">
                         Filter

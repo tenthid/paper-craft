@@ -41,7 +41,7 @@
         <button @click="$emit('remove', $event.target.value)" class="btn text-white bg-danger rounded-[10px]">
             Remove
         </button>
-        <input :checked="selected" @click="$emit('incart', $event.target.value)" type="checkbox" class="input-check input-no-focus h-[35px] w-[35px]">
+        <input :checked="selected" @input="$emit('incart', $event.target.value)" type="checkbox" class="input-check input-no-focus h-[35px] w-[35px]">
     </div>
 </template>
 

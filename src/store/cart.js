@@ -45,9 +45,24 @@ export default {
         state.cart[payload.id - 1].qty = payload.value
         state.cart[payload.id - 1].totalPrice = state.cart[payload.id - 1].price * payload.value
       },
+
       setCartItems(state, payload) {
         state.cart = payload
-      }     
+      },
+
+      insertCheckoutItems(state, payload) {
+        state.checkoutItems = payload
+      },
+      
+      changeSelected(state, payload) {
+        console.log('jalan')
+        for(let item of state.cart) {
+          if(item.id === payload) {
+            item.selected = !item.selected
+          }
+        }
+      },
+
     },
 
     getters: {

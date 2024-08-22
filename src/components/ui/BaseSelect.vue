@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col gap-5">
-      <select class="w-[250px] border border-gray rounded py-[5px] px-[10px] text-gray font-normal">
+      <select class="w-[100%] border border-gray rounded py-[5px] px-[10px] text-gray font-normal">
         <option value="" disabled selected>{{ label }}</option>
         <option v-for="option in options">
           {{ option.label || option.brandName || option.categoryName }}
