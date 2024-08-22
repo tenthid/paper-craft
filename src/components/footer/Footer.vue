@@ -3,7 +3,7 @@
     class="w-full px-[20px] tablet:px-[40px] laptop:px-[60px] py-[50px] bg-primary flex flex-col gap-10 font-inter"
   >
     <div
-      class="flex flex-col tablet:flex-row justify-between gap-8 tablet:gap-10"
+      class="flex laptop:flex-row justify-between gap-8 laptop:gap-10"
     >
       <!-- Desc Section -->
       <div class="space-y-4 tablet:space-y-6 max-w-md">
@@ -114,16 +114,16 @@
 
     <div class="border-t border-white"></div>
 
+    <!-- Social Media and Copyright Section -->
     <div
-      class="flex flex-col tablet:flex-row justify-between items-center space-y-4 tablet:space-y-0"
+      class="flex laptop:flex-row justify-between items-center space-y-4 laptop:space-y-0"
     >
       <p class="text-white text-[16px] phone-m:text-[18px] tablet:text-[20px]">
         © 2024 Papercraft
       </p>
       <div
-        class="flex flex-wrap justify-center tablet:justify-end space-x-2 tablet:space-x-4 mt-4 tablet:mt-0"
+        class="flex flex-wrap justify-center laptop:justify-end space-x-2 laptop:space-x-4 mt-4 laptop:mt-0"
       >
-        <!-- Social Media Icons with Links -->
         <a
           href="https://www.facebook.com"
           target="_blank"

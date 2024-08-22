@@ -86,7 +86,7 @@
             <div
               class="w-[700px] relative border-gray border-t-[1px] border-solid box-border h-px opacity-50"
             ></div>
-            <div>
+            <div class="font-medium text-[#7A8089] font-poppins">
               <BaseInput
                 v-model="userInput.category"
                 label="Category Name"

@@ -14,6 +14,7 @@ import ProductAdminPage from "@/views/ProductAdminPage.vue";
 import CategoryAdminPage from "@/views/CategoryAdminPage.vue";
 import ProfilePage from '@/views/ProfilePage.vue'
 import CheckoutPage from '@/views/CheckoutPage.vue'
+import CreateProductPage from "@/views/CreateProductPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -148,6 +149,14 @@ const router = createRouter({
       name: 'checkout',
       component: CheckoutPage,
     },
+    {
+      meta: {
+        layout: AdminLayout
+      },
+      path: '/create-product',
+      name: 'createProduct',
+      component: CreateProductPage,
+    }
   ]
 })
 

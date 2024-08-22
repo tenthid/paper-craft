@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative bg-white w-50 h-[740px] overflow-hidden flex flex-col justify-between items-start p-5 box-border text-left text-base font-maitree"
+    class="sticky top-0 bg-white w-50 h-[740px] overflow-hidden flex flex-col justify-between items-start px-5 box-border text-left text-base font-maitree pt-[70px] pb-[20px]"
   >
     <div
       class="w-[171px] bg-white overflow-hidden flex flex-col items-start gap-5"
@@ -9,7 +9,7 @@
         class="self-stretch bg-white overflow-hidden flex flex-row items-start font-inter "
       >
         <div
-          class="self-stretch bg-white overflow-hidden flex flex-col items-start justify-start gap-10 mt-[50px]"
+          class="self-stretch bg-white overflow-hidden flex flex-col items-start justify-start gap-10 "
         >
           <router-link to="/home-admin" active-class="text-primary-1"
             >Home</router-link
