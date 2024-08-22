@@ -16,7 +16,11 @@ export default {
       'white' : '#FFFFFF',
       'white2' : '#F3F7EC',
       'primary1' : '#006989',
-      'black' : '#000000'
+      'black' : '#000000',
+      'gray-1' : '#5B5B5B',
+      'gray-2' : '#808080',
+      'gray-3' : '#404040',
+      'gray-4' : '#dedede',
     },
     fontFamily: {
       'inter': ['"Inter"', 'sans-sherif'],
