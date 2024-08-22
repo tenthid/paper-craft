@@ -112,9 +112,9 @@ const router = createRouter({
 
     {
       meta: {
-        layout: ProductLayout
+        layout: MainLayout
       },
-      path: '/detail-page',
+      path: '/product/:id',
       name: 'Detail',
       component: DetailPage,
     },

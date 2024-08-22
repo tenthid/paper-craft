@@ -1,14 +1,14 @@
 <template>
     <div class="w-[100%] bg-primary-background h-auto flex flex-col items-center gap-[40px] py-[166px] px-[60px] pb-[50px] self-stretch">
       <!-- Header -->
-      <div class="flex px-[10px] justify-start items-center gap-[10px] self-stretch">
+      <!-- <div class="flex px-[10px] justify-start items-center gap-[10px] self-stretch">
         <router-link to="/" class="absolute pl-[22px]" @click="goBack">
           <img class="h-[48px] w-auto" src="/images/arrow-left-circle.svg" alt="" />
         </router-link>
         <div class="flex w-full h-[46px] justify-center items-center gap-[10px] text-primary text-center font-maitree text-[35px] font-normal">
           Product Detail
         </div>
-      </div>
+      </div> -->
       
       <!-- Conditional Rendering -->
       <div v-if="!hasProduct" class="w-[100%] h-[440px] flex flex-col items-center justify-center h-100">
