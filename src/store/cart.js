@@ -4,51 +4,74 @@ export default {
         return {
             cart: [
                 {
+                  id: 1,
                   name: "This Product name bla bla ba ball",
                   brand: "Brand name",
-                  price: "Rp200.000",
+                  category: "category name",
+                  price: 200000,
                   stock: 11,
                   image: "/images/tas.jpg",
+                  qty: 1,
                 },
                 {
+                  id: 2,
                   name: "This Product name bla bla ba ball",
                   brand: "Brand name",
-                  price: "Rp200.000",
+                  category: "category name",
+                  price: 200000,
                   stock: 11,
                   image: "/images/tas.jpg",
+                  qty: 1,
                 },
                 {
+                  id: 3,
                   name: "This Product name bla bla ba ball",
                   brand: "Brand name",
-                  price: "Rp200.000",
+                  category: "category name",
+                  price: 200000,
                   stock: 11,
                   image: "/images/tas.jpg",
+                  qty: 1,
                 },
-                {
-                  name: "This Product name bla bla ba ball",
-                  brand: "Brand name",
-                  price: "Rp200.000",
-                  stock: 11,
-                  image: "/images/tas.jpg",
-                },
-                {
-                  name: "This Product name bla bla ba ball",
-                  brand: "Brand name",
-                  price: "Rp200.000",
-                  stock: 11,
-                  image: "/images/tas.jpg",
-                },
+            ],
+            checkoutItems: [
+
             ]
         }
     },
 
     mutations: {
-
+      changeQty(state, payload) {
+        state.cart[payload.id - 1].qty = payload.value
+        state.cart[payload.id - 1].totalPrice = state.cart[payload.id - 1].price * payload.value
+      },
+      setCartItems(state, payload) {
+        state.cart = payload
+      }     
     },
 
     getters: {
 
     },
 
+    actions: {
+      getCartItems({ state, commit }, payload) {
+        let cart = state.cart
+        for(let item of cart) {
+          item.selected = true
+          item.totalPrice = item.qty * item.price
+        }
 
+        commit('setCartItems', cart)
+      },
+
+      qtyControll({ commit, dispatch }, payload) {
+        commit('changeQty', payload)
+      },
+
+      removeItem({ state }, payload) {
+        let cartItems = state.cart
+
+      }
+    }
 }

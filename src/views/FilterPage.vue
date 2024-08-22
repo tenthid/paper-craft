@@ -1,12 +1,12 @@
 <template>
     
-    <div class="w-[100%] bg-[#ECF3F7] h-auto flex flex-col items-center gap-[40px] py-[166px] px-[60px] pb-[50px] self-stretch">
-        <div class="text-primary text-center font-[Maitree] text-[35px] font-normal leading-[120%]">
+    <div class="w-[100%] bg-primary-background h-auto flex flex-col items-center gap-[40px] py-[166px] px-[60px] pb-[50px] self-stretch">
+        <div class="text-primary text-center font-maitree text-[35px] font-normal leading-[120%]">
           Filtered Products
         </div>
 
         <div>
-          <FilterProduct />
+          <!-- <FilterProduct /> -->
         </div>
 
         <div v-if="products.length === 0" class="w-[100%] h-[425px] flex flex-col items-center justify-center h-100">
@@ -14,7 +14,7 @@
         <div class="text-center font-inter">
           <p class="font-medium text-[35px]">Cant Find Product Based on Your Filter</p>
           <p class="text-[#404040] text-[20px] mt-4">
-            The product you are lookng for does not exist
+            The product you are looking for does not exist
           </p>
         </div>
       </div>
@@ -65,7 +65,7 @@
 
 <script setup>
 import { ref, computed, reactive } from "vue";
-import FilterProduct from "@/components/filter/FilterProduct.vue";
+// import FilterProduct from "@/components/filter/FilterProduct.vue";
 import AllProduct from "@/components/product/AllProduct.vue";
 
 const itemsPerPage = 15; 

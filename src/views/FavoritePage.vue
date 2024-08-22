@@ -1,6 +1,6 @@
 <template>
     
-    <div class="w-[100%] bg-[#ECF3F7] h-auto flex flex-col items-center gap-[40px] py-[166px] px-[60px] pb-[50px] self-stretch">
+    <div class="container-page !pt-[105px] !pb-[50px]">
         <div class="flex h-12 justify-between items-center self-stretch text-primary text-center font-maitree text-[35px] font-normal px-[30px]">
             Favorite Products
             <div class="flex border-[1px] border-primary p-2.5 px-5 justify-center items-center gap-2.5 rounded-lg bg-white">
@@ -12,7 +12,6 @@
                 </div>
             </div>
         </div>
-
 
       <div v-if="products.length === 0" class="w-[100%] h-[425px] flex flex-col items-center justify-center h-100">
         <img class="h-[150px] w-auto pb-[10px]" src="/images/Like.png" alt="" />

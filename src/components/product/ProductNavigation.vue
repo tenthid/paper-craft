@@ -6,7 +6,7 @@
             <img width="20px" height="auto" bg-primary src="/images/dropdown-icon.svg" alt="dropdown-icon">
 
             <!-- Dropdown -->
-             <div class="hidden group-hover:flex px-[60px] py-[20px] gap-[20px] flex-col font-inter absolute w-[100%] items-center left-0 top-[120px] bg-white border-b-[0.5px] border-b-primary">
+             <div class="hidden px-[60px] py-[20px] gap-[20px] flex-col font-inter absolute w-[100%] items-center left-0 top-[120px] bg-white border-b-[0.5px] border-b-primary" :class="{'group-hover:flex' : !filterShow}">
                 <p class="font-[700] text-[25px]">
                     Categories
                 </p>
@@ -23,7 +23,7 @@
             <img width="20px" height="auto" bg-primary src="/images/dropdown-icon.svg" alt="dropdown-icon">
             
             <!-- Dropdown -->
-            <div class="hidden group-hover:flex px-[60px] py-[20px] gap-[20px] flex-col font-inter absolute w-[100%] items-center left-0 top-[120px] bg-white border-b-[0.5px] border-b-primary">
+            <div class="hidden px-[60px] py-[20px] gap-[20px] flex-col font-inter absolute w-[100%] items-center left-0 top-[120px] bg-white border-b-[0.5px] border-b-primary" :class="{'group-hover:flex' : !filterShow}">
                 <p class="font-[700] text-[25px]">
                     Brands
                 </p>
@@ -54,7 +54,11 @@
                             Sortby
                         </p>
                         <!-- dropdown -->
-                         <Sortby />
+                         <BaseSelect label="Choose Field" :options="[
+                            {label: 'Name'},
+                            {label: 'Price'},
+                            {label: 'Stock'},
+                         ]"/>
 
                     </div>
                     <div class="flex justify-between w-[100%]">
@@ -62,7 +66,10 @@
                             Orderby
                         </p>
                         <!-- dropdown -->
-                        <Orderby />
+                         <BaseSelect label="Choose Order By" :options="[
+                            {label: 'Ascending'},
+                            {label: 'Descending'},
+                         ]"/>
     
                     </div>
                     <div class="flex justify-between w-[100%]">
@@ -70,7 +77,7 @@
                             Category
                         </p>
                         <!-- dropdown -->
-                         <FilterCategory />
+                         <BaseSelect label="Choose Category" :options="categories"/>
     
                     </div>
                     <div class="flex justify-between w-[100%]">
@@ -78,7 +85,7 @@
                             Brand
                         </p>
                         <!-- dropdown -->
-                         <FilterBrand />
+                         <BaseSelect label="Choose Brand" :options="brands"/>
     
                     </div>
                     <button class="btn bg-primary text-white rounded-[5px] w-[100%] hover:opacity-[80%]">
@@ -91,11 +98,14 @@
 </template>
 
 <script setup>
-    import { ref, onMounted, onBeforeUnmount } from 'vue';
-    import FilterCategory from '../filter/FilterCategory.vue';
-    import FilterBrand from '../filter/FilterBrand.vue';
-    import Sortby from '../filter/Sortby.vue';
-    import Orderby from '../filter/Orderby.vue';
+    import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
+    import BaseSelect from '../ui/BaseSelect.vue';
+    import { useStore } from 'vuex';
+
+    const store = useStore()
+
+    const brands = computed(() => { return store.state.product.brands })
+    const categories = computed(() => { return store.state.product.categories })
 
     const filterShow = ref(false)
     const filterModalContainer = ref(null)

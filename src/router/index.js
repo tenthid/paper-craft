@@ -71,7 +71,7 @@ const router = createRouter({
       meta: {
         layout: ProductLayout
       },
-      path: '/products-page',
+      path: '/products',
       name: 'Products',
       component: ProductsPage,
     },
@@ -80,7 +80,7 @@ const router = createRouter({
       meta: {
         layout: ProductLayout
       },
-      path: '/filter-page',
+      path: '/filter',
       name: 'Filter',
       component: FilterPage,
     },
@@ -89,7 +89,7 @@ const router = createRouter({
       meta: {
         layout: ProductLayout
       },
-      path: '/category-page',
+      path: '/categories',
       name: 'CategoryName',
       component: CategoryPage,
     },
@@ -98,16 +98,16 @@ const router = createRouter({
       meta: {
         layout: ProductLayout
       },
-      path: '/brand-page',
+      path: '/brands',
       name: 'BrandName',
       component: BrandPage,
     },
 
     {
       meta: {
-        layout: ProductLayout
+        layout: MainLayout
       },
-      path: '/favorite-page',
+      path: '/favorite',
       name: 'Favorite',
       component: FavoritePage,
     },
