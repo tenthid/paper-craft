@@ -66,20 +66,25 @@
         <router-link 
          v-if="productStock > 0"
          :to="quantity > 0 ? '/cart' : '#'" 
-         class="flex h-[45px] justify-center items-center gap-[10px] self-stretch rounded-[5px] bg-primary text-white font-inter text-[20px] font-normal hover:opacity-[70%]"
-         :disabled="quantity <= 0"
-         :class="{ 'opacity-40 hover:opacity-40': quantity <= minQuantity }"
+         class="flex h-[45px] justify-center items-center gap-[10px] self-stretch rounded-[5px] bg-primary text-white font-inter text-[20px] font-normal"
+         :class="{
+         'opacity-40': quantity <= minQuantity,
+         'hover:opacity-70': quantity > minQuantity
+        }"
         >
-         Add to Cart
+          Add to Cart
         </router-link>
+
         <router-link 
          v-if="productStock > 0"
          :to="quantity > 0 ? '/checkout' : '#'"  
-         class="flex h-[45px] justify-center items-center gap-1 self-stretch rounded-[5px] border-[2px] border-primary text-primary font-inter text-[20px] font-normal hover:bg-primary hover:text-white"
-         :disabled="quantity <= 0"
-         :class="{ 'opacity-40 hover:bg-white hover:text-primary': quantity <= minQuantity }"
-        >                                  <!--Jangan diubah menjadi primary-->
-         Buy Now
+         class="flex h-[45px] justify-center items-center gap-1 self-stretch rounded-[5px] border-[2px] border-primary text-primary font-inter text-[20px] font-normal"
+         :class="{
+         'opacity-40 hover:bg-white hover:text-primary': quantity <= minQuantity,
+         'hover:bg-primary hover:text-white': quantity > minQuantity
+        }"
+        >
+          Buy Now
         </router-link>
         <div v-else class="w-full text-center text-500 text-danger justify-center text-[30px] py-[10px] font-semibold rounded-md border-[3px] border-danger mt-[10px]">sold out</div>
       </div>
