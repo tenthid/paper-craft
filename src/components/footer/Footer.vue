@@ -96,7 +96,7 @@
           <img
             src="/images/ytb-logo.svg"
             alt="YouTube"
-            class="w-[30px] h-[30px]"
+            class="w-[37px] h-[37px]"
           />
         </a>
         <a
@@ -116,9 +116,9 @@
           class="flex items-center justify-center"
         >
           <img
-            src="/images/tweeter-logo.svg"
+            src="/images/X-logo.svg"
             alt="Twitter"
-            class="w-[30px] h-[30px]"
+            class="w-[25px] h-[25px]"
           />
         </a>
       </div>
