@@ -11,19 +11,19 @@
       </div>
   
       <div class="flex h-auto px-[10px] justify-center items-start gap-[var(--line-height-line-height-400,20px)] flex-shrink-0 self-stretch">
-        <div class="flex h-auto px-[24px] pt-[var(--line-height-line-height-400,20px)] pb-[40px] flex-col items-center gap-[var(--line-height-line-height-400,20px)] rounded-[12px] border border-[#EDEDED] bg-[#FFF]">
+        <div class="flex h-auto px-[24px] pt-[var(--line-height-line-height-400,20px)] pb-[40px] flex-col items-center gap-[var(--line-height-line-height-400,20px)] rounded-[12px] border border-gray-7 bg-white">
           <div class="flex h-auto flex-col justify-center items-center gap-0 flex-shrink-0 self-stretch">
             <img class="h-[250px] w-auto pt-[20px]" src="/images/success.gif" alt="" />
-            <div class="text-bilu text-center font-inter text-[34px] font-medium leading-[36px]">
-              Payment Success
+            <div class="text-bilu text-center font-inter text-[30px] font-medium leading-[36px]">
+              Payment Successful!
             </div>
             <div class="py-[10px] pb-[30px] text-center text-[17px] font-normal leading-[24px] text-gray-3 font-inter">
-              thanks for shopping
+              Your payment has been successful been
             </div>
           </div>
   
-          <div class="flex w-[554px] h-[128px] p-[15px] flex-col gap-[4px] rounded-[10px] border border-[#EDEDED] bg-white ">
-            <!-- Konten informasi sini -->
+          <!-- Informasi -->
+          <div class="flex w-[480px] h-[128px] p-[15px] flex-col gap-[4px] rounded-[10px] border border-[#EDEDED] bg-white ">
             <div class="flex items-start gap-[26.646px] self-stretch justify-between">
               <div class="text-gray-5 font-poppins text-[14px] font-normal leading-[29.977px]">
                 Payment Time
@@ -50,26 +50,27 @@
             </div>
           </div>
   
-          <div class="text-gray-6 font-inter text-[14px] font-normal leading-[20px] pr-[450px]">
+          <div class="text-gray-6 font-inter text-[14px] font-normal leading-[20px] pr-[370px]">
             Product Price
           </div>
-  
-          <div class="flex w-[554px] h-auto p-[15px] flex-col gap-[4px] rounded-[10px] border border-[#EDEDED] bg-white ">
-            <ProductUnit />
+
+          <!-- Product price -->
+          <div class="flex w-[480px] h-auto p-[15px] flex-col gap-[4px] rounded-[10px] border border-[#EDEDED] bg-white ">
+            <ProductUnit ref="productUnitRef" />
           </div>
   
-          <div class="text-gray-6 font-inter text-[14px] font-normal leading-[20px] pr-[500px]">
+          <div class="text-gray-6 font-inter text-[14px] font-normal leading-[20px] pr-[430px]">
             Total
           </div>
   
-          <div class="flex w-[554px] h-auto p-[15px] flex-col gap-[4px] rounded-[10px] border border-[#EDEDED] bg-white ">
-            <!-- Konten informasi sini -->
+          <!-- Total -->
+          <div class="flex w-[480px] h-auto p-[15px] flex-col gap-[4px] rounded-[10px] border border-[#EDEDED] bg-white ">
             <div class="flex items-start gap-[26.646px] self-stretch justify-between">
               <div class="text-gray-5 font-poppins text-[14px] font-normal leading-[29.977px]">
                 Subtotal
               </div>
               <div class="text-gray-5 text-center font-poppins text-[14px] font-medium leading-[29.977px]">
-                {{ formatPrice(subtotal) }}
+                {{ formatPrice(totalPrice) }}
               </div>
             </div>
             <div class="flex items-start gap-[26.646px] self-stretch justify-between">
@@ -97,33 +98,51 @@
               </div>
             </div>
           </div>
+          <div class="py-[10px] pb-0 text-center text-[17px] font-normal leading-[24px] text-gray-3 font-inter">
+                Thanks for shopping
+              </div>
         </div>
       </div>
     </div>
-  </template>
+</template>
   
-  <script setup>
-  import { ref, computed } from 'vue';
-  import ProductUnit from '@/components/checkout/ProductUnit.vue';
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+import ProductUnit from '@/components/checkout/ProductUnit.vue';
   
   // Data Pembayaran
   const paymentTime = '25-02-2023, 13:22:16';
   const paymentMethod = 'Bank';
   const senderName = 'Antonio Ginting';
   
-  const subtotal = ref(0);
+  // const subtotal = ref(0);
   const taxes = ref(20000);
   const shipping = ref(50000);
   
-  // Total Pesanan
-  const orderTotal = computed(() => subtotal.value + taxes.value + shipping.value);
-  
-  // Format Harga
-  const formatPrice = (price) => {
-    return price.toLocaleString('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-    });
-  };  
+  const productUnitRef = ref(null);
+
+const totalPrice = computed(() => {
+  return productUnitRef.value ? productUnitRef.value.totalPrice : 0;
+});
+
+const orderTotal = computed(() => totalPrice.value + taxes.value + shipping.value);
+
+// Format Harga
+const formatPrice = (price) => {
+  return price.toLocaleString('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+  });
+};
+
+// Mengupdate totalPrice setelah ProductUnit di-mount
+onMounted(() => {
+  if (productUnitRef.value) {
+    console.log('Total Price:', totalPrice.value);
+  }
+});
 </script>
   
+<style lang="scss" scoped>
+
+</style>

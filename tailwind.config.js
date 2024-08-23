@@ -23,6 +23,7 @@ export default {
       'gray-4' : '#dedede',
       'gray-5' : '#707070',
       'gray-6' : '#616161',
+      'gray-7' : '#EDEDED',
       'pisang-ijo' : '#10AF13',
       'bilu' : '#009fd3',
     },
