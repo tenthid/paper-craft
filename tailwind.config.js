@@ -26,6 +26,7 @@ export default {
       'gray-7' : '#EDEDED',
       'pisang-ijo' : '#10AF13',
       'bilu' : '#009fd3',
+      'logout' : '#feecec',
     },
     fontFamily: {
       'inter': ['"Inter"', 'sans-sherif'],

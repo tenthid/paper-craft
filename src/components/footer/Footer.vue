@@ -36,7 +36,7 @@
           Email:
           <span class="text-gray font-medium">papercraft@gmail.com</span>
         </p>
-        <p class="text-white text-[14px] leading-tight">
+        <p class="text-white text-[18px] leading-tight">
           Jln Singosari Gg.Bebek No.6
         </p>
       </div>
@@ -46,38 +46,7 @@
         <h3 class="text-white text-[20px] tablet:text-[20px] font-medium mr-5">
           Categories
         </h3>
-        <ul class="space-y-3">
-          <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px] mb-2">
-              Alat Tulis
-            </li>
-          </router-link>
-          <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px] mb-2">
-              Perlengkapan Sekolah
-            </li>
-          </router-link>
-          <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px] mb-2">
-              Perlengkapan Pramuka
-            </li>
-          </router-link>
-          <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px] mb-2">
-              Perlengkapan Kantor
-            </li>
-          </router-link>
-          <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px] mb-2">
-              Perlengkapan Seni
-            </li>
-          </router-link>
-          <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px] mb-2">
-              Kertas dan Buku
-            </li>
-          </router-link>
-        </ul>
+        <FooterCategory />
       </div>
 
       <!-- Support Section -->
@@ -87,12 +56,12 @@
         </h3>
         <ul class="space-y-1">
           <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px] mb-2">
+            <li class="text-gray text-[16px] tablet:text-[16px] mb-2 hover:text-white">
               Privacy Policy
             </li>
           </router-link>
           <router-link to="/">
-            <li class="text-gray text-[16px] tablet:text-[16px]">
+            <li class="text-gray text-[16px] tablet:text-[16px] hover:text-white">
               Terms & Conditions
             </li>
           </router-link>
@@ -157,6 +126,8 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import FooterCategory from './FooterCategory.vue';
+</script>
 
 <style lang="scss" scoped></style>

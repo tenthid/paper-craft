@@ -23,7 +23,7 @@
           </div>
   
           <!-- Informasi -->
-          <div class="flex w-[480px] h-[128px] p-[15px] flex-col gap-[4px] rounded-[10px] border border-[#EDEDED] bg-white ">
+          <div class="flex w-full h-[128px] p-[15px] flex-col gap-[4px] rounded-[10px] border border-[#EDEDED] bg-white ">
             <div class="flex items-start gap-[26.646px] self-stretch justify-between">
               <div class="text-gray-5 font-poppins text-[14px] font-normal leading-[29.977px]">
                 Payment Time
@@ -50,21 +50,21 @@
             </div>
           </div>
   
-          <div class="text-gray-6 font-inter text-[14px] font-normal leading-[20px] pr-[370px]">
+          <div class="w-full text-gray-6 font-inter text-[14px] font-normal leading-[20px]  pl-[15px]">
             Product Price
           </div>
 
           <!-- Product price -->
-          <div class="flex w-[480px] h-auto p-[15px] flex-col gap-[4px] rounded-[10px] border border-[#EDEDED] bg-white ">
+          <div class="flex min-w-[460px] h-auto p-[15px] flex-col gap-[4px] rounded-[10px] border border-[#EDEDED] bg-white ">
             <ProductUnit ref="productUnitRef" />
           </div>
   
-          <div class="text-gray-6 font-inter text-[14px] font-normal leading-[20px] pr-[430px]">
+          <div class="w-full text-gray-6 font-inter text-[14px] font-normal leading-[20px] pl-[15px]">
             Total
           </div>
   
           <!-- Total -->
-          <div class="flex w-[480px] h-auto p-[15px] flex-col gap-[4px] rounded-[10px] border border-[#EDEDED] bg-white ">
+          <div class="flex w-full h-auto p-[15px] flex-col gap-[4px] rounded-[10px] border border-[#EDEDED] bg-white ">
             <div class="flex items-start gap-[26.646px] self-stretch justify-between">
               <div class="text-gray-5 font-poppins text-[14px] font-normal leading-[29.977px]">
                 Subtotal
@@ -98,9 +98,11 @@
               </div>
             </div>
           </div>
+
           <div class="py-[10px] pb-0 text-center text-[17px] font-normal leading-[24px] text-gray-3 font-inter">
-                Thanks for shopping
-              </div>
+            Thanks for shopping
+          </div>
+
         </div>
       </div>
     </div>
@@ -115,7 +117,6 @@ import ProductUnit from '@/components/checkout/ProductUnit.vue';
   const paymentMethod = 'Bank';
   const senderName = 'Antonio Ginting';
   
-  // const subtotal = ref(0);
   const taxes = ref(20000);
   const shipping = ref(50000);
   

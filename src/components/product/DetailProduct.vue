@@ -11,7 +11,9 @@
             <div class="w-[660px] text-black font-inter text-[28px] font-medium">
               {{ productName }} <!-- nama product -->
             </div>
-            <img class="w-[30px] h-auto pt-[5px]" src="/images/heart.svg" alt="" />
+            <router-link>
+              <img class="w-[30px] h-auto pt-[5px]" src="/images/heart.svg" alt="" />
+            </router-link>
           </div>
 
           <div class="text-gray-3 font-inter text-[18px] font-normal leading-[20px]">
