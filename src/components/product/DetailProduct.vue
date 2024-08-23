@@ -68,7 +68,7 @@
          :to="quantity > 0 ? '/cart' : '#'" 
          class="flex h-[45px] justify-center items-center gap-[10px] self-stretch rounded-[5px] bg-primary text-white font-inter text-[20px] font-normal hover:opacity-[70%]"
          :disabled="quantity <= 0"
-         :class="{ 'opacity-40 hover:opacity-[40%]': quantity <= minQuantity }"
+         :class="{ 'opacity-40 hover:opacity-40': quantity <= minQuantity }"
         >
          Add to Cart
         </router-link>
@@ -77,7 +77,7 @@
          :to="quantity > 0 ? '/checkout' : '#'"  
          class="flex h-[45px] justify-center items-center gap-1 self-stretch rounded-[5px] border-[2px] border-primary text-primary font-inter text-[20px] font-normal hover:bg-primary hover:text-white"
          :disabled="quantity <= 0"
-         :class="{ 'opacity-40 hover:bg-white hover:text-[#005C78]': quantity <= minQuantity }"
+         :class="{ 'opacity-40 hover:bg-white hover:text-primary': quantity <= minQuantity }"
         >                                  <!--Jangan diubah menjadi primary-->
          Buy Now
         </router-link>
