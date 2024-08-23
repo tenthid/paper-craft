@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-primary-background mt-[50px] w-full container-page">
+  <div class="bg-primary-background pt-[50px] w-full container-page">
     <div
-      class="mt-[50px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-[15px]"
+      class="pt-[100px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-[15px]"
     >
       <div class="align-center font-maitree text-[35px] text-primary">
         Manage Categories

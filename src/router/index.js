@@ -14,10 +14,22 @@ import ProductAdminPage from "@/views/ProductAdminPage.vue";
 import CategoryAdminPage from "@/views/CategoryAdminPage.vue";
 import ProfilePage from '@/views/ProfilePage.vue'
 import CheckoutPage from '@/views/CheckoutPage.vue'
+import ProductLayout from '@/layouts/ProductLayout.vue'
+import FilterPage from '@/views/FilterPage.vue'
+import FavoritePage from '@/views/FavoritePage.vue'
+import CategoryPage from '@/views/CategoryPage.vue'
+import BrandPage from '@/views/BrandPage.vue'
 import CreateProductPage from "@/views/CreateProductPage.vue";
+import EditProductPage from "@/views/EditProductPage.vue";
+import EditCategoryPage from "@/views/EditCategoryPage.vue";
+import EditBrandPage from "@/views/EditBrandPage.vue";
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior (to, from, savedPosition) {
+    return { top: 0 }
+  },
   routes: [
     {
       meta: {
@@ -66,11 +78,47 @@ const router = createRouter({
 
     {
       meta: {
-        layout: MainLayout,
+        layout: ProductLayout
       },
-      path: "/products-page",
-      name: "Products",
+      path: '/products',
+      name: 'Products',
       component: ProductsPage,
+    },
+
+    {
+      meta: {
+        layout: ProductLayout
+      },
+      path: '/filter',
+      name: 'Filter',
+      component: FilterPage,
+    },
+
+    {
+      meta: {
+        layout: ProductLayout
+      },
+      path: '/categories',
+      name: 'CategoryName',
+      component: CategoryPage,
+    },
+
+    {
+      meta: {
+        layout: ProductLayout
+      },
+      path: '/brands',
+      name: 'BrandName',
+      component: BrandPage,
+    },
+
+    {
+      meta: {
+        layout: MainLayout
+      },
+      path: '/favorite',
+      name: 'Favorite',
+      component: FavoritePage,
     },
 
     {
@@ -174,6 +222,30 @@ const router = createRouter({
       path: '/create-product',
       name: 'createProduct',
       component: CreateProductPage,
+    },
+    {
+      meta: {
+        layout: AdminLayout
+      },
+      path: '/edit-product',
+      name: 'editProduct',
+      component: EditProductPage,
+    },
+    {
+      meta: {
+        layout: AdminLayout
+      },
+      path: '/edit-category',
+      name: 'editCategory',
+      component: EditCategoryPage,
+    },
+    {
+      meta: {
+        layout: AdminLayout
+      },
+      path: '/edit-brand',
+      name: 'editBrand',
+      component: EditBrandPage,
     }
   ]
 })

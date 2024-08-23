@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-primary-background mt-12 w-full container-page">
+  <div class="bg-primary-background pt-20 w-full container-page">
     <div
-      class="mt-12 w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-4"
+      class="pt-20 w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-4"
     >
       <h1 class="font-maitree text-3xl text-primary">Create Product</h1>
 
@@ -85,37 +85,13 @@
                 <label class="block text-sm font-bold mb-2"
                   >Product Brand</label
                 >
-                <select
-                  v-model="userInput.brand"
-                  class="input-select rounded-md w-full"
-                >
-                  <option disabled value="">Choose Brand</option>
-                  <option
-                    v-for="brand in brands"
-                    :key="brand.id"
-                    :value="brand.id"
-                  >
-                    {{ brand.name }}
-                  </option>
-                </select>
+                <BaseSelect label="Choose brand" :options="brands" />
               </div>
               <div class="w-full">
                 <label class="block text-sm font-bold mb-2"
                   >Product Category</label
                 >
-                <select
-                  v-model="userInput.category"
-                  class="input-select rounded-md w-full"
-                >
-                  <option disabled value="">Choose Category</option>
-                  <option
-                    v-for="category in categories"
-                    :key="category.id"
-                    :value="category.id"
-                  >
-                    {{ category.name }}
-                  </option>
-                </select>
+                <BaseSelect label="Choose category" :options="categories" />
               </div>
             </div>
             <div class="w-full h-px bg-primary opacity-40"></div>
@@ -141,8 +117,18 @@
 
 <script setup>
 import { ref, reactive, onMounted, computed } from "vue";
+import { useStore } from "vuex";
 import BaseInput from "@/components/ui/BaseInput.vue";
+import BaseSelect from "@/components/ui/BaseSelect.vue";
 
+const store = useStore();
+const brands = computed(() => {
+  return store.state.product.brands;
+});
+
+const categories = computed(() => {
+  return store.state.product.categories;
+});
 const userInput = reactive({
   product: "",
   price: "",
@@ -151,8 +137,8 @@ const userInput = reactive({
   category: "",
 });
 
-const brands = ref([]);
-const categories = ref([]);
+// const brands = ref([]);
+// const categories = ref([]);
 const imageUrl = ref(null);
 const imageWidth = ref(300);
 const imageHeight = computed(() => imageWidth.value * (9 / 16));
@@ -166,20 +152,20 @@ const onFileChange = (event) => {
   }
 };
 
-const fetchBrandsAndCategories = async () => {
-  try {
-    const [brandResponse, categoryResponse] = await Promise.all([
-      fetch("/api/brands"),
-      fetch("/api/categories"),
-    ]);
-    brands.value = await brandResponse.json();
-    categories.value = await categoryResponse.json();
-  } catch (error) {
-    console.error("Error fetching brands and categories:", error);
-  }
-};
+// const fetchBrandsAndCategories = async () => {
+//   try {
+//     const [brandResponse, categoryResponse] = await Promise.all([
+//       fetch("/api/brands"),
+//       fetch("/api/categories"),
+//     ]);
+//     brands.value = await brandResponse.json();
+//     categories.value = await categoryResponse.json();
+//   } catch (error) {
+//     console.error("Error fetching brands and categories:", error);
+//   }
+// };
 
-onMounted(fetchBrandsAndCategories);
+// onMounted(fetchBrandsAndCategories);
 </script>
 
 <style scoped></style>

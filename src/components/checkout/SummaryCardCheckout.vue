@@ -1,10 +1,10 @@
 <template>
     <div class="flex flex-col gap-[20px]">
-        <select class="input-select" name="" id="">
-            <option value="dana">Dana</option>
-            <option value="master card">Master Card</option>
-            <option value="gopay">Gopay</option>
-        </select>
+        <BaseSelect label="Choose your payment" :options="[
+            {label: 'Dana'},
+            {label: 'Gopay'},
+            {label: 'Qris'},
+        ]" />
         <p class="font-inter text-[14px] font-[400] text-gray">Total</p>
         <div class="p-[15px] rounded-[10px] flex flex-col gap-[15px] border-[#EDEDED] border-[1px]">
             <div class="flex justify-between">
@@ -24,7 +24,12 @@
 </template>
 
 <script setup>
+    import BaseSelect from '../ui/BaseSelect.vue';
+    import { defineProps } from 'vue';
 
+    defineProps({
+        
+    })
 </script>
 
 <style lang="scss" scoped>

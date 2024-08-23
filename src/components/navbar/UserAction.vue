@@ -10,7 +10,7 @@
                 </span>
             </div>
             <div class="relative flex items-center">
-                <router-link to="">
+                <router-link to="/favorite">
                     <img width="28px" height="auto" src="/images/love-icon.svg" alt="cart-icon">
                 </router-link>
                 <span v-if="true" class=" ml-[15px] px-[7px] py-[2px] bg-danger absolute top-0 text-[12px] rounded-full text-white">

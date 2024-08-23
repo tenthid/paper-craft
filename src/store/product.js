@@ -38,6 +38,29 @@ export default {
                   stock: 11,
                   image: "/images/tas.jpg",
                 },
+            ],
+            brands: [
+                {
+                  brandName: 'brand 1',
+                },
+                {
+                  brandName: 'brand 2',
+                },
+                {
+                  brandName: 'brand 3',
+                },
+              ],
+              categories: [
+                {
+                  categoryName: 'category 1',
+                },
+                {
+                  categoryName: 'category 2',
+                },
+                {
+                  categoryName: 'category 3',
+                },
+                
             ]
         }
     },
@@ -47,7 +70,9 @@ export default {
     },
 
     getters: {
-
+      formatToIdr: () => (price) => {
+        return price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0, minimumFractionDigits: 0 })
+    }
     },
 
     actions: {

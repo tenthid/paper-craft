@@ -29,6 +29,7 @@ export default {
       'maitree': ['"Maitree"', 'serif'],
       'poppins': ['"Poppins"', 'serif'],
       'montserrat' : ['"montserrat"', 'serif'],
+      'dm-sans' : ['"DM Sans"', 'sans-serif'],
     },
     screens: {
       'phone-s' : '320px',
