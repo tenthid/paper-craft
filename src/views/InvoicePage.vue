@@ -11,7 +11,7 @@
       </div>
   
       <div class="flex h-auto px-[10px] justify-center items-start gap-[var(--line-height-line-height-400,20px)] flex-shrink-0 self-stretch">
-        <div class="flex h-auto px-[24px] pt-[var(--line-height-line-height-400,20px)] pb-[40px] flex-col items-center gap-[var(--line-height-line-height-400,20px)] rounded-[12px] border border-gray-7 bg-white">
+        <div class="flex h-auto px-[24px] pt-[var(--line-height-line-height-400,20px)] pb-[35px] flex-col items-center gap-[var(--line-height-line-height-400,20px)] rounded-[12px] border border-gray-7 bg-white">
           <div class="flex h-auto flex-col justify-center items-center gap-0 flex-shrink-0 self-stretch">
             <img class="h-[250px] w-auto pt-[20px]" src="/images/success.gif" alt="" />
             <div class="text-bilu text-center font-inter text-[30px] font-medium leading-[36px]">
@@ -114,8 +114,8 @@ import ProductUnit from '@/components/checkout/ProductUnit.vue';
   
   // Data Pembayaran
   const paymentTime = '25-02-2023, 13:22:16';
-  const paymentMethod = 'Bank';
-  const senderName = 'Antonio Ginting';
+  const paymentMethod = 'Konoha Bank';
+  const senderName = 'Uzumaki Naruto';
   
   const taxes = ref(20000);
   const shipping = ref(50000);
