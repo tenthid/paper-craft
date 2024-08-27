@@ -132,6 +132,7 @@
     
     onMounted(async () => {
         await checkPath()
+        await store.dispatch('product/getProducts')
         parentRendered.value = true
     })
 </script>

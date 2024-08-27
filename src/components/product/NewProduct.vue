@@ -19,13 +19,23 @@
     <div
       class="mb-[100px] self-stretch overflow-hidden flex flex-row items-center justify-start gap-5 text-left text-sm text-black"
     >
-      <product-list> </product-list>
+      <product-list></product-list>
     </div>
   </div>
 </template>
 
 <script setup>
-import ProductList from "./ProductList.vue";
+  import ProductList from "./ProductList.vue";
+  import { useStore } from "vuex";
+  import { onMounted } from "vue";
+
+  const store = useStore()
+
+  onMounted(() => {
+    store.dispatch('product/getProducts', 'orderBy=created_at&sortBy=desc')
+  })
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

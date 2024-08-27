@@ -33,8 +33,8 @@ export default {
             state.notif.topPos = 0;
         },
 
-        setNotifTimeout(state, timeout) {
-            state.notif.notifTimeout = timeout;
+        setNotifTimeout(state, payload) {
+            state.notif.notifTimeout = payload;
         }
     },
 
@@ -55,7 +55,7 @@ export default {
         
             const timeout = setTimeout(() => {
               commit('hideNotif');
-            }, 3000);
+            }, 1500);
         
             commit('setNotifTimeout', timeout);
         }
