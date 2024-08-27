@@ -4,9 +4,13 @@
         <div class="border-[1px] border-solid rounded-full border-[#E0E0E0] w-[100%] h-[40px] input-group">
             <div class="group-span">
                 <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
-                <img width="100%" height="auto" src="/images/magnify-glass.svg" alt="logo">
+                <img class="cursor-pointer" @click="handleSearch()" width="100%" height="auto" src="/images/magnify-glass.svg" alt="logo">
             </div>
-            <input type="text" class="group-controll input-no-focus" placeholder="Search for items">
+            <input @keyup.enter="handleSearch()" v-model="keyWord" type="text" class="group-controll input-no-focus" placeholder="Search for items">
+            <div v-if="keyWord" class="group-span">
+                <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+                <img class="cursor-pointer" @click="() => {keyWord = ''}" width="100%" height="auto" src="/images/X-page.svg" alt="logo">
+            </div>
         </div>
         <component :is="components[loginStatus? 'userAction' : 'authAction']"></component>
     </nav>
@@ -15,15 +19,42 @@
 <script setup>
     import AuthAction from './AuthAction.vue';
     import UserAction from './UserAction.vue';
-    import { useRouter } from 'vue-router';
+    import { useRouter, useRoute } from 'vue-router';
+    import { ref, onMounted } from 'vue';
 
     const loginStatus = true
     const router = useRouter()
+    const route = useRoute()
+    const keyWord = ref()
 
     const components = {
         'authAction' : AuthAction,
         'userAction' : UserAction
     }
+
+    const pushWithPath = (path) => {
+        router.push({
+                path: path,
+                query: {
+                    ...route.query,
+                    keyword : keyWord.value
+                }
+            })
+    }
+
+    const handleSearch = () => {
+        if(keyWord.value && route.path !== '/') {
+            pushWithPath(route.path)
+        } else {
+            pushWithPath('/products')
+        }
+    }
+
+    onMounted(() => {
+        if(route.query.keyword) {
+            keyWord.value = route.query.keyword
+        }
+    })
 </script>
 
 <style lang="scss" scoped>

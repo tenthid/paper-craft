@@ -9,6 +9,9 @@ import ResetPasswordPage from '@/views/ResetPasswordPage.vue'
 import ProductsPage from '@/views/ProductsPage.vue'
 import ProfilePage from '@/views/ProfilePage.vue'
 import CheckoutPage from '@/views/CheckoutPage.vue'
+import HomeAdminPage from '@/views/HomeAdminPage.vue'
+import AdminLayout from '@/layouts/AdminLayout.vue'
+import ProductAdminPage from '@/views/ProductAdminPage.vue'
 import ProductLayout from '@/layouts/ProductLayout.vue'
 import FilterPage from '@/views/FilterPage.vue'
 import FavoritePage from '@/views/FavoritePage.vue'
@@ -20,6 +23,9 @@ import InvoicePage from '@/views/InvoicePage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior (to, from, savedPosition) {
+    return { top: 0 }
+  },
   routes: [
     {
       meta: {
@@ -70,7 +76,7 @@ const router = createRouter({
       meta: {
         layout: ProductLayout
       },
-      path: '/products-page',
+      path: '/products',
       name: 'Products',
       component: ProductsPage,
     },
@@ -79,7 +85,7 @@ const router = createRouter({
       meta: {
         layout: ProductLayout
       },
-      path: '/filter-page',
+      path: '/filter',
       name: 'Filter',
       component: FilterPage,
     },
@@ -88,7 +94,7 @@ const router = createRouter({
       meta: {
         layout: ProductLayout
       },
-      path: '/category-page',
+      path: '/categories',
       name: 'CategoryName',
       component: CategoryPage,
     },
@@ -97,7 +103,7 @@ const router = createRouter({
       meta: {
         layout: ProductLayout
       },
-      path: '/brand-page',
+      path: '/brands',
       name: 'BrandName',
       component: BrandPage,
     },
@@ -106,7 +112,7 @@ const router = createRouter({
       meta: {
         layout: MainLayout
       },
-      path: '/favorite-page',
+      path: '/favorite',
       name: 'Favorite',
       component: FavoritePage,
     },
@@ -172,6 +178,24 @@ const router = createRouter({
       path: '/invoice',
       name: 'Invoice',
       component: InvoicePage,
+    },
+
+    {
+      meta: {
+        layout: AdminLayout
+      },
+      path: '/home-admin',
+      name: 'HomeAdmin',
+      component: HomeAdminPage,
+    },
+
+    {
+      meta: {
+        layout: AdminLayout
+      },
+      path: '/products-admin',
+      name: 'ProductAdmin',
+      component: ProductAdminPage,
     },
   ]
 })
