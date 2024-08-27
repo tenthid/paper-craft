@@ -3,7 +3,7 @@
     class="w-full px-[20px] tablet:px-[40px] laptop:px-[60px] py-[50px] bg-primary flex flex-col gap-10 font-inter"
   >
     <div
-      class="flex laptop:flex-row justify-between gap-8 laptop:gap-10"
+      class="flex laptop:flex-row justify-between gap-8 laptop:gap-10 tablet:flex-col phone-l:flex-col"
     >
       <!-- Desc Section -->
       <div class="space-y-4 tablet:space-y-6 max-w-md">
@@ -116,7 +116,7 @@
 
     <!-- Social Media and Copyright Section -->
     <div
-      class="flex laptop:flex-row justify-between items-center space-y-4 laptop:space-y-0"
+      class="flex laptop:flex-row justify-between items-center space-y-4 laptop:space-y-0 phone-s:flex-col phone-l:flex-col"
     >
       <p class="text-white text-[16px] phone-m:text-[18px] tablet:text-[20px]">
         © 2024 Papercraft

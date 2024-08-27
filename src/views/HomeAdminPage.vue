@@ -9,7 +9,7 @@
       >
         <div class="flex flex-col gap-6 font-inter">
           <div class="font-semibold">Top Selling Products</div>
-          <div class="flex flex-col gap-[15px] text-sm ">
+          <div class="flex flex-col gap-[15px] text-sm">
             <div class="w-[539px] relative h-[18px] text-gray">
               <div class="absolute left-[0px] font-medium">Product name</div>
               <div class="absolute left-[150px] font-medium">Price</div>

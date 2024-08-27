@@ -3,44 +3,52 @@
     <div
       class="pt-[100px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-[15px]"
     >
-      <div class="align-center font-maitree text-[35px] text-primary">
+      <div
+        class="align-center font-maitree laptop:text-[35px] text-primary phone-s:text-[25px]"
+      >
         Manage Categories
       </div>
     </div>
+
     <div
-      class="w-full relative bg-primary-background overflow-hidden flex flex-row items-start justify-start py-2.5 px-5 box-border gap-5 text-left text-sm font-regular"
+      class="w-full relative bg-primary-background overflow-hidden flex laptop:flex-row items-start justify-start py-2.5 px-5 box-border gap-5 text-left phone-s:flex-col tablet:items-center text-sm font-regular"
     >
       <div
-        class="w-[400px] bg-white flex flex-col p-6 box-border rounded-[5px] text-[20px] text-[#000] font-inter"
+        class="laptop-l:w-[400px] bg-white flex flex-col p-6 box-border rounded-[5px] text-[20px] phone-s:w-full text-[#000] font-inter"
       >
         <div class="flex flex-col gap-6 font-inter">
-          <div class="font-medium">Category List</div>
+          <div class="font-medium phone-s:text-[15px] tablet:text-xl">
+            Category List
+          </div>
           <div class="flex flex-col gap-[15px] text-sm">
-            <div class="w-[345px] relative h-[18px] text-gray">
-              <div class="absolute left-[0px] font-medium">Category Name</div>
-              <div class="absolute left-[250px] font-medium">Edit</div>
+            <div
+              class="laptop-l:w-[345px] phone-s:w-full phone-s:flex flex-row justify-end items-end text-gray text-[12px]"
+            >
+              <div class="font-medium tablet:text-[15px]">Category Name</div>
+              <div class="ml-auto font-medium tablet:text-[15px]">Edit</div>
             </div>
             <div
-              class="w-[350px] relative border-gray border-t-[1px] border-solid box-border h-px"
+              class="w-[350px] relative border-gray border-t-[1px] border-solid box-border h-px phone-s:w-full"
             ></div>
 
             <div
               v-if="CategoryList.length === 0"
-              class="w-[507px] relative h-6"
+              class="w-full relative h-6 phone-s:flex flex-row justify-between items-center"
             >
               <div
-                class="absolute left-[0px] font-inter text-[15px] w-[250px] h-[27px]"
+                class="font-inter laptop:text-[15px] w-full h-[27px] phone-s:text-[12px]"
               >
                 Empty
               </div>
-              <div class="absolute left-[250px] flex flex-row">
-                <router-link to="/edit-category"
-                  class="btn bg-[#9199A3] rounded-[5px] w-[50px] h-[27px] text-white cursor-not-allowed"
+              <div class="flex flex-row items-center gap-2.5">
+                <router-link
+                  to="/edit-category"
+                  class="btn bg-[#9199A3] rounded-[5px] laptop:w-[50px] laptop:h-[27px] laptop:text-[15px] text-white cursor-not-allowed phone-s:w-[30px] phone-s:h-[15px] phone-s:text-[10px]"
                 >
                   Edit
                 </router-link>
                 <button
-                  class="btn bg-[#fca6a0] rounded-[5px] w-[20px] h-[27px] ml-[6px] cursor-not-allowed"
+                  class="btn bg-[#fca6a0] rounded-[5px] laptop:w-[27px] laptop:h-[27px] text-white cursor-not-allowed phone-s:w-[20px] phone-s:h-[20px]"
                 >
                   <img src="/images/trash.svg" alt="" />
                 </button>
@@ -51,40 +59,39 @@
               v-else
               v-for="category in CategoryList"
               :key="category.name"
-              class="w-[507px] relative h-6"
+              class="w-full relative h-6 phone-s:flex flex-row justify-between items-center"
             >
               <div
-                class="absolute left-[0px] font-inter text-[15px] w-[250px] h-[27px]"
+                class="font-inter laptop:text-[15px] w-full h-[27px] phone-s:text-[12px]"
               >
                 {{ category.name }}
               </div>
-              <div class="absolute left-[250px] flex flex-row ">
-                <router-link to="edit-category"
-                  class="btn bg-primary rounded-[5px] w-[50px] h-[27px] text-white"
+              <div class="flex flex-row items-center gap-2.5">
+                <router-link
+                  to="edit-category"
+                  class="btn bg-primary rounded-[5px] laptop:w-[50px] laptop:h-[27px] text-white phone-s:w-[50px] phone-s:h-[27px]"
                 >
                   Edit
                 </router-link>
-                <div
-                  class="btn bg-danger rounded-[5px] w-[20px] h-[27px] ml-[6px]"
+                <button
+                  class="btn bg-danger rounded-[5px] laptop:w-[27px] laptop:h-[27px] text-white phone-s:w-[20px] phone-s:h-[20px]"
                 >
                   <img src="/images/trash.svg" alt="" />
-                </div>
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <div
-        class="w-[750px] bg-white flex flex-col p-6 box-border rounded-[5px] text-[20px] text-[#000] font-inter"
+        class="w-full bg-white flex flex-col p-6 box-border rounded-[5px] text-[20px] phone-s:w-full text-[#000] font-inter"
       >
         <div class="flex flex-col gap-6 font-inter">
           <div class="font-medium">Input Category</div>
           <div class="flex flex-col gap-[15px] text-sm">
-            <div class="w-[345px] relative h-[18px] text-gray">
-              <div class="absolute left-[0px] font-medium">Category Name</div>
-            </div>
             <div
-              class="w-[700px] relative border-gray border-t-[1px] border-solid box-border h-px opacity-50"
+              class="w-full relative border-gray border-t-[1px] border-solid box-border h-px opacity-50"
             ></div>
             <div class="font-medium text-[#7A8089] font-poppins">
               <BaseInput
