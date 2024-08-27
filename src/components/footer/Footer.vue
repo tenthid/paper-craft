@@ -3,7 +3,7 @@
     class="w-full px-[20px] tablet:px-[40px] laptop:px-[60px] py-[50px] bg-primary flex flex-col gap-10 font-inter"
   >
     <div
-      class="flex laptop:flex-row justify-between gap-8 laptop:gap-10 tablet:flex-col phone-l:flex-col"
+      class="flex laptop:flex-row justify-between gap-8 laptop:gap-10 tablet:flex-col phone-s:flex-col"
     >
       <!-- Desc Section -->
       <div class="space-y-4 tablet:space-y-6 max-w-md">

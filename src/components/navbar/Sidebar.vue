@@ -1,6 +1,6 @@
 <template>
   <div
-    class="phone-s:hidden laptop:block sticky top-0 bg-white w-50 h-[740px] flex flex-col justify-between items-start px-5 box-border text-left text-base font-maitree pt-[70px] pb-[20px]"
+    class="sidebar sticky top-0 bg-white w-50 h-[740px] flex flex-col justify-between items-start px-5 box-border text-left text-base font-maitree pt-[70px] pb-[20px]"
   >
     <div
       class="w-[171px] bg-white overflow-hidden flex flex-col items-start gap-5"
@@ -50,3 +50,11 @@ const logout = () => {
   router.push("/login");
 };
 </script>
+
+<style>
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
+</style>

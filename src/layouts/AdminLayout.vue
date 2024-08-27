@@ -5,7 +5,7 @@
     </header>
 
     <main class="flex flex-row">
-       <!-- <Sidebar></Sidebar> -->
+       <Sidebar></Sidebar>
       <slot></slot>
     </main>
   </div>
