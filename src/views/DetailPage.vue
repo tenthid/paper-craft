@@ -1,5 +1,5 @@
 <template>
-    <div class="w-[100%] bg-primary-background h-auto flex flex-col items-center gap-[40px] py-[166px] px-[60px] pb-[50px] self-stretch">
+    <div class="w-[100%] bg-primary-background h-auto flex flex-col items-center gap-[40px] py-[100px] px-[60px] pb-[50px] self-stretch">
       <!-- Header -->
       <!-- <div class="flex px-[10px] justify-start items-center gap-[10px] self-stretch">
         <router-link to="/" class="absolute pl-[22px]" @click="goBack">
@@ -11,7 +11,7 @@
       </div> -->
       
       <!-- Conditional Rendering -->
-      <div v-if="!hasProduct" class="w-[100%] h-[440px] flex flex-col items-center justify-center h-100">
+      <div v-if="!hasProduct" class="w-[100%] h-[500px] flex flex-col items-center justify-center h-100">
         <img class="h-[150px] w-auto pb-[10px]" src="/images/remove.png" alt="" />
         <div class="text-center font-inter">
           <p class="font-medium text-[35px]">Products has been Removed</p>

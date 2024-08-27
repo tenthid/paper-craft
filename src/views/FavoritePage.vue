@@ -1,6 +1,5 @@
 <template>
-    
-    <div class="w-[100%] bg-[#ECF3F7] h-auto flex flex-col items-center gap-[40px] py-[166px] px-[60px] pb-[50px] self-stretch">
+    <div class="w-[100%] bg-primary-background h-auto flex flex-col items-center gap-[40px] py-[100px] px-[60px] pb-[50px] self-stretch">
         <div class="flex h-12 justify-between items-center self-stretch text-primary text-center font-maitree text-[35px] font-normal px-[30px]">
             Favorite Products
             <div class="flex border-[1px] border-primary p-2.5 px-5 justify-center items-center gap-2.5 rounded-lg bg-white">
@@ -13,24 +12,22 @@
             </div>
         </div>
 
-
-      <div v-if="products.length === 0" class="w-[100%] h-[425px] flex flex-col items-center justify-center h-100">
-        <img class="h-[150px] w-auto pb-[10px]" src="/images/Like.png" alt="" />
-        <div class="text-center font-inter">
-          <p class="font-medium text-[35px]">No Favorite Product yet</p>
-          <p class="text-[#404040] text-[20px] mt-4">
-            When you like an item, your favorite item will appear here
-          </p>
+        <div v-if="products.length === 0" class="w-[100%] h-[500px] flex flex-col items-center justify-center h-100">
+          <img class="h-[150px] w-auto pb-[10px]" src="/images/Like.png" alt="" />
+          <div class="text-center font-inter">
+            <p class="font-medium text-[35px]">No Favorite Product yet</p>
+            <p class="text-[#404040] text-[20px] mt-4">
+              When you like an item, your favorite item will appear here
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div v-else>
+        <div v-else>
         <!-- Product List -->
-        <div class="container-page">
-          <AllProduct :products="paginatedProducts" />
-    
-          <!-- Pagination -->
-          <div class="flex flex-row items-center justify-center p-2.5 text-base text-text-default-default gap-2">
+          <div class="container-page">
+            <AllProduct :products="paginatedProducts" />
+            <!-- Pagination -->
+            <div class="flex flex-row items-center justify-center p-2.5 text-base text-text-default-default gap-2">
               <button
                 @click="previousPage"
                 :disabled="currentPage === 1"

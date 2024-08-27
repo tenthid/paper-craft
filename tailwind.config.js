@@ -21,6 +21,12 @@ export default {
       'gray-2' : '#808080',
       'gray-3' : '#404040',
       'gray-4' : '#dedede',
+      'gray-5' : '#707070',
+      'gray-6' : '#616161',
+      'gray-7' : '#EDEDED',
+      'pisang-ijo' : '#10AF13',
+      'bilu' : '#009fd3',
+      'logout' : '#feecec',
     },
     fontFamily: {
       'inter': ['"Inter"', 'sans-sherif'],

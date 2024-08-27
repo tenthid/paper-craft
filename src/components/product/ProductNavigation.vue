@@ -44,8 +44,8 @@
             </div>
             
             <!-- ini modal bukan dropdown -->
-            <div v-if="filterShow" @click="() => {filterShow = !filterShow}" class="left-0 absolute w-[100%] flex justify-center top-[124px]">
-                <div @click.stop="() => {filterShow = true}" ref='filterModal' class="bg-white flex flex-col p-[20px] gap-[25px] rounded-[8px] shadow-md w-[400px] items-center">
+            <div v-if="filterShow" @click="() => {filterShow = !filterShow}" class="left-0 absolute w-[100%] flex justify-center top-[120px]">
+                <div @click.stop="() => {filterShow = true}" ref='filterModal' class="bg-white flex flex-col p-[20px] gap-[25px] rounded-[5px] shadow-md w-[400px] items-center">
                     <p class="font-inter text-[24px] font-bold">
                         Filter Product
                     </p>
