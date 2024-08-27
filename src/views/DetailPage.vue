@@ -15,12 +15,10 @@
             <DetailProduct />
           </div>
       
-          <div class="w-[100%] px-[60px] py-[40px] text-primary font-inter text-[30px] font-medium leading-[36px]">
+          <div class="w-[100%] py-[40px] text-primary font-inter text-[30px] font-medium leading-[36px]">
             Other Product
           </div>
-          <div class="container-page">
-            <ProductList />
-          </div>
+          <ProductList />
       </div>
     </div>
 </template>
