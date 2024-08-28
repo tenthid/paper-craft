@@ -7,7 +7,7 @@ import RegisterPage from "@/views/RegisterPage.vue";
 import ForgotPasswordPage from "@/views/ForgotPasswordPage.vue";
 import ResetPasswordPage from "@/views/ResetPasswordPage.vue";
 import ProductsPage from "@/views/ProductsPage.vue";
-import HomeAdminPage from "@/views/HomeAdminPage.vue";
+// import HomeAdminPage from "@/views/HomeAdminPage.vue";
 import AdminLayout from "@/layouts/AdminLayout.vue";
 import BrandAdminPage from "@/views/BrandAdminPage.vue";
 import ProductAdminPage from "@/views/ProductAdminPage.vue";
@@ -121,14 +121,14 @@ const router = createRouter({
       component: FavoritePage,
     },
 
-    {
-      meta: {
-        layout: AdminLayout,
-      },
-      path: "/home-admin",
-      name: "HomeAdmin",
-      component: HomeAdminPage,
-    },
+    // {
+    //   meta: {
+    //     layout: AdminLayout,
+    //   },
+    //   path: "/home-admin",
+    //   name: "HomeAdmin",
+    //   component: HomeAdminPage,
+    // },
     {
       meta: {
         layout: AdminLayout,
@@ -198,14 +198,14 @@ const router = createRouter({
       component: CheckoutPage,
     },
 
-    {
-      meta: {
-        layout: AdminLayout
-      },
-      path: '/home-admin',
-      name: 'HomeAdmin',
-      component: HomeAdminPage,
-    },
+    // {
+    //   meta: {
+    //     layout: AdminLayout
+    //   },
+    //   path: '/home-admin',
+    //   name: 'HomeAdmin',
+    //   component: HomeAdminPage,
+    // },
 
     {
       meta: {

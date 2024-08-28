@@ -1,6 +1,8 @@
 <template>
   <div
-    class="sidebar sticky top-0 bg-white w-50 h-[740px] flex flex-col justify-between items-start px-5 box-border text-left text-base font-maitree pt-[70px] pb-[20px]"
+    id="sidebar"
+    style=""
+    class="sticky top-0 bg-white w-50 h-[740px] flex flex-col justify-between items-start px-5 box-border text-left text-base font-maitree pt-[70px] pb-[20px]"
   >
     <div
       class="w-[171px] bg-white overflow-hidden flex flex-col items-start gap-5"
@@ -11,9 +13,9 @@
         <div
           class="self-stretch bg-white overflow-hidden flex flex-col items-start justify-start gap-10"
         >
-          <router-link to="/home-admin" active-class="text-primary-1"
+          <!-- <router-link to="/home-admin" active-class="text-primary-1"
             >Home</router-link
-          >
+          > -->
           <router-link to="/products-admin" active-class="text-primary-1"
             >Products</router-link
           >
@@ -41,6 +43,7 @@
 </template>
 
 <script setup>
+import { onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -49,6 +52,27 @@ const logout = () => {
   localStorage.removeItem("authToken");
   router.push("/login");
 };
+
+function adjustSidebarVisibility() {
+  const sidebar = document.getElementById("sidebar");
+  const width = window.innerWidth;
+
+  if (width <= 768) {
+    sidebar.style.display = "none";
+  } else {
+    sidebar.style.display = "flex";
+  }
+}
+
+onMounted(() => {
+  adjustSidebarVisibility();
+
+  window.addEventListener("resize", adjustSidebarVisibility);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", adjustSidebarVisibility);
+});
 </script>
 
 <style>

@@ -1,7 +1,7 @@
 <template>
   <div class="bg-primary-background pt-[50px] w-full container-page">
     <div
-      class="pt-[100px] w-full relative bg-primaryy-background overflow-hidden flex flex-row items-start justify-start py-2.5 px-5 box-border gap-5 text-left text-sm text-black-100 font-regular"
+      class="phone-s:flex-col pt-[100px] w-full relative bg-primary-background overflow-hidden flex laptop:flex-row items-start justify-start py-2.5 px-5 box-border gap-5 text-left text-sm text-black-100 font-regular"
     >
       <!-- Top Selling Products -->
       <div

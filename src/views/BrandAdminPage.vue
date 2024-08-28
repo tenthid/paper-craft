@@ -1,96 +1,88 @@
 <template>
-  <div class="bg-primary-background pt-[50px] w-full container-page">
+  <div
+    class="bg-primary-background laptop:pt-[50px] w-full phone-s:px-3 laptop:container-page"
+  >
     <div
       class="pt-[100px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-[15px]"
     >
-      <div class="align-center font-maitree text-[35px] text-primary">
+      <div
+        class="items-center font-maitree laptop:text-[35px] text-primary phone-s:text-[25px]"
+      >
         Create Brand
       </div>
     </div>
+
     <div
-      class="w-full relative bg-primary-background overflow-hidden flex flex-row items-start justify-start py-2.5 px-5 box-border gap-5 text-left text-sm font-regular"
+      class="w-full relative bg-primary-background overflow-hidden flex laptop:flex-row items-start justify-start py-2.5 px-5 box-border gap-5 text-left phone-s:flex-col phone-s:items-center text-sm font-regular"
     >
       <div
-        class="w-[400px] bg-white flex flex-col p-6 box-border rounded-[5px] text-[20px] text-[#000] font-inter"
+        class="w-full bg-white flex flex-col p-6 rounded-md text-black font-inter phone-s:w-full laptop:w-[400px]"
       >
-        <div class="flex flex-col gap-6 font-inter">
-          <div class="font-medium">Brand List</div>
-          <div class="flex flex-col gap-[15px] text-sm">
-            <div class="w-[345px] relative h-[18px] text-gray">
-              <div class="absolute left-[0px]">Logo</div>
-              <div class="absolute left-[100px] font-medium">Brand Name</div>
-              <div class="absolute left-[250px] font-medium">Edit</div>
-            </div>
-            <div
-              class="w-[350px] relative border-gray border-t-[1px] border-solid box-border h-px"
-            ></div>
+        <div class="flex flex-col gap-6">
+          <h2 class="font-medium text-lg phone-s:text-base">Brand List</h2>
 
-            <div v-if="BrandList.length === 0" class="w-[507px] relative h-6 mb-3">
-              <img src="" alt="logo" class="bg-primary-background w-[50px] h-[50px] absolute left-[0px]"></img>
-              <div
-                class="absolute left-[100px] font-inter text-[15px] w-[250px] h-[27px]"
+          <table class="w-full text-left border-collapse border-primary-background outline-none">
+            <thead>
+              <tr
+                class="text-gray text-xs font-medium border-b border-gray"
               >
-                Empty
-              </div>
-              <div class="absolute left-[250px] flex flex-row">
-                <router-link
-                  to="/edit-brand"
-                  class="btn bg-[#9199A3] rounded-[5px] w-[50px] h-[27px] text-white cursor-not-allowed"
-                >
-                  Edit
-                </router-link>
-                <button
-                  class="btn bg-[#fca6a0] rounded-[5px] w-[20px] h-[27px] ml-[6px] cursor-not-allowed"
-                >
-                  <img src="/images/trash.svg" alt="Trash Icon" />
-                </button>
-              </div>
-            </div>
+                <th class="p-2 tablet:text-[15px]">Logo</th>
+                <th class="p-2 tablet:text-[15px]">Brand Name</th>
+                <th class="p-2 tablet:text-[15px] text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-if="BrandList.length === 0" class="text-gray text-sm">
+                <td colspan="3" class="p-2 text-center">Empty</td>
+              </tr>
 
-            <div
-              v-else
-              v-for="brand in BrandList"
-              :key="brand.name"
-              class="w-[507px] relative h-[27px]"
-            >
-              <div class="absolute left-[0px] flex items-center">
-                <img
-                  :src="brand.logo"
-                  alt="Brand Logo"
-                  class="w-[40px] h-[40px] mr-[10px] object-cover" 
-                />
-                <span class="font-inter text-[15px]">{{ brand.name }}</span>
-              </div>
-              <div class="absolute left-[250px] flex flex-row">
-                <router-link
-                  to="/edit-brand"
-                  class="btn bg-primary rounded-[5px] w-[50px] h-[27px] text-white"
-                >
-                  Edit
-                </router-link>
-                <div
-                  class="btn bg-danger rounded-[5px] w-[20px] h-[27px] ml-[6px]"
-                >
-                  <img src="/images/trash.svg" alt="Delete Icon" />
-                </div>
-              </div>
-            </div>
-          </div>
+              <tr
+                v-else
+                v-for="brand in BrandList"
+                :key="brand.name"
+                class="border-b border-none"
+              >
+                <td class="p-2">
+                  <img
+                    :src="brand.logo"
+                    alt="Brand Logo"
+                    class="w-10 h-10 object-cover"
+                  />
+                </td>
+                <td class="p-2">{{ brand.name }}</td>
+                <td class="p-2 text-right">
+                  <div class="flex gap-2 justify-end">
+                    <router-link
+                      to="/edit-brand"
+                      class="btn bg-primary rounded px-3 py-1 text-white"
+                    >
+                      Edit
+                    </router-link>
+                    <button class="btn bg-danger rounded px-3 py-1 text-white">
+                      <img src="/images/trash.svg" alt="Delete Icon" />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
       <div
-        class="w-[750px] bg-white flex flex-col p-6 box-border rounded-[5px] text-[20px] text-[#000] font-inter"
+        class="laptop:w-[750px] bg-white flex flex-col p-6 box-border rounded-[5px] text-[20px] text-[#000] font-inter phone-s:w-full"
       >
         <div class="flex flex-col gap-6 font-inter">
-          <div class="font-medium">Input Brand</div>
+          <div class="font-medium phone-s:text-[15px] tablet:text-xl">
+            Input Brand
+          </div>
           <div class="flex flex-col gap-[15px] text-sm">
             <div
-              class="w-[700px] relative border-gray border-t-[1px] border-solid box-border h-px opacity-50"
+              class="w-full border-t-[1px] border-gray border-solid box-border h-px opacity-50"
             ></div>
 
             <label
-              class="relative mx-auto w-[650px] h-[204px] flex flex-col items-center justify-center text-center text-base font-montserrat border border-dashed border-dark-blue p-4 cursor-pointer overflow-hidden"
+              class="relative mx-auto w-full h-[204px] flex flex-col items-center justify-center text-center text-base font-montserrat border border-dashed border-dark-blue p-4 cursor-pointer overflow-hidden"
               @dragover.prevent
               @drop.prevent
             >
@@ -136,10 +128,14 @@
 
             <div class="flex justify-end mt-[10px]">
               <button
-                class="bg-primary rounded-[10px] w-[130px] h-[40px] px-[25px]"
+                class="bg-primary rounded-[10px] laptop:w-[130px] laptop:h-[40px] phone-s:w-[130px] phone-s:h-[40px] px-[25px]"
                 @click="saveBrand"
               >
-                <div class="font-poppins text-[16px] text-white">Save</div>
+                <div
+                  class="font-poppins laptop:text-[16px] text-white phone-s:text-[16px]"
+                >
+                  Save
+                </div>
               </button>
             </div>
           </div>

@@ -3,7 +3,7 @@
     <div
       class="pt-[100px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-[15px]"
     >
-      <div
+        <div
         class="align-center font-maitree laptop:text-[35px] text-primary phone-s:text-[25px]"
       >
         Edit Categories
