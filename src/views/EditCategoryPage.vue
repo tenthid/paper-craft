@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-primary-background pt-[50px] w-full container-page">
+  <div class="bg-primary-background laptop:pt-[50px] w-full phone-l:container-page">
     <div
       class="pt-[100px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-[15px]"
     >
@@ -10,7 +10,7 @@
       </div>
     </div>
     <div
-      class="w-full relative bg-primary-background overflow-hidden flex laptop:flex-row items-start justify-start py-2.5 px-5 box-border gap-5 text-left phone-s:flex-col tablet:items-center text-sm font-regular"
+      class="w-full relative bg-primary-background overflow-hidden flex items-center justify-start py-2.5 px-5 box-border gap-5 text-left phone-s:flex-col tablet:items-center text-sm font-regular"
     >
       <div
         class="laptop:w-[750px] bg-white flex flex-col items-center justify-center p-6 box-border rounded-[5px] text-[20px] phone-s:w-full text-[#000] font-inter"
@@ -42,11 +42,11 @@
               <button
                 class="bg-danger rounded-[10px] phone-s:w-[100px] phone-s:h-[35px] laptop:w-[130px] laptop:h-[40px] mr-2"
               >
-                <div
+                <button
                   class="font-poppins text-[12px] laptop:text-[16px] text-white"
                 >
                   Cancel
-                </div>
+                </button>
               </button>
               <button
                 class="bg-primary rounded-[10px] phone-s:w-[100px] phone-s:h-[35px] laptop:w-[130px] laptop:h-[40px]"

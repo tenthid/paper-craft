@@ -1,16 +1,16 @@
 <template>
   <div class="bg-primary-background mt-[50px] w-full">
     <div
-      class="mt-[50px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold"
+      class="mt-[50px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold tablet:px-10"
     >
       <!-- Header Section -->
       <div
-        class="w-[1052px] h-12 flex justify-between text-center text-[35px] text-primary font-maitree"
+        class="laptop:w-[1052px] phone-s:px-5 phone-s:w-full h-12 flex justify-between text-center laptop:text-[35px] text-primary font-maitree"
       >
-        <div class="leading-[120%]">Manage Products</div>
+        <div class="leading-[120%] phone-s:text-[20px] laptop:text-[35px]">Manage Products</div>
         <router-link
           to="/create-product"
-          class="rounded-[10px] bg-primary-1 h-10 flex items-center justify-center py-2.5 text-white px-5 text-base font-medium font-inter"
+          class="rounded-[10px] bg-primary-1 h-10 flex items-center justify-center tablet:py-2.5 text-white px-5 text-base font-medium font-inter phone-s:text-[15px]"
         >
           Create Product
         </router-link>
@@ -21,10 +21,10 @@
         v-if="products.length === 0"
         class="flex flex-col items-center justify-center h-100"
       >
-        <img class="h-[200px] w-auto" src="/images/emptysign.png" alt="" />
+        <img class="h-auto w-auto phone-s:w-[100px]" src="/images/emptysign.png" alt="" />
         <div class="text-center font-inter">
-          <p class="font-medium text-[40px]">No Product yet</p>
-          <p class="text-[#404040] text-[24px] mt-4">
+          <p class="font-medium laptop:text-[40px] phone-s:text-[20px]">No Product yet</p>
+          <p class="text-[#404040] laptop:text-[24px] phone-s:text-[12px] mt-4">
             Please create the product first
           </p>
         </div>

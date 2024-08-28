@@ -1,11 +1,13 @@
 <template>
-  <div class="bg-primary-background pt-20 w-full container-page">
+  <div class="bg-primary-background  w-full tablet:container-page">
     <div
       class="pt-20 w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-4"
     >
-      <h1 class="font-maitree text-3xl text-primary">Edit Product</h1>
+      <h1 class="font-maitree text-3xl text-primary">Create Product</h1>
 
-      <div class="w-[850px] h-auto px-12 py-6 gap-5 font-poppins flex flex-col">
+      <div
+        class="laptop:w-[850px] phone-s:w-full h-auto px-12 py-6 gap-5 font-poppins flex flex-col"
+      >
         <div class="bg-white w-full h-auto rounded-lg pb-3">
           <div class="flex items-center h-14 px-5">
             <h4 class="font-poppins font-semibold text-lg text-blue">
@@ -15,7 +17,7 @@
           <div class="border-t border-primary-background"></div>
 
           <label
-            class="relative mx-auto w-[650px] h-[204px] flex flex-col items-center justify-center text-center text-base font-montserrat border border-dashed border-dark-blue p-4 cursor-pointer overflow-hidden"
+            class="relative mx-auto laptop:w-[650px] phone-s:w-[75%] phone-s:h-auto flex flex-col items-center justify-center text-center text-base font-montserrat border border-dashed border-dark-blue p-6 laptop:p-4 phone-s:p-3 cursor-pointer overflow-hidden"
             @dragover.prevent
             @drop.prevent
           >
@@ -23,8 +25,7 @@
               v-if="imageUrl"
               :src="imageUrl"
               alt="Uploaded Image"
-              :style="{ width: `${imageWidth}px`, height: `${imageHeight}px` }"
-              class="object-cover"
+              class="object-cover w-full h-full"
             />
             <img
               v-else
@@ -49,12 +50,14 @@
         </div>
       </div>
 
-      <div class="w-[850px] h-auto px-12 py-6 gap-5 flex flex-col">
+      <div
+        class="laptop:w-[850px] phone-s:w-full h-auto px-12 py-6 gap-5 flex flex-col"
+      >
         <div class="bg-white w-full h-auto rounded-lg pb-3">
           <h4 class="font-poppins font-semibold text-lg text-blue px-5 my-3">
             Product Information
           </h4>
-          <div class="border-t border-primary-background"></div>
+          <div class="border-t border-primary-background w-full"></div>
 
           <div class="mx-4 flex flex-col font-medium text-prime-gray">
             <BaseInput
@@ -64,7 +67,7 @@
               placeholder="Enter product name"
               identity="product"
             />
-            <div class="flex w-full gap-4">
+            <div class="flex phone-s:flex-col tablet:flex-row w-full gap-4">
               <BaseInput
                 class="w-full"
                 v-model="userInput.price"
@@ -80,17 +83,19 @@
                 identity="stock"
               />
             </div>
-            <div class="flex w-full gap-4 my-5">
+            <div
+              class="flex phone-s:flex-col tablet:flex-row w-full gap-4 my-5"
+            >
               <div class="w-full">
-                <label class="block text-sm font-bold mb-2"
-                  >Product Brand</label
-                >
+                <label class="block text-sm font-bold mb-2">
+                  Product Brand
+                </label>
                 <BaseSelect label="Choose brand" :options="brands" />
               </div>
               <div class="w-full">
-                <label class="block text-sm font-bold mb-2"
-                  >Product Category</label
-                >
+                <label class="block text-sm font-bold mb-2">
+                  Product Category
+                </label>
                 <BaseSelect label="Choose category" :options="categories" />
               </div>
             </div>
@@ -116,19 +121,15 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, computed } from "vue";
+import { ref, reactive, computed } from "vue";
 import { useStore } from "vuex";
 import BaseInput from "@/components/ui/BaseInput.vue";
 import BaseSelect from "@/components/ui/BaseSelect.vue";
 
 const store = useStore();
-const brands = computed(() => {
-  return store.state.product.brands;
-});
+const brands = computed(() => store.state.product.brands);
+const categories = computed(() => store.state.product.categories);
 
-const categories = computed(() => {
-  return store.state.product.categories;
-});
 const userInput = reactive({
   product: "",
   price: "",
@@ -137,11 +138,7 @@ const userInput = reactive({
   category: "",
 });
 
-// const brands = ref([]);
-// const categories = ref([]);
 const imageUrl = ref(null);
-const imageWidth = ref(300);
-const imageHeight = computed(() => imageWidth.value * (9 / 16));
 
 const onFileChange = (event) => {
   const file = event.target.files[0];
@@ -151,6 +148,10 @@ const onFileChange = (event) => {
     reader.readAsDataURL(file);
   }
 };
+
+// const brands = ref([]);
+// const categories = ref([]);
+
 
 // const fetchBrandsAndCategories = async () => {
 //   try {
@@ -168,4 +169,8 @@ const onFileChange = (event) => {
 // onMounted(fetchBrandsAndCategories);
 </script>
 
-<style scoped></style>
+<style scoped>
+img.object-cover {
+  object-fit: cover;
+}
+</style>

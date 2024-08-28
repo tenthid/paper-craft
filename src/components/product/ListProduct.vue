@@ -3,16 +3,16 @@
     <div
       v-for="(row, rowIndex) in rows"
       :key="rowIndex"
-      class="flex flex-row justify-center gap-5"
+      class="flex laptop:flex-row phone-s:flex-col phones-s:justify-center laptop:justify-start gap-5 "
     >
       <router-link
         v-for="(product, productIndex) in row"
         :key="productIndex"
         to="/detail-product"
-        class="product-card flex flex-col items-center p-[15px] gap-2.5 font-inter"
+        class="laptop:w-[250px] laptop:h-[385px] phone-s:w-full flex-shrink-0 flex-grow-0 bg-white rounded-[10px] overflow-hidden flex flex-col items-center p-[15px] gap-2.5 font-inter"
       >
         <img
-          class="product-image rounded-sm object-cover"
+          class="laptop:w-[218px] laptop:h-[240px] rounded-sm object-cover"
           :alt="product.name"
           :src="product.image"
         />
@@ -63,28 +63,4 @@ const rows = computed(() => {
 </script>
 
 <style>
-.product-card {
-  width: 250px;
-  height: 385px;
-  flex-shrink: 0;
-  flex-grow: 0;
-  background-color: white;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.product-image {
-  width: 218px;
-  height: 240px;
-}
-
-.flex-row {
-  display: flex;
-  justify-content: start;
-}
-
-.flex-col {
-  display: flex;
-  flex-direction: column;
-}
 </style>

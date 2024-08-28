@@ -13,7 +13,7 @@
     </div>
 
     <div
-      class="w-full relative bg-primary-background overflow-hidden flex laptop:flex-row items-start justify-start py-2.5 px-5 box-border gap-5 text-left phone-s:flex-col phone-s:items-center text-sm font-regular"
+      class="w-full relative bg-primary-background overflow-hidden flex laptop:flex-row laptop:items-start justify-start py-2.5 px-5 box-border gap-5 text-left phone-s:flex-col phone-s:items-center text-sm font-regular"
     >
       <div
         class="w-full bg-white flex flex-col p-6 rounded-md text-black font-inter phone-s:w-full laptop:w-[400px]"
@@ -64,7 +64,7 @@
       </div>
 
       <div
-        class="laptop:w-[750px] bg-white flex flex-col p-6 box-border rounded-[5px] text-[20px] text-[#000] font-inter phone-s:w-full"
+        class="laptop:sticky laptop:w-[750px] bg-white flex flex-col p-6 box-border rounded-[5px] text-[20px] text-[#000] font-inter phone-s:w-full"
       >
         <div class="flex flex-col gap-6 font-inter">
           <div class="font-medium phone-s:text-[15px] tablet:text-xl">
