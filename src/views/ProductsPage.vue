@@ -1,244 +1,61 @@
 <template>
-    
-    <div class="w-[100%] bg-[#ECF3F7] h-auto flex flex-col items-center gap-[40px] py-[166px] px-[60px] pb-[50px] self-stretch">
-        <div class="text-primary text-center font-[Maitree] text-[35px] font-normal leading-[120%]">
-            All Products
-        </div>
-
-    <!-- Product List -->
-    <div class="container-page">
-      <AllProduct :products="paginatedProducts" />
-
-      <!-- Pagination -->
-      <div class="flex flex-row items-center justify-center p-2.5 text-base text-text-default-default gap-2">
-          <button
-            @click="previousPage"
-            :disabled="currentPage === 1"
-            class="bg-gray p-2 rounded-lg opacity-50 hover:bg-primary hover:opacity-100"
-          >
-            <img class="w-6 h-6" src="/images/arrow-left.svg" alt="Previous" />
-          </button>
-          <div class="flex flex-row items-center justify-start gap-2">
-            <button
-              v-for="page in displayedPages"
-              :key="page"
-              @click="changePage(page)"
-              :class="[
-                'px-[15px] py-2 rounded-lg',
-                {
-                  'bg-primary text-white': page === currentPage,
-                  'bg-gray-200': page !== currentPage,
-                },
-              ]"
-            >
-              {{ page }}
-            </button>
-          </div>
-          <button
-            @click="nextPage"
-            :disabled="currentPage === totalPages"
-            class="bg-gray p-2 rounded-lg opacity-50 hover:bg-primary hover:opacity-100"
-          >
-            <img class="w-6 h-6" src="/images/arrow-right.svg" alt="Next" />
-          </button>
-        </div>
+  
+  <div class="w-[100%] bg-[#ECF3F7] py-[166px] px-[60px] pb-[50px] flex flex-col gap-[40px]">
+    <div class="text-primary flex flex-col gap-[20px] text-center font-maitree text-[35px] font-normal items-center">
+      <p>
+        All Products
+      </p>
+      <FIlterQueries />
     </div>
 
+    <div v-if="productsLength === 0" class="w-[100%] h-[55vh] flex flex-col items-center justify-center h-100">
+      <img class="h-[150px] w-auto pb-[10px]" src="/images/Empty-filtered-page.png" alt="" />
+      <div class="text-center font-inter">
+        <p class="font-medium text-[35px]">Cant Find Product Based on Your Filter</p>
+        <p class="text-[#404040] text-[20px] mt-4">
+          The product you are looking for does not exist
+        </p>
+      </div>
+    </div>
+    
+    <div class="flex flex-col gap-[40px]" v-else>
+  
+      <!-- Product List -->
+      <ProductList :products="products" :format-price="store.getters['product/formatToIdr']" />
+  
+      <!-- Pagination -->
+      <Pagination v-if="dataLoaded" :pagination-data="pagination" />
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import AllProduct from "@/components/product/AllProduct.vue";
+import ProductList from "@/components/product/ProductList.vue";
+import Pagination from "@/components/product/Pagination.vue";
+import { ref, computed, onMounted, watch } from "vue";
+import { useRoute } from "vue-router";
+import { useStore } from "vuex";
+import FIlterQueries from "@/components/product/FIlterQueries.vue";
 
-const products = ref([
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-  {
-    name: "This Product name bla bla ba ball",
-    brand: "Brand name",
-    price: "Rp200.000",
-    stock: 11,
-    image: "/images/tas.jpg",
-  },
-]);
+const store = useStore()
+const route = useRoute()
 
-const itemsPerPage = 15; 
-const maxPagesToShow = 5; 
-const currentPage = ref(1); 
+const products = computed(() => store.state.product.products)
+const pagination = computed(() => store.state.product.pagination)
+const productsLength = computed(() => store.getters['product/productsLength'])
+const dataLoaded = ref(false)
 
-const totalPages = computed(() =>
-  Math.ceil(products.value.length / itemsPerPage)
-);
+watch(route, async (oldValue, newValue) => {
+  dataLoaded.value = false
+  await store.dispatch('product/getProducts', route.fullPath.split('?')[1])
+  dataLoaded.value = true
+})
 
-const paginatedProducts = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  return products.value.slice(start, end);
-});
-
-const displayedPages = computed(() => {
-  let startPage = Math.max(currentPage.value - Math.floor(maxPagesToShow / 2), 1);
-  let endPage = startPage + maxPagesToShow - 1;
-
-  if (endPage > totalPages.value) {
-    endPage = totalPages.value;
-    startPage = Math.max(endPage - maxPagesToShow + 1, 1);
-  }
-
-  const pages = [];
-  for (let i = startPage; i <= endPage; i++) {
-    pages.push(i);
-  }
-  return pages;
-});
-
-function previousPage() {
-  if (currentPage.value > 1) {
-    currentPage.value--;
-  }
-}
-
-function nextPage() {
-  if (currentPage.value < totalPages.value) {
-    currentPage.value++;
-  }
-}
-
-function changePage(page) {
-  currentPage.value = page;
-}
+onMounted(async () => {
+  await store.dispatch('product/getProducts', route.fullPath.split('?')[1])
+  console.log(productsLength.value)
+  dataLoaded.value = true
+})
 </script>
 
 <style lang="scss" scoped>

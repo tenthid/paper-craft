@@ -1,6 +1,6 @@
 <template>
-    <div class="profile-card-footer border-t-[0px] gap-[20px]">
-        <div v-if="orderEmpty">
+    <div class="profile-card-footer border-t-[0px]">
+        <div v-if="orderEmpty" class="flex flex-col gap-[20px]">
             <div v-for="index in 10" class="border-[#EDEDED] border-[1px] rounded-[10px]">
                <div class="p-[15px]">
                 <div class="flex gap-[24px] justify-between">

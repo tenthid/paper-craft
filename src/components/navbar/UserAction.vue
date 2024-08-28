@@ -30,7 +30,7 @@
                     <img src="/images/receipt-icon.svg" alt="person-icon">
                     <p class="font-inter">Order</p>
                 </router-link>
-                <button class="flex items-center gap-[8px] p-[8px] w-[100%]" to="/logout">
+                <button @click="handleLogout()" class="flex items-center gap-[8px] p-[8px] w-[100%]" to="/logout">
                     <img src="/images/exit-icon.svg" alt="person-icon">
                     <p class="font-inter text-danger">Logout</p>
                 </button>
@@ -41,6 +41,11 @@
 
 <script setup>
     import { ref, onMounted, onBeforeUnmount } from 'vue';
+    import { useStore } from 'vuex';
+    import { useRouter } from 'vue-router';
+
+    const store = useStore()
+    const router = useRouter()
 
     const toggleDropdown = ref(false)
     const dropdown = ref(null)
@@ -56,6 +61,11 @@
 
     const dropdownToggler = () => {
         toggleDropdown.value = !toggleDropdown.value
+    }
+
+    const handleLogout = () => {
+        store.commit('user/setLogout')
+        router.push('/')
     }
 
     onMounted(() => {

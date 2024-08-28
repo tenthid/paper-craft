@@ -1,7 +1,7 @@
 <template>
-  <select @input="$emit('update:modelValue', $event.target.value)" class="w-[100%] border border-gray rounded py-[5px] px-[10px] text-gray font-normal h-[fit-content]">
-    <option value="" disabled selected>{{ label }}</option>
-    <option :value="option.value" v-for="option in options" :selected="option.value == modelValue">
+  <select @input="$emit('update:modelValue', $event.target.value)" class="w-[100%] border border-gray rounded py-[5px] px-[10px] font-normal h-[fit-content]">
+    <option class="text-gray" value="" disabled selected>{{ label }}</option>
+    <option class="text-primary" :value="option.value" v-for="option in options" :selected="option.value == modelValue">
       {{ option.label }}
     </option>
   </select>

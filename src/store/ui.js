@@ -5,7 +5,7 @@ export default {
             akuAdalah: 'manusia',
             dropdownVisible: false,
             notif: {
-                topPos: 0,
+                topPos: -100,
                 isError: false,
                 notifMessage: '',
                 notifTimeout: null
@@ -25,12 +25,18 @@ export default {
 
         setNotif(state, payload) {
             state.notif.notifMessage = payload.message;
+
             state.notif.isError = payload.isError;
-            state.notif.topPos = 65;
+            
+            if(payload.topPos !== undefined && payload.topPos !== null) {
+                state.notif.topPos = payload.topPos;
+            } else {
+                state.notif.topPos = 65;
+            }
         },
 
         hideNotif(state) {
-            state.notif.topPos = 0;
+            state.notif.topPos = -100;
         },
 
         setNotifTimeout(state, payload) {
@@ -55,7 +61,7 @@ export default {
         
             const timeout = setTimeout(() => {
               commit('hideNotif');
-            }, 1500);
+            }, 1800);
         
             commit('setNotifTimeout', timeout);
         }

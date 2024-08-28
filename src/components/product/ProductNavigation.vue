@@ -11,8 +11,8 @@
                     Categories
                 </p>
                 <div class="grid grid-cols-6 w-[100%] gap-y-[25px]">
-                    <router-link to="/" v-for="index in 12" class="text-center hover:underline font-inter font-[300]">
-                        Category name
+                    <router-link :to="`/categories?brandId=${category.id}`" v-for="category in categoryList" class="text-center hover:underline font-inter font-[300]">
+                        {{ category.category_name }}
                     </router-link>
                 </div>
             </div>
@@ -28,8 +28,8 @@
                     Brands
                 </p>
                 <div class="grid grid-cols-6 w-[100%] gap-y-[25px]">
-                    <router-link to="/" v-for="index in 12" class="text-center hover:underline font-inter font-[300]">
-                        Brand name
+                    <router-link :to="`/brands?brandId=${brand.id}`" v-for="brand in brandList" class="text-center hover:underline font-inter font-[300]">
+                        {{ brand.brand_name }}
                     </router-link>
                 </div>
             </div>
@@ -44,7 +44,7 @@
             </div>
             
             <!-- ini modal bukan dropdown -->
-            <div v-if="filterShow" @click="() => {filterShow = !filterShow}" class="left-0 absolute w-[100%] flex justify-center top-[120px]">
+            <div v-if="filterShow" @click="() => {filterShow = !filterShow}" class="left-0 absolute w-[100%] flex justify-center top-[125px]">
                 <div @click.stop="() => {filterShow = true}" ref='filterModal' class="bg-white flex flex-col p-[20px] gap-[25px] rounded-[5px] shadow-md w-[400px] items-center">
                     <p class="font-inter text-[24px] font-bold">
                         Filter Product
@@ -91,7 +91,7 @@
 </template>
 
 <script setup>
-    import { ref, onMounted, onBeforeUnmount, computed, reactive } from 'vue';
+    import { ref, onMounted, onBeforeUnmount, computed, reactive, watch } from 'vue';
     import BaseSelect from '../ui/BaseSelect.vue';
     import { useStore } from 'vuex';
     import { useRouter, useRoute } from 'vue-router';
@@ -140,6 +140,10 @@
             queries.brand = filter.brand
         }
 
+        if(route.query.keyword) {
+            queries.keyword = route.query.keyword
+        }
+
         router.push({
             path: router.path,
             query: queries
@@ -148,23 +152,7 @@
         filterShow.value = false
     }
 
-    onMounted(async() => {
-        await store.dispatch('product/getBrands')
-        await store.dispatch('product/getCategories')
-
-        brandList.value = brands.value
-        categoryList.value = categories.value
-
-        brandList.value.forEach(brand => {
-            brand.value = brand.id
-            brand.label = brand.brand_name
-        })
-        categoryList.value.forEach(category => {
-            category.value = category.id
-            category.label = category.category_name
-        })
-
-        document.addEventListener('click', handleClickOutside)
+    const filterQueries = () => {
         let queries = {
             sortBy: '',
             orderBy: '',
@@ -189,6 +177,31 @@
         }
 
         Object.assign(filter, queries)
+    }
+
+    watch(route , (oldValue, newaValue) => {
+        filterQueries()
+    })
+
+    onMounted(async() => {
+        await store.dispatch('product/getBrands')
+        await store.dispatch('product/getCategories')
+
+        brandList.value = brands.value
+        categoryList.value = categories.value
+
+        brandList.value.forEach(brand => {
+            brand.value = brand.id
+            brand.label = brand.brand_name
+        })
+        categoryList.value.forEach(category => {
+            category.value = category.id
+            category.label = category.category_name
+        })
+
+        document.addEventListener('click', handleClickOutside)
+
+        filterQueries()
     })
     
     onBeforeUnmount(() => {

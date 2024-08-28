@@ -1,16 +1,16 @@
 <template>
   <div
-    class="w-full relative overflow-hidden grid grid-cols-5 gap-5 text-left text-sm text-black font-inter"
+    class="w-full relative overflow-hidden grid laptop-l:grid-cols-5 laptop:grid-cols-4 tablet:grid-cols-3 phone-s:grid-cols-1 gap-5 text-left text-sm text-black font-inter"
   >
     <router-link
-      to="/detail-product"
+      :to="`/product/${product.id}`"
       v-for="product in products"
       class="self-stretch flex-1 rounded-2xl bg-white overflow-hidden flex flex-col items-center justify-start p-[15px] relative gap-2.5"
     >
       <img
         class="self-stretch relative rounded-sm max-w-full overflow-hidden h-[250px] shrink-0 object-cover z-[0]"
         :alt="product.product_name"
-        :src="product.image_url"
+        src="/images/tas.jpg"
       />
       <div
         class="self-stretch bg-white overflow-hidden flex flex-col items-start justify-start gap-[3px] z-[1]"
@@ -31,7 +31,7 @@
           <div
             class="w-[87px] relative tracking-[0.1px] leading-[24px] font-medium flex items-center h-[21px] shrink-0"
           >
-            {{ store.getters['product/formatToIdr'](product.price) }}
+            {{ formatPrice(product.price) }}
           </div>
           <div
             class="relative text-xs tracking-[0.1px] leading-[24px] text-[12px] text-[#5B5B5B]"
@@ -79,10 +79,10 @@
 </template>
 
 <script setup>
-  import { useStore } from 'vuex';
-  import { computed } from 'vue';
+  import { defineProps } from 'vue';
 
-  const store = useStore()
-  
-  const products = computed(() => store.state.product.products)
+  defineProps({
+    products: {type: Array},
+    formatPrice: {type: Function}
+  })
 </script>
