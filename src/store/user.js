@@ -13,7 +13,8 @@ export default {
             },
             errors: {
 
-            }
+            },
+            message: ''
         }
     },
 
@@ -33,6 +34,9 @@ export default {
             state.userData = {}
             state.isLogin = false
             Cookies.remove('bearer_token')
+        },
+        setMessage(state, payload) {
+            state.message = payload
         }
     },
 
@@ -86,6 +90,37 @@ export default {
                 return false
             }
             
+        },
+        
+        async getPassResetToken({commit, state}, payload) {
+            let api = `${state.apiUrl}forgot-password`
+            try {   
+                const { data } = await axios.post(api, payload)
+                commit('setErrorData', {})
+                commit('setMessage', data.message)
+                return true
+            } catch (err) {
+                console.log(err)
+                err.response.data.errors? commit('setErrorData', err.response.data.errors) : commit('setErrorData', {})
+                commit('setMessage', err.response.data.message)
+                return false
+            }
+        },
+
+        async resetPassword({commit, state}, payload) {
+            let api = `${state.apiUrl}reset-password`
+            try {   
+                const { data } = await axios.post(api, payload)
+                commit('setErrorData', {})
+                console.log(data)
+                commit('setMessage', data.message)
+                return true
+            } catch (err) {
+                console.log(err)
+                err.response.data.errors? commit('setErrorData', err.response.data.errors) : commit('setErrorData', {})
+                commit('setMessage', err.response.data.message)
+                return false
+            }
         }
     }
 }
