@@ -9,7 +9,7 @@
       alt="logo"
     />
     <div
-      class="search-bar flex items-center w-[75%] h-[40px] rounded-full border border-gray-200"
+      class="search-bar flex items-center w-[75%] h-[40px] rounded-full border border-gray"
     >
       <div class="pl-[10px]">
         <img src="/images/magnify-glass.svg" alt="Search" />
@@ -29,7 +29,10 @@
       />
     </div>
     <div class="menu-toggle hidden cursor-pointer" @click="toggleMenu">
-      <img src="/images/menu-icon.svg" alt="Menu" />
+      <img
+        :src="isMenuOpen ? '/images/close-icon.svg' : '/images/menu-icon.svg'"
+        alt="Menu Toggle"
+      />
     </div>
 
     <div :class="['mobile-menu', { 'menu-open': isMenuOpen }]">
@@ -69,7 +72,10 @@
           Brands
         </router-link>
       </div>
-      <button class="logout-btn flex items-center text-red-500" @click="logout">
+      <button
+        class="logout-btn flex items-center text-red mt-auto"
+        @click="logout"
+      >
         <img src="/images/logout.svg" alt="Logout" class="mr-[10px]" />
         <div class="logout-text">Logout</div>
       </button>
@@ -98,7 +104,6 @@ const logout = () => {
 };
 </script>
 
-
 <style scoped>
 .navbar {
   border-bottom: 0.5px solid #ccc;
@@ -110,7 +115,7 @@ const logout = () => {
 }
 
 .mobile-menu {
-  align-items: end;
+  align-items: flex-start;
   display: none;
   flex-direction: column;
   position: fixed;
@@ -119,7 +124,7 @@ const logout = () => {
   width: 250px;
   height: 100%;
   background-color: white;
-  justify-content: end;
+  justify-content: space-between;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   padding: 70px 20px 20px;
   transition: transform 0.3s ease-in-out;
@@ -127,23 +132,16 @@ const logout = () => {
 }
 
 .menu-open {
-  display: block;
-}
-
-.mobile-nav a {
-  margin-bottom: 15px;
-  font-size: 18px;
+  display: flex;
 }
 
 .logout-btn {
-  margin-top: auto;
   display: flex;
   align-items: center;
   color: red;
   background: none;
   border: none;
   cursor: pointer;
-  margin-top: auto;
 }
 
 .logout-btn img {

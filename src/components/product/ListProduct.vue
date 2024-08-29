@@ -3,13 +3,13 @@
     <div
       v-for="(row, rowIndex) in rows"
       :key="rowIndex"
-      class="flex laptop:flex-row phone-s:flex-col phones-s:justify-center laptop:justify-start gap-5 "
+      class="flex laptop:flex-row phone-s:flex-col tablet:flex phones-s:justify-center laptop:justify-start gap-5"
     >
       <router-link
         v-for="(product, productIndex) in row"
         :key="productIndex"
         to="/detail-product"
-        class="laptop:w-[250px] laptop:h-[385px] phone-s:w-full flex-shrink-0 flex-grow-0 bg-white rounded-[10px] overflow-hidden flex flex-col items-center p-[15px] gap-2.5 font-inter"
+        class="product-card laptop:w-[250px] laptop:h-[385px] phone-s:w-full flex-shrink-0 flex-grow-0 bg-white rounded-[10px] overflow-hidden flex flex-col items-center p-[15px] gap-2.5 font-inter"
       >
         <img
           class="laptop:w-[218px] laptop:h-[240px] rounded-sm object-cover"
@@ -62,5 +62,4 @@ const rows = computed(() => {
 });
 </script>
 
-<style>
-</style>
+<style scoped></style>
