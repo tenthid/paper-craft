@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-primary-background w-full phone-l:container-page"
+    class="bg-primary-background w-full phone-l:container-page laptop:pl-[250px] h-[100vh]"
   >
     <div
       class="pt-[100px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-[15px]"

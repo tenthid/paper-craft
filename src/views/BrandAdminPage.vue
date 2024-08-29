@@ -1,19 +1,19 @@
 <template>
   <div
-    class="bg-primary-background laptop:pt-[50px] w-full phone-s:px-3 laptop:container-page"
+    class="bg-primary-background phone-s:pt-[100px] laptop:pt-[100px] w-full phone-s:px-3 h-[100vh] laptop:pl-[250px] laptop:pr-[80px]"
   >
     <div
-      class="pt-[100px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-[15px]"
+      class="w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-[15px]"
     >
       <div
         class="items-center font-maitree laptop:text-[35px] text-primary phone-s:text-[25px]"
       >
-        Create Brand
+        Manage Brands
       </div>
     </div>
 
     <div
-      class="w-full relative bg-primary-background overflow-hidden flex laptop:flex-row laptop:items-start justify-start py-2.5 px-5 box-border gap-5 text-left phone-s:flex-col phone-s:items-center text-sm font-regular"
+      class="w-full relative bg-primary-background flex laptop:flex-row laptop:items-start justify-start py-2.5 px-5 box-border gap-5 text-left phone-s:flex-col phone-s:items-center text-sm font-regular"
     >
       <div
         class="w-full bg-white flex flex-col p-6 rounded-md text-black font-inter phone-s:w-full laptop:w-[400px]"
@@ -21,11 +21,11 @@
         <div class="flex flex-col gap-6">
           <h2 class="font-medium text-lg phone-s:text-base">Brand List</h2>
 
-          <table class="w-full text-left border-collapse border-primary-background outline-none">
+          <table
+            class="w-full text-left border-collapse border-primary-background outline-none"
+          >
             <thead>
-              <tr
-                class="text-gray text-xs font-medium border-b border-gray"
-              >
+              <tr class="text-gray text-xs font-medium border-b border-gray">
                 <th class="p-2 tablet:text-[15px]">Logo</th>
                 <th class="p-2 tablet:text-[15px]">Brand Name</th>
                 <th class="p-2 tablet:text-[15px] text-right">Actions</th>
@@ -70,7 +70,7 @@
       </div>
 
       <div
-        class="laptop:sticky laptop:w-[750px] bg-white flex flex-col p-6 box-border rounded-[5px] text-[20px] text-[#000] font-inter phone-s:w-full"
+        class="laptop:w-[750px] bg-white flex flex-col p-6 box-border rounded-[5px] text-[20px] text-[#000] font-inter phone-s:w-full"
       >
         <div class="flex flex-col gap-6 font-inter">
           <div class="font-medium phone-s:text-[15px] tablet:text-xl">

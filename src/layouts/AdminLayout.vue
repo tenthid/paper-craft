@@ -4,8 +4,8 @@
       <NavAdmin></NavAdmin>
     </header>
 
-    <main class="flex flex-row">
-       <Sidebar></Sidebar>
+    <main>
+       <!-- <Sidebar></Sidebar> -->
       <slot></slot>
     </main>
   </div>
