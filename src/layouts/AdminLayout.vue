@@ -5,7 +5,6 @@
     </header>
 
     <main>
-       <!-- <Sidebar></Sidebar> -->
       <slot></slot>
     </main>
   </div>

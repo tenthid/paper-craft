@@ -21,9 +21,10 @@
           <div class="border-t border-primary-background"></div>
 
           <label
-            class="relative mx-auto laptop:w-[600px] phone-s:w-[80%] phone-s:h-auto flex flex-col items-center justify-center text-center text-base font-montserrat border border-dashed border-dark-blue p-4 cursor-pointer overflow-hidden"
-            @dragover.prevent
-            @drop.prevent
+            class="relative mx-auto my-3 laptop:w-[600px] phone-s:w-[80%] phone-s:h-auto flex flex-col items-center justify-center text-center text-base font-montserrat border border-dashed border-dark-blue p-4 cursor-pointer overflow-hidden"
+            @click="triggerFileInput"
+            @dragover.prevent="handleDragOver"
+            @drop="handleDrop"
           >
             <img
               v-if="imageUrl"
@@ -49,6 +50,7 @@
               accept="image/jpeg, image/png"
               @change="onFileChange"
               class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              @click.stop
             />
           </label>
         </div>
@@ -144,6 +146,13 @@ const userInput = reactive({
 
 const imageUrl = ref(null);
 
+const triggerFileInput = () => {
+  const fileInput = document.querySelector('input[type="file"]');
+  if (fileInput) {
+    fileInput.click();
+  }
+};
+
 const onFileChange = (event) => {
   const file = event.target.files[0];
   if (file) {
@@ -153,23 +162,21 @@ const onFileChange = (event) => {
   }
 };
 
-// const brands = ref([]);
-// const categories = ref([]);
+const handleDragOver = (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+};
 
-// const fetchBrandsAndCategories = async () => {
-//   try {
-//     const [brandResponse, categoryResponse] = await Promise.all([
-//       fetch("/api/brands"),
-//       fetch("/api/categories"),
-//     ]);
-//     brands.value = await brandResponse.json();
-//     categories.value = await categoryResponse.json();
-//   } catch (error) {
-//     console.error("Error fetching brands and categories:", error);
-//   }
-// };
-
-// onMounted(fetchBrandsAndCategories);
+const handleDrop = (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+  const file = event.dataTransfer.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => (imageUrl.value = e.target.result);
+    reader.readAsDataURL(file);
+  }
+};
 </script>
 
 <style scoped>
