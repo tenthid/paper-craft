@@ -10,6 +10,11 @@ export default {
                 notifMessage: '',
                 notifTimeout: null
             },
+            modal: {
+                modalVisible: false,
+                bottomPos: -100,
+                type: ''
+            }
         }
     },
 
@@ -41,6 +46,19 @@ export default {
 
         setNotifTimeout(state, payload) {
             state.notif.notifTimeout = payload;
+        },
+        
+        toggleModal(state, payload) {
+            state.modal.modalVisible = !state.modal.modalVisible
+            
+            if(state.modal.bottomPos < 0) {
+                state.modal.type = payload.type
+                state.modal.bottomPos = 0
+                document.documentElement.style.overflow = 'hidden'
+            } else {
+                state.modal.bottomPos = -100
+                document.documentElement.style.overflow = 'auto'
+            }
         }
     },
 
@@ -64,6 +82,13 @@ export default {
             }, 1800);
         
             commit('setNotifTimeout', timeout);
+        },
+
+        async showModal({commit, dispatch, state} , payload) {
+            if(!state.modal.modalVisible) {
+                await dispatch('product/getProductDetail', payload.id, { root: true })
+            }
+            commit('toggleModal', payload)
         }
     }
 }

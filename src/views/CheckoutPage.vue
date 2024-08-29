@@ -27,12 +27,10 @@
                     </div>
                     <div v-for="item in checkoutItems" class="flex-col flex gap-[10px]">
                         <ProductCardCheckout 
-                            @increase="qtyControll('+',item.id)" 
-                            @decrease="qtyControll('-',item.id)"
                             :qty="item.qty"
-                            :productName="item.name"
-                            :categoryName="item.category"
-                            :brandName="item.brand"
+                            :productName="item.product_name"
+                            :categoryName="item.category.category_name"
+                            :brandName="item.brand.brand_name"
                             :price="item.price"
                             :stock="item.stock"
                             :image="item.image"
@@ -55,7 +53,7 @@
         <div class="p-[25px] rounded-[12px] bg-white w-[600px] flex flex-col h-[fit-content] gap-[20px] sticky top-[85px]">
             <p class="font-inter text-[14px] font-[400] text-gray">Payment</p>
 
-            <SummaryCardCart v-if="route.path === '/cart'" :tax="tax" :subtotal="subtotal" :subTotal="subTotal" :items="cartItems" :formatPrice="store.getters['product/formatToIdr']" />
+            <SummaryCardCart v-if="route.path === '/cart'" :tax="tax" :subTotal="subTotal" :items="cartItems" :formatPrice="store.getters['product/formatToIdr']" />
 
             <SummaryCardCheckout v-else :subTotal="subTotal" :items="checkoutItems" :formatPrice="store.getters['product/formatToIdr']" />
 
@@ -97,8 +95,14 @@
 
     const calculateTotal = () => {
         subTotal.value = 0
-        for(let item of cartItems.value) {
-            subTotal.value += item.totalPrice
+        if(Object.keys(checkoutItems.value).length > 0) {
+            for(let item of checkoutItems.value) {
+                subTotal.value += item.totalPrice
+            }
+        } else {
+            for(let item of cartItems.value) {
+                subTotal.value += item.totalPrice
+            }
         }
     }
 
@@ -116,14 +120,13 @@
     const checkPath = async () => {
         if(route.path === '/cart') {
             await store.dispatch('cart/getCartItems')
-            calculateTotal()
         } else {
-            console.log(checkoutItems.value)
             if(checkoutItems.value.length === 0) {
                 router.push('/cart')
                 store.dispatch('ui/showNotif', {isError: true, message: 'Please select item to checkout' })
             }
         }
+        calculateTotal()
     }
 
     watch(() => route.path, (oldValue, newValue) => {

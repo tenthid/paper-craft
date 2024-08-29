@@ -36,7 +36,6 @@
         totalPrice: {type: Number},
         image: {type: String},
         qty: {type: Number},
-        totalPrice: {type: Number},
         selected: {type: Boolean},
         formatPrice: {type: Function},
     })

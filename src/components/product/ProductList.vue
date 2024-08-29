@@ -47,23 +47,22 @@
         <div
           class="rounded-md bg-primary overflow-hidden flex flex-row items-center justify-center p-1.5"
         >
-          <router-link
-            to="/cart"
+          <button
             class="flex flex-row items-center justify-center"
+            @click.prevent="async() => { await store.dispatch('ui/showModal', {id: product.id, type: 'addCart'}) }"
           >
             <img
               class="w-5 relative h-5 overflow-hidden shrink-0"
               alt="cart"
               src="/images/cart.svg"
             />
-          </router-link>
+          </button>
         </div>
-        <router-link
-          to="/checkout"
+        <button @click.prevent="async() => { await store.dispatch('ui/showModal', {id: product.id, type: 'checkout'}) }"
           class="self-stretch flex-1 rounded-md border-primary border-[1px] border-solid overflow-hidden flex flex-row items-center justify-center py-0.5 px-0"
         >
           <div class="relative leading-[16px] font-medium">Buy now</div>
-        </router-link>
+        </button>
       </div>  
       <div
         class="w-[30px] !m-[0] absolute top-[12px] left-[13px] rounded-md bg-white h-[30px] flex flex-row items-center justify-center p-1 box-border z-[3]"
@@ -80,6 +79,9 @@
 
 <script setup>
   import { defineProps } from 'vue';
+  import { useStore } from 'vuex';
+
+  const store = useStore()
 
   defineProps({
     products: {type: Array},

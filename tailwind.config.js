@@ -28,7 +28,8 @@ export default {
       'pisang-ijo' : '#10AF13',
       'bilu' : '#009fd3',
       'logout' : '#feecec',
-      'light-gray' : '#EDEDED'
+      'light-gray' : '#EDEDED',
+      'modal-rgba': 'rgba(0, 0, 0, 0.5)'
     },
     fontFamily: {
       'inter': ['"Inter"', 'sans-sherif'],

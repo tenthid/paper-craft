@@ -122,7 +122,6 @@ export default {
         try {
           let api = `${state.apiUrl}products/${payload}`
           const { data } = await axios.get(api)
-          // console.log(data.product[0])
           commit('setProductDetailData', data.product[0])
         } catch(err) {
           console.log(err)

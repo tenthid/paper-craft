@@ -1,11 +1,12 @@
 <script setup>
+  import ModalProduct from './components/modal/ModalProduct.vue';
   import { useStore } from 'vuex';
   import { computed, ref, watch } from 'vue';
-  import { useRoute } from 'vue-router';
 
   const store = useStore()
 
   const notif = computed(() => store.state.ui.notif)
+  const modal = computed(() => store.state.ui.modal)
 </script>
 
 <template>
@@ -18,6 +19,10 @@
     <router-view></router-view>
   </component>
   <router-view v-else></router-view>
+  
+  <div @click="store.dispatch('ui/showModal')" class="flex bg-black/10 justify-center items-center w-full fixed z-[99999] transition-all h-[100vh]" :style="{'bottom': `${modal.bottomPos}vh`}">
+    <ModalProduct :modal="modal" />
+  </div>
 </template>
 
 <style scoped>

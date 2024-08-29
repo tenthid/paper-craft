@@ -43,7 +43,7 @@
     const handleResetPassword = async () => {
         const isSuccess = await store.dispatch('user/resetPassword', userInput)
         if(isSuccess) {
-            store.dispatch('ui/showNotif', { message: message.value})
+            store.dispatch('ui/showNotif', { message: message.value, topPos: 0})
             router.push('/login')
         } else if (Object.keys(errors.value).length === 0) {
             store.dispatch('ui/showNotif', { message: message.value, isError: true, topPos: 0})

@@ -10,7 +10,6 @@ const auth = {
         if(isSuccess) {
             return true
         } else {
-            console.log(isSuccess)
             store.commit('user/setLogout')
             return false
         }

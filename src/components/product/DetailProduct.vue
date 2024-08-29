@@ -3,7 +3,7 @@
     <div class="p-[25px] flex items-center w-full bg-white rounded-[10px]">
       <img class="h-auto w-full border-[1px] border-light-gray rounded-[10px]" src="/images/tas.jpg" alt="detail-img">
     </div>
-    <div class="sticky top-[85px] flex flex-col px-[25px] py-[30px] laptop:h-full w-full bg-white rounded-[10px] justify-between gap-[20px]">
+    <div class="flex flex-col px-[25px] py-[30px] laptop:h-full w-full bg-white rounded-[10px] justify-between gap-[20px]">
       <div class="flex flex-col gap-[20px]">
         <div class="flex flex-col gap-[12px]">
           <div class="flex justify-between">
