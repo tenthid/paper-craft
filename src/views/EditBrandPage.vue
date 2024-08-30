@@ -33,8 +33,8 @@
 
             <label
               class="relative mx-auto laptop:w-[650px] laptop:h-[204px] phone-s:w-full phone-s:h-auto flex flex-col items-center justify-center text-center text-base font-montserrat border border-dashed border-dark-blue p-4 cursor-pointer overflow-hidden"
-              @dragover.prevent
-              @drop.prevent
+              @dragover.prevent="handleDragOver"
+              @drop="handleDrop"
             >
               <img
                 v-if="imageUrl"

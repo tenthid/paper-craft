@@ -15,14 +15,22 @@
     <div
       class="mb-[20px] self-stretch overflow-hidden flex flex-row items-center justify-start gap-5 text-left text-sm text-black"
     >
-      <product-list></product-list>
-    </div>
+      <product-list :products="popularProduct" :format-price="store.getters['product/formatToIdr']"> </product-list>    </div>
   </div>
 </template>
 
 
 <script setup>
 import ProductList from "./ProductList.vue";
+import { useStore } from "vuex";
+import { computed, onMounted } from "vue";
+
+const store = useStore()
+const popularProduct = computed(() => store.state.product.popularProducts)
+
+onMounted(async () => {
+  await store.dispatch('product/getPopular')
+})
 </script>
 
 <style scoped></style>

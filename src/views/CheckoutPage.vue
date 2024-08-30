@@ -20,21 +20,27 @@
                         :formatPrice="store.getters['product/formatToIdr']"
                     />
                 </div>
-                <div v-else v-for="item in checkoutItems" class="flex-col flex gap-[10px]">
-                    <ProductCardCheckout 
-                        @increase="qtyControll('+',item.id)" 
-                        @decrease="qtyControll('-',item.id)"
-                        :qty="item.qty"
-                        :productName="item.name"
-                        :categoryName="item.category"
-                        :brandName="item.brand"
-                        :price="item.price"
-                        :stock="item.stock"
-                        :image="item.image"
-                        :totalPrice="item.totalPrice"
-                        :selected="item.selected"
-                        :formatPrice="store.getters['product/formatToIdr']"
-                    />
+                <div v-else>
+                    <div class="p-[20px] border-[1px] border-[#EDEDED] rounded-[10px]">
+                        <p class="pb-[8px] font-inter font-[500] text-[14px]">Home Address</p>
+                        <p class="font-inter font-[400] text-[15px] text-gray">jalan kwkwkwkkwkw</p>
+                    </div>
+                    <div v-for="item in checkoutItems" class="flex-col flex gap-[10px]">
+                        <ProductCardCheckout 
+                            @increase="qtyControll('+',item.id)" 
+                            @decrease="qtyControll('-',item.id)"
+                            :qty="item.qty"
+                            :productName="item.name"
+                            :categoryName="item.category"
+                            :brandName="item.brand"
+                            :price="item.price"
+                            :stock="item.stock"
+                            :image="item.image"
+                            :totalPrice="item.totalPrice"
+                            :selected="item.selected"
+                            :formatPrice="store.getters['product/formatToIdr']"
+                        />
+                    </div>
                 </div>
             </div>
             <div v-else class="flex items-center flex-col gap-[15px]">
@@ -49,11 +55,11 @@
         <div class="p-[25px] rounded-[12px] bg-white w-[600px] flex flex-col h-[fit-content] gap-[20px] sticky top-[85px]">
             <p class="font-inter text-[14px] font-[400] text-gray">Payment</p>
 
-            <SummaryCardCart v-if="route.path === '/cart'" :tax="tax" :subtotal="subtotal" :orderTotal="orderTotal" :items="cartItems" :formatPrice="store.getters['product/formatToIdr']" />
+            <SummaryCardCart v-if="route.path === '/cart'" :tax="tax" :subtotal="subtotal" :subTotal="subTotal" :items="cartItems" :formatPrice="store.getters['product/formatToIdr']" />
 
-            <SummaryCardCheckout v-else :tax="tax" :subtotal="subtotal" :orderTotal="orderTotal" :items="items" :formatPrice="store.getters['product/formatToIdr']" />
+            <SummaryCardCheckout v-else :subTotal="subTotal" :items="checkoutItems" :formatPrice="store.getters['product/formatToIdr']" />
 
-            <button @click="handleCheckout()" class="btn bg-primary rounded-[5px] text-white font-inter">
+            <button :disabled="cartItems.length === 0 || selcetedEmpty" @click="handleCheckout()" class="btn bg-primary rounded-[5px] text-white font-inter disabled:disabled">
                 {{ route.name === 'cart'? 'Checkout' : 'Pay now' }}
             </button>
         </div>
@@ -76,9 +82,7 @@
     const cartItems = computed(() => store.state.cart.cart) 
     const checkoutItems = computed(() => store.state.cart.checkoutItems)
     
-    const subtotal = ref(0)
-    const orderTotal = ref(0)
-    const tax = ref(100000)
+    const subTotal = ref(0)
     const parentRendered = ref(false)
 
     const qtyControll = async (type, id) => {
@@ -92,13 +96,10 @@
     }
 
     const calculateTotal = () => {
-        subtotal.value = 0
-        orderTotal.value = 0
+        subTotal.value = 0
         for(let item of cartItems.value) {
-            subtotal.value += item.totalPrice
+            subTotal.value += item.totalPrice
         }
-
-        orderTotal.value += subtotal.value + tax.value
     }
 
     const handleCheckout = () => {
@@ -120,6 +121,7 @@
             console.log(checkoutItems.value)
             if(checkoutItems.value.length === 0) {
                 router.push('/cart')
+                store.dispatch('ui/showNotif', {isError: true, message: 'Please select item to checkout' })
             }
         }
     }
@@ -130,6 +132,7 @@
     
     onMounted(async () => {
         await checkPath()
+        await store.dispatch('product/getProducts')
         parentRendered.value = true
     })
 </script>

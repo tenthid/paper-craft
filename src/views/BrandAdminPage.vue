@@ -83,8 +83,8 @@
 
             <label
               class="relative mx-auto w-full h-[204px] flex flex-col items-center justify-center text-center text-base font-montserrat border border-dashed border-dark-blue p-4 cursor-pointer overflow-hidden"
-              @dragover.prevent
-              @drop.prevent
+              @dragover.prevent="handleDragOver"
+              @drop="handleDrop"
             >
               <img
                 v-if="imageUrl"

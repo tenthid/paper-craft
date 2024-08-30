@@ -11,6 +11,7 @@ export default {
                   price: 200000,
                   stock: 11,
                   image: "/images/tas.jpg",
+                  packaging: 5000,
                   qty: 1,
                 },
                 {
@@ -21,6 +22,7 @@ export default {
                   price: 200000,
                   stock: 11,
                   image: "/images/tas.jpg",
+                  packaging: 5000,
                   qty: 1,
                 },
                 {
@@ -31,6 +33,7 @@ export default {
                   price: 200000,
                   stock: 11,
                   image: "/images/tas.jpg",
+                  packaging: 5000,
                   qty: 1,
                 },
             ],

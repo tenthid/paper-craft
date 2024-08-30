@@ -4,23 +4,26 @@
             {{ label }} <span v-if="withSpan" class="text-danger" >*</span>
         </label>
 
-        <div class="input-group rounded-[12px] bg-primary-background flex gap-[6px] w-[100%]" v-if="isPassword || type === 'password'">
-            <input
-            class=" bg-[inherit] group-controll w-[100%]  input-no-focus text-[16px]" 
-            :type="passIcon? 'text' : 'password'"
-            :id="identity" 
-            :placeholder="placeholder" 
-            :readonly="readonly === '1'"
-            :value="modelValue"
-            @input="$emit('update:modelValue', $event.target.value)"
-            @keyup="$emit('keyInput', $event.target.value)"
-            @focus="$emit('totalTimeFocus', $event.target.value)"
-            @change="$emit('fileInput', $event.target.value)"/>
-            <span class="group-span"><i style="cursor: pointer;" @click="passIconControl()" :class="passIcon? ['fa-solid fa-eye-slash'] : ['fa-solid fa-eye']"></i></span>
+        <div class="flex w-full gap-[6px] flex-col" v-if="isPassword || type === 'password'">
+            <div class="input-group rounded-[12px] bg-primary-background w-full" >
+                <input
+                class=" bg-[inherit] group-controll w-full input-no-focus text-[16px]" 
+                :type="passIcon? 'text' : 'password'"
+                :id="identity" 
+                :placeholder="placeholder" 
+                :readonly="readonly === '1'"
+                :value="modelValue"
+                @input="$emit('update:modelValue', $event.target.value)"
+                @keyup="$emit('keyInput', $event.target.value)"
+                @focus="$emit('totalTimeFocus', $event.target.value)"
+                @change="$emit('fileInput', $event.target.value)"/>
+                <span class="group-span"><i style="cursor: pointer;" @click="passIconControl()" :class="passIcon? ['fa-solid fa-eye-slash'] : ['fa-solid fa-eye']"></i></span>
+            </div>
+            <slot></slot>
         </div>
 
-        <div v-else class="flex gap-[6px] w-[100%]">        
-            <input class="bg-primary-background py-[8px] px-[12px]  rounded-[12px] w-[100%] input-no-focus text-[16px]"
+        <div v-else class="flex gap-[6px] w-full flex-col">
+            <input class="bg-primary-background py-[8px] px-[12px] flex-col rounded-[12px] w-full input-no-focus text-[16px]"
             :type="type"
             :id="identity"
             :placeholder="placeholder" 

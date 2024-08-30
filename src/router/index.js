@@ -15,10 +15,12 @@ import CategoryAdminPage from "@/views/CategoryAdminPage.vue";
 import ProfilePage from '@/views/ProfilePage.vue'
 import CheckoutPage from '@/views/CheckoutPage.vue'
 import ProductLayout from '@/layouts/ProductLayout.vue'
-import FilterPage from '@/views/FilterPage.vue'
 import FavoritePage from '@/views/FavoritePage.vue'
 import CategoryPage from '@/views/CategoryPage.vue'
 import BrandPage from '@/views/BrandPage.vue'
+import DetailPage from '@/views/DetailPage.vue'
+import InvoicePage from '@/views/InvoicePage.vue'
+import auth from './middleware/auth'
 import CreateProductPage from "@/views/CreateProductPage.vue";
 import EditProductPage from "@/views/EditProductPage.vue";
 import EditCategoryPage from "@/views/EditCategoryPage.vue";
@@ -35,8 +37,9 @@ const router = createRouter({
       meta: {
         layout: MainLayout,
       },
-      path: "/",
-      name: "home",
+      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
+      path: '/',
+      name: 'home',
       component: HomePage,
     },
 
@@ -44,20 +47,22 @@ const router = createRouter({
       meta: {
         layout: AuthLayout,
       },
-      path: "/login",
-      name: "login",
+      beforeEnter: async (to, from, next) => {await auth.checkAuth()?  next('/') : next()},
+      path: '/login',
+      name: 'login',
       component: LoginPage,
     },
-
+    
     {
       meta: {
         layout: AuthLayout,
       },
-      path: "/register",
-      name: "register",
+      beforeEnter: async (to, from, next) => {await auth.checkAuth()?  next('/') : next()},
+      path: '/register',
+      name: 'register',
       component: RegisterPage,
     },
-
+    
     {
       meta: {
         layout: AuthLayout,
@@ -80,110 +85,87 @@ const router = createRouter({
       meta: {
         layout: ProductLayout
       },
+      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
       path: '/products',
       name: 'Products',
       component: ProductsPage,
     },
-
+    
     {
       meta: {
         layout: ProductLayout
       },
-      path: '/filter',
-      name: 'Filter',
-      component: FilterPage,
-    },
-
-    {
-      meta: {
-        layout: ProductLayout
-      },
+      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
       path: '/categories',
       name: 'CategoryName',
       component: CategoryPage,
     },
-
+    
     {
       meta: {
         layout: ProductLayout
       },
+      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
       path: '/brands',
       name: 'BrandName',
       component: BrandPage,
     },
-
+    
     {
       meta: {
         layout: MainLayout
       },
+      beforeEnter: async (to, from, next) => {await auth.checkAuth()?  next() : next('/login')},
       path: '/favorite',
       name: 'Favorite',
       component: FavoritePage,
     },
-
-    // {
-    //   meta: {
-    //     layout: AdminLayout,
-    //   },
-    //   path: "/home-admin",
-    //   name: "HomeAdmin",
-    //   component: HomeAdminPage,
-    // },
-    {
-      meta: {
-        layout: AdminLayout,
-      },
-      path: "/products-admin",
-      name: "ProductAdmin",
-      component: ProductAdminPage,
-    },
-    {
-      meta: {
-        layout: AdminLayout,
-      },
-      path: "/category-admin",
-      name: "CategoryAdmin",
-      component: CategoryAdminPage,
-    },
-    {
-      meta: {
-        layout: AdminLayout,
-      },
-      path: "/brand-admin",
-      name: "BrandAdmin",
-      component: BrandAdminPage,
-    },
+    
     {
       meta: {
         layout: MainLayout
       },
+      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
+      path: '/product/:id',
+      name: 'Detail',
+      component: DetailPage,
+    },
+    
+    {
+      meta: {
+        layout: MainLayout
+      },
+      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
       path: '/profile-details',
       name: 'profileDetails',
       component: ProfilePage,
     },
-
+    
     {
       meta: {
         layout: MainLayout
       },
+      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
       path: '/change-password',
       name: 'changePassword',
       component: ProfilePage,
     },
-
+    
     {
       meta: {
         layout: MainLayout
       },
+      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
       path: '/transaction-history',
       name: 'transactionHistory',
       component: ProfilePage,
     },
-
+    
     {
       meta: {
         layout: MainLayout
       },
+      beforeEnter: async (to, from, next) => {await auth.checkAuth()?  next() : next('/login')},
       path: '/cart',
       name: 'cart',
       component: CheckoutPage,
@@ -198,6 +180,15 @@ const router = createRouter({
       component: CheckoutPage,
     },
 
+    {
+      meta: {
+        layout: MainLayout
+      },
+      path: '/invoice',
+      name: 'Invoice',
+      component: InvoicePage,
+    },
+
     // {
     //   meta: {
     //     layout: AdminLayout
@@ -206,6 +197,24 @@ const router = createRouter({
     //   name: 'HomeAdmin',
     //   component: HomeAdminPage,
     // },
+
+    {
+      meta: {
+        layout: AdminLayout
+      },
+      path: '/category-admin',
+      name: CategoryAdminPage,
+      component: CategoryAdminPage
+    },
+
+    {
+      meta: {
+        layout: AdminLayout
+      },
+      path: '/brand-admin',
+      name: BrandAdminPage,
+      component: BrandAdminPage
+    },
 
     {
       meta: {

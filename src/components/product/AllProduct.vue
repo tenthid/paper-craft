@@ -1,6 +1,6 @@
 <template>
   <div v-for="(row, rowIndex) in rows" :key="rowIndex" class="w-full pb-[25px] relative overflow-hidden flex flex-row items-center justify-start gap-5 text-left text-sm text-black font-inter">
-    <router-link v-for="(product, index) in row" :key="index" :to="`/detail-product/${product.id}`" class="self-stretch flex-1 rounded-md bg-white overflow-hidden flex flex-col items-center justify-start p-[15px] relative gap-2.5">
+    <router-link v-for="(product, index) in row" :key="index" :to="`/detail-page/${product.id}`" class="self-stretch flex-1 rounded-md bg-white overflow-hidden flex flex-col items-center justify-start p-[15px] relative gap-2.5">
       <img
         class="self-stretch relative rounded-sm max-w-full overflow-hidden h-[250px] shrink-0 object-cover z-[0]"
         :alt="product.name"

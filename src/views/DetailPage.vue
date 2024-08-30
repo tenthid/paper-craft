@@ -1,0 +1,59 @@
+<template>
+  <div v-if="!dataLoaded" class="flex justify-center items-center h-[100vh] bg-primary-background">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+  </div>
+  <div>
+    <div v-if="Object.keys(product).length === 0" class="w-[100%] h-[100vh] flex flex-col items-center justify-center h-100 bg-primary-background">
+      <img class="h-[150px] w-auto pb-[10px]" src="/images/remove.png" alt="" />
+      <div class="text-center font-inter">
+        <p class="font-medium text-[35px]">Products has been Removed</p>
+        <p class="text-gray-3 text-[20px] mt-4">
+          The product you are looking for may have been removed
+        </p>
+      </div>
+    </div>
+    <div v-else class="w-[100%] bg-primary-background h-auto flex flex-col items-center gap-[40px] py-[100px] px-[60px] pb-[50px] self-stretch">
+        
+      <div class="pb-[50px]">
+        <div class="container-Detail">
+          <DetailProduct :productDetail="product" :formatPrice="store.getters['product/formatToIdr']" />
+        </div>
+        
+        <div class="w-[100%] py-[40px] text-primary font-inter text-[30px] font-medium leading-[36px]">
+          Other Product
+        </div>
+        <ProductList :products="products" :formatPrice="store.getters['product/formatToIdr']" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed, onMounted, watch } from 'vue';
+import DetailProduct from "@/components/product/DetailProduct.vue";
+import ProductList from "@/components/product/ProductList.vue";
+import { useStore } from 'vuex';
+import { useRoute } from 'vue-router';
+
+const route = useRoute()
+const store = useStore()
+const dataLoaded = ref(false)
+
+const product = computed(() => store.state.product.product); 
+const products = computed(() => store.state.product.products)
+
+watch(route, async (oldValue, newValue) => {
+  await store.dispatch('product/getProdctDetail', route.params.id)
+})
+
+onMounted(async() => {
+  await store.dispatch('product/getProducts', 'perPage=5')
+  await store.dispatch('product/getProductDetail', route.params.id)
+  console.log(Object.keys(product.value).length !== 0)
+  dataLoaded.value = true
+})
+</script>
+
+<style lang="scss" scoped>
+
+</style>
