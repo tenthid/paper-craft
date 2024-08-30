@@ -8,12 +8,12 @@
       class="self-stretch flex-1 rounded-2xl bg-white overflow-hidden flex flex-col items-center justify-start p-[15px] relative gap-2.5"
     >
       <img
-        class="self-stretch relative rounded-sm max-w-full overflow-hidden h-[250px] shrink-0 object-cover z-[0]"
+        class="self-stretch relative rounded-sm max-w-full overflow-hidden h-[250px] shrink-0 object-cover "
         :alt="product.product_name"
         src="/images/tas.jpg"
       />
       <div
-        class="self-stretch bg-white overflow-hidden flex flex-col items-start justify-start gap-[3px] z-[1]"
+        class="self-stretch bg-white overflow-hidden flex flex-col items-start justify-start gap-[3px]"
       >
         <div
           class="text-[#000000] text-[14px] w-full relative tracking-[0.1px] leading-[24px] flex items-center h-[17px] shrink-0"
@@ -42,7 +42,7 @@
         </div>
       </div>
       <div
-        class="self-stretch bg-white overflow-hidden flex flex-row items-start justify-start gap-1.5 z-[2] text-primary"
+        class="self-stretch bg-white overflow-hidden flex flex-row items-start justify-start gap-1.5 text-primary"
       >
         <div
           class="rounded-md bg-primary overflow-hidden flex flex-row items-center justify-center p-1.5"
@@ -65,7 +65,7 @@
         </button>
       </div>  
       <div
-        class="w-[30px] !m-[0] absolute top-[12px] left-[13px] rounded-md bg-white h-[30px] flex flex-row items-center justify-center p-1 box-border z-[3]"
+        class="w-[30px] !m-[0] absolute top-[12px] left-[13px] rounded-md bg-white h-[30px] flex flex-row items-center justify-center p-1 box-border"
       >
         <img
           class="w-[22px] relative h-[22px] overflow-hidden shrink-0"

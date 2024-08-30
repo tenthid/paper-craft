@@ -5,15 +5,16 @@
             <div v-if="cartItems.length > 0" class="flex flex-col gap-[20px]">
                 <div v-if="route.path === '/cart'" v-for="item in cartItems" class="flex-col flex gap-[10px]">
                     <ProductCardCart 
-                        @increase="qtyControll('+',item.id)" 
-                        @decrease="qtyControll('-',item.id)" 
-                        @incart="store.commit('cart/changeSelected', item.id)" 
-                        :qty="item.qty"
-                        :productName="item.name"
-                        :categoryName="item.category"
-                        :brandName="item.brand"
-                        :price="item.price"
-                        :stock="item.stock"
+                        @increase="qtyControll('+',item.product.id, item.quantity)" 
+                        @decrease="qtyControll('-',item.product.id, item.quantity)" 
+                        @incart="store.commit('cart/changeSelected', item.product.id)"
+                        @remove="async () => {await store.dispatch('cart/removeItemCart', item.product.id); calculateTotal()}" 
+                        :qty="item.quantity"
+                        :productName="item.product.product_name"
+                        :categoryName="item.product.category.category_name"
+                        :brandName="item.product.brand.brand_name"
+                        :price="item.product.price"
+                        :stock="item.product.stock"
                         :image="item.image"
                         :totalPrice="item.totalPrice"
                         :selected="item.selected"
@@ -62,6 +63,9 @@
             </button>
         </div>
     </div>
+    <div v-else class="flex h-[100vh] justify-center items-center bg-primary-background">
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    </div>
 </template>
 
 <script setup>
@@ -83,13 +87,12 @@
     const subTotal = ref(0)
     const parentRendered = ref(false)
 
-    const qtyControll = async (type, id) => {
+    const qtyControll = async (type, id, itemQty) => {
         if(type === '+') {
-          cartItems.value[id - 1].qty++
+          await store.dispatch('cart/addItemToCart', {id: id, qty : itemQty + 1})
         } else {
-          cartItems.value[id - 1].qty--
+            await store.dispatch('cart/addItemToCart', {id: id, qty : itemQty - 1})
         }
-        await store.dispatch('cart/qtyControll', {id: id, value : cartItems.value[id - 1].qty})
         calculateTotal()
     }
 

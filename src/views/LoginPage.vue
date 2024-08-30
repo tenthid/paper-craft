@@ -36,23 +36,18 @@
 
 <script setup>
     import BaseInput from '@/components/ui/BaseInput.vue';
-    import { reactive, computed, watch } from 'vue';
-    import { useRouter, useRoute } from 'vue-router';
+    import { reactive, computed, onMounted } from 'vue';
+    import { useRouter } from 'vue-router';
     import { useStore } from 'vuex';
 
     const store = useStore()
     const router = useRouter()
-    const route = useRoute()
 
 
     const errors = computed(() => store.state.user.errors)
     const userInput = reactive({
         email: '',
         password: '',
-    })
-
-    watch(route, async (oldValue, newValue) => {
-        console.log('jawa')
     })
 
     const handleLogin = async () => {
@@ -64,6 +59,10 @@
             store.dispatch('ui/showNotif',{message: errors.value.message, topPos: 0, isError: true})
         }
     }
+
+    onMounted(() => {
+        store.commit('user/setErrorData', {})
+    })
 </script>
 
 <style lang="scss" scoped>

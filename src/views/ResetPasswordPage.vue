@@ -23,7 +23,7 @@
 
 <script setup>
     import BaseInput from '@/components/ui/BaseInput.vue';
-    import { reactive, onMounted, computed, watch } from 'vue';
+    import { reactive, onMounted, computed } from 'vue';
     import { useRoute, useRouter } from 'vue-router';
     import { useStore } from 'vuex';
 
@@ -49,12 +49,9 @@
             store.dispatch('ui/showNotif', { message: message.value, isError: true, topPos: 0})
         }
     }
-    
-    watch(route, (oldValue, newValue) => {
-        store.commit('setErrorData', {})
-    })
 
     onMounted(() => {
+        store.commit('user/setErrorData', {})
         if(route.query.token && route.query.email) {
             userInput.token = route.query.token
             userInput.email = route.query.email

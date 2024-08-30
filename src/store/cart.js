@@ -1,41 +1,14 @@
+import axios from "axios"
+import Cookies from "js-cookie"
+
 export default {
     namespaced: true,
     state () {
         return {
+            apiUrl: 'http://FinalProject.test/api/',
+            token: Cookies.get('bearer_token'),
             cart: [
-                {
-                  id: 1,
-                  name: "This Product name bla bla ba ball",
-                  brand: "Brand name",
-                  category: "category name",
-                  price: 200000,
-                  stock: 11,
-                  image: "/images/tas.jpg",
-                  packaging: 5000,
-                  qty: 1,
-                },
-                {
-                  id: 2,
-                  name: "This Product name bla bla ba ball",
-                  brand: "Brand name",
-                  category: "category name",
-                  price: 200000,
-                  stock: 11,
-                  image: "/images/tas.jpg",
-                  packaging: 5000,
-                  qty: 1,
-                },
-                {
-                  id: 3,
-                  name: "This Product name bla bla ba ball",
-                  brand: "Brand name",
-                  category: "category name",
-                  price: 200000,
-                  stock: 11,
-                  image: "/images/tas.jpg",
-                  packaging: 5000,
-                  qty: 1,
-                },
+              
             ],
             checkoutItems: [
 
@@ -51,6 +24,10 @@ export default {
 
       setCartItems(state, payload) {
         state.cart = payload
+        for(let item of state.cart) {
+          item.selected = true
+          item.totalPrice = item.quantity * item.product.price
+        }
       },
 
       insertCheckoutItems(state, payload) {
@@ -59,9 +36,8 @@ export default {
       },
       
       changeSelected(state, payload) {
-        console.log('jalan')
         for(let item of state.cart) {
-          if(item.id === payload) {
+          if(item.product.id === payload) {
             item.selected = !item.selected
           }
         }
@@ -70,27 +46,60 @@ export default {
     },
 
     getters: {
-
+      getCartLength: (state) => {
+        return state.cart.length
+      }
     },
 
     actions: {
-      getCartItems({ state, commit }, payload) {
-        let cart = state.cart
-        for(let item of cart) {
-          item.selected = true
-          item.totalPrice = item.qty * item.price
+      async getCartItems({ state, commit }, payload) {
+        let api = `${state.apiUrl}cart`
+        try {
+          const { data } = await axios.post(api,{}, {
+            headers: {
+                Authorization: `Bearer ${state.token}`
+            }
+          })
+          
+  
+          commit('setCartItems', data.items)
+        } catch(err) {
+          console.log(err)
         }
-
-        commit('setCartItems', cart)
+      },
+      
+      async addItemToCart({state, commit, dispatch}, payload) {
+        let api = `${state.apiUrl}cart/add`
+        try {
+          if(payload.qty === 0) {
+            await dispatch('removeItemCart', payload.id)
+          } else {
+            const { data } = await axios.post(api, {product_id: payload.id, quantity: payload.qty}, {
+              headers: {
+                Authorization: `Bearer ${state.token}`
+              }
+            })
+            commit('setCartItems', data.items)
+          }
+          return true
+        } catch(err) {
+          console.log(err)
+          return false
+        }
       },
 
-      qtyControll({ commit, dispatch }, payload) {
-        commit('changeQty', payload)
-      },
-
-      removeItem({ state }, payload) {
-        let cartItems = state.cart
-
+      async removeItemCart({ state, commit }, payload) {
+        let api = `${state.apiUrl}cart/remove`
+        try {
+          const { data } = await axios.post(api, { product_id: payload }, {
+            headers: {
+              Authorization: `Bearer ${state.token}`
+            }
+          })
+          commit('setCartItems', data.items)
+        } catch(err) {
+          console.log(err)
+        }
       }
     }
 }

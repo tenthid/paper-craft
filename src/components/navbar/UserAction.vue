@@ -5,8 +5,8 @@
                 <router-link to="/cart">
                     <img width="28px" height="auto" src="/images/cart-icon.svg" alt="cart-icon">
                 </router-link>
-                <span v-if="true" class=" ml-[15px] px-[7px] py-[2px] bg-danger absolute top-0 text-[12px] rounded-full text-white">
-                    {{ userCart }}
+                <span v-if="cartLength !== 0" class=" ml-[15px] px-[7px] py-[2px] bg-danger absolute top-0 text-[12px] rounded-full text-white">
+                    {{ cartLength }}
                 </span>
             </div>
             <div class="relative flex items-center">
@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-    import { ref, onMounted, onBeforeUnmount } from 'vue';
+    import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
     import { useStore } from 'vuex';
     import { useRouter } from 'vue-router';
 
@@ -50,8 +50,7 @@
     const toggleDropdown = ref(false)
     const dropdown = ref(null)
     const userLike = ref(1)
-    const userCart = ref(9)
-    const link = '/profile'
+    const cartLength = computed(() => store.getters['cart/getCartLength'])
 
     const dropdownTogglerOutside = (event) => {
         if(toggleDropdown.value && !dropdown.value.contains(event.target)) {
@@ -68,8 +67,9 @@
         router.push('/')
     }
 
-    onMounted(() => {
+    onMounted(async() => {
         document.addEventListener('click', dropdownTogglerOutside)
+        await store.dispatch('cart/getCartItems')
     })
 
     onBeforeUnmount(() => {

@@ -22,13 +22,12 @@
 
 <script setup>
     import BaseInput from '@/components/ui/BaseInput.vue';
-    import { reactive, computed, watch } from 'vue';
+    import { reactive, computed, onMounted } from 'vue';
     import { useStore } from 'vuex';
-    import { useRouter, useRoute } from 'vue-router';
+    import { useRouter } from 'vue-router';
 
     const store = useStore()
     const router = useRouter()
-    const route = useRoute()
 
     const message = computed(() => store.state.user.message)
     const errors = computed(() => store.state.user.errors)
@@ -48,8 +47,8 @@
         }
     }
 
-    watch(route, (oldValue, newValue) => {
-        store.commit('setErrorData', {})
+    onMounted(() => {
+        store.commit('user/setErrorData', {})
     })
 </script>
 

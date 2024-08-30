@@ -1,5 +1,5 @@
 <template>
-    <div class="w-[100%] bg-white fixed h-[120px] border-b-[0.5px] border-primary flex gap-[60px] justify-center items-center text-[18px] font-medium text-primary pt-[65px] px-[60px] pb-0 z-[9999] ">
+    <div class="w-[100%] bg-white fixed h-[120px] border-b-[0.5px] border-primary flex gap-[60px] justify-center items-center text-[18px] font-medium text-primary pt-[65px] px-[60px] pb-0 z-[98] ">
         
         <div class="flex gap-[5px] text-[20px] font-[500] font-inter group cursor-pointer h-[100%] items-center">
             Category

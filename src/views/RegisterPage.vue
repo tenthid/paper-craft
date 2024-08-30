@@ -48,13 +48,12 @@
 
 <script setup>
     import BaseInput from '@/components/ui/BaseInput.vue';
-    import { computed, reactive, ref, watch } from 'vue';
-    import { useRouter, useRoute } from 'vue-router';
+    import { computed, reactive, ref, onMounted } from 'vue';
+    import { useRouter } from 'vue-router';
     import { useStore } from 'vuex';
 
     const router = useRouter()
     const store = useStore()
-    const route = useRoute()
 
     const errors = computed(() => store.state.user.errors)
     const userInput = reactive({
@@ -65,10 +64,6 @@
         terms_agrree: false,
     })
     const showErrorAggree = ref(false)
-
-    watch(route, (oldValue, newValue) => {
-        store.commit('setErrorData', {})
-    })
 
     const handleRegister =async () => {  
         if(userInput.terms_agrree === false) {
@@ -82,6 +77,10 @@
             showErrorAggree.value = false
         }
     }
+
+    onMounted(() => {
+        store.commit('user/setErrorData', {})
+    })
 </script>
 
 <style lang="scss" scoped>
