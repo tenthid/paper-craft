@@ -5,7 +5,7 @@ export default {
     namespaced: true,
     state () {
         return {
-            apiUrl: 'http://FinalProject.test/api/',
+            apiUrl: import.meta.env.VITE_API_URL,
             token: Cookies.get('bearer_token'),
             cart: [
               
