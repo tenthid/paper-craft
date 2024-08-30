@@ -36,18 +36,23 @@
 
 <script setup>
     import BaseInput from '@/components/ui/BaseInput.vue';
-    import { reactive, computed } from 'vue';
-    import { useRouter } from 'vue-router';
+    import { reactive, computed, watch } from 'vue';
+    import { useRouter, useRoute } from 'vue-router';
     import { useStore } from 'vuex';
 
     const store = useStore()
     const router = useRouter()
+    const route = useRoute()
 
 
     const errors = computed(() => store.state.user.errors)
     const userInput = reactive({
         email: '',
         password: '',
+    })
+
+    watch(route, async (oldValue, newValue) => {
+        console.log('jawa')
     })
 
     const handleLogin = async () => {

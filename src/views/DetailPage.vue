@@ -43,13 +43,12 @@ const product = computed(() => store.state.product.product);
 const products = computed(() => store.state.product.products)
 
 watch(route, async (oldValue, newValue) => {
-  await store.dispatch('product/getProdctDetail', route.params.id)
+  await store.dispatch('product/getProductDetail', route.params.id)
 })
 
 onMounted(async() => {
   await store.dispatch('product/getProducts', 'perPage=5')
   await store.dispatch('product/getProductDetail', route.params.id)
-  console.log(Object.keys(product.value).length !== 0)
   dataLoaded.value = true
 })
 </script>

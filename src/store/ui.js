@@ -1,8 +1,10 @@
+import axios from "axios"
+
 export default {
     namespaced: true,
     state () {
         return {
-            akuAdalah: 'manusia',
+            apiUrl: import.meta.env.VITE_API_URL,
             dropdownVisible: false,
             notif: {
                 topPos: -100,
@@ -14,6 +16,10 @@ export default {
                 modalVisible: false,
                 bottomPos: -100,
                 type: ''
+            },
+            modalQty: 0,
+            modalProduct: {
+
             }
         }
     },
@@ -23,6 +29,10 @@ export default {
     },
 
     mutations: {
+        changeModalQty(state, payload) {
+            state.modalQty = payload
+        },
+
         ubahAkuAdalah(state, payload) {
             state.akuAdalah = payload
             console.log(state.akuAdalah)
@@ -58,7 +68,11 @@ export default {
             } else {
                 state.modal.bottomPos = -100
                 document.documentElement.style.overflow = 'auto'
+                state.modalQty = 0
             }
+        },
+        setModalProduct(state, payload) {
+            state.modalProduct = payload
         }
     },
 
@@ -84,9 +98,10 @@ export default {
             commit('setNotifTimeout', timeout);
         },
 
-        async showModal({commit, dispatch, state} , payload) {
-            if(!state.modal.modalVisible) {
-                await dispatch('product/getProductDetail', payload.id, { root: true })
+        async showModal({commit, state} , payload) {
+            if(!state.modal.modalVisible && state.modalProduct.id !== payload.id) {
+                const {data} = await axios.get(`${state.apiUrl}products/${payload.id}`)
+                commit('setModalProduct', data[0])
             }
             commit('toggleModal', payload)
         }

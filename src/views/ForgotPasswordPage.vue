@@ -22,12 +22,13 @@
 
 <script setup>
     import BaseInput from '@/components/ui/BaseInput.vue';
-    import { reactive, computed } from 'vue';
+    import { reactive, computed, watch } from 'vue';
     import { useStore } from 'vuex';
-    import { useRouter } from 'vue-router';
+    import { useRouter, useRoute } from 'vue-router';
 
     const store = useStore()
     const router = useRouter()
+    const route = useRoute()
 
     const message = computed(() => store.state.user.message)
     const errors = computed(() => store.state.user.errors)
@@ -46,6 +47,10 @@
             store.dispatch('ui/showNotif', { message: message.value, isError: true, topPos: 0})
         }
     }
+
+    watch(route, (oldValue, newValue) => {
+        store.commit('setErrorData', {})
+    })
 </script>
 
 <style lang="scss" scoped>

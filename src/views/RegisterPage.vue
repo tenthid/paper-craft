@@ -48,12 +48,13 @@
 
 <script setup>
     import BaseInput from '@/components/ui/BaseInput.vue';
-    import { computed, reactive, ref } from 'vue';
-    import { useRouter } from 'vue-router';
+    import { computed, reactive, ref, watch } from 'vue';
+    import { useRouter, useRoute } from 'vue-router';
     import { useStore } from 'vuex';
 
     const router = useRouter()
     const store = useStore()
+    const route = useRoute()
 
     const errors = computed(() => store.state.user.errors)
     const userInput = reactive({
@@ -65,12 +66,15 @@
     })
     const showErrorAggree = ref(false)
 
-    const handleRegister =async () => {
-        const isSuccess = await store.dispatch('user/register', userInput)
-        
+    watch(route, (oldValue, newValue) => {
+        store.commit('setErrorData', {})
+    })
+
+    const handleRegister =async () => {  
         if(userInput.terms_agrree === false) {
             showErrorAggree.value = true
         } else {
+            const isSuccess = await store.dispatch('user/register', userInput)
             if(isSuccess) {
                 store.dispatch('ui/showNotif',{message: 'Register berhasil', topPos: 0})
                 router.push('/login')

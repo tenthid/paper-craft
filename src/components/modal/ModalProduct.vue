@@ -1,6 +1,6 @@
 <template>
     <div @click.stop="" class="form-card border-light-gray border-[1px] h-fit relative w-[400px]">
-      <img @click="store.dispatch('ui/showModal')" class="absolute right-0 pt-[10px] pr-[10px] top-0 cursor-pointer" src="/images/X-page.svg" alt="x-icon">
+      <img @click="store.dispatch('ui/showModal');" class="absolute right-0 pt-[10px] pr-[10px] top-0 cursor-pointer" src="/images/X-page.svg" alt="x-icon">
       <div class="form-card-body">
           <img src="/images/tas.jpg" alt="tes">
           <div class="grid grid-cols-2 gap-[20px]">
@@ -18,7 +18,7 @@
                         -
                     </button>
                     <input v-model="qty" type="number" class="text-[14px] group-controll input-no-focus text-center w-[20px]" readonly >
-                    <button @click="increment()" class="select-none cursor-pointer group-span border-l-[1px] pl-[8px] align-top">
+                    <button :disabled="qty === product.stock" @click="increment()" class="select-none cursor-pointer group-span border-l-[1px] pl-[8px] align-top">
                         +
                     </button>
                 </div>
@@ -44,16 +44,18 @@
     const router = useRouter()
     const store = useStore()
 
-    const qty = ref(0)
-    const product = computed(()  => store.state.product.product)
+    const qty = computed(() => store.state.ui.modalQty)
+    const product = computed(()  => store.state.ui.modalProduct)
 
     const increment = () => {
-        qty.value++
+        let amount = qty.value + 1
+        store.commit('ui/changeModalQty', amount)
     }
-
+    
     const decrement = () => {
         if(qty.value !== 0) {
-            qty.value--
+            let amount = qty.value - 1
+            store.commit('ui/changeModalQty', amount)
         }
     }
 

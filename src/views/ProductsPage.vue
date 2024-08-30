@@ -53,7 +53,6 @@ watch(route, async (oldValue, newValue) => {
 
 onMounted(async () => {
   await store.dispatch('product/getProducts', route.fullPath.split('?')[1])
-  console.log(productsLength.value)
   dataLoaded.value = true
 })
 </script>
