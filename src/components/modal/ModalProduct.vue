@@ -60,20 +60,25 @@
     }
 
     const handleInsert =async () => {
-        if(props.modal.type === 'checkout' && qty.value) {
-            let item = {...product.value, qty: qty.value, totalPrice: qty.value * product.value.price}
-            store.commit('cart/insertCheckoutItems', [item])
-            qty.value = 0
-            store.dispatch('ui/showModal')
-            router.push('/checkout')
-        } else if (qty.value) {
-            const isSuccess = await store.dispatch('cart/addItemToCart', { id: product.value.id, qty: qty.value, stock: product.value.stock})
-            if(isSuccess) {
+        if(store.state.user.isLogin) {
+            if(props.modal.type === 'checkout' && qty.value) {
+                let item = {...product.value, qty: qty.value, totalPrice: qty.value * product.value.price}
+                store.commit('cart/insertCheckoutItems', [item])
+                qty.value = 0
                 store.dispatch('ui/showModal')
-                store.dispatch('ui/showNotif', { message: 'Added to cart'})
-            } else {
-                store.dispatch('ui/showNotif', { message: 'Failed add item to cart', isError: true, topPos: 0})
+                router.push('/checkout')
+            } else if (qty.value) {
+                const isSuccess = await store.dispatch('cart/addItemToCart', { id: product.value.id, qty: qty.value, stock: product.value.stock})
+                if(isSuccess) {
+                    store.dispatch('ui/showModal')
+                    store.dispatch('ui/showNotif', { message: 'Added to cart'})
+                } else {
+                    store.dispatch('ui/showNotif', { message: 'Failed add item to cart', isError: true, topPos: 0})
+                }
             }
+        } else {
+            router.push('/login')
+            store.dispatch('ui/showModal')
         }
     }
 </script>
