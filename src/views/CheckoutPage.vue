@@ -29,13 +29,14 @@
                     <div v-for="item in checkoutItems" class="flex-col flex gap-[10px]">
                         <ProductCardCheckout 
                             :qty="item.qty"
-                            :productName="checkoutItems.length !== 1? item.product.product_name : item.product_name"
-                            :categoryName="checkoutItems.length !== 1? item.product.category.category_name : item.category.category_name"
-                            :brandName="checkoutItems.length !== 1? item.product.brand.brand_name : item.brand.brand_name"
-                            :price="checkoutItems.length !== 1? item.product.price : item.price"
-                            :stock="checkoutItems.length !== 1? item.product.stock : item.stock"
-                            :image="checkoutItems.length !== 1? item.product.image : item.image"
+                            :productName="item.product.product_name"
+                            :categoryName="item.product.category.category_name"
+                            :brandName="item.product.brand.brand_name"
+                            :price="item.product.price"
+                            :stock="item.product.stock"
+                            :image="item.product.image"
                             :totalPrice="item.totalPrice"
+                            :selected="item.selected"
                             :formatPrice="store.getters['product/formatToIdr']"
                         />
                     </div>

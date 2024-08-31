@@ -62,7 +62,9 @@
     const handleInsert =async () => {
         if(store.state.user.isLogin) {
             if(props.modal.type === 'checkout' && qty.value) {
-                let item = {...product.value, qty: qty.value, totalPrice: qty.value * product.value.price}
+                let item = {product: {
+                    ...product.value
+                }, qty: qty.value, totalPrice: qty.value * product.value.price}
                 store.commit('cart/insertCheckoutItems', [item])
                 qty.value = 0
                 store.dispatch('ui/showModal')
