@@ -67,7 +67,7 @@
             store.dispatch('ui/showModal')
             router.push('/checkout')
         } else if (qty.value) {
-            const isSuccess = await store.dispatch('cart/addItemToCart', { id: product.value.id, qty: qty.value})
+            const isSuccess = await store.dispatch('cart/addItemToCart', { id: product.value.id, qty: qty.value, stock: product.value.stock})
             if(isSuccess) {
                 store.dispatch('ui/showModal')
                 store.dispatch('ui/showNotif', { message: 'Added to cart'})

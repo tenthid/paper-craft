@@ -5,8 +5,8 @@
             <div v-if="cartItems.length > 0" class="flex flex-col gap-[20px]">
                 <div v-if="route.path === '/cart'" v-for="item in cartItems" class="flex-col flex gap-[10px]">
                     <ProductCardCart 
-                        @increase="qtyControll('+',item.product.id, item.quantity)" 
-                        @decrease="qtyControll('-',item.product.id, item.quantity)" 
+                        @increase="qtyControll('+',item.product.id, item.quantity, item.product.stock)" 
+                        @decrease="qtyControll('-',item.product.id, item.quantity, item.product.stock)" 
                         @incart="store.commit('cart/changeSelected', item.product.id)"
                         @remove="async () => {await store.dispatch('cart/removeItemCart', item.product.id); calculateTotal()}" 
                         :qty="item.quantity"
@@ -29,14 +29,13 @@
                     <div v-for="item in checkoutItems" class="flex-col flex gap-[10px]">
                         <ProductCardCheckout 
                             :qty="item.qty"
-                            :productName="item.product_name"
-                            :categoryName="item.category.category_name"
-                            :brandName="item.brand.brand_name"
-                            :price="item.price"
-                            :stock="item.stock"
-                            :image="item.image"
+                            :productName="checkoutItems.length !== 1? item.product.product_name : item.product_name"
+                            :categoryName="checkoutItems.length !== 1? item.product.category.category_name : item.category.category_name"
+                            :brandName="checkoutItems.length !== 1? item.product.brand.brand_name : item.brand.brand_name"
+                            :price="checkoutItems.length !== 1? item.product.price : item.price"
+                            :stock="checkoutItems.length !== 1? item.product.stock : item.stock"
+                            :image="checkoutItems.length !== 1? item.product.image : item.image"
                             :totalPrice="item.totalPrice"
-                            :selected="item.selected"
                             :formatPrice="store.getters['product/formatToIdr']"
                         />
                     </div>
@@ -87,9 +86,11 @@
     const subTotal = ref(0)
     const parentRendered = ref(false)
 
-    const qtyControll = async (type, id, itemQty) => {
+    const qtyControll = async (type, id, itemQty, itemStock) => {
         if(type === '+') {
-          await store.dispatch('cart/addItemToCart', {id: id, qty : itemQty + 1})
+            if( itemStock !== itemQty) {
+                await store.dispatch('cart/addItemToCart', {id: id, qty : itemQty + 1})
+            }
         } else {
             await store.dispatch('cart/addItemToCart', {id: id, qty : itemQty - 1})
         }

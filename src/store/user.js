@@ -27,12 +27,13 @@ export default {
             state.errors = payload
         },
         setToken(state, payload) {
-            state.token = payload
-            Cookies.set('bearer_token', payload)
+            state.token = payload.token
+            if(payload.cookies) Cookies.set('bearer_token', payload.token)
         },
         setLogout(state) {
             state.userData = {}
             state.isLogin = false
+            state.token = ''
             Cookies.remove('bearer_token')
         },
         setMessage(state, payload) {
@@ -62,7 +63,7 @@ export default {
             let api = `${state.apiUrl}login`
             try {
                 const { data } = await axios.post(api, payload)
-                commit('setToken', data.token)
+                commit('setToken', {token: data.token, cookies: true})
                 await dispatch('getUserData', data.token)
                 commit('setErrorData', {})
                 return true
@@ -82,6 +83,7 @@ export default {
                     }
                 })
                 commit('setErrorData', {})
+                commit('setToken', {token: Cookies.get('bearer_token')})
                 commit('setLogin', data)
                 return true
             } catch(err) {

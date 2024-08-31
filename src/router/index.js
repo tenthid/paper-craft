@@ -29,9 +29,8 @@ const router = createRouter({
   routes: [
     {
       meta: {
-        layout: MainLayout
+        layout: MainLayout,
       },
-      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
       path: '/',
       name: 'home',
       component: HomePage,
@@ -39,9 +38,9 @@ const router = createRouter({
     
     {
       meta: {
-        layout: AuthLayout
+        layout: AuthLayout,
+        authPage: true
       },
-      beforeEnter: async (to, from, next) => {await auth.checkAuth()?  next('/') : next()},
       path: '/login',
       name: 'login',
       component: LoginPage,
@@ -49,9 +48,9 @@ const router = createRouter({
     
     {
       meta: {
-        layout: AuthLayout
+        layout: AuthLayout,
+        authPage: true
       },
-      beforeEnter: async (to, from, next) => {await auth.checkAuth()?  next('/') : next()},
       path: '/register',
       name: 'register',
       component: RegisterPage,
@@ -59,7 +58,8 @@ const router = createRouter({
     
     {
       meta: {
-        layout: AuthLayout
+        layout: AuthLayout,
+        authPage: true
       },
       path: '/forgot-password',
       name: 'forgotPassword',
@@ -68,7 +68,8 @@ const router = createRouter({
 
     {
       meta: {
-        layout: AuthLayout
+        layout: AuthLayout,
+        authPage: true
       },
       path: '/reset-password',
       name: 'resetPassword',
@@ -79,7 +80,6 @@ const router = createRouter({
       meta: {
         layout: ProductLayout
       },
-      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
       path: '/products',
       name: 'Products',
       component: ProductsPage,
@@ -89,7 +89,6 @@ const router = createRouter({
       meta: {
         layout: ProductLayout
       },
-      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
       path: '/categories',
       name: 'CategoryName',
       component: CategoryPage,
@@ -99,7 +98,6 @@ const router = createRouter({
       meta: {
         layout: ProductLayout
       },
-      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
       path: '/brands',
       name: 'BrandName',
       component: BrandPage,
@@ -107,7 +105,8 @@ const router = createRouter({
     
     {
       meta: {
-        layout: MainLayout
+        layout: MainLayout,
+        requireAuth: true
       },
       beforeEnter: async (to, from, next) => {await auth.checkAuth()?  next() : next('/login')},
       path: '/favorite',
@@ -119,7 +118,6 @@ const router = createRouter({
       meta: {
         layout: MainLayout
       },
-      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
       path: '/product/:id',
       name: 'Detail',
       component: DetailPage,
@@ -127,9 +125,9 @@ const router = createRouter({
     
     {
       meta: {
-        layout: MainLayout
+        layout: MainLayout,
+        requireAuth: true
       },
-      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
       path: '/profile-details',
       name: 'profileDetails',
       component: ProfilePage,
@@ -137,9 +135,9 @@ const router = createRouter({
     
     {
       meta: {
-        layout: MainLayout
+        layout: MainLayout,
+        requireAuth: true
       },
-      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
       path: '/change-password',
       name: 'changePassword',
       component: ProfilePage,
@@ -147,9 +145,9 @@ const router = createRouter({
     
     {
       meta: {
-        layout: MainLayout
+        layout: MainLayout,
+        requireAuth: true
       },
-      beforeEnter: async (to, from, next) => {await auth.checkAuth();  next()},
       path: '/transaction-history',
       name: 'transactionHistory',
       component: ProfilePage,
@@ -157,9 +155,9 @@ const router = createRouter({
     
     {
       meta: {
-        layout: MainLayout
+        layout: MainLayout,
+        requireAuth: true
       },
-      beforeEnter: async (to, from, next) => {await auth.checkAuth()?  next() : next('/login')},
       path: '/cart',
       name: 'cart',
       component: CheckoutPage,
@@ -202,5 +200,20 @@ const router = createRouter({
     },
   ]
 })
+
+router.beforeEach(async (to, from, next) => {
+  
+  if(to.meta.requireAuth) {
+    await auth.getAuth()
+    auth.checkAuth()? next() : next('/login')
+  }
+  
+  if(to.meta.authPage) {
+    await auth.getAuth()
+    auth.checkAuth()? next(from) : next()
+  }
+
+  next()
+}) 
 
 export default router

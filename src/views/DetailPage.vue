@@ -16,9 +16,8 @@
         
       <div class="pb-[50px]">
         <div class="container-Detail">
-          <DetailProduct :productDetail="product" :formatPrice="store.getters['product/formatToIdr']" />
+          <DetailProduct @addCart="store.dispatch('ui/showModal', {id: route.params.id, type: 'addCart'})" @checkout="store.dispatch('ui/showModal', {id: route.params.id, type: 'checkout'})" :productDetail="product" :formatPrice="store.getters['product/formatToIdr']" />
         </div>
-        
         <div class="w-[100%] py-[40px] text-primary font-inter text-[30px] font-medium leading-[36px]">
           Other Product
         </div>
@@ -33,12 +32,13 @@ import { ref, computed, onMounted, watch } from 'vue';
 import DetailProduct from "@/components/product/DetailProduct.vue";
 import ProductList from "@/components/product/ProductList.vue";
 import { useStore } from 'vuex';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute()
 const store = useStore()
-const dataLoaded = ref(false)
+const router = useRouter()
 
+const dataLoaded = ref(false)
 const product = computed(() => store.state.product.product); 
 const products = computed(() => store.state.product.products)
 

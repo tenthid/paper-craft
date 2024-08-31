@@ -12,7 +12,7 @@
                 <img class="cursor-pointer" @click="() => {keyWord = ''}" width="100%" height="auto" src="/images/X-page.svg" alt="logo">
             </div>
         </div>
-        <component :is="components[loginStatus? 'userAction' : 'authAction']"></component>
+        <component v-if="parentRendered" @logout="handleLogout()" :likeLength="0" :cartLength="cartLength" :is="components[loginStatus? 'userAction' : 'authAction']"></component>
     </nav>
 </template>
 
@@ -22,6 +22,7 @@
     import { useRouter, useRoute } from 'vue-router';
     import { ref, onMounted, watch, computed } from 'vue';
     import { useStore } from 'vuex';
+    import Cookies from 'js-cookie';
 
     const router = useRouter()
     const route = useRoute()
@@ -29,10 +30,12 @@
 
     const loginStatus = computed(() => store.state.user.isLogin)
     const keyWord = ref()
+    const cartLength = computed(() => store.getters['cart/getCartLength'])
     const components = {
         'authAction' : AuthAction,
         'userAction' : UserAction
     }
+    const parentRendered = ref(false)
 
     const pushWithPath = (path) => {
         router.push({
@@ -54,6 +57,11 @@
         }
     }
 
+    const handleLogout = () => {
+        store.commit('user/setLogout')
+        router.push('/')
+    }
+
     watch(route, (oldValue, newValue) => {
         if(!route.query.keyword) {
            keyWord.value = ''   
@@ -62,10 +70,17 @@
         }
     })
 
-    onMounted(() => {
+    onMounted(async() => {
+        const token = Cookies.get('bearer_token')
         if(route.query.keyword) {
             keyWord.value = route.query.keyword
         }
+
+        if(token) {
+            await store.dispatch('user/getUserData', token)
+            await store.dispatch('cart/getCartItems')
+        }
+        parentRendered.value = true
     })
 </script>
 

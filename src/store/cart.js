@@ -6,7 +6,6 @@ export default {
     state () {
         return {
             apiUrl: import.meta.env.VITE_API_URL,
-            token: Cookies.get('bearer_token'),
             cart: [
               
             ],
@@ -52,31 +51,34 @@ export default {
     },
 
     actions: {
-      async getCartItems({ state, commit }, payload) {
+      async getCartItems({ state, commit, rootState }, payload) {
         let api = `${state.apiUrl}cart`
         try {
           const { data } = await axios.post(api,{}, {
             headers: {
-                Authorization: `Bearer ${state.token}`
+                Authorization: `Bearer ${rootState.user.token}`
             }
           })
-          
-  
-          commit('setCartItems', data.items)
+          if (Object.keys(data).length !== 0) {
+            commit('setCartItems', data.items)
+          } else {
+            commit('setCartItems', [])
+          }
         } catch(err) {
           console.log(err)
         }
       },
       
-      async addItemToCart({state, commit, dispatch}, payload) {
+      async addItemToCart({state, commit, dispatch, rootState }, payload) {
         let api = `${state.apiUrl}cart/add`
+        let token = Cookies.get('bearer_token')
         try {
           if(payload.qty === 0) {
             await dispatch('removeItemCart', payload.id)
           } else {
             const { data } = await axios.post(api, {product_id: payload.id, quantity: payload.qty}, {
               headers: {
-                Authorization: `Bearer ${state.token}`
+                Authorization: `Bearer ${rootState.user.token}`
               }
             })
             commit('setCartItems', data.items)
@@ -88,12 +90,12 @@ export default {
         }
       },
 
-      async removeItemCart({ state, commit }, payload) {
+      async removeItemCart({ state, commit, rootState }, payload) {
         let api = `${state.apiUrl}cart/remove`
         try {
           const { data } = await axios.post(api, { product_id: payload }, {
             headers: {
-              Authorization: `Bearer ${state.token}`
+              Authorization: `Bearer ${rootState.user.token}`
             }
           })
           commit('setCartItems', data.items)
