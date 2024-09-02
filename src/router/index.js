@@ -184,7 +184,7 @@ const router = createRouter({
       meta: {
         layout: MainLayout
       },
-      path: '/invoice',
+      path: '/    invoice',
       name: 'Invoice',
       component: InvoicePage,
     },

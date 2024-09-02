@@ -5,13 +5,15 @@
     <router-link
       :to="`/product/${product.id}`"
       v-for="product in products"
-      class="self-stretch flex-1 rounded-2xl bg-white overflow-hidden flex flex-col items-center justify-start p-[15px] relative gap-2.5"
+      class="self-stretch flex-1 rounded-2xl bg-white overflow-hidden flex flex-col items-center justify-between p-[15px] relative gap-2.5"
     >
-      <img
-        class="self-stretch relative rounded-sm max-w-full overflow-hidden h-[250px] shrink-0 object-cover z-[0]"
-        :alt="product.product_name"
-        src="/images/tas.jpg"
-      />
+      <div class="flex justify-center items-center w-full h-[250px]">
+        <img
+          class="relative rounded-sm w-[200px] h-[200px] object-cover z-[0]"
+          :alt="product.product_name"
+          src="/images/tas.jpg"
+        />
+      </div>
       <div
         class="self-stretch bg-white overflow-hidden flex flex-col items-start justify-start gap-[3px] z-[1]"
       >
@@ -86,3 +88,4 @@
     formatPrice: {type: Function}
   })
 </script>
+<style scoped></style>

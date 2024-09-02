@@ -16,7 +16,7 @@
       class="w-full relative bg-primary-background flex laptop:flex-row laptop:items-start justify-start py-2.5 px-5 box-border gap-5 text-left phone-s:flex-col phone-s:items-center text-sm font-regular"
     >
       <div
-        class="w-full bg-white flex flex-col p-6 rounded-md text-black font-inter phone-s:w-full laptop:w-[400px]"
+        class="w-full bg-white flex flex-col p-6 rounded-md text-black font-inter phone-s:w-full laptop:w-[600px]"
       >
         <div class="flex flex-col gap-6">
           <h2 class="font-medium text-lg phone-s:text-base">Brand List</h2>
@@ -39,7 +39,7 @@
               <tr
                 v-else
                 v-for="brand in BrandList"
-                :key="brand.name"
+                :key="brand.id"
                 class="border-b border-none"
               >
                 <td class="p-2">
@@ -49,16 +49,19 @@
                     class="w-10 h-10 object-cover"
                   />
                 </td>
-                <td class="p-2">{{ brand.name }}</td>
+                <td class="p-2">{{ brand.brand_name }}</td>
                 <td class="p-2 text-right">
                   <div class="flex gap-2 justify-end">
                     <router-link
-                      to="/edit-brand"
+                      :to="'/edit-brand/${brand.id}'  "
                       class="btn bg-primary rounded px-3 py-1 text-white"
                     >
                       Edit
                     </router-link>
-                    <button class="btn bg-danger rounded px-3 py-1 text-white">
+                    <button
+                      class="btn bg-danger rounded px-3 py-1 text-white"
+                      @click="deleteBrand(brand.id)"
+                    >
                       <img src="/images/trash.svg" alt="Delete Icon" />
                     </button>
                   </div>
@@ -146,14 +149,21 @@
 </template>
 
 <script setup>
+import { ref, reactive, onMounted, computed } from "vue";
+import { useStore } from "vuex";
 import BaseInput from "@/components/ui/BaseInput.vue";
-import { reactive, ref, computed } from "vue";
+
+const store = useStore();
 
 const userInput = reactive({
   brand: "",
 });
 
-const BrandList = reactive([]);
+const BrandList = computed(() => store.state.product.brands);
+
+onMounted(async () => {
+  await store.dispatch("product/getBrands");
+});
 
 const imageUrl = ref(null);
 const imageWidth = ref(100);
@@ -170,16 +180,48 @@ const onFileChange = (event) => {
   }
 };
 
-function saveBrand() {
+function handleDragOver(event) {
+  event.preventDefault();
+}
+
+function handleDrop(event) {
+  event.preventDefault();
+  const file = event.dataTransfer.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      imageUrl.value = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+async function saveBrand() {
   if (userInput.brand.trim() !== "" && imageUrl.value) {
-    BrandList.push({
-      name: userInput.brand.trim(),
-      logo: imageUrl.value,
-    });
-    userInput.brand = "";
-    imageUrl.value = null;
+    try {
+      await store.dispatch("product/createBrand", {
+        name: userInput.brand.trim(),
+        logo: imageUrl.value,
+      });
+      userInput.brand = "";
+      imageUrl.value = null;
+      alert("Brand saved successfully!");
+    } catch (error) {
+      alert("Failed to save brand.");
+      console.error(error);
+    }
   } else {
     alert("Brand name and logo cannot be empty!");
+  }
+}
+
+async function deleteBrand(id) {
+  try {
+    await store.dispatch("product/deleteBrand", id);
+    alert("Brand deleted successfully!");
+  } catch (error) {
+    alert("Failed to delete brand.");
+    console.error(error);
   }
 }
 </script>

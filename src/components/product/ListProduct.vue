@@ -8,7 +8,7 @@
       <router-link
         v-for="(product, productIndex) in row"
         :key="productIndex"
-        to="/detail-product"
+        :to="`/detail-product/${product.id}`"
         class="product-card laptop:w-[250px] laptop:h-[385px] phone-s:w-full flex-shrink-0 flex-grow-0 bg-white rounded-[10px] overflow-hidden flex flex-col items-center p-[15px] gap-2.5 font-inter"
       >
         <img
@@ -36,7 +36,7 @@
             </router-link>
           </div>
           <router-link
-            to="/Edit-Product"
+            :to="`/edit-product/${product.id}`"
             class="btn rounded-[5px] bg-primary text-white py-0.5 px-0 w-[174px] h-[33px] text-center font-inter text-[14px]"
           >
             Edit Product
@@ -49,14 +49,17 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { useStore } from "vuex";
 
-const props = defineProps<{ products: any[] }>();
+const store = useStore();
+
+const products = computed(() => store.state.product.products);
 
 const rows = computed(() => {
   const productsPerPage = 8;
   const rows = [];
-  for (let i = 0; i < props.products.length; i += 4) {
-    rows.push(props.products.slice(i, i + 4));
+  for (let i = 0; i < products.value.length; i += 4) {
+    rows.push(products.value.slice(i, i + 4));
   }
   return rows;
 });

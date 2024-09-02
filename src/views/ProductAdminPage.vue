@@ -1,13 +1,13 @@
 <template>
   <div
-    class="bg-primary-background laptop:mx-auto mt-[50px] w-full h-screen overflow-hidden flex items-end justify-end laptop:container-page"
+    class="bg-primary-background laptop:mx-auto mt-[30px] w-full h-screen overflow-hidden flex items-center justify-center laptop:container-page"
   >
     <div
-      class="laptop:px[200px] pt-8 h-full mt-[50px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold ml-[200px] tablet:px-10"
+      class="laptop:px[200px] pt-8 h-full mt-[50px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold laptop:ml-[150px] tablet:px-10"
     >
       <!-- Header Section -->
       <div
-        class="laptop-l:w-[1052px] phone-s:px-5 phone-s:w-full h-12 flex justify-between text-center laptop:text-[35px] text-primary font-maitree"
+        class="laptop-l:w-[1052px] laptop:px-5 phone-s:w-full h-12 flex justify-between text-center laptop:text-[35px] text-primary font-maitree"
       >
         <div class="leading-[120%] phone-s:text-[20px] laptop:text-[35px]">
           Manage Products
@@ -36,7 +36,7 @@
           >
             No Product yet
           </p>
-          <p class="text-[#404040] tablet:text-[24px] phone-s:text-[12px] mt-4">
+          <p class="text-gray-3 tablet:text-[24px] phone-s:text-[12px] mt-4">
             Please create the product first
           </p>
         </div>
