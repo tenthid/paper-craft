@@ -11,7 +11,7 @@
                     Categories
                 </p>
                 <div class="grid grid-cols-6 w-[100%] gap-y-[25px]">
-                    <router-link :to="`/categories?brandId=${category.id}`" v-for="category in categoryList" class="text-center hover:underline font-inter font-[300]">
+                    <router-link :to="`/products?categoryId=${category.id}`" v-for="category in categoryList" class="text-center hover:underline font-inter font-[300]">
                         {{ category.category_name }}
                     </router-link>
                 </div>
@@ -28,7 +28,7 @@
                     Brands
                 </p>
                 <div class="grid grid-cols-6 w-[100%] gap-y-[25px]">
-                    <router-link :to="`/brands?brandId=${brand.id}`" v-for="brand in brandList" class="text-center hover:underline font-inter font-[300]">
+                    <router-link :to="`/products?brandId=${brand.id}`" v-for="brand in brandList" class="text-center hover:underline font-inter font-[300]">
                         {{ brand.brand_name }}
                     </router-link>
                 </div>
@@ -73,13 +73,13 @@
                             Category
                         </p>
                         <!-- dropdown -->
-                        <BaseSelect v-model="filter.category" label="Choose Category" :options="categoryList"/>
+                        <BaseSelect v-model="filter.categoryId" label="Choose Category" :options="categoryList"/>
 
                         <p class="font-inter text-[18px] font-[400]">
                             Brand
                         </p>
                         <!-- dropdown -->
-                         <BaseSelect v-model="filter.brand" label="Choose Brand" :options="brandList"/>
+                         <BaseSelect v-model="filter.brandId" label="Choose Brand" :options="brandList"/>
                     </div>
                     <button @click.stop="handleFilter()" class="btn bg-primary text-white rounded-[5px] w-[100%] hover:opacity-[80%]">
                         Filter
@@ -100,8 +100,8 @@
     const route = useRoute()
     const router = useRouter()
 
-    const brands = computed(() => store.state.product.brands)
-    const categories = computed(() => store.state.product.categories)
+    const brands = computed(() => store.state.brand.brands)
+    const categories = computed(() => store.state.category.categories)
 
     const filterShow = ref(false)
     const filterModalContainer = ref(null)
@@ -111,8 +111,8 @@
     const filter = reactive({
         sortBy: '',
         orderBy: '',
-        category: '',
-        brand: '',
+        categoryId: '',
+        brandId: '',
     })
 
     const handleClickOutside = (event) => {
@@ -132,12 +132,12 @@
             queries.orderBy = filter.orderBy
         }
 
-        if(filter.category) {
-            queries.category = filter.category
+        if(filter.categoryId) {
+            queries.categoryId = filter.categoryId
         }
 
-        if(filter.brand) {
-            queries.brand = filter.brand
+        if(filter.brandId) {
+            queries.brandId = filter.brandId
         }
 
         if(route.query.keyword) {
@@ -156,8 +156,8 @@
         let queries = {
             sortBy: '',
             orderBy: '',
-            category: '',
-            brand: '',
+            categoryId: '',
+            brandId: '',
         }
 
         if(route.query.sortBy) {
@@ -168,12 +168,12 @@
             queries.orderBy = route.query.orderBy
         }
 
-        if(route.query.category) {
-            queries.category = route.query.category
+        if(route.query.categoryId) {
+            queries.categoryId = route.query.categoryId
         }
 
-        if(route.query.brand) {
-            queries.brand = route.query.brand
+        if(route.query.brandId) {
+            queries.brandId = route.query.brandId
         }
 
         Object.assign(filter, queries)
@@ -184,8 +184,8 @@
     })
 
     onMounted(async() => {
-        await store.dispatch('product/getBrands')
-        await store.dispatch('product/getCategories')
+        await store.dispatch('brand/getBrands')
+        await store.dispatch('category/getCategories')
 
         brandList.value = brands.value
         categoryList.value = categories.value

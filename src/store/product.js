@@ -1,4 +1,5 @@
 import axios from "axios"
+import Cookies from "js-cookie"
 
 export default {
     namespaced: true,
@@ -25,14 +26,6 @@ export default {
             product: {
               
             },
-
-            brands: [
-
-            ],
-
-            categories: [  
-
-            ]
         }
     },
 
@@ -43,14 +36,6 @@ export default {
 
       setPaginationData(state, payload) {
         state.pagination = payload
-      },
-
-      setBrandsData(state, payload) {
-        state.brands = payload
-      },
-
-      setCategoriesData(state, payload) {
-        state.categories = payload
       },
 
       setProductDetailData(state, payload) {
@@ -76,15 +61,26 @@ export default {
     },
 
     actions: {
-      async getProducts ({commit, state}, payload) {
+      async getProducts ({commit, state, rootState}, payload) {
+        const token = Cookies.get('bearer_token')
+        let api = token? `${state.apiUrl}user/products` : `${state.apiUrl}products`
         try {
-          let api = `${state.apiUrl}products`
           let queries = payload !== undefined && payload !== null? payload : {}
           if(Object.keys(queries).length !== 0) {
-            api = `${api}?${payload}`    
+            api = `${api}?${payload}`
             console.log(api)
           }
-          const { data } = await axios.get(api)
+          
+          const getData = async () => {
+            if(token) return await axios.post(api, {}, {
+              headers: {
+                Authorization: ` Bearer ${token}`
+              }
+            })
+            return await axios.get(api)
+          }
+
+          const { data } = await getData()
           commit('setProductsData', data.data)
           let pagination = {...data}
           delete pagination.data
@@ -96,32 +92,20 @@ export default {
         }
       },
 
-      async getBrands({commit, state}, payload) {
-        try{
-          let api = `${state.apiUrl}brands`
-          const { data } = await axios.get(api)
-          commit('setBrandsData', data.data)
-        } catch(err) {
-          console.log(err)
-          commit('setBrandsData', [])
-        }
-      },
-
-      async getCategories({commit, state}, payload) {
-        try{
-          let api = `${state.apiUrl}categories`
-          const { data } = await axios.get(api)
-          commit('setCategoriesData', data.data)
-        } catch(err) {
-          console.log(err)
-          commit('setCategoriesData', [])
-        }
-      },
-
       async getProductDetail({state, commit}, payload) {
+        const token = Cookies.get('bearer_token')
+        const api = token? `${state.apiUrl}user/products/${payload}` : `${state.apiUrl}products/${payload}`
         try {
-          let api = `${state.apiUrl}products/${payload}`
-          const { data } = await axios.get(api)
+          const getData = async () => {
+            if(token) return await axios.post(api, {}, {
+              headers: {
+                Authorization: ` Bearer ${token}`
+              }
+            })
+            return await axios.get(api)
+          }
+
+          const { data } = await getData()
           commit('setProductDetailData', data[0])
         } catch(err) {
           console.log(err)
@@ -131,8 +115,17 @@ export default {
 
       async getNewest({state, commit}) {
         try{
-          let api = `${state.apiUrl}products?orderBy=created_at&sortBy=desc&perPage=5`
-          const { data } = await axios.get(api)
+          const getData = async () => {
+            const token = Cookies.get('bearer_token')
+            if(token) return await axios.post(`${state.apiUrl}user/products?orderBy=created_at&sortBy=desc&perPage=5`, {}, {
+              headers: {
+                Authorization: ` Bearer ${token}`
+              }
+            })
+            return await axios.get(`${state.apiUrl}products?orderBy=created_at&sortBy=desc&perPage=5`)
+          }
+
+          const { data } = await getData()
           commit('setNewestProductsData', data.data)
         } catch(err) {
           console.log(err)
@@ -142,8 +135,17 @@ export default {
 
       async getPopular({state, commit}) {
         try{
-          let api = `${state.apiUrl}products?orderBy=created_at&sortBy=desc&perPage=5`
-          const { data } = await axios.get(api)
+          const getData = async () => {
+            const token = Cookies.get('bearer_token')
+            if(token) return await axios.post(`${state.apiUrl}user/products?orderBy=liked_by_users_count&sortBy=desc&perPage=5`, {}, {
+              headers: {
+                Authorization: ` Bearer ${token}`
+              }
+            })
+            return await axios.get(`${state.apiUrl}products?orderBy=liked_by_users_count&sortBy=desc&perPage=5`)
+          }
+
+          const { data } = await getData()
           commit('setPopularProductsData', data.data)
         } catch(err) {
           console.log(err)

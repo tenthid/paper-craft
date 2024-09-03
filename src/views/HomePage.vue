@@ -36,15 +36,19 @@
     >
       <router-link
         v-for="category in categoryList"
-        :key="category.id"
-        :to="'/category/' + category.category_name"
+        :to="{
+          path: '/products',
+          query: {
+            categoryId: category.id
+          }
+        }"
         class="flex-1 rounded-[10px] bg-white overflow-hidden flex flex-row items-center justify-center py-2.5 px-5 relative leading-[120%] font-medium"
       >
         {{ category.category_name }}
       </router-link>
 
       <router-link
-        to="/categories"
+        to="/products"
         class="self-stretch rounded-[10px] bg-primary overflow-hidden flex flex-row items-center justify-center py-2.5 px-5 text-white btn relative leading-[120%] font-medium"
       >
         View all
@@ -69,12 +73,17 @@
       <div
         class="flex-1 bg-primary-1 flex items-start justify-start p-[50px] gap-[30px] text-[20px] text-black font-inter"
       >
-        <div class="bg-white rounded-[10px] py-[10px] flex items-center px-[15px] w-full"  v-for="brand in brandList">
+        <router-link class="bg-white rounded-[10px] py-[10px] flex items-center px-[15px] w-full"  v-for="brand in brandList" :to="{
+          path: '/products',
+          query: {
+            brandId: brand.id
+          }
+        }">
           <img src="" alt="brand-img" class="w-[50px] relative bg-gray h-[50px] rounded-[10px]" />
-          <router-link class="text-center w-full" :to="`/brands?brandId=${brand.id}`">
+          <div class="text-center w-full" >
             {{ brand.brand_name }}
-          </router-link>
-        </div>
+          </div>
+        </router-link>
       </div>
     </div>
     <NewestProduct />
@@ -84,19 +93,28 @@
 <script setup>
 import PopularProduct from "../components/product/PopularProduct.vue";
 import NewestProduct from "../components/product/NewProduct.vue";
-import { onMounted, computed, ref } from "vue";
+import { onMounted, computed, ref, watch } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 
+const route = useRoute()
 const store = useStore()
 
-const categories = computed(() => store.state.product.categories)
-const brands = computed(() => store.state.product.brands)
+const categories = computed(() => store.state.category.categories)
+const brands = computed(() => store.state.brand.brands)
 const categoryList = ref()
 const brandList = ref()
 
+watch(route,async (oldValue, newValue) => {
+  await store.dispatch('category/getCategories')
+  await store.dispatch('brand/getBrands')
+  await store.dispatch('brand/getNewest')
+  await store.dispatch('brand/getPopular')
+})
+
 onMounted(async() => {
-  await store.dispatch('product/getCategories')
-  await store.dispatch('product/getBrands')
+  await store.dispatch('category/getCategories')
+  await store.dispatch('brand/getBrands')
 
   categoryList.value = categories.value.slice(0, 4)
   brandList.value = brands.value.slice(0, 4)

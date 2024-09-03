@@ -30,7 +30,6 @@ export default {
       },
 
       insertCheckoutItems(state, payload) {
-        console.log(payload)
         state.checkoutItems = payload
       },
       

@@ -14,12 +14,12 @@
                     <img width="28px" height="auto" src="/images/love-icon.svg" alt="cart-icon">
                 </router-link>
                 <span v-if="likeLength" class=" ml-[15px] px-[7px] py-[2px] bg-danger absolute top-0 text-[12px] rounded-full text-white">
-                    {{ userLike }}
+                    {{ likeLength }}
                 </span>
             </div>
         </div>
         <div ref="dropdown" class="flex gap-[12px] cursor-pointer" @click="dropdownToggler()">
-            <img width="40px" height="40px" class="rounded-full" src="" alt="profile-img">
+            <img width="40px" height="40px" class="rounded-full" :src="userData.image_path? `https://tenth.run.place:90/storage/${userData.image_path}` : 'images/user.png'" alt="profile-img">
             <img width="16px" height="auto" src="/images/dropdown-icon.svg" alt="dropdown-icon">
             <div v-if="toggleDropdown" class="flex flex-col py-[4px] right-[50px] absolute top-[65px] w-[200px] bg-white rounded-[4px] shadow-lg">
                 <router-link class="flex items-center gap-[8px] p-[8px] w-[100%]" to="/profile-details">
@@ -49,7 +49,8 @@
 
     defineProps({
         cartLength: {type: Number},
-        likeLength: {type: Number}
+        likeLength: {type: Number},
+        userData: {type: Object}
     })
 
     const toggleDropdown = ref(false)

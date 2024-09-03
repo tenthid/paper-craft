@@ -10,7 +10,13 @@
       >
         <h2 class="relative text-primary font-inter">Popular Product</h2>
         <router-link
-          to="/pop-product "
+          :to="{
+            path: '/products',
+            query: {
+              orderBy: 'liked_by_users_count',
+              sortBy: 'desc'
+            }
+          }"
           class="relative text-[20px] font-light text-primary-1"
           >View all</router-link
         >

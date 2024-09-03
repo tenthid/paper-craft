@@ -38,12 +38,12 @@
             queries.orderBy = route.query.orderBy
         }
 
-        if(route.query.category) {
-            queries.category = route.query.category
+        if(route.query.categoryId) {
+            queries.categoryId = route.query.categoryId
         }
 
-        if(route.query.brand) {
-            queries.brand = route.query.brand
+        if(route.query.brandId) {
+            queries.brandId = route.query.brandId
         }
 
         if(route.query.keyword) {

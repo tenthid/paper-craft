@@ -33,7 +33,7 @@
 <script setup>
   import ProductList from "./ProductList.vue";
   import { useStore } from "vuex";
-  import { onMounted, computed } from "vue";
+  import { onMounted, computed, watch } from "vue";
 
   const store = useStore()
 
@@ -41,7 +41,6 @@
 
   onMounted(async() => {
     await store.dispatch('product/getNewest')
-
   })
 </script>
 

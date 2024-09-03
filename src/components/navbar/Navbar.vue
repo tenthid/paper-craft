@@ -12,7 +12,7 @@
                 <img class="cursor-pointer" @click="() => {keyWord = ''}" width="100%" height="auto" src="/images/X-page.svg" alt="logo">
             </div>
         </div>
-        <component v-if="parentRendered" @logout="handleLogout()" :likeLength="0" :cartLength="cartLength" :is="components[loginStatus? 'userAction' : 'authAction']"></component>
+        <component :userData="userData" v-if="parentRendered" @logout="handleLogout()" :likeLength="likeLength" :cartLength="cartLength" :is="components[loginStatus? 'userAction' : 'authAction']"></component>
     </nav>
 </template>
 
@@ -31,6 +31,8 @@
     const loginStatus = computed(() => store.state.user.isLogin)
     const keyWord = ref()
     const cartLength = computed(() => store.getters['cart/getCartLength'])
+    const likeLength = computed(() => store.getters['user/getLikeLength'])
+    const userData = computed(() => store.state.user.userData)
     const components = {
         'authAction' : AuthAction,
         'userAction' : UserAction
@@ -79,6 +81,7 @@
         if(token) {
             await store.dispatch('user/getUserData', token)
             await store.dispatch('cart/getCartItems')
+            await store.dispatch('user/getUserLike')
         }
         parentRendered.value = true
     })

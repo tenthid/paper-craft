@@ -1,4 +1,5 @@
 import axios from "axios"
+import Cookies from "js-cookie"
 
 export default {
     namespaced: true,
@@ -99,11 +100,25 @@ export default {
         },
 
         async showModal({commit, state} , payload) {
-            if(!state.modal.modalVisible && state.modalProduct.id !== payload.id) {
-                const {data} = await axios.get(`${state.apiUrl}products/${payload.id}`)
-                commit('setModalProduct', data[0])
+            const token = Cookies.get('bearer_token')
+            try {
+                if(!state.modal.modalVisible) {
+                    const getData = async () => {
+                        if(token) return await axios.post(`${state.apiUrl}user/products/${payload.id}`, {}, {
+                            headers: {
+                            Authorization: ` Bearer ${token}`
+                            }
+                        })
+                        return await axios.get(`${state.apiUrl}products/${payload.id}`)
+                    }
+        
+                    const { data } = await getData()
+                    commit('setModalProduct', data[0])
+                }
+                commit('toggleModal', payload)
+            } catch(err) {
+                console.log(err)
             }
-            commit('toggleModal', payload)
         }
     }
 }

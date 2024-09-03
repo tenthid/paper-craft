@@ -34,14 +34,15 @@
 
 <script setup>
     import { useStore } from 'vuex';
-    import { computed, ref } from 'vue';
-    import { useRouter } from 'vue-router';
+    import { computed, watch } from 'vue';
+    import { useRouter, useRoute } from 'vue-router';
     
     const props = defineProps({
         modal: {type: Object}
     })
     
     const router = useRouter()
+    const route = useRoute()
     const store = useStore()
 
     const qty = computed(() => store.state.ui.modalQty)
@@ -78,11 +79,23 @@
                     store.dispatch('ui/showNotif', { message: 'Failed add item to cart', isError: true, topPos: 0})
                 }
             }
+            await store.dispatch('product/getProducts',route.path === `/product/${route.params.id}`? 'perPage=5' : null)
+            await store.dispatch('product/getNewest')
+            await store.dispatch('product/getPopular')
+            await store.dispatch('product/getProductDetail', product.value.id)
         } else {
             router.push('/login')
             store.dispatch('ui/showModal')
         }
     }
+
+    watch(props.modal, (oldValue, newValue) => {
+        if(props.modal.type !== 'checkout' && product.value.cart_quantity) {
+            store.commit('ui/changeModalQty', product.value.cart_quantity)
+        } else {
+            store.commit('ui/changeModalQty', 0)
+        }
+    })
 </script>
 
 <style lang="scss" scoped>

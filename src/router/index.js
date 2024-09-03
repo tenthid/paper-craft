@@ -108,7 +108,6 @@ const router = createRouter({
         layout: MainLayout,
         requireAuth: true
       },
-      beforeEnter: async (to, from, next) => {await auth.checkAuth()?  next() : next('/login')},
       path: '/favorite',
       name: 'Favorite',
       component: FavoritePage,
@@ -165,7 +164,8 @@ const router = createRouter({
 
     {
       meta: {
-        layout: MainLayout
+        layout: MainLayout,
+        requireAuth: true
       },
       path: '/checkout',
       name: 'checkout',
@@ -205,12 +205,12 @@ router.beforeEach(async (to, from, next) => {
   
   if(to.meta.requireAuth) {
     await auth.getAuth()
-    auth.checkAuth()? next() : next('/login')
+    return auth.checkAuth()? next() : next('/login')
   }
   
   if(to.meta.authPage) {
     await auth.getAuth()
-    auth.checkAuth()? next(from) : next()
+    return auth.checkAuth()? next(from) : next()
   }
 
   next()

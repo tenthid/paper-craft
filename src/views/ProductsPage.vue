@@ -21,7 +21,7 @@
     <div class="flex flex-col gap-[40px]" v-else>
   
       <!-- Product List -->
-      <ProductList :products="products" :format-price="store.getters['product/formatToIdr']" />
+      <ProductList :disable-like="false" :products="products" :format-price="store.getters['product/formatToIdr']" />
   
       <!-- Pagination -->
       <Pagination v-if="dataLoaded" :pagination-data="pagination" />

@@ -52,10 +52,15 @@
             @click.prevent="async() => { await store.dispatch('ui/showModal', {id: product.id, type: 'addCart'}) }"
           >
             <img
+              v-if="!product.in_cart"
               class="w-5 relative h-5 overflow-hidden shrink-0"
               alt="cart"
               src="/images/cart.svg"
             />
+
+            <p v-else class="text-white w-5 h-5 font-bold">
+              {{ product.cart_quantity }}
+            </p>
           </button>
         </div>
         <button @click.prevent="async() => { await store.dispatch('ui/showModal', {id: product.id, type: 'checkout'}) }"
@@ -64,27 +69,50 @@
           <div class="relative leading-[16px] font-medium">Buy now</div>
         </button>
       </div>  
-      <div
+      <button v-if="!disableLike && isLogin"
+        :disabled="isCooldown"
+        @click.prevent="handleLike(product.id)"
         class="w-[30px] !m-[0] absolute top-[12px] left-[13px] rounded-md bg-white h-[30px] flex flex-row items-center justify-center p-1 box-border"
       >
-        <img
+        <img v-if="product.liked"
+          class="w-[22px] relative h-[22px] overflow-hidden shrink-0"
+          alt="heart"
+          src="/images/heart-red.svg"
+        />
+
+        <img v-else
           class="w-[22px] relative h-[22px] overflow-hidden shrink-0"
           alt="heart"
           src="/images/heart.svg"
         />
-      </div>
+    </button>
     </router-link>
   </div>
 </template>
 
 <script setup>
-  import { defineProps } from 'vue';
+  import { computed, defineProps, ref } from 'vue';
   import { useStore } from 'vuex';
+  import { useRoute  } from 'vue-router';
 
   const store = useStore()
+  const route = useRoute()
+  const isLogin = computed(() => store.state.user.isLogin)
 
   defineProps({
     products: {type: Array},
-    formatPrice: {type: Function}
+    formatPrice: {type: Function},
+    disableLike: {type: Boolean, default: true}
   })
+
+  const isCooldown = ref(false)
+
+  const handleLike = async (id) => {
+    isCooldown.value = true
+    await store.dispatch('user/likeControll', id); 
+    await store.dispatch('user/getUserLike')
+    await store.dispatch('product/getProducts', route.fullPath.split('?')[1])
+    isCooldown.value = false
+  }
+
 </script>

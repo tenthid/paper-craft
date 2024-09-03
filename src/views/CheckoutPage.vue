@@ -2,7 +2,7 @@
     <div v-if="parentRendered" class="container-page bg-primary-background !pt-[85px] !pb-[50px] flex gap-[20px]" :class="{'h-[100vh]': cartItems.length === 0}">
         <div class="p-[30px] rounded-[12px] bg-white w-[100%] h-[fit-content]">
             <p class="font-inter text-[14px] font-[400] text-gray pb-[20px]">{{ route.name === 'cart'? 'Cart List' : 'Product' }}</p>
-            <div v-if="cartItems.length > 0" class="flex flex-col gap-[20px]">
+            <div v-if="cartItems.length || checkoutItems.length > 0" class="flex flex-col gap-[20px]">
                 <div v-if="route.path === '/cart'" v-for="item in cartItems" class="flex-col flex gap-[10px]">
                     <ProductCardCart 
                         @increase="qtyControll('+',item.product.id, item.quantity, item.product.stock)" 
@@ -24,7 +24,8 @@
                 <div v-else>
                     <div class="p-[20px] border-[1px] border-[#EDEDED] rounded-[10px]">
                         <p class="pb-[8px] font-inter font-[500] text-[14px]">Home Address</p>
-                        <p class="font-inter font-[400] text-[15px] text-gray">jalan kwkwkwkkwkw</p>
+                        <p v-if="userData.address" class="font-inter font-[400] text-[15px] text-gray">{{ userData.address }}</p>
+                        <p v-else class="font-inter font-[400] text-[15px] text-gray">please set your <router-link class="text-primary font-[400] underline">address</router-link> before checkout</p>
                     </div>
                     <div v-for="item in checkoutItems" class="flex-col flex gap-[10px]">
                         <ProductCardCheckout 
@@ -54,7 +55,7 @@
         <div class="p-[25px] rounded-[12px] bg-white w-[600px] flex flex-col h-[fit-content] gap-[20px] sticky top-[85px]">
             <p class="font-inter text-[14px] font-[400] text-gray">Payment</p>
 
-            <SummaryCardCart v-if="route.path === '/cart'" :tax="tax" :subTotal="subTotal" :items="cartItems" :formatPrice="store.getters['product/formatToIdr']" />
+            <SummaryCardCart v-if="route.path === '/cart'" :subTotal="subTotal" :items="cartItems" :formatPrice="store.getters['product/formatToIdr']" />
 
             <SummaryCardCheckout v-else :subTotal="subTotal" :items="checkoutItems" :formatPrice="store.getters['product/formatToIdr']" />
 
@@ -83,6 +84,7 @@
     
     const cartItems = computed(() => store.state.cart.cart) 
     const checkoutItems = computed(() => store.state.cart.checkoutItems)
+    const userData = computed(() => store.state.user.userData)
     
     const subTotal = ref(0)
     const parentRendered = ref(false)
@@ -112,14 +114,22 @@
     }
 
     const handleCheckout = () => {
-        let items = []
-        for(let item of cartItems.value) {
-            if(item.selected) {
-                items.push(item)
+        if(route.path === '/cart') {
+            let items = []
+            for(let item of cartItems.value) {
+                if(item.selected) {
+                    items.push(item)
+                }
+            }
+            store.commit('cart/insertCheckoutItems', items)
+            router.push('/checkout')
+        } else {
+            if(userData.address) {
+
+            } else {
+                store.dispatch('showNotif', {message: 'your address is not set yet', isError: true})
             }
         }
-        store.commit('cart/insertCheckoutItems', items)
-        router.push('/checkout')
     }
 
     const checkPath = async () => {

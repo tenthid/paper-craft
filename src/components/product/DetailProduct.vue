@@ -8,10 +8,14 @@
         <div class="flex flex-col gap-[12px]">
           <div class="flex justify-between">
             <p class="font-inter text-[22px] font-[500]">{{ productDetail.product_name }}</p>
-            <img width="22px" height="22px" src="/images/heart.svg" alt="like">
+            <button v-if="isLogin" :disabled="likeDisabled" @click="$emit('like', $event.target.value)">
+              <img v-if="productDetail.liked" width="22px" height="22px" src="/images/heart-red.svg" alt="like">
+              <img v-else width="22px" height="22px" src="/images/heart.svg" alt="like">
+            </button>
           </div>
           <p class="font-inter text-[14px] font-[400]">{{ productDetail.brand.brand_name }} / {{ productDetail.category.category_name }}</p>
           <p class="font-inter text-[14px] font-[400] text-gray">Stock  <span class="font-bold text-black">{{ productDetail.stock }}</span></p>
+          <p class="font-inter text-[14px] font-[400]"><span class="font-bold text-primary">{{ productDetail.liked_by_users_count }}</span> {{ productDetail.liked_by_users_count > 1? 'peoples' : 'people' }} like this product</p>
           <p class="font-inter text-[22px] font-[500] text-primary">{{ formatPrice(productDetail.price) }}</p>
           <hr class="border-light-gray">
           <p class="font-inter text-[14px] font-bold">Description</p>
@@ -20,7 +24,7 @@
       </div>
       <div class="flex flex-col gap-[10px]">
         <button @click="$emit('addCart', $event.target.value)" class="btn bg-primary text-white rounded-[5px] w-full">
-          Add to cart
+          {{ productDetail.in_cart? `${productDetail.cart_quantity} ${productDetail.cart_quantity > 1? 'items' : 'item'} in cart` : 'Add to cart' }}
         </button>
         <button @click="$emit('checkout', $event.target.value)" class="btn border-primary border-[1px] text-primary rounded-[5px] w-full">
           Buy now
@@ -35,7 +39,9 @@
 
   defineProps({
     productDetail: {type: Object},
-    formatPrice: {type: Function}
+    formatPrice: {type: Function},
+    likeDisabled: {type: Boolean},
+    isLogin: {type: Boolean}
   })
 </script>
 
