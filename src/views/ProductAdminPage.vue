@@ -1,13 +1,13 @@
 <template>
   <div
-    class="bg-primary-background laptop:mx-auto mt-[30px] w-full h-screen overflow-hidden flex items-center justify-center laptop:container-page"
+    class="bg-primary-background laptop:mx-auto w-full h-screen overflow-hidden flex items-center justify-center laptop:container-page"
   >
     <div
-      class="laptop:px[200px] pt-8 h-full mt-[50px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold laptop:ml-[150px] tablet:px-10"
+      class="laptop:px[200px] pt-8 h-full mt-[100px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold laptop:ml-[150px] tablet:px-10"
     >
       <!-- Header Section -->
       <div
-        class="laptop-l:w-[1052px] laptop:px-5 phone-s:w-full h-12 flex justify-between text-center laptop:text-[35px] text-primary font-maitree"
+        class="laptop-l:w-[1052px] laptop:px-5 phone-s:w-full phone-s:px-3 h-12 flex justify-between text-center laptop:text-[35px] text-primary font-maitree"
       >
         <div class="leading-[120%] phone-s:text-[20px] laptop:text-[35px]">
           Manage Products
@@ -20,127 +20,53 @@
         </router-link>
       </div>
 
-      <!-- Conditional Rendering -->
-      <div
-        v-if="products.length === 0"
-        class="flex flex-col items-center justify-center h-full my-7 phone-s:px-5 tablet:py-[50px] laptop-l:pb-20"
-      >
-        <img
-          class="h-auto w-auto phone-s:w-[100px] tablet:w-max"
-          src="/images/emptysign.png"
-          alt=""
-        />
-        <div class="text-center font-inter">
-          <p
-            class="font-medium laptop:text-[40px] tablet:text-[25px] phone-s:text-[20px]"
-          >
-            No Product yet
-          </p>
-          <p class="text-gray-3 tablet:text-[24px] phone-s:text-[12px] mt-4">
-            Please create the product first
-          </p>
-        </div>
-      </div>
-
-      <div v-else>
-        <ListProduct :products="paginatedProducts" />
-
-        <!-- Pagination -->
+        <!-- Conditional Rendering -->
         <div
-          class="flex items-center justify-center p-2.5 text-base text-text-default-default"
+          v-if="productsLength === 0"
+          class="w-[100%] h-[55vh] flex flex-col items-center justify-center h-100"
         >
-          <button
-            @click="previousPage"
-            :disabled="currentPage === 1"
-            :class="[
-              'p-2 rounded-lg mr-1',
-              currentPage === 1
-                ? 'bg-gray opacity-50 cursor-not-allowed'
-                : 'bg-primary',
-            ]"
-          >
-            <img class="w-4 h-4" src="/images/arrow-left.svg" alt="Previous" />
-          </button>
-          <div class="flex flex-row items-center justify-start gap-2">
-            <button
-              v-for="page in totalPages"
-              :key="page"
-              @click="changePage(page)"
-              :class="[
-                'p-2 rounded-lg',
-                {
-                  'bg-primary text-white': page === currentPage,
-                  'bg-gray-200': page !== currentPage,
-                },
-              ]"
-            >
-              {{ page }}
-            </button>
+          <img
+            class="h-[150px] w-auto pb-[10px]"
+            src="/images/Empty-filtered-page.png"
+            alt=""
+          />
+          <div class="text-center font-inter">
+            <p class="font-medium text-[35px]">
+              Can't Find Product Based on Your Filter
+            </p>
+            <p class="text-[#404040] text-[20px] mt-4">
+              The product you are looking for does not exist
+            </p>
           </div>
-          <button
-            @click="nextPage"
-            :disabled="currentPage === totalPages"
-            :class="[
-              'p-2 rounded-lg ml-1',
-              currentPage === totalPages
-                ? 'bg-gray opacity-50 cursor-not-allowed'
-                : 'bg-primary',
-            ]"
-          >
-            <img class="w-4 h-4" src="/images/arrow-right.svg" alt="Next" />
-          </button>
+        </div>
+
+        <div class="flex flex-col gap-[40px]" v-else>
+          <!-- Product List -->
+          <ListProduct
+            :products="products"
+            :format-price="store.getters['product/formatToIdr']"
+          />
+
+          <!-- Pagination -->
+          <!-- <Pagination v-if="dataLoaded" :pagination-data="pagination" /> -->
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
 import ListProduct from "@/components/product/ListProduct.vue";
+import Pagination from "@/components/product/Pagination.vue";
+import { ref, computed, onMounted, watch } from "vue";
+import { useRoute } from "vue-router";
 import { useStore } from "vuex";
-import { onMounted, onUnmounted } from "vue";
-
-onMounted(() => {
-  document.body.style.overflow = "hidden";
-});
-
-onUnmounted(() => {
-  document.body.style.overflow = "";
-});
 
 const store = useStore();
-const products = computed(() => {
-  return store.state.product.products;
-});
-const itemsPerPage = 8;
-const maxPagesToShow = 5;
+const route = useRoute();
 
-const currentPage = ref(1);
+// const products = computed(() => store.state.product.products); 
+// const pagination = computed(() => store.state.product.pagination);
 
-const totalPages = computed(() =>
-  Math.ceil(products.value.length / itemsPerPage)
-);
-
-// const paginatedProducts = computed(() => {
-//   const start = (currentPage.value - 1) * itemsPerPage;
-//   const end = start + itemsPerPage;
-//   return products.value.slice(start, end);
-// });
-
-// function previousPage() {
-//   if (currentPage.value > 1) {
-//     currentPage.value--;
-//   }
-// }
-
-// function nextPage() {
-//   if (currentPage.value < totalPages.value) {
-//     currentPage.value++;
-//   }
-// }
-
-// function changePage(page) {
-//   currentPage.value = page;
-// }
 </script>
+
+<style scoped></style>

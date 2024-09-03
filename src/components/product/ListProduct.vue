@@ -1,53 +1,87 @@
 <template>
-  <div class="w-full flex flex-col gap-5">
-    <div
-      v-for="(row, rowIndex) in rows"
-      :key="rowIndex"
-      class="flex laptop:flex-row phone-s:flex-col tablet:flex phones-s:justify-center laptop:justify-start gap-5"
+  <div
+    class="w-full relative overflow-hidden grid laptop-l:grid-cols-5 laptop:grid-cols-4 tablet:grid-cols-3 phone-s:grid-cols-1 gap-5 text-left text-sm text-black font-inter"
+  >
+    <router-link
+      :to="`/detail-product/${product.id}`"
+      v-for="product in paginatedProducts"
+      :key="product.id"
+      class="self-stretch flex-1 rounded-2xl bg-white overflow-hidden flex flex-col items-center justify-between p-[15px] relative gap-2.5"
     >
-      <router-link
-        v-for="(product, productIndex) in row"
-        :key="productIndex"
-        :to="`/detail-product/${product.id}`"
-        class="product-card laptop:w-[250px] laptop:h-[385px] phone-s:w-full flex-shrink-0 flex-grow-0 bg-white rounded-[10px] overflow-hidden flex flex-col items-center p-[15px] gap-2.5 font-inter"
-      >
+      <div class="flex justify-center items-center w-full h-[250px]">
         <img
-          class="laptop:w-[218px] laptop:h-[240px] rounded-sm object-cover"
-          :alt="product.name"
+          class="relative rounded-sm w-[200px] h-[200px] object-cover z-[0]"
+          :alt="product.product_name"
           :src="product.image"
         />
-        <div class="flex flex-col items-start gap-[3px]">
-          <div class="text-[#000000] text-[14px]">{{ product.name }}</div>
-          <div class="text-[#5B5B5B] text-3xs">{{ product.brand }}</div>
+      </div>
+      <div
+        class="self-stretch bg-white overflow-hidden flex flex-col items-start justify-start gap-[3px] z-[1]"
+      >
+        <div
+          class="text-[#000000] text-[14px] w-full relative tracking-[0.1px] leading-[24px] flex items-center h-[17px] shrink-0"
+        >
+          {{ product.product_name }}
+        </div>
+        <div
+          class="text-[#5B5B5B] w-full relative text-3xs tracking-[0.1px] text-[10px] text-dimgray flex items-center h-[15px] shrink-0"
+        >
+          {{ product.brand.brand_name }}
+        </div>
+        <div
+          class="self-stretch bg-white overflow-hidden flex flex-row items-center justify-between text-base text-primary"
+        >
           <div
-            class="flex flex-row items-center justify-between text-base text-primary"
+            class="w-[87px] relative tracking-[0.1px] leading-[24px] font-medium flex items-center h-[21px] shrink-0"
           >
-            <div class="font-medium mr-[80px]">{{ product.price }}</div>
-            <div class="text-xs text-[#5B5B5B]">
-              <span>Stock </span>
-              <b>{{ product.stock }}</b>
-            </div>
+            {{ formatPrice(product.price) }}
+          </div>
+          <div
+            class="ml-auto relative text-xs tracking-[0.1px] leading-[24px] text-[12px] text-[#5B5B5B]"
+          >
+            <span>Stock </span>
+            <b class="text-[#000] text-[12px]">{{ product.stock }}</b>
           </div>
         </div>
-        <div class="flex flex-row gap-1.5 text-primary">
-          <div class="rounded-md bg-danger p-1.5">
-            <router-link to="/" class="flex items-center justify-center">
-              <img class="w-5 h-5" alt="cart" src="/images/trash.svg" />
-            </router-link>
-          </div>
+      </div>
+      <div
+        class="self-stretch bg-white overflow-hidden flex flex-row items-start justify-start gap-1.5 z-[2] text-primary"
+      >
+        <div
+          class="rounded-md bg-primary overflow-hidden flex flex-row items-center justify-center p-1.5"
+        >
           <router-link
-            :to="`/edit-product/${product.id}`"
-            class="btn rounded-[5px] bg-primary text-white py-0.5 px-0 w-[174px] h-[33px] text-center font-inter text-[14px]"
+            to="/cart"
+            class="flex flex-row items-center justify-center"
           >
-            Edit Product
+            <img
+              class="w-5 relative h-5 overflow-hidden shrink-0"
+              alt="cart"
+              src="/images/cart.svg"
+            />
           </router-link>
         </div>
-      </router-link>
-    </div>
+        <router-link
+          :to="`/edit-product/${product.id}`"
+          class="self-stretch flex-1 rounded-md border-primary border-[1px] border-solid overflow-hidden py-0.5 px-0"
+        >
+          <div class="btn relative leading-[16px] font-medium">Edit Product</div>
+        </router-link>
+      </div>
+      <div
+        class="w-[30px] !m-[0] absolute top-[12px] left-[13px] rounded-md bg-white h-[30px] flex flex-row items-center justify-center p-1 box-border z-[3]"
+      >
+        <img
+          class="w-[22px] relative h-[22px] overflow-hidden shrink-0"
+          alt="trash"
+          src="/images/trash.svg"
+        />
+      </div>
+    </router-link>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { computed } from "vue";
 import { useStore } from "vuex";
 
@@ -55,14 +89,17 @@ const store = useStore();
 
 const products = computed(() => store.state.product.products);
 
-const rows = computed(() => {
-  const productsPerPage = 8;
-  const rows = [];
-  for (let i = 0; i < products.value.length; i += 4) {
-    rows.push(products.value.slice(i, i + 4));
-  }
-  return rows;
-});
+// const paginatedProducts = computed(() => {
+//   const productsPerPage = 8;
+//   const page = store.state.product.pagination.current_page || 1;
+//   const start = (page - 1) * productsPerPage;
+//   return products.value.slice(start, start + productsPerPage);
+// });
+
+// Fungsi untuk format harga
+const formatPrice = (price) => {
+  return store.getters['product/formatToIdr'](price);
+};
 </script>
 
 <style scoped></style>
