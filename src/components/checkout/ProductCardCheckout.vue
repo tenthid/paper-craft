@@ -14,7 +14,7 @@
                        <b class="text-black">Quantity :</b> {{ qty }} {{ qty > 1? 'Products' : 'Product' }}
                     </p>
                     <p class="font-inter text-[14px] font-[400] text-gray">
-                        {{ qty }} {{ qty > 1? 'Products' : 'Product' }} x {{ price }}
+                        {{ qty }} {{ qty > 1? 'Products' : 'Product' }} x {{ formatPrice(price) }}
                     </p>
                 </div>
             </div>
@@ -36,7 +36,6 @@
         totalPrice: {type: Number},
         image: {type: String},
         qty: {type: Number},
-        totalPrice: {type: Number},
         selected: {type: Boolean},
         formatPrice: {type: Function},
     })

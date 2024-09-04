@@ -22,7 +22,7 @@
                         </div>
                         <input :value="qty" type="number" class="text-[14px] group-controll input-no-focus text-center w-[20px]" readonly >
                         <div @click="$emit('increase', $event.target.value)" class="select-none cursor-pointer group-span border-l-[1px] pl-[8px] align-top">
-                            +
+                            + 
                         </div>
                     </div>
                 </div>

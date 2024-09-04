@@ -15,7 +15,6 @@ import CategoryAdminPage from "@/views/CategoryAdminPage.vue";
 import ProfilePage from '@/views/ProfilePage.vue'
 import CheckoutPage from '@/views/CheckoutPage.vue'
 import ProductLayout from '@/layouts/ProductLayout.vue'
-import FilterPage from '@/views/FilterPage.vue'
 import FavoritePage from '@/views/FavoritePage.vue'
 import CategoryPage from '@/views/CategoryPage.vue'
 import BrandPage from '@/views/BrandPage.vue'
@@ -23,6 +22,9 @@ import CreateProductPage from "@/views/CreateProductPage.vue";
 import EditProductPage from "@/views/EditProductPage.vue";
 import EditCategoryPage from "@/views/EditCategoryPage.vue";
 import EditBrandPage from "@/views/EditBrandPage.vue";
+import DetailPage from '@/views/DetailPage.vue'
+import InvoicePage from '@/views/InvoicePage.vue'
+import auth from './middleware/auth'
 
 
 const router = createRouter({
@@ -43,24 +45,27 @@ const router = createRouter({
     {
       meta: {
         layout: AuthLayout,
+        authPage: true
       },
       path: "/login",
       name: "login",
       component: LoginPage,
     },
-
+    
     {
       meta: {
         layout: AuthLayout,
+        authPage: true
       },
       path: "/register",
       name: "register",
       component: RegisterPage,
     },
-
+    
     {
       meta: {
         layout: AuthLayout,
+        authPage: true
       },
       path: "/forgot-password",
       name: "forgotPassword",
@@ -70,6 +75,7 @@ const router = createRouter({
     {
       meta: {
         layout: AuthLayout,
+        authPage: true
       },
       path: "/reset-password",
       name: "resetPassword",
@@ -84,16 +90,7 @@ const router = createRouter({
       name: 'Products',
       component: ProductsPage,
     },
-
-    {
-      meta: {
-        layout: ProductLayout
-      },
-      path: '/filter',
-      name: 'Filter',
-      component: FilterPage,
-    },
-
+    
     {
       meta: {
         layout: ProductLayout
@@ -102,7 +99,7 @@ const router = createRouter({
       name: 'CategoryName',
       component: CategoryPage,
     },
-
+    
     {
       meta: {
         layout: ProductLayout
@@ -111,10 +108,11 @@ const router = createRouter({
       name: 'BrandName',
       component: BrandPage,
     },
-
+    
     {
       meta: {
-        layout: MainLayout
+        layout: MainLayout,
+        requireAuth: true
       },
       path: '/favorite',
       name: 'Favorite',
@@ -157,32 +155,45 @@ const router = createRouter({
       meta: {
         layout: MainLayout
       },
+      path: '/product/:id',
+      name: 'Detail',
+      component: DetailPage,
+    },
+    
+    {
+      meta: {
+        layout: MainLayout,
+        requireAuth: true
+      },
       path: '/profile-details',
       name: 'profileDetails',
       component: ProfilePage,
     },
-
+    
     {
       meta: {
-        layout: MainLayout
+        layout: MainLayout,
+        requireAuth: true
       },
       path: '/change-password',
       name: 'changePassword',
       component: ProfilePage,
     },
-
+    
     {
       meta: {
-        layout: MainLayout
+        layout: MainLayout,
+        requireAuth: true
       },
       path: '/transaction-history',
       name: 'transactionHistory',
       component: ProfilePage,
     },
-
+    
     {
       meta: {
-        layout: MainLayout
+        layout: MainLayout,
+        requireAuth: true
       },
       path: '/cart',
       name: 'cart',
@@ -191,7 +202,8 @@ const router = createRouter({
 
     {
       meta: {
-        layout: MainLayout
+        layout: MainLayout,
+        requireAuth: true
       },
       path: '/checkout',
       name: 'checkout',
@@ -206,6 +218,15 @@ const router = createRouter({
     //   name: 'HomeAdmin',
     //   component: HomeAdminPage,
     // },
+
+    {
+      meta: {
+        layout: MainLayout
+      },
+      path: '/invoice',
+      name: 'Invoice',
+      component: InvoicePage,
+    },
 
     {
       meta: {
@@ -250,4 +271,18 @@ const router = createRouter({
   ]
 })
 
-export default router;
+router.beforeEach(async (to, from, next) => {
+  await auth.getAuth()
+  
+  if(to.meta.requireAuth) {
+    return auth.checkAuth()? next() : next('/login')
+  }
+  
+  if(to.meta.authPage) {
+    return auth.checkAuth()? next(from) : next()
+  }
+
+  next()
+}) 
+
+export default router

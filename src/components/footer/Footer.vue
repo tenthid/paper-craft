@@ -44,7 +44,7 @@
           Email:
           <span class="text-gray font-medium">papercraft@gmail.com</span>
         </p>
-        <p class="text-white text-[14px] leading-tight">
+        <p class="text-white text-[18px] leading-tight">
           Jln Singosari Gg.Bebek No.6
         </p>
       </div>
@@ -56,38 +56,7 @@
         >
           Categories
         </h3>
-        <ul class="space-y-2">
-          <li
-            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
-          >
-            <router-link to="/">Alat Tulis</router-link>
-          </li>
-          <li
-            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
-          >
-            <router-link to="/">Perlengkapan Sekolah</router-link>
-          </li>
-          <li
-            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
-          >
-            <router-link to="/">Perlengkapan Pramuka</router-link>
-          </li>
-          <li
-            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
-          >
-            <router-link to="/">Perlengkapan Kantor</router-link>
-          </li>
-          <li
-            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
-          >
-            <router-link to="/">Perlengkapan Seni</router-link>
-          </li>
-          <li
-            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
-          >
-            <router-link to="/">Kertas dan Buku</router-link>
-          </li>
-        </ul>
+        <FooterCategory />
       </div>
 
       <!-- Support Section -->
@@ -97,17 +66,17 @@
         >
           Support
         </h3>
-        <ul class="space-y-2">
-          <li
-            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
-          >
-            <router-link to="/">Privacy Policy</router-link>
-          </li>
-          <li
-            class="text-gray text-[14px] phone-m:text-[16px] tablet:text-[16px]"
-          >
-            <router-link to="/">Terms & Conditions</router-link>
-          </li>
+        <ul class="space-y-1">
+          <router-link to="/">
+            <li class="text-gray text-[16px] tablet:text-[16px] mb-2 hover:text-white">
+              Privacy Policy
+            </li>
+          </router-link>
+          <router-link to="/">
+            <li class="text-gray text-[16px] tablet:text-[16px] hover:text-white">
+              Terms & Conditions
+            </li>
+          </router-link>
         </ul>
       </div>
     </div>
@@ -143,7 +112,7 @@
           <img
             src="/images/ytb-logo.svg"
             alt="YouTube"
-            class="w-[30px] h-[30px]"
+            class="w-[37px] h-[37px]"
           />
         </a>
         <a
@@ -163,9 +132,9 @@
           class="flex items-center justify-center"
         >
           <img
-            src="/images/tweeter-logo.svg"
+            src="/images/X-logo.svg"
             alt="Twitter"
-            class="w-[30px] h-[30px]"
+            class="w-[25px] h-[25px]"
           />
         </a>
       </div>
@@ -173,6 +142,8 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import FooterCategory from './FooterCategory.vue';
+</script>
 
 <style lang="scss" scoped></style>
