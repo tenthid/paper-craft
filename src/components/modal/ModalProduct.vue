@@ -10,23 +10,30 @@
               <p class="font-inter text-[18px] font-[500] text-primary text-end">
                   {{ store.getters['product/formatToIdr'](product.price) }}
                 </p>
-                <p class="font-inter text-[18px] font-[500]">
-                    Amount
-                </p>
-                <div class="justify-self-end input-group font-inter !px-[8px] !gap-[5px] !w-[fit-content] border-[1px] rounded-[5px] !py-0">
-                    <button @click="decrement()" class="select-none cursor-pointer group-span border-r-[1px] pr-[8px]">
-                        -
-                    </button>
-                    <input v-model="qty" type="number" class="text-[14px] group-controll input-no-focus text-center w-[20px]" readonly >
-                    <button :disabled="qty === product.stock" @click="increment()" class="select-none cursor-pointer group-span border-l-[1px] pl-[8px] align-top">
-                        +
+                <div class="flex items-center">
+                    <p class="font-inter text-[18px] font-[500]">
+                        Amount
+                    </p>
+                </div>
+                <div class="flex justify-end gap-[10px]">
+                    <div class="justify-self-end input-group font-inter !px-[8px] !gap-[5px] !w-[fit-content] border-[1px] rounded-[5px] !py-0">
+                        <button @click="decrement()" class="select-none cursor-pointer group-span border-r-[1px] pr-[8px]">
+                            -
+                        </button>
+                        <input v-model="qty" type="number" class="text-[14px] group-controll input-no-focus text-center w-[20px]" readonly >
+                        <button :disabled="qty === product.stock" @click="increment()" class="select-none cursor-pointer group-span border-l-[1px] pl-[8px] align-top">
+                            +
+                        </button>
+                    </div>
+                    <button v-if="product.in_cart && props.modal.type !== 'checkout'" :disabled="!qty" @click="handleRemove()" class="btn bg-danger text-white font-inter text-[18px] rounded-[10px] !px-[10px]">
+                        <img width="13px" src="/images/remove-white.svg" alt="">
                     </button>
                 </div>
           </div>
       </div>
       <div class="form-card-footer">
         <button :disabled="!qty" :class="{'!bg-gray' : !qty}" @click="handleInsert()" class="btn bg-primary text-white w-full font-inter text-[18px] rounded-[10px]">
-            {{ props.modal.type === 'checkout'? "Checkout" : 'Add to cart' }}
+            {{ props.modal.type === 'checkout'? "Checkout" : `${product.in_cart? 'save' : 'Add to cart'}` }}
         </button>
       </div>
     </div>
@@ -60,6 +67,18 @@
         }
     }
 
+    const handleRemove = async () => {
+        await store.dispatch('cart/removeItemCart', product.value.id)
+        store.dispatch('ui/showModal')
+        await store.dispatch('product/getProducts',route.path === `/product/${route.params.id}`? 'perPage=5' : route.fullPath.split('?')[1])
+        await store.dispatch('product/getProductDetail', product.value.id)
+        if (route.path === '/') {
+            await store.dispatch('product/getNewest')
+            await store.dispatch('product/getPopular')
+        }
+        store.dispatch('ui/showNotif', {message: 'item removed from cart'})
+    }
+
     const handleInsert =async () => {
         if(store.state.user.isLogin) {
             if(props.modal.type === 'checkout' && qty.value) {
@@ -79,9 +98,11 @@
                     store.dispatch('ui/showNotif', { message: 'Failed add item to cart', isError: true, topPos: 0})
                 }
             }
-            await store.dispatch('product/getProducts',route.path === `/product/${route.params.id}`? 'perPage=5' : null)
-            await store.dispatch('product/getNewest')
-            await store.dispatch('product/getPopular')
+            await store.dispatch('product/getProducts',route.path === `/product/${route.params.id}`? 'perPage=5' : route.fullPath.split('?')[1])
+            if (route.path === '/') {
+                await store.dispatch('product/getNewest')
+                await store.dispatch('product/getPopular')
+            }
             await store.dispatch('product/getProductDetail', product.value.id)
         } else {
             router.push('/login')

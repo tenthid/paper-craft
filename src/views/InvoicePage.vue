@@ -56,7 +56,7 @@
 
           <!-- Product price -->
           <div class="flex min-w-[460px] h-auto p-[15px] flex-col gap-[4px] rounded-[10px] border border-[#EDEDED] bg-white ">
-            <ProductUnit ref="productUnitRef" />
+            <ProductUnit />
           </div>
   
           <div class="w-full text-gray-6 font-inter text-[14px] font-normal leading-[20px] pl-[15px]">
@@ -109,39 +109,24 @@
 </template>
   
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import ProductUnit from '@/components/checkout/ProductUnit.vue';
   
-  // Data Pembayaran
   const paymentTime = '25-02-2023, 13:22:16';
   const paymentMethod = 'Konoha Bank';
   const senderName = 'Uzumaki Naruto';
   
   const taxes = ref(20000);
   const shipping = ref(50000);
-  
-  const productUnitRef = ref(null);
-
-const totalPrice = computed(() => {
-  return productUnitRef.value ? productUnitRef.value.totalPrice : 0;
-});
 
 const orderTotal = computed(() => totalPrice.value + taxes.value + shipping.value);
 
-// Format Harga
 const formatPrice = (price) => {
   return price.toLocaleString('id-ID', {
     style: 'currency',
     currency: 'IDR',
   });
 };
-
-// Mengupdate totalPrice setelah ProductUnit di-mount
-onMounted(() => {
-  if (productUnitRef.value) {
-    console.log('Total Price:', totalPrice.value);
-  }
-});
 </script>
   
 <style lang="scss" scoped>

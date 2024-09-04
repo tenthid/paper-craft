@@ -19,7 +19,7 @@
             </div>
         </div>
         <div ref="dropdown" class="flex gap-[12px] cursor-pointer" @click="dropdownToggler()">
-            <img width="40px" height="40px" class="rounded-full" :src="userData.image_path? `https://tenth.run.place:90/storage/${userData.image_path}` : 'images/user.png'" alt="profile-img">
+            <img width="40px" height="40px" class="rounded-full" :src="`https://tenth.run.place:90/storage/${userData.image_path? userData.image_path : 'profile_images/NmKk7zhtxTksQ4RJwlbNkWQzHDqR6VlgwZQkzcOF.png'}`" alt="profile-img">
             <img width="16px" height="auto" src="/images/dropdown-icon.svg" alt="dropdown-icon">
             <div v-if="toggleDropdown" class="flex flex-col py-[4px] right-[50px] absolute top-[65px] w-[200px] bg-white rounded-[4px] shadow-lg">
                 <router-link class="flex items-center gap-[8px] p-[8px] w-[100%]" to="/profile-details">

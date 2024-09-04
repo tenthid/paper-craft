@@ -72,7 +72,7 @@ export default {
           }
           
           const getData = async () => {
-            if(token) return await axios.post(api, {}, {
+            if(rootState.user.isLogin) return await axios.post(api, {}, {
               headers: {
                 Authorization: ` Bearer ${token}`
               }
@@ -92,12 +92,12 @@ export default {
         }
       },
 
-      async getProductDetail({state, commit}, payload) {
+      async getProductDetail({state, commit, rootState}, payload) {
         const token = Cookies.get('bearer_token')
         const api = token? `${state.apiUrl}user/products/${payload}` : `${state.apiUrl}products/${payload}`
         try {
           const getData = async () => {
-            if(token) return await axios.post(api, {}, {
+            if(rootState.user.isLogin) return await axios.post(api, {}, {
               headers: {
                 Authorization: ` Bearer ${token}`
               }
@@ -113,11 +113,11 @@ export default {
         }
       },
 
-      async getNewest({state, commit}) {
+      async getNewest({state, commit, rootState}) {
         try{
           const getData = async () => {
             const token = Cookies.get('bearer_token')
-            if(token) return await axios.post(`${state.apiUrl}user/products?orderBy=created_at&sortBy=desc&perPage=5`, {}, {
+            if(rootState.user.isLogin) return await axios.post(`${state.apiUrl}user/products?orderBy=created_at&sortBy=desc&perPage=5`, {}, {
               headers: {
                 Authorization: ` Bearer ${token}`
               }
@@ -133,11 +133,11 @@ export default {
         }
       },
 
-      async getPopular({state, commit}) {
+      async getPopular({state, commit, rootState}) {
         try{
           const getData = async () => {
             const token = Cookies.get('bearer_token')
-            if(token) return await axios.post(`${state.apiUrl}user/products?orderBy=liked_by_users_count&sortBy=desc&perPage=5`, {}, {
+            if(rootState.user.isLogin) return await axios.post(`${state.apiUrl}user/products?orderBy=liked_by_users_count&sortBy=desc&perPage=5`, {}, {
               headers: {
                 Authorization: ` Bearer ${token}`
               }

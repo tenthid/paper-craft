@@ -202,14 +202,13 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
+  await auth.getAuth()
   
   if(to.meta.requireAuth) {
-    await auth.getAuth()
     return auth.checkAuth()? next() : next('/login')
   }
   
   if(to.meta.authPage) {
-    await auth.getAuth()
     return auth.checkAuth()? next(from) : next()
   }
 

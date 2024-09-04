@@ -22,7 +22,6 @@
     import { useRouter, useRoute } from 'vue-router';
     import { ref, onMounted, watch, computed } from 'vue';
     import { useStore } from 'vuex';
-    import Cookies from 'js-cookie';
 
     const router = useRouter()
     const route = useRoute()
@@ -73,13 +72,11 @@
     })
 
     onMounted(async() => {
-        const token = Cookies.get('bearer_token')
         if(route.query.keyword) {
             keyWord.value = route.query.keyword
         }
 
-        if(token) {
-            await store.dispatch('user/getUserData', token)
+        if(loginStatus.value) {
             await store.dispatch('cart/getCartItems')
             await store.dispatch('user/getUserLike')
         }

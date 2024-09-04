@@ -7,7 +7,7 @@
                     <ProductCardCart 
                         @increase="qtyControll('+',item.product.id, item.quantity, item.product.stock)" 
                         @decrease="qtyControll('-',item.product.id, item.quantity, item.product.stock)" 
-                        @incart="store.commit('cart/changeSelected', item.product.id)"
+                        @incart="() => {store.commit('cart/changeSelected', item.product.id); calculateTotal()}"
                         @remove="async () => {await store.dispatch('cart/removeItemCart', item.product.id); calculateTotal()}" 
                         :qty="item.quantity"
                         :productName="item.product.product_name"
@@ -102,13 +102,15 @@
 
     const calculateTotal = () => {
         subTotal.value = 0
-        if(Object.keys(checkoutItems.value).length > 0) {
+        if(route.path === '/checkout') {
             for(let item of checkoutItems.value) {
                 subTotal.value += item.totalPrice
             }
         } else {
             for(let item of cartItems.value) {
-                subTotal.value += item.totalPrice
+                if(item.selected) {
+                    subTotal.value += item.totalPrice
+                }
             }
         }
     }

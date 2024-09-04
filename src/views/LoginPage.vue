@@ -22,7 +22,7 @@
             <div class="form-card-footer">
                 <div class="flex justify-between w-[100%]">
                     <div class="flex gap-[6px] items-center">
-                        <input type="checkbox" class="rounded-[3px] input-check">
+                        <input v-model="userInput.remember_me" type="checkbox" class="rounded-[3px] input-check">
                         <p class="font-inter text-[14px] font-[500]">Remember me</p>
                     </div>
                     <router-link to="/forgot-password" class="font-inter text-[14px]">Forgot passsword</router-link>
@@ -48,6 +48,7 @@
     const userInput = reactive({
         email: '',
         password: '',
+        remember_me: false
     })
 
     const handleLogin = async () => {

@@ -1,9 +1,9 @@
 <template>
     <div v-for="(product, index) in products" :key="index" class="flex items-start gap-[26.646px] self-stretch justify-between">
-      <div class="flex text-gray-5 font-poppins text-[14px] font-normal leading-[29.977px]">
+      <div class="flex text-gray-5 text-[14px] font-normal">
         {{ product.name }} <p class="pl-[15px] text-[12px]">x {{ product.quantity }}</p>
       </div>
-      <div class="text-gray-5 text-center font-poppins text-[14px] font-medium leading-[29.977px]">
+      <div class="text-gray-5 text-center font-poppins text-[14px] font-medium">
         {{ formatPrice(product.price * product.quantity) }}
       </div>
     </div>
