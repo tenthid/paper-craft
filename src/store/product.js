@@ -31,6 +31,17 @@ export default {
       state.products.push(newProduct);
     },
 
+    updateProduct(state, updatedProduct) {
+      const index = state.products.findIndex(product => product.id === updatedProduct.id);
+      if (index !== -1) {
+        state.products.splice(index, 1, updatedProduct);
+      }
+    },
+
+    deleteProduct(state, productId) {
+      state.products = state.products.filter(product => product.id !== productId);
+    },
+
     setPaginationData(state, payload) {
       state.pagination = payload;
     },
@@ -76,6 +87,9 @@ export default {
     productsLength: (state) => {
       return state.products.length;
     },
+    getProductById: (state) => (id) => {
+      return state.products.find(product => product.id === id);
+    },
   },
 
   actions: {
@@ -112,6 +126,40 @@ export default {
         return response.data;
       } catch (err) {
         console.error("Error creating product:", err.response ? err.response.data : err.message);
+        throw err;
+      }
+    },
+    
+    async updateProduct({ commit, state }, { id, formData }) {
+      try {
+        const apiUrl = `${state.apiUrl}products/${id}`;
+        const response = await axios.put(apiUrl, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "Authorization": `Bearer ${state.token}`
+          },
+          withCredentials: true
+        });
+        commit("updateProduct", response.data);
+        return response.data;
+      } catch (err) {
+        console.error("Error updating product:", err.response ? err.response.data : err.message);
+        throw err;
+      }
+    },
+
+    async deleteProduct({ commit, state }, id) {
+      try {
+        const apiUrl = `${state.apiUrl}products/${id}`;
+        await axios.delete(apiUrl, {
+          headers: {
+            "Authorization": `Bearer ${state.token}`
+          },
+          withCredentials: true
+        });
+        commit("deleteProduct", id);
+      } catch (err) {
+        console.error("Error deleting product:", err.response ? err.response.data : err.message);
         throw err;
       }
     },

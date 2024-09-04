@@ -40,7 +40,7 @@
         v-for="category in categoryList"
         :key="category.id"
         :to="'/category/' + category.category_name"
-        class="flex-1 rounded-[10px] bg-white tablet:overflow-hidden flex flex-row items-center justify-center py-2.5 px-5 relative leading-[120%] font-medium"
+        class="phone-s:text-[10px] tablet:text-[15px] laptop:text-[25px] flex-1 rounded-[10px] bg-white tablet:overflow-hidden flex flex-row items-center justify-center py-2.5 laptop: px-5 relative leading-[120%] font-medium"
       >
         {{ category.category_name }}
       </router-link>
@@ -94,7 +94,7 @@
       </div>
     </div>
 
-    <NewestProduct />
+    <NewestPr oduct />
   </div>
 </template>
 

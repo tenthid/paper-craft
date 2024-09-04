@@ -3,8 +3,8 @@
     class="w-full relative overflow-hidden grid laptop-l:grid-cols-5 laptop:grid-cols-4 tablet:grid-cols-3 phone-s:grid-cols-1 gap-5 text-left text-sm text-black font-inter"
   >
     <router-link
-      :to="`/detail-product/${product.id}`"
-      v-for="product in paginatedProducts"
+      :to="'/detail-product/' + product.id"
+      v-for="product in products"
       :key="product.id"
       class="self-stretch flex-1 rounded-2xl bg-white overflow-hidden flex flex-col items-center justify-between p-[15px] relative gap-2.5"
     >
@@ -12,7 +12,7 @@
         <img
           class="relative rounded-sm w-[200px] h-[200px] object-cover z-[0]"
           :alt="product.product_name"
-          :src="product.image"
+          src="/images/tas.jpg"
         />
       </div>
       <div
@@ -62,10 +62,12 @@
           </router-link>
         </div>
         <router-link
-          :to="`/edit-product/${product.id}`"
+          :to="'/edit-product/' + product.id"
           class="self-stretch flex-1 rounded-md border-primary border-[1px] border-solid overflow-hidden py-0.5 px-0"
         >
-          <div class="btn relative leading-[16px] font-medium">Edit Product</div>
+          <div class="btn relative leading-[16px] font-medium">
+            Edit Product
+          </div>
         </router-link>
       </div>
       <div
@@ -82,24 +84,12 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { useStore } from "vuex";
+import { defineProps } from "vue";
 
-const store = useStore();
-
-const products = computed(() => store.state.product.products);
-
-// const paginatedProducts = computed(() => {
-//   const productsPerPage = 8;
-//   const page = store.state.product.pagination.current_page || 1;
-//   const start = (page - 1) * productsPerPage;
-//   return products.value.slice(start, start + productsPerPage);
-// });
-
-// Fungsi untuk format harga
-const formatPrice = (price) => {
-  return store.getters['product/formatToIdr'](price);
-};
+defineProps({
+  products: { type: Array, required: true },
+  formatPrice: { type: Function, default: (price) => `$${price.toFixed(2)}` },
+});
 </script>
 
 <style scoped></style>
