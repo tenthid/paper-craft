@@ -27,7 +27,7 @@
       </div>
     </div>
     <button
-      class="bg-white overflow-hidden flex flex-row items-center justify-center py-auto gap-2.5 text-danger"
+      class=" bg-white overflow-hidden flex flex-row items-center justify-center py-auto gap-2.5 text-danger"
       @click="logout"
     >
       <img

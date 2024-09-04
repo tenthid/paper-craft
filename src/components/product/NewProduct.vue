@@ -1,9 +1,9 @@
 <template>
   <div
-    class="w-full relative overflow-hidden flex flex-col items-start justify-start text-center text-[35px] text-primary font-inter"
+    class="w-full relative overflow-hidden flex flex-col items-start justify-start text-center tablet:text-[35px] text-primary font-inter"
   >
     <div
-      class="w-full relative overflow-hidden flex flex-row justify-between text-primary font-inter mb-[20px]"
+      class="w-full relative flex flex-row justify-between items-center text-primary font-inter mb-[20px]"
     >
         <h2 class="relative text-primary font-inter">Newest Product</h2>
         <router-link
@@ -21,7 +21,10 @@
     <div
       class="mb-[100px] self-stretch overflow-hidden flex flex-row items-center justify-start gap-5 text-left text-sm text-black"
     >
-      <product-list :products="newestProducts" :formatPrice="store.getters['product/formatToIdr']"></product-list>
+      <product-list
+        :products="newestProducts"
+        :formatPrice="store.getters['product/formatToIdr']"
+      ></product-list>
     </div>
   </div>
 </template>
@@ -31,15 +34,13 @@
   import { useStore } from "vuex";
   import { onMounted, computed, watch } from "vue";
 
-  const store = useStore()
+const store = useStore();
 
-  const newestProducts = computed(() => store.state.product.newestProducts)
+const newestProducts = computed(() => store.state.product.newestProducts);
 
   onMounted(async() => {
     await store.dispatch('product/getNewest')
   })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

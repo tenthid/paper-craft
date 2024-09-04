@@ -26,6 +26,10 @@ export default {
             product: {
               
             },
+            message: '',
+            errors: {
+
+            }
         }
     },
 
@@ -48,6 +52,9 @@ export default {
 
       setPopularProductsData(state, payload) {
         state.popularProducts = payload
+      },
+      setMessage(state, payload) {
+        state.message = payload
       }
     },
 
@@ -153,6 +160,25 @@ export default {
         }
       },
 
+      async deleteProduct({commit, state}, payload) {
+        const token = Cookies.get('bearer_token')
+        let api = `${state.apiUrl}products/${payload}`
+        try {
+          const { data } = await axios.delete(api, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+          })
+          // commit('setErrorData', {})
+          commit('setMessage', data.message)
+          return true
+        } catch(err) {
+          console.log(err)
+          err.response.data.errors? commit('setErrorData', err.response.data.errors) : commit('setErrorData', {})
+          commit('setMessage', err.response.data.message)
+          return false
+      }
+      }
 
     }
 }

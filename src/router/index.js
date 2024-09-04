@@ -18,7 +18,7 @@ import ProductLayout from '@/layouts/ProductLayout.vue'
 import FavoritePage from '@/views/FavoritePage.vue'
 import CategoryPage from '@/views/CategoryPage.vue'
 import BrandPage from '@/views/BrandPage.vue'
-import CreateProductPage from "@/views/CreateProductPage.vue";
+import ProductFormPage from "@/views/ProductFormPage.vue";
 import EditProductPage from "@/views/EditProductPage.vue";
 import EditCategoryPage from "@/views/EditCategoryPage.vue";
 import EditBrandPage from "@/views/EditBrandPage.vue";
@@ -129,30 +129,6 @@ const router = createRouter({
     // },
     {
       meta: {
-        layout: AdminLayout,
-      },
-      path: "/products-admin",
-      name: "ProductAdmin",
-      component: ProductAdminPage,
-    },
-    {
-      meta: {
-        layout: AdminLayout,
-      },
-      path: "/category-admin",
-      name: "CategoryAdmin",
-      component: CategoryAdminPage,
-    },
-    {
-      meta: {
-        layout: AdminLayout,
-      },
-      path: "/brand-admin",
-      name: "BrandAdmin",
-      component: BrandAdminPage,
-    },
-    {
-      meta: {
         layout: MainLayout
       },
       path: '/product/:id',
@@ -210,15 +186,6 @@ const router = createRouter({
       component: CheckoutPage,
     },
 
-    // {
-    //   meta: {
-    //     layout: AdminLayout
-    //   },
-    //   path: '/home-admin',
-    //   name: 'HomeAdmin',
-    //   component: HomeAdminPage,
-    // },
-
     {
       meta: {
         layout: MainLayout
@@ -230,7 +197,28 @@ const router = createRouter({
 
     {
       meta: {
-        layout: AdminLayout
+        layout: AdminLayout,
+        isAdmin: true
+      },
+      path: '/category-admin',
+      name: CategoryAdminPage,
+      component: CategoryAdminPage
+    },
+    
+    {
+      meta: {
+        layout: AdminLayout,
+        isAdmin: true
+      },
+      path: '/brand-admin',
+      name: BrandAdminPage,
+      component: BrandAdminPage
+    },
+    
+    {
+      meta: {
+        layout: AdminLayout,
+        isAdmin: true
       },
       path: '/products-admin',
       name: 'ProductAdmin',
@@ -238,23 +226,26 @@ const router = createRouter({
     },
     {
       meta: {
-        layout: AdminLayout
+        layout: AdminLayout,
+        isAdmin: true
       },
       path: '/create-product',
       name: 'createProduct',
-      component: CreateProductPage,
+      component: ProductFormPage,
     },
     {
       meta: {
-        layout: AdminLayout
+        layout: AdminLayout,
+        isAdmin: true
       },
       path: '/edit-product',
       name: 'editProduct',
-      component: EditProductPage,
+      component: ProductFormPage,
     },
     {
       meta: {
-        layout: AdminLayout
+        layout: AdminLayout,
+        isAdmin: true
       },
       path: '/edit-category',
       name: 'editCategory',
@@ -262,7 +253,8 @@ const router = createRouter({
     },
     {
       meta: {
-        layout: AdminLayout
+        layout: AdminLayout,
+        isAdmin: true
       },
       path: '/edit-brand',
       name: 'editBrand',
@@ -280,6 +272,15 @@ router.beforeEach(async (to, from, next) => {
   
   if(to.meta.authPage) {
     return auth.checkAuth()? next(from) : next()
+  }
+
+  if(to.meta.isAdmin) {
+    if(auth.checkAuth()) return auth.checkRole('user')? next(from) : next()
+    return next(from)
+  }
+
+  if(auth.checkAuth()) {
+    if(!to.meta.isAdmin) return !auth.checkRole('user')? next('/products-admin') : next()
   }
 
   next()

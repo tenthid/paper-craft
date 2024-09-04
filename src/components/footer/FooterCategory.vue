@@ -1,4 +1,4 @@
-<template>
+   <template>
     <ul class="space-y-3">
       <router-link v-for="(item, index) in menuItems" :key="index" :to="item.link">
         <li class="text-gray text-[16px] tablet:text-[16px] mb-2 hover:text-white">
@@ -20,7 +20,7 @@
     { name: 'Perlengkapan Kantor', link: '/' },
 
   ]);
-  </script>
+  </script> 
   
   <style lang="scss" scoped>
   

@@ -24,18 +24,16 @@
   </div>
 </template>
 
-
 <script setup>
 import ProductList from "./ProductList.vue";
 import { useStore } from "vuex";
 import { computed, onMounted } from "vue";
 
-const store = useStore()
-const popularProduct = computed(() => store.state.product.popularProducts)
+const store = useStore();
+const popularProduct = computed(() => store.state.product.popularProducts);
 
 onMounted(async () => {
-  await store.dispatch('product/getPopular')
-})
+  await store.dispatch("product/getPopular");
+});
 </script>
-
 <style scoped></style>

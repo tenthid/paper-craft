@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-primary-background w-full phone-l:container-page"
+    class="bg-primary-background w-full phone-l:container-page laptop:pl-[250px] h-[100vh]"
   >
     <div
       class="pt-[100px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-[15px]"
@@ -33,8 +33,8 @@
 
             <label
               class="relative mx-auto laptop:w-[650px] laptop:h-[204px] phone-s:w-full phone-s:h-auto flex flex-col items-center justify-center text-center text-base font-montserrat border border-dashed border-dark-blue p-4 cursor-pointer overflow-hidden"
-              @dragover.prevent
-              @drop.prevent
+              @dragover.prevent="handleDragOver"
+              @drop="handleDrop"
             >
               <img
                 v-if="imageUrl"

@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-primary-background laptop:pt-[50px] w-full phone-l:container-page">
+  <div class="bg-primary-background w-full phone-l:container-page laptop:pl-[250px] h-[100vh]">
     <div
-      class="pt-[100px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-[15px]"
+      class="pt-[100px] w-full flex flex-col items-center justify-center gap-5 text-left text-sm font-body-base-bold mb-[15px]"
     >
         <div
         class="align-center font-maitree laptop:text-[35px] text-primary phone-s:text-[25px]"

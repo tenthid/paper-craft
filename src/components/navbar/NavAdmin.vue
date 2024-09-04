@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar flex justify-between items-center py-[10px] px-[20px] bg-white w-full fixed"
+    class="navbar flex justify-between items-center py-[10px] px-[20px] bg-white w-full fixed top-0 left-0 z-[1100]"
   >
     <img
       @click="router.push('/')"
@@ -28,6 +28,7 @@
         class="w-[40px] h-[40px] bg-white rounded-full"
       />
     </div>
+
     <div class="menu-toggle hidden cursor-pointer" @click="toggleMenu">
       <img
         :src="isMenuOpen ? '/images/close-icon.svg' : '/images/menu-icon.svg'"
@@ -81,13 +82,53 @@
       </button>
     </div>
   </nav>
+  <div
+    id="sidebar"
+    class="sidebar fixed bg-white w-40 h-full flex flex-col justify-between items-start px-5 box-border text-left text-base font-maitree pt-[70px] pb-[20px] mt-5 z-[1000]"
+  >
+    <div
+      class="w-auto bg-white overflow-hidden flex flex-col items-start gap-5"
+    >
+      <div
+        class="self-stretch bg-white overflow-hidden flex flex-row items-start font-inter"
+      >
+        <div
+          class="self-stretch bg-white overflow-hidden flex flex-col items-start justify-start gap-10"
+        >
+          <router-link to="/products-admin" active-class="text-primary-1"
+            >Products</router-link
+          >
+          <router-link to="/category-admin" active-class="text-primary-1"
+            >Categories</router-link
+          >
+          <router-link to="/brand-admin" active-class="text-primary-1"
+            >Brands</router-link
+          >
+        </div>
+      </div>
+    </div>
+    <button
+      class="bg-white overflow-hidden flex flex-row items-center justify-center py-auto mb-[20px] gap-2.5 text-danger"
+      @click="store.commit('user/setLogout'); router.push('/')"
+    >
+      <img
+        class="w-5 relative h-[18px]"
+        alt="Logout"
+        src="/images/logout.svg"
+      />
+      <div class="relative leading-[13px] text-danger">Logout</div>
+    </button>
+  </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 
 const router = useRouter();
+const store = useStore()
+
 const isMenuOpen = ref(false);
 
 const toggleMenu = () => {
@@ -97,21 +138,28 @@ const toggleMenu = () => {
 const handleNavigation = () => {
   isMenuOpen.value = false;
 };
-
-const logout = () => {
-  localStorage.removeItem("authToken");
-  router.push("/login");
-};
 </script>
 
 <style scoped>
+.layout-container {
+  display: flex;
+}
+
 .navbar {
   border-bottom: 0.5px solid #ccc;
-  z-index: 9999;
+  z-index: 1100;
 }
 
 .search-bar {
   border: 1px solid #e0e0e0;
+}
+
+.sidebar {
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  height: 100%;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-menu {
@@ -127,7 +175,6 @@ const logout = () => {
   justify-content: space-between;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   padding: 70px 20px 20px;
-  transition: transform 0.3s ease-in-out;
   z-index: 1000;
 }
 
@@ -149,6 +196,23 @@ const logout = () => {
 }
 
 @media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .navbar .profile {
+    display: none;
+  }
+
+  .navbar .search-bar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1023px) {
+  .sidebar {
+    display: none;
+  }
   .menu-toggle {
     display: block;
   }

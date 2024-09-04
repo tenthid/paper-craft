@@ -1,31 +1,31 @@
 <template>
   <div
-    class="bg-primary-background laptop:pt-[50px] w-full phone-s:px-3 laptop:container-page"
+    class="bg-primary-background phone-s:pt-[100px] laptop:pt-[100px] w-full phone-s:px-3 h-[100vh] laptop:pl-[250px] laptop:pr-[80px]"
   >
     <div
-      class="pt-[100px] w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-[15px]"
+      class="w-full flex flex-col items-center gap-5 text-left text-sm font-body-base-bold mb-[15px]"
     >
       <div
         class="items-center font-maitree laptop:text-[35px] text-primary phone-s:text-[25px]"
       >
-        Create Brand
+        Manage Brands
       </div>
     </div>
 
     <div
-      class="w-full relative bg-primary-background overflow-hidden flex laptop:flex-row laptop:items-start justify-start py-2.5 px-5 box-border gap-5 text-left phone-s:flex-col phone-s:items-center text-sm font-regular"
+      class="w-full relative bg-primary-background flex laptop:flex-row laptop:items-start justify-start py-2.5 px-5 box-border gap-5 text-left phone-s:flex-col phone-s:items-center text-sm font-regular"
     >
       <div
-        class="w-full bg-white flex flex-col p-6 rounded-md text-black font-inter phone-s:w-full laptop:w-[400px]"
+        class="w-full bg-white flex flex-col p-6 rounded-md text-black font-inter phone-s:w-full laptop:w-[600px]"
       >
         <div class="flex flex-col gap-6">
           <h2 class="font-medium text-lg phone-s:text-base">Brand List</h2>
 
-          <table class="w-full text-left border-collapse border-primary-background outline-none">
+          <table
+            class="w-full text-left border-collapse border-primary-background outline-none"
+          >
             <thead>
-              <tr
-                class="text-gray text-xs font-medium border-b border-gray"
-              >
+              <tr class="text-gray text-xs font-medium border-b border-gray">
                 <th class="p-2 tablet:text-[15px]">Logo</th>
                 <th class="p-2 tablet:text-[15px]">Brand Name</th>
                 <th class="p-2 tablet:text-[15px] text-right">Actions</th>
@@ -39,7 +39,7 @@
               <tr
                 v-else
                 v-for="brand in BrandList"
-                :key="brand.name"
+                :key="brand.id"
                 class="border-b border-none"
               >
                 <td class="p-2">
@@ -49,16 +49,19 @@
                     class="w-10 h-10 object-cover"
                   />
                 </td>
-                <td class="p-2">{{ brand.name }}</td>
+                <td class="p-2">{{ brand.brand_name }}</td>
                 <td class="p-2 text-right">
                   <div class="flex gap-2 justify-end">
                     <router-link
-                      to="/edit-brand"
+                      :to="'/edit-brand/${brand.id}'  "
                       class="btn bg-primary rounded px-3 py-1 text-white"
                     >
                       Edit
                     </router-link>
-                    <button class="btn bg-danger rounded px-3 py-1 text-white">
+                    <button
+                      class="btn bg-danger rounded px-3 py-1 text-white"
+                      @click="deleteBrand(brand.id)"
+                    >
                       <img src="/images/trash.svg" alt="Delete Icon" />
                     </button>
                   </div>
@@ -70,7 +73,7 @@
       </div>
 
       <div
-        class="laptop:sticky laptop:w-[750px] bg-white flex flex-col p-6 box-border rounded-[5px] text-[20px] text-[#000] font-inter phone-s:w-full"
+        class="laptop:w-[750px] bg-white flex flex-col p-6 box-border rounded-[5px] text-[20px] text-[#000] font-inter phone-s:w-full"
       >
         <div class="flex flex-col gap-6 font-inter">
           <div class="font-medium phone-s:text-[15px] tablet:text-xl">
@@ -83,8 +86,8 @@
 
             <label
               class="relative mx-auto w-full h-[204px] flex flex-col items-center justify-center text-center text-base font-montserrat border border-dashed border-dark-blue p-4 cursor-pointer overflow-hidden"
-              @dragover.prevent
-              @drop.prevent
+              @dragover.prevent="handleDragOver"
+              @drop="handleDrop"
             >
               <img
                 v-if="imageUrl"
@@ -146,14 +149,21 @@
 </template>
 
 <script setup>
+import { ref, reactive, onMounted, computed } from "vue";
+import { useStore } from "vuex";
 import BaseInput from "@/components/ui/BaseInput.vue";
-import { reactive, ref, computed } from "vue";
+
+const store = useStore();
 
 const userInput = reactive({
   brand: "",
 });
 
-const BrandList = reactive([]);
+const BrandList = computed(() => store.state.brand.brands);
+
+onMounted(async () => {
+  await store.dispatch("product/getBrands");
+});
 
 const imageUrl = ref(null);
 const imageWidth = ref(100);
@@ -170,16 +180,48 @@ const onFileChange = (event) => {
   }
 };
 
-function saveBrand() {
+function handleDragOver(event) {
+  event.preventDefault();
+}
+
+function handleDrop(event) {
+  event.preventDefault();
+  const file = event.dataTransfer.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      imageUrl.value = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+async function saveBrand() {
   if (userInput.brand.trim() !== "" && imageUrl.value) {
-    BrandList.push({
-      name: userInput.brand.trim(),
-      logo: imageUrl.value,
-    });
-    userInput.brand = "";
-    imageUrl.value = null;
+    try {
+      await store.dispatch("product/createBrand", {
+        name: userInput.brand.trim(),
+        logo: imageUrl.value,
+      });
+      userInput.brand = "";
+      imageUrl.value = null;
+      alert("Brand saved successfully!");
+    } catch (error) {
+      alert("Failed to save brand.");
+      console.error(error);
+    }
   } else {
     alert("Brand name and logo cannot be empty!");
+  }
+}
+
+async function deleteBrand(id) {
+  try {
+    await store.dispatch("product/deleteBrand", id);
+    alert("Brand deleted successfully!");
+  } catch (error) {
+    alert("Failed to delete brand.");
+    console.error(error);
   }
 }
 </script>
