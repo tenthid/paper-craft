@@ -34,11 +34,11 @@
 
         <div class="text-center font-inter">
           <p class="font-medium phone-s:text-[15px] tablet:text-[35px]">
-            Can't Find Product Based on Your Filter
+            No Product yet
           </p>
 
           <p class="text-gray-3 phone-s:text-[15px] tablet:text-[20px] mt-4">
-            The product you are looking for does not exist
+            Please create the product first
           </p>
         </div>
       </div>
