@@ -1,8 +1,6 @@
 <template>
   <div
-    id="sidebar"
-    style=""
-    class="sticky top-0 bg-white w-50 h-[740px] flex flex-col justify-between items-start px-5 box-border text-left text-base font-maitree pt-[70px] pb-[20px]"
+    class="sticky top-0 bg-white w-50 h-[100vh] flex flex-col justify-between items-start px-5 box-border text-left text-base font-maitree pt-[70px] pb-[20px]"
   >
     <div
       class="w-[171px] bg-white overflow-hidden flex flex-col items-start gap-5"
