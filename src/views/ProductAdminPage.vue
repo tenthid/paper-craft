@@ -7,24 +7,28 @@
     >
       <!-- Header Section -->
       <div
-        class="w-full h-12 flex justify-between text-center laptop:text-[35px] text-primary font-maitree"
+        class="w-full gap-[20px]"
       >
-        <div class="leading-[120%] phone-s:text-[20px] laptop:text-[35px]">
-          Manage Products
+        <div class="w-full h-12 flex justify-between text-center laptop:text-[35px] text-primary font-maitree">
+          <div class="leading-[120%] phone-s:text-[20px] laptop:text-[35px]">
+            Manage Products
+          </div>
+  
+          <router-link
+            to="/create-product"
+            class="rounded-[10px] bg-primary h-10 flex items-center justify-center tablet:py-2.5 text-white px-5 text-base font-medium font-inter phone-s:text-[15px]"
+          >
+            Create Product
+          </router-link>
         </div>
-
-        <router-link
-          to="/create-product"
-          class="rounded-[10px] bg-primary h-10 flex items-center justify-center tablet:py-2.5 text-white px-5 text-base font-medium font-inter phone-s:text-[15px]"
-        >
-          Create Product
-        </router-link>
+        
+        <FIlterQueries />
       </div>
 
       <!-- Conditional Rendering -->
       <div
         v-if="products.length === 0"
-        class="w-[100%] h-[55vh] flex flex-col items-center justify-center h-100"
+        class="w-[100%] h-[70vh] flex flex-col items-center justify-center"
       >
         <img
           class="h-[150px] w-auto pb-[10px]"
@@ -62,6 +66,7 @@ import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import ProductList from "@/components/product/ProductList.vue";
 import Pagination from "@/components/product/Pagination.vue";
+import FIlterQueries from "@/components/product/FIlterQueries.vue";
 
 
 const store = useStore();
@@ -71,26 +76,14 @@ const dataLoaded = ref(false)
 const products = computed(() => store.state.product.products);
 const pagination = computed(() => store.state.product.pagination)
 
-const handlePageChange = async (page) => {
-  currentPage.value = page;
-  loading.value = true;
-  try {
-    await store.dispatch("productAdmin/getProducts", { page });
-  } catch (error) {
-    console.error("Failed to fetch products:", error);
-  } finally {
-    loading.value = false;
-  }
-};
-
 watch(route, async (oldValue, newValue) => {
   dataLoaded.value = false
-  await store.dispatch('product/getProducts', route.fullPath.split('?')[1])
+  await store.dispatch('product/getProducts', `${route.fullPath.split('?')[1]}&orderBy=updated_at&sortBy=desc`)
   dataLoaded.value = true
 })
 
 onMounted(async () => {
-  await store.dispatch('product/getProducts', route.fullPath.split('?')[1])
+  await store.dispatch('product/getProducts', `${route.fullPath.split('?')[1]}&orderBy=updated_at&sortBy=desc`)
   dataLoaded.value = true
 })
 </script>

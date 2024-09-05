@@ -32,19 +32,19 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-if="BrandList.length === 0" class="text-gray text-sm">
+              <tr v-if="brandList.length === 0" class="text-gray text-sm">
                 <td colspan="3" class="p-2 text-center">Empty</td>
               </tr>
 
               <tr
                 v-else
-                v-for="brand in BrandList"
+                v-for="brand in brandList"
                 :key="brand.id"
                 class="border-b border-none"
               >
                 <td class="p-2">
                   <img
-                    :src="brand.logo"
+                    :src="brand.image_url? `https://tenth.run.place:90/storage/${brand.image_url}` : '/images/logo.svg'"
                     alt="Brand Logo"
                     class="w-10 h-10 object-cover"
                   />
@@ -53,14 +53,14 @@
                 <td class="p-2 text-right">
                   <div class="flex gap-2 justify-end">
                     <router-link
-                      :to="'/edit-brand/${brand.id}'  "
+                      :to="`/edit-brand/${brand.id}`"
                       class="btn bg-primary rounded px-3 py-1 text-white"
                     >
                       Edit
                     </router-link>
                     <button
                       class="btn bg-danger rounded px-3 py-1 text-white"
-                      @click="deleteBrand(brand.id)"
+                      @click="handleDelete(brand.id)"
                     >
                       <img src="/images/trash.svg" alt="Delete Icon" />
                     </button>
@@ -90,13 +90,10 @@
               @drop="handleDrop"
             >
               <img
-                v-if="imageUrl"
-                :src="imageUrl"
+                v-if="imageTemp"
+                :src="imageTemp"
                 alt="Uploaded Image"
-                :style="{
-                  width: `${imageWidth}px`,
-                  height: `${imageHeight}px`,
-                }"
+                style="width: auto; height: 100px;"
                 class="object-cover"
               />
               <img
@@ -105,39 +102,42 @@
                 src="/images/upload-icon.svg"
                 class="w-18 h-15 z-10"
               />
-              <span v-if="!imageUrl" class="font-semibold z-10">
+              <span v-if="!imageTemp" class="font-semibold z-10">
                 Drag & drop image or <span class="underline">Browse</span>
               </span>
-              <p v-if="!imageUrl" class="text-xs text-gray leading-4 z-10">
+              <p v-if="!imageTemp" class="text-xs text-gray leading-4 z-10">
                 Supported formats: JPEG, PNG
               </p>
               <input
                 type="file"
-                ref="fileInput"
                 accept="image/jpeg, image/png"
-                @change="onFileChange"
+                @input="renderImage"
                 class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
             </label>
 
             <div class="font-medium text-[#7A8089] font-poppins">
               <BaseInput
-                v-model="userInput.brand"
+                v-model="userInput.brand_name"
                 label="Brand Name"
                 placeholder="Enter brand name"
                 identity="brand"
-              ></BaseInput>
+              >
+              <p v-if="errors.brand_name" v-for="error in errors.brand_name" class="text-danger font-inter text-[12px]">
+                {{ error }}
+              </p>
+              </BaseInput>
             </div>
 
             <div class="flex justify-end mt-[10px]">
               <button
                 class="bg-primary rounded-[10px] laptop:w-[130px] laptop:h-[40px] phone-s:w-[130px] phone-s:h-[40px] px-[25px]"
-                @click="saveBrand"
+                @click="handleCreate()"
               >
                 <div
                   class="font-poppins laptop:text-[16px] text-white phone-s:text-[16px]"
                 >
-                  Save
+                  Create
                 </div>
               </button>
             </div>
@@ -149,79 +149,89 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, computed } from "vue";
+import { reactive, onMounted, computed, ref } from "vue";
 import { useStore } from "vuex";
 import BaseInput from "@/components/ui/BaseInput.vue";
 
 const store = useStore();
 
+const brandList = computed(() => store.state.brand.brands);
+const errors = computed(() => store.state.brand.errors)
+const message = computed(() => store.state.brand.message)
+const fileInput = ref()
+const imageTemp = ref()
 const userInput = reactive({
-  brand: "",
+  brand_name: '',
+  image_url: ''
 });
 
-const BrandList = computed(() => store.state.brand.brands);
 
-onMounted(async () => {
-  await store.dispatch("product/getBrands");
-});
+const handleDelete = async (id) => {
+  const confimation = confirm('Menghapus brand ini juga akan menghapus semua product dengan brand terkait')
+  if(confimation) {
+    const isSuccess = await store.dispatch('brand/deleteBrand', id)
+    
+    if(isSuccess) {
+      await store.dispatch('ui/showNotif', { message: message.value})
+      await store.dispatch('brand/getBrands')
+    } else {
+      await store.dispatch('ui/showNotif', { message: message.value, isError: true})
+    }
+  }
+}
 
-const imageUrl = ref(null);
-const imageWidth = ref(100);
-const imageHeight = computed(() => imageWidth.value);
+const handleCreate = async () => {
+  let isSuccess = {status: true}
+  if(fileInput.value) {
+      isSuccess = await store.dispatch('brand/uploadBrandImage', fileInput.value)
+      userInput.image_url = isSuccess.path
+  }
+  if(isSuccess.status) {
+      const createSuccess = await store.dispatch('brand/createBrand', userInput)
+      if(createSuccess) {
+          store.dispatch('ui/showNotif', {message: message.value})
+          await store.dispatch('brand/getBrands')
+          userInput.brand_name = ''
+          userInput.image_url = ''
+          fileInput.value = null
+          imageTemp.value = null
+      } else if(Object.keys(errors.value).length === 0) {
+          store.dispatch('ui/showNotif', {message: message.value, isError: true})
+      }
+  } else {
+    store.dispatch('ui/showNotif', {message: message.value, isError: true})
+  }
+}
 
-const onFileChange = (event) => {
-  const file = event.target.files[0];
-  if (file) {
+const renderImage = (e) => {
+  fileInput.value = e.target.files[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(fileInput.value);
+
+  reader.addEventListener ("load", () => {
+    imageTemp.value = reader.result;
+  });
+};
+
+const handleDragOver = (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+};
+
+const handleDrop = (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+  fileInput.value = event.dataTransfer.files[0];
+  if (fileInput.value) {
     const reader = new FileReader();
     reader.onload = (e) => {
-      imageUrl.value = e.target.result;
+      imageTemp.value = e.target.result;
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(fileInput.value);
   }
 };
 
-function handleDragOver(event) {
-  event.preventDefault();
-}
-
-function handleDrop(event) {
-  event.preventDefault();
-  const file = event.dataTransfer.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      imageUrl.value = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-}
-
-async function saveBrand() {
-  if (userInput.brand.trim() !== "" && imageUrl.value) {
-    try {
-      await store.dispatch("product/createBrand", {
-        name: userInput.brand.trim(),
-        logo: imageUrl.value,
-      });
-      userInput.brand = "";
-      imageUrl.value = null;
-      alert("Brand saved successfully!");
-    } catch (error) {
-      alert("Failed to save brand.");
-      console.error(error);
-    }
-  } else {
-    alert("Brand name and logo cannot be empty!");
-  }
-}
-
-async function deleteBrand(id) {
-  try {
-    await store.dispatch("product/deleteBrand", id);
-    alert("Brand deleted successfully!");
-  } catch (error) {
-    alert("Failed to delete brand.");
-    console.error(error);
-  }
-}
+onMounted(async () => {
+  await store.dispatch("brand/getBrands");
+});
 </script>

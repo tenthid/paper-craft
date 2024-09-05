@@ -15,7 +15,7 @@
                         :brandName="item.product.brand.brand_name"
                         :price="item.product.price"
                         :stock="item.product.stock"
-                        :image="item.image"
+                        :image="item.product.image_url? `https://tenth.run.place:90/storage/${item.product.image_url}` : '/images/tas.jpg'"
                         :totalPrice="item.totalPrice"
                         :selected="item.selected"
                         :formatPrice="store.getters['product/formatToIdr']"
@@ -35,7 +35,7 @@
                             :brandName="item.product.brand.brand_name"
                             :price="item.product.price"
                             :stock="item.product.stock"
-                            :image="item.product.image"
+                            :image="item.product.image_url? `https://tenth.run.place:90/storage/${item.product.image_url}` : '/images/tas.jpg'"
                             :totalPrice="item.totalPrice"
                             :selected="item.selected"
                             :formatPrice="store.getters['product/formatToIdr']"
@@ -153,6 +153,7 @@
     onMounted(async () => {
         await checkPath()
         await store.dispatch('product/getProducts')
+        console.log(cartItems.value)
         parentRendered.value = true
     })
 </script>

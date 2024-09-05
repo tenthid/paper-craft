@@ -20,21 +20,26 @@
             Edit Category
           </div>
           <div class="flex flex-col gap-[15px] text-sm">
-            <div class="w-full relative h-[18px] text-gray">
+            <!-- <div class="w-full relative h-[18px] text-gray">
               <div class="font-medium phone-s:text-[12px] tablet:text-[15px]">
                 Category Name
               </div>
             </div>
             <div
               class="w-full relative border-gray border-t-[1px] border-solid box-border h-px opacity-50"
-            ></div>
+            ></div> -->
             <div class="font-medium text-[#7A8089] font-poppins">
               <BaseInput
-                v-model="userInput.category"
+                v-model="userInput.category_name"
                 label="Category Name"
                 placeholder="Enter category name"
                 identity="category"
-              ></BaseInput>
+                :with-span="false"
+              >
+                <p v-if="errors.category_name" v-for="error in errors.category_name" class="text-danger font-inter text-[12px]">
+                  {{ error }}
+                </p>
+              </BaseInput>
             </div>
             <div
               class="flex justify-end mt-[10px] phone-s:pl-0 tablet:pl-[350px]"
@@ -42,15 +47,16 @@
               <button
                 class="bg-danger rounded-[10px] phone-s:w-[100px] phone-s:h-[35px] laptop:w-[130px] laptop:h-[40px] mr-2"
               >
-                <button
+                <router-link
+                  to="/category-admin"
                   class="font-poppins text-[12px] laptop:text-[16px] text-white"
                 >
                   Cancel
-                </button>
+                </router-link>
               </button>
               <button
                 class="bg-primary rounded-[10px] phone-s:w-[100px] phone-s:h-[35px] laptop:w-[130px] laptop:h-[40px]"
-                @click="saveCategory"
+                @click="handleUpdate()"
               >
                 <div
                   class="font-poppins text-[12px] laptop:text-[16px] text-white"
@@ -68,20 +74,39 @@
 
 <script setup>
 import BaseInput from "@/components/ui/BaseInput.vue";
-import { reactive } from "vue";
+import { useStore } from "vuex";
+import { computed, onMounted, reactive } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
+const store = useStore()
+const route = useRoute()
+const router = useRouter()
+
+const category = computed(() => store.state.category.category)
+const errors = computed(() => store.state.category.errors)
+const message = computed(() => store.state.category.message)
 const userInput = reactive({
-  category: "",
+  category_name: "",
 });
 
-const CategoryList = reactive([]);
+const handleUpdate = async () => {
+  const isSuccess = await store.dispatch('category/updateCategory', userInput)
 
-function saveCategory() {
-  if (userInput.category.trim() !== "") {
-    CategoryList.push({ name: userInput.category.trim() });
-    userInput.category = "";
-  } else {
-    alert("Category name cannot be empty!");
+  if(isSuccess) {
+    await store.dispatch('ui/showNotif', { message: message.value})
+    router.push('/category-admin')
+  } else if (Object.keys(errors.value).length() === 0) {
+    await store.dispatch('ui/showNotif', { message: message.value, isError: true})
   }
 }
+
+onMounted(async() => {
+  await store.dispatch('category/getCategory', route.params.id)
+
+  if(Object.keys(category.value).length === 0) {
+    router.push('/category-admin')
+  } else {
+    Object.assign(userInput, category.value)
+  }
+})
 </script>

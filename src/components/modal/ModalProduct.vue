@@ -2,7 +2,7 @@
     <div @click.stop="" class="form-card border-light-gray border-[1px] h-fit relative w-[400px]">
       <img @click="store.dispatch('ui/showModal');" class="absolute right-0 pt-[10px] pr-[10px] top-0 cursor-pointer" src="/images/X-page.svg" alt="x-icon">
       <div class="form-card-body">
-          <img src="/images/tas.jpg" alt="tes">
+          <img :src="product.image_url? `https://tenth.run.place:90/storage/${product.image_url}` : '/images/tas.jpg'" alt="tes">
           <div class="grid grid-cols-2 gap-[20px]">
               <p class="font-maitree text-[18px] font-[500]">
                   {{ product.product_name }}

@@ -45,12 +45,12 @@
                 <td class="p-2 text-right">
                   <div class="flex gap-2 justify-end">
                     <router-link
-                      to="/edit-category"
+                      :to="`/edit-category/${category.id}`"
                       class="btn bg-primary rounded px-3 py-1 text-white"
                     >
                       Edit
                     </router-link>
-                    <button class="btn bg-danger rounded px-3 py-1 text-white">
+                    <button @click="handleDelete(category.id)" class="btn bg-danger rounded px-3 py-1 text-white">
                       <img src="/images/trash.svg" alt="Delete Icon" />
                     </button>
                   </div>
@@ -75,17 +75,22 @@
 
             <div class="font-medium text-[#7A8089] font-poppins">
               <BaseInput
-                v-model="userInput.category"
+                v-model="userInput.category_name"
                 label="Category Name"
                 placeholder="Enter category name"
                 identity="category"
-              ></BaseInput>
+                :with-span="false"
+              >
+              <p v-if="errors.category_name" v-for="error in errors.category_name" class="text-danger font-inter text-[12px]">
+                {{ error }}
+              </p>
+              </BaseInput>
             </div>
 
             <div class="flex justify-end mt-[10px]">
               <button
                 class="bg-primary rounded-[10px] laptop:w-[130px] laptop:h-[40px] phone-s:w-[130px] phone-s:h-[40px] px-[25px]"
-                @click="saveCategory"
+                @click="handleCreate()"
               >
                 <div
                   class="font-poppins laptop:text-[16px] text-white phone-s:text-[16px]"
@@ -108,26 +113,40 @@ import BaseInput from "@/components/ui/BaseInput.vue";
 
 const store = useStore();
 
-const userInput = reactive({
-  category: "",
-});
-
 const CategoryList = computed(() => store.state.category.categories);
+const errors = computed(() => store.state.category.errors)
+const message = computed(() => store.state.category.message)
+const userInput = reactive({
+  category_name: "",
+});
 
 onMounted(async () => {
-  await store.dispatch("product/getCategories");
-
-  console.log("Categories after fetch:", CategoryList.value);
+  await store.dispatch("category/getCategories");
 });
 
-async function saveCategory() {
-  if (userInput.category.trim() !== "") {
-    const newCategory = { category_name: userInput.category.trim() };
-    await store.dispatch("product/createCategory", newCategory);
-    await store.dispatch("product/getCategories");
-    userInput.category = "";
-  } else {
-    alert("Category name cannot be empty!");
+const handleDelete = async (id) => {
+  const confimation = confirm('menghapus category ini juga akan menghapus semua product dengan category terkait')
+  if(confimation) {2
+    const isSuccess = await store.dispatch('category/deleteCategory', id)
+    
+    if(isSuccess) {
+      await store.dispatch('ui/showNotif', { message: message.value})
+      await store.dispatch('category/getCategories')
+    } else {
+      await store.dispatch('ui/showNotif', { message: message.value, isError: true})
+    }
+  }
+}
+
+const handleCreate =async () => {
+  const isSuccess = await store.dispatch('category/createCategory', userInput)
+
+  if(isSuccess) {
+    await store.dispatch('ui/showNotif', { message: message.value})
+    await store.dispatch('category/getCategories')
+    userInput.category_name = ''
+  } else if (Object.keys(errors.value).length() === 0) {
+    await store.dispatch('ui/showNotif', { message: message.value, isError: true})
   }
 }
 

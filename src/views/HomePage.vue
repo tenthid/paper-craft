@@ -84,7 +84,7 @@
             brandId: brand.id
           }
         }">
-          <img src="" alt="brand-img" class="w-[50px] relative bg-gray h-[50px] rounded-[10px]" />
+          <img :src="brand.image_url? `https://tenth.run.place:90/storage/${brand.image_url}` : '/images/logo.svg'" alt="brand-img" class="w-[50px] relative h-[50px] rounded-[10px]" />
           <div class="text-center w-full" >
             {{ brand.brand_name }}
           </div>
@@ -92,7 +92,7 @@
       </div>
     </div>
 
-    <NewestPr oduct />
+    <NewestProduct />
   </div>
 </template>
 

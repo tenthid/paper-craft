@@ -10,7 +10,7 @@
       <img
         class="self-stretch relative rounded-sm max-w-full overflow-hidden h-[250px] shrink-0 object-cover "
         :alt="product.product_name"
-        src="/images/tas.jpg"
+        :src="product.image_url? `https://tenth.run.place:90/storage/${product.image_url}` : '/images/tas.jpg'"
       />
       <div
         class="self-stretch bg-white overflow-hidden flex flex-col items-start justify-start gap-[3px]"
@@ -88,7 +88,7 @@
           />
         </button>
       </div>
-      <router-link to="/edit-product"
+      <router-link :to="`/edit-product/${product.id}`"
         class="self-stretch flex-1 rounded-md bg-primary text-white overflow-hidden flex flex-row items-center justify-center py-0.5 px-0"
       >
         <div class="relative leading-[16px] font-medium">Edit Product</div>
@@ -98,7 +98,7 @@
       <button v-if="!disableLike && !isAdmin && isLogin"
         :disabled="isCooldown"
         @click.prevent="handleLike(product.id)"
-        class="w-[30px] !m-[0] absolute top-[12px] left-[13px] rounded-md bg-white h-[30px] flex flex-row items-center justify-center p-1 box-border"
+        class="w-[30px] !m-[0] absolute top-[12px] left-[13px] rounded-md bg-[transparent] h-[30px] flex flex-row items-center justify-center p-1 box-border"
       >
         <img v-if="product.liked"
           class="w-[22px] relative h-[22px] overflow-hidden shrink-0"

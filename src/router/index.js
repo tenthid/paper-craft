@@ -19,12 +19,12 @@ import FavoritePage from '@/views/FavoritePage.vue'
 import CategoryPage from '@/views/CategoryPage.vue'
 import BrandPage from '@/views/BrandPage.vue'
 import ProductFormPage from "@/views/ProductFormPage.vue";
-import EditProductPage from "@/views/EditProductPage.vue";
 import EditCategoryPage from "@/views/EditCategoryPage.vue";
 import EditBrandPage from "@/views/EditBrandPage.vue";
 import DetailPage from '@/views/DetailPage.vue'
 import InvoicePage from '@/views/InvoicePage.vue'
 import auth from './middleware/auth'
+import UserRolePage from "@/views/UserRolePage.vue";
 
 
 const router = createRouter({
@@ -238,7 +238,7 @@ const router = createRouter({
         layout: AdminLayout,
         isAdmin: true
       },
-      path: '/edit-product',
+      path: '/edit-product/:id',
       name: 'editProduct',
       component: ProductFormPage,
     },
@@ -247,7 +247,7 @@ const router = createRouter({
         layout: AdminLayout,
         isAdmin: true
       },
-      path: '/edit-category',
+      path: '/edit-category/:id',
       name: 'editCategory',
       component: EditCategoryPage,
     },
@@ -256,9 +256,18 @@ const router = createRouter({
         layout: AdminLayout,
         isAdmin: true
       },
-      path: '/edit-brand',
+      path: '/edit-brand/:id',
       name: 'editBrand',
       component: EditBrandPage,
+    },
+    {
+      meta: {
+        layout: AdminLayout,
+        isMaster: true
+      },
+      path: '/user-role',
+      name: 'manageUserRole',
+      component: UserRolePage
     }
   ]
 })
@@ -266,21 +275,26 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   await auth.getAuth()
   
+  if(to.meta.isAdmin) {
+    if(auth.checkAuth()) return auth.checkRole('user')? next(from) : next()
+    return next(from)
+  }
+
+  if(to.meta.isMaster) {
+    if(auth.checkAuth()) return auth.checkRole('master')? next() : next(from)
+    return next(from)
+  }
+
+  if(auth.checkAuth()) {
+    if(!to.meta.isAdmin) return !auth.checkRole('user')? next('/products-admin') : next()
+  }
+
   if(to.meta.requireAuth) {
     return auth.checkAuth()? next() : next('/login')
   }
   
   if(to.meta.authPage) {
     return auth.checkAuth()? next(from) : next()
-  }
-
-  if(to.meta.isAdmin) {
-    if(auth.checkAuth()) return auth.checkRole('user')? next(from) : next()
-    return next(from)
-  }
-
-  if(auth.checkAuth()) {
-    if(!to.meta.isAdmin) return !auth.checkRole('user')? next('/products-admin') : next()
   }
 
   next()

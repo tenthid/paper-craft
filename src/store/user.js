@@ -11,6 +11,9 @@ export default {
             userData: {
                 
             },
+            users: [
+
+            ],
             errors: {
 
             },
@@ -20,7 +23,10 @@ export default {
             pagination: {
 
             },
-            message: ''
+            message: '',
+            roles: [
+
+            ]
         }
     },
 
@@ -53,6 +59,12 @@ export default {
         },
         setUserData(state, payload) {
             state.userData = payload
+        },
+        setUsersData(state, payload) {
+            state.users = payload
+        },
+        setRolesData(state, payload) {
+            state.roles = payload
         }
     },
 
@@ -237,6 +249,63 @@ export default {
                 })
             } catch(err) {
                 console.log(err)
+            }
+        },
+
+        async getUsers({state, commit}, payload) {
+            let api = `${state.apiUrl}users`
+            const token = Cookies.get('bearer_token')
+            let queries = payload !== undefined && payload !== null? payload : {}
+            if(Object.keys(queries).length !== 0) {
+              api = `${api}?${payload}`
+              console.log(api)
+            }
+            try {
+                const { data } = await axios.post(api, {}, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                let pagination = {...data}
+                delete pagination.data
+                commit('setUsersData', data.data)
+                commit('setPaginationData', pagination)
+            } catch(err) {
+                console.log(err)
+            }
+        },
+
+        async getRoles({state, commit}) {
+            let api = `${state.apiUrl}roles`
+            const token = Cookies.get('bearer_token')
+            try {
+                const { data } = await axios.post(api, {}, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                commit('setRolesData', data)
+            } catch(err) {
+                console.log(err)
+            }
+        },
+
+        async updateUserRole({state, commit}, payload) {
+            const token = Cookies.get('bearer_token')
+            let api = `${state.apiUrl}user/${payload.userId}/role`
+            try {
+                const { data } = await axios.put(api, payload, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                commit('setMessage', data.message)
+                commit('setErrorData', {})
+                return true
+            } catch (err) {
+                console.log(err)
+                commit('setMessage', err.response.data.message)
+                return false
             }
         }
     }

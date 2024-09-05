@@ -54,8 +54,8 @@
     const handleLogin = async () => {
         const isSuccess = await store.dispatch('user/login', userInput)
         if(isSuccess) {
-            store.dispatch('ui/showNotif',{message: 'Successfuly login'})
             router.push('/')
+            store.dispatch('ui/showNotif',{message: 'Successfuly login'})
         } else if(errors.value.message) {
             store.dispatch('ui/showNotif',{message: errors.value.message, topPos: 0, isError: true})
         }

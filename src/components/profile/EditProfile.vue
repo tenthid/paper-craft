@@ -1,7 +1,7 @@
 <template>
     <div class="profile-card-body">
         <label for="fileInput" class="rounded-full self-center overflow-hidden flex items-center justify-center flex-col relative border-primary-background border-[4px]">
-            <img class="" width="160px" height="160px" :src="userInput.image_path || imageTemp? imageTemp || `https://tenth.run.place:90/storage/${userInput.image_path}` : 'images/user.png'" alt="profileImage">
+            <img class="" width="160px" height="160px" :src="userInput.image_path || imageTemp? imageTemp || `https://tenth.run.place:90/storage/${userInput.image_path}` : '/images/user.png'" alt="profileImage">
             <i class="fa-solid h-[8px] w-[8px] fa-camera absolute bottom-[5px] text-primary1"></i>
         </label>
         <input type="file" @change="renderImage" class="hidden" name="" id="fileInput">

@@ -2,7 +2,7 @@
     <div class="p-[18px] border-b-[0.5px] border-b-[#EDEDED]">
         <div class="flex gap-[24px] justify-between">
             <div class="flex gap-[16px]">
-                <img width="130px" height="auto" src="/images/tas.jpg" alt="productPage">
+                <img width="130px" height="auto" :src="image" alt="productPage">
                 <div class="flex gap-[8px] flex-col">
                     <p class="font-inter text-[16px] font-[500]">
                         {{ productName }}

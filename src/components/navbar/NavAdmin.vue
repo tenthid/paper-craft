@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar flex justify-between items-center py-[10px] px-[20px] bg-white w-full fixed top-0 left-0 z-[1100]"
+    class="navbar flex justify-between items-center py-[10px] px-[20px] bg-white w-full fixed top-0 left-0 z-[1100] gap-[20px]"
   >
     <img
       @click="router.push('/')"
@@ -8,22 +8,21 @@
       src="/images/logo-full.png"
       alt="logo"
     />
-    <div
-      class="search-bar flex items-center w-[75%] h-[40px] rounded-full border border-gray"
-    >
-      <div class="pl-[10px]">
-        <img src="/images/magnify-glass.svg" alt="Search" />
+    <div class="border-[1px] border-solid rounded-full border-[#E0E0E0] w-[100%] h-[40px] input-group">
+      <div class="group-span">
+        <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+        <img class="cursor-pointer" @click="handleSearch()" width="100%" height="auto" src="/images/magnify-glass.svg" alt="logo">
       </div>
-      <input
-        type="text"
-        class="search-input w-full border-none outline-none p-[10px]"
-        placeholder="Search for items"
-      />
+      <input @keyup.enter="handleSearch()" v-model="keyWord" type="text" class="group-controll input-no-focus" placeholder="Search for items">
+      <div v-if="keyWord" class="group-span">
+        <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+        <img class="cursor-pointer" @click="() => {keyWord = ''}" width="100%" height="auto" src="/images/X-page.svg" alt="logo">
+      </div>
     </div>
     <div class="profile flex items-center">
-      <div class="text-[16px] text-primary mr-[20px]">Admin Name</div>
+      <div class="text-[16px] text-primary mr-[20px]">{{ userData.name }}</div>
       <img
-        src=""
+        :src="userData.image_path? `https://tenth.run.place:90/storage/${userData.image_path}` : 'images/user.png'"
         alt="Profile Picture"
         class="w-[40px] h-[40px] bg-white rounded-full"
       />
@@ -72,6 +71,15 @@
         >
           Brands
         </router-link>
+        <router-link
+          class="mb-[15px] text-[18px]"
+          active-class="text-primary"
+          to="/user-role"
+          v-if="userData.roles[0].name === 'master'"
+          @click="handleNavigation"
+        >
+          Manage user role
+        </router-link>
       </div>
       <button
         class="logout-btn flex items-center text-red mt-auto"
@@ -104,6 +112,9 @@
           <router-link to="/brand-admin" active-class="text-primary-1"
             >Brands</router-link
           >
+          <router-link v-if="userData.roles[0].name === 'master'" to="/user-role" active-class="text-primary-1"
+            >User Role</router-link
+          >
         </div>
       </div>
     </div>
@@ -122,14 +133,38 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { ref, onMounted, computed } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 
 const router = useRouter();
+const route = useRoute();
 const store = useStore()
 
+const userData = computed(() => store.state.user.userData)
+
 const isMenuOpen = ref(false);
+const keyWord = ref()
+
+const pushWithPath = (path) => {
+  router.push({
+    path: path,
+    query: {
+      ...route.query,
+      keyword : keyWord.value
+    }
+  })
+}
+
+const handleSearch = () => {
+  if(keyWord.value) {
+    if(route.path !== '/') {
+      pushWithPath(route.path)
+    } else {
+      pushWithPath('/products')
+    }
+  }
+}
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;

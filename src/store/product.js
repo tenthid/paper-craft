@@ -55,7 +55,10 @@ export default {
       },
       setMessage(state, payload) {
         state.message = payload
-      }
+      },
+      setErrorData(state, payload) {
+        state.errors = payload
+      },
     },
 
     getters: {
@@ -169,7 +172,6 @@ export default {
                 Authorization: `Bearer ${token}`
             }
           })
-          // commit('setErrorData', {})
           commit('setMessage', data.message)
           return true
         } catch(err) {
@@ -177,8 +179,67 @@ export default {
           err.response.data.errors? commit('setErrorData', err.response.data.errors) : commit('setErrorData', {})
           commit('setMessage', err.response.data.message)
           return false
-      }
-      }
+        }
+      },
 
+      async uploadProductImage({state, commit}, payload) {
+        const token = Cookies.get('bearer_token')
+        let api = `${state.apiUrl}products/upload`
+        const formData = new FormData()
+        formData.append('image', payload)
+        try {
+            const { data } = await axios.post(api, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            return { status: true, path: data.image_path}
+        } catch(err) {
+            console.log(err)
+            err.response.data.errors? commit('setErrorData', err.response.data.errors) : commit('setErrorData', {})
+            commit('setMessage', err.response.data.message)
+            return false
+        }
+      },
+
+      async createProduct({state, commit}, payload) {
+        const token = Cookies.get('bearer_token')
+        let api = `${state.apiUrl}products`
+        try {
+          const { data } = await axios.post(api, payload, {
+              headers: {
+                  Authorization: `Bearer ${token}`
+              }
+          })
+          commit('setMessage', data.message)
+          commit('setErrorData', {})
+          return true
+        } catch (err) {
+            console.log(err)
+            err.response.data.errors? commit('setErrorData', err.response.data.errors) : commit('setErrorData', {})
+            commit('setMessage', err.response.data.message)
+            return false
+        }
+      },
+
+      async updateProduct({state, commit}, payload) {
+        const token = Cookies.get('bearer_token')
+        let api = `${state.apiUrl}products/${payload.id}`
+        try {
+          const { data } = await axios.put(api, payload, {
+              headers: {
+                  Authorization: `Bearer ${token}`
+              }
+          })
+          commit('setMessage', data.message)
+          commit('setErrorData', {})
+          return true
+        } catch (err) {
+            console.log(err)
+            err.response.data.errors? commit('setErrorData', err.response.data.errors) : commit('setErrorData', {})
+            commit('setMessage', err.response.data.message)
+            return false
+        }
+      },
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white p-[30px] flex flex-col gap-[24px] rounded-[11px] w-[480px]  h-[fit-content]">
         <div class="flex gap-[18px] items-center">
-            <img class="rounded-full border-[3px] border-white" width="100px" height="100px" :src="userData.image_path? `https://tenth.run.place:90/storage/${userData.image_path}` : 'images/user.png'" alt="profile-img">
+            <img class="rounded-full border-[3px] border-white" width="100px" height="100px" :src="userData.image_path? `https://tenth.run.place:90/storage/${userData.image_path}` : '/images/user.png'" alt="profile-img">
             <div class="flex flex-col justify-between">
                 <p class="font-inter font-bold text-[20px]">{{ userData.name }}</p>
                 <p class="font-inter text-gray text[18px]">{{ userData.email }}</p>

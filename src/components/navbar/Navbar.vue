@@ -28,7 +28,6 @@
     const store = useStore()
 
     const loginStatus = computed(() => store.state.user.isLogin)
-    const keyWord = ref()
     const cartLength = computed(() => store.getters['cart/getCartLength'])
     const likeLength = computed(() => store.getters['user/getLikeLength'])
     const userData = computed(() => store.state.user.userData)
@@ -37,6 +36,7 @@
         'userAction' : UserAction
     }
     const parentRendered = ref(false)
+    const keyWord = ref()
 
     const pushWithPath = (path) => {
         router.push({

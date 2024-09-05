@@ -36,14 +36,11 @@
               @dragover.prevent="handleDragOver"
               @drop="handleDrop"
             >
-              <img
-                v-if="imageUrl"
-                :src="imageUrl"
+            <img
+                v-if="imageTemp"
+                :src="userInput.image_url? typeof imageTemp === 'string'? imageTemp : false || `https://tenth.run.place:90/storage/${userInput.image_url}` : '/images/logo-full.png'"
                 alt="Uploaded Image"
-                :style="{
-                  width: `${imageWidth}px`,
-                  height: `${imageHeight}px`,
-                }"
+                style="height: 100px; width: auto;"
                 class="object-cover"
               />
               <img
@@ -52,28 +49,31 @@
                 src="/images/upload-icon.svg"
                 class="w-18 h-15 z-10"
               />
-              <span v-if="!imageUrl" class="font-semibold z-10">
+              <span v-if="!imageTemp" class="font-semibold z-10">
                 Drag & drop image or <span class="underline">Browse</span>
               </span>
-              <p v-if="!imageUrl" class="text-xs text-gray leading-4 z-10">
+              <p v-if="!imageTemp" class="text-xs text-gray leading-4 z-10">
                 Supported formats: JPEG, PNG
               </p>
               <input
                 type="file"
-                ref="fileInput"
                 accept="image/jpeg, image/png"
-                @change="onFileChange"
+                @input="renderImage"
                 class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
             </label>
 
             <div class="font-medium text-[#7A8089] font-poppins">
               <BaseInput
-                v-model="userInput.brand"
+                v-model="userInput.brand_name"
                 label="Brand Name"
                 placeholder="Enter brand name"
                 identity="brand"
-              ></BaseInput>
+              >
+              <p v-if="errors.brand_name" v-for="error in errors.brand_name" class="text-danger font-inter text-[12px]">
+                {{ error }}
+              </p>
+              </BaseInput>
             </div>
 
             <div
@@ -90,7 +90,7 @@
               </button>
               <button
                 class="bg-primary rounded-[10px] phone-s:w-[100px] phone-s:h-[35px] laptop:w-[130px] laptop:h-[40px]"
-                @click="saveBrand"
+                @click="handleUpdate()"
               >
                 <div
                   class="font-poppins text-[12px] laptop:text-[16px] text-white"
@@ -107,40 +107,81 @@
 </template>
 
 <script setup>
+import { reactive, onMounted, computed, ref } from "vue";
+import { useStore } from "vuex";
+import { useRoute, useRouter } from "vue-router";
 import BaseInput from "@/components/ui/BaseInput.vue";
-import { reactive, ref, computed } from "vue";
 
+const store = useStore();
+const route = useRoute()
+const router = useRouter()
+
+const brand = computed(() => store.state.brand.brand);
+const errors = computed(() => store.state.brand.errors)
+const message = computed(() => store.state.brand.message)
+const fileInput = ref()
+const imageTemp = ref()
 const userInput = reactive({
-  brand: "",
+  brand_name: '',
+  image_url: ''
 });
 
-const imageUrl = ref(null);
-const imageWidth = ref(100);
-const imageHeight = computed(() => imageWidth.value);
+const handleUpdate = async () => {
+  let isSuccess = {status: true}
+  if(fileInput.value) {
+      isSuccess = await store.dispatch('brand/uploadBrandImage', fileInput.value)
+      userInput.image_url = isSuccess.path
+  }
+  if(isSuccess.status) {
+      const createSuccess = await store.dispatch('brand/updateBrand', userInput)
+      if(createSuccess) {
+          store.dispatch('ui/showNotif', {message: message.value})
+          await store.dispatch('brand/getBrands')
+          router.push('/brand-admin')
+      } else if(Object.keys(errors.value).length === 0) {
+          store.dispatch('ui/showNotif', {message: message.value, isError: true})
+      }
+  } else {
+    store.dispatch('ui/showNotif', {message: message.value, isError: true})
+  }
+}
 
-function onFileChange(event) {
-  const file = event.target.files[0];
-  if (file) {
+const renderImage = (e) => {
+  fileInput.value = e.target.files[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(fileInput.value);
+
+  reader.addEventListener ("load", () => {
+    imageTemp.value = reader.result;
+  });
+};
+
+const handleDragOver = (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+};
+
+const handleDrop = (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+  fileInput.value = event.dataTransfer.files[0];
+  if (fileInput.value) {
     const reader = new FileReader();
     reader.onload = (e) => {
-      imageUrl.value = e.target.result;
+      imageTemp.value = e.target.result;
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(fileInput.value);
   }
-}
+};
 
-const BrandList = reactive([]);
+onMounted(async () => {
+  await store.dispatch("brand/getBrand", route.params.id);
 
-function saveBrand() {
-  if (userInput.brand.trim() !== "" && imageUrl.value) {
-    BrandList.push({
-      name: userInput.brand.trim(),
-      logo: imageUrl.value,
-    });
-    userInput.brand = "";
-    imageUrl.value = null;
+  if(Object.keys(brand.value).length !== 0) {
+    Object.assign(userInput, brand.value)
+    if(userInput.image_url) imageTemp.value = true
   } else {
-    alert("Brand name and logo cannot be empty!");
+    router.push('/brand-admin')
   }
-}
+});
 </script>
