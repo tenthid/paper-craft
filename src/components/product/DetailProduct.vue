@@ -3,7 +3,7 @@
     <div class="p-[25px] flex items-center w-full bg-white rounded-[10px]">
       <img class="h-auto w-full border-[1px] border-light-gray rounded-[10px]" :src="productDetail.image_url? `https://tenth.run.place:90/storage/${productDetail.image_url}` : '/images/tas.jpg'" alt="detail-img">
     </div>
-    <div class="flex flex-col px-[25px] py-[30px] laptop:h-full w-full bg-white rounded-[10px] justify-between gap-[20px]">
+    <div class="relative overflow-hidden flex flex-col px-[25px] py-[30px] laptop:h-full w-full bg-white rounded-[10px] justify-between gap-[20px]">
       <div class="flex flex-col gap-[20px]">
         <div class="flex flex-col gap-[12px]">
           <div class="flex justify-between">
@@ -29,6 +29,9 @@
         <button @click="$emit('checkout', $event.target.value)" class="btn border-primary border-[1px] text-primary rounded-[5px] w-full">
           Buy now
         </button>
+      </div>
+      <div @click.prevent="" v-if="productDetail.stock === 0" class="text-white text-[30px] font-bold absolute top-0 right-0 w-full h-full flex justify-center items-center bg-modal-rgba">
+        Out of Stock
       </div>
     </div>
   </div>

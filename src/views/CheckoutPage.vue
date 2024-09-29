@@ -1,5 +1,5 @@
 <template>
-    <div v-if="parentRendered" class="container-page bg-primary-background !pt-[85px] !pb-[50px] flex gap-[20px]" :class="{'h-[100vh]': cartItems.length === 0}">
+    <div v-if="parentRendered" class="container-page bg-primary-background min-h-screen max-h-fit !pt-[85px] !pb-[50px] flex gap-[20px]">
         <div class="p-[30px] rounded-[12px] bg-white w-[100%] h-[fit-content]">
             <p class="font-inter text-[14px] font-[400] text-gray pb-[20px]">{{ route.name === 'cart'? 'Cart List' : 'Product' }}</p>
             <div v-if="cartItems.length || checkoutItems.length > 0" class="flex flex-col gap-[20px]">
@@ -16,7 +16,7 @@
                         :price="item.product.price"
                         :stock="item.product.stock"
                         :image="item.product.image_url? `https://tenth.run.place:90/storage/${item.product.image_url}` : '/images/tas.jpg'"
-                        :totalPrice="item.totalPrice"
+                        :totalPrice="item.total_price"
                         :selected="item.selected"
                         :formatPrice="store.getters['product/formatToIdr']"
                     />
@@ -29,14 +29,14 @@
                     </div>
                     <div v-for="item in checkoutItems" class="flex-col flex gap-[10px]">
                         <ProductCardCheckout 
-                            :qty="item.qty"
+                            :qty="item.quantity"
                             :productName="item.product.product_name"
                             :categoryName="item.product.category.category_name"
                             :brandName="item.product.brand.brand_name"
                             :price="item.product.price"
                             :stock="item.product.stock"
                             :image="item.product.image_url? `https://tenth.run.place:90/storage/${item.product.image_url}` : '/images/tas.jpg'"
-                            :totalPrice="item.totalPrice"
+                            :totalPrice="item.total_price"
                             :selected="item.selected"
                             :formatPrice="store.getters['product/formatToIdr']"
                         />
@@ -59,7 +59,10 @@
 
             <SummaryCardCheckout v-else :subTotal="subTotal" :items="checkoutItems" :formatPrice="store.getters['product/formatToIdr']" />
 
-            <button :disabled="cartItems.length === 0 || selcetedEmpty" @click="handleCheckout()" class="btn bg-primary rounded-[5px] text-white font-inter disabled:disabled">
+            <button v-if="route.path === '/cart'" :disabled="cartItems.length === 0" @click="handleCheckout()" class="btn bg-primary rounded-[5px] text-white font-inter disabled:disabled">
+                {{ route.name === 'cart'? 'Checkout' : 'Pay now' }}
+            </button>
+            <button v-else :disabled="checkoutItems.length === 0" @click="handleCheckout()" class="btn bg-primary rounded-[5px] text-white font-inter disabled:disabled">
                 {{ route.name === 'cart'? 'Checkout' : 'Pay now' }}
             </button>
         </div>
@@ -85,13 +88,14 @@
     const cartItems = computed(() => store.state.cart.cart) 
     const checkoutItems = computed(() => store.state.cart.checkoutItems)
     const userData = computed(() => store.state.user.userData)
+    const message = computed(() => store.state.order.message)
     
     const subTotal = ref(0)
     const parentRendered = ref(false)
 
     const qtyControll = async (type, id, itemQty, itemStock) => {
         if(type === '+') {
-            if( itemStock !== itemQty) {
+            if( itemStock > itemQty) {
                 await store.dispatch('cart/addItemToCart', {id: id, qty : itemQty + 1})
             }
         } else {
@@ -104,18 +108,18 @@
         subTotal.value = 0
         if(route.path === '/checkout') {
             for(let item of checkoutItems.value) {
-                subTotal.value += item.totalPrice
+                subTotal.value += item.total_price
             }
         } else {
             for(let item of cartItems.value) {
                 if(item.selected) {
-                    subTotal.value += item.totalPrice
+                    subTotal.value += item.total_price
                 }
             }
         }
     }
 
-    const handleCheckout = () => {
+    const handleCheckout = async () => {
         if(route.path === '/cart') {
             let items = []
             for(let item of cartItems.value) {
@@ -126,10 +130,36 @@
             store.commit('cart/insertCheckoutItems', items)
             router.push('/checkout')
         } else {
-            if(userData.address) {
-
+            if(userData.value.address) {
+                let items = {}
+                let productIds = []
+                checkoutItems.value.forEach(item => {
+                    if(items.buy) {
+                        productIds.push({
+                            id: item.id,
+                            quantity: item.quantity
+                        })
+                    } else {
+                        productIds.push(item.id)
+                    }
+                })
+                if(!route.query.buy)  {
+                    items.reorder = true
+                    items.itemIds = productIds
+                } else {
+                    items.buy = true
+                    items.items = productIds
+                }
+                const isSuccess = await store.dispatch('order/makeOrder', items)
+                if(isSuccess) {
+                    store.dispatch('ui/showNotif', {message: message.value})
+                    await store.dispatch('cart/getCartItems')
+                    router.push('/')
+                } else {
+                    store.dispatch('ui/showNotif', {message: message.value, isError: true})
+                }
             } else {
-                store.dispatch('showNotif', {message: 'your address is not set yet', isError: true})
+                store.dispatch('ui/showNotif', {message: 'your address is not set yet', isError: true})
             }
         }
     }
@@ -153,7 +183,6 @@
     onMounted(async () => {
         await checkPath()
         await store.dispatch('product/getProducts')
-        console.log(cartItems.value)
         parentRendered.value = true
     })
 </script>

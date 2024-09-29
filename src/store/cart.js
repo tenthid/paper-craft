@@ -18,14 +18,14 @@ export default {
     mutations: {
       changeQty(state, payload) {
         state.cart[payload.id - 1].qty = payload.value
-        state.cart[payload.id - 1].totalPrice = state.cart[payload.id - 1].price * payload.value
+        state.cart[payload.id - 1].total_price = state.cart[payload.id - 1].price * payload.value
       },
 
       setCartItems(state, payload) {
         state.cart = payload
         for(let item of state.cart) {
           item.selected = true
-          item.totalPrice = item.quantity * item.product.price
+          item.total_price = item.quantity * item.product.price
         }
       },
 
@@ -90,9 +90,9 @@ export default {
       },
 
       async removeItemCart({ state, commit, rootState }, payload) {
-        let api = `${state.apiUrl}cart/remove`
+        let api = `${state.apiUrl}cart/${[payload]}`
         try {
-          const { data } = await axios.post(api, { product_id: payload }, {
+          const { data } = await axios.delete(api, {
             headers: {
               Authorization: `Bearer ${rootState.user.token}`
             }

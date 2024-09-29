@@ -98,11 +98,11 @@
       <button v-if="!disableLike && !isAdmin && isLogin"
         :disabled="isCooldown"
         @click.prevent="handleLike(product.id)"
-        class="w-[30px] !m-[0] absolute top-[12px] left-[13px] rounded-md bg-[transparent] h-[30px] flex flex-row items-center justify-center p-1 box-border"
+        class="w-[30px] !m-[0] absolute top-[12px] left-[13px] rounded-md bg-white h-[30px] flex flex-row items-center justify-center p-1 box-border z-[1]"
       >
         <img v-if="product.liked"
           class="w-[22px] relative h-[22px] overflow-hidden shrink-0"
-          alt="heart"
+        alt="heart"
           src="/images/heart-red.svg"
         />
 
@@ -112,6 +112,9 @@
           src="/images/heart.svg"
         />
     </button>
+    <div @click.prevent="" v-if="product.stock === 0 && !isAdmin" class="text-white text-[30px] font-bold absolute top-0 w-full h-full flex justify-center items-center bg-modal-rgba">
+      Out of Stock
+    </div>
     </router-link>
   </div>
 </template>

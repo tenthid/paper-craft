@@ -104,7 +104,7 @@
         if(isSuccess) {
             await store.dispatch("user/getUsers", route.fullPath.split('?')[1])
             await store.dispatch('ui/showNotif', { message: message.value})
-        } else if (Object.keys(errors.value).length() === 0) {
+        } else {
             await store.dispatch('ui/showNotif', { message: message.value, isError: true})
         }
     }

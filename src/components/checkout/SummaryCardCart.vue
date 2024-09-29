@@ -4,7 +4,7 @@
             <p class="text-[14px] font-bold font-inter">Product price</p>
             <div v-for="item in items" :class="{'hidden' : !item.selected}" class="flex justify-between">
                 <p class="text-[14px] font-inter text-gray">{{ item.product.product_name }}</p>
-                <p class="text-[14px] font-inter text-gray">{{ formatPrice(item.totalPrice) }}</p>
+                <p class="text-[14px] font-inter text-gray">{{ formatPrice(item.total_price) }}</p>
             </div>
         </div>
         <p class="font-inter text-[14px] font-[400] text-gray">Total</p>

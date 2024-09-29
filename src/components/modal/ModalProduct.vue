@@ -21,7 +21,7 @@
                             -
                         </button>
                         <input v-model="qty" type="number" class="text-[14px] group-controll input-no-focus text-center w-[20px]" readonly >
-                        <button :disabled="qty === product.stock" @click="increment()" class="select-none cursor-pointer group-span border-l-[1px] pl-[8px] align-top">
+                        <button :disabled="qty >= product.stock" @click="increment()" class="select-none cursor-pointer group-span border-l-[1px] pl-[8px] align-top">
                             +
                         </button>
                     </div>
@@ -79,16 +79,16 @@
         store.dispatch('ui/showNotif', {message: 'item removed from cart'})
     }
 
-    const handleInsert =async () => {
+    const handleInsert = async () => {
         if(store.state.user.isLogin) {
             if(props.modal.type === 'checkout' && qty.value) {
                 let item = {product: {
                     ...product.value
-                }, qty: qty.value, totalPrice: qty.value * product.value.price}
+                }, id: product.value.id,  quantity: qty.value, total_price: qty.value * product.value.price}
                 store.commit('cart/insertCheckoutItems', [item])
                 qty.value = 0
                 store.dispatch('ui/showModal')
-                router.push('/checkout')
+                router.push('/checkout?buy=true')
             } else if (qty.value) {
                 const isSuccess = await store.dispatch('cart/addItemToCart', { id: product.value.id, qty: qty.value, stock: product.value.stock})
                 if(isSuccess) {

@@ -5,6 +5,7 @@ import product from "./product";
 import user from "./user";
 import brand from "./brand";
 import category from "./category";
+import order from "./order";
 
 export const store = createStore({
     modules: {
@@ -13,6 +14,7 @@ export const store = createStore({
         product,
         user,
         brand,
-        category
+        category,
+        order
     },
 })

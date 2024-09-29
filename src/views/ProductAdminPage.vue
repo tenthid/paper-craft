@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <div class="flex flex-col gap-[40px]" v-else>
+      <div class="flex flex-col max-h-fit min-h-screen gap-[40px]" v-else>
         <!-- Product List -->
         <ProductList :is-admin="true" :disable-like="false" :products="products" :format-price="store.getters['product/formatToIdr']" />
 

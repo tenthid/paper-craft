@@ -11,17 +11,17 @@
         </div>
         <p class="font-inter text-[14px] font-[400] text-gray">Total</p>
         <div class="p-[15px] rounded-[10px] flex flex-col gap-[15px] border-[#EDEDED] border-[1px]">
-            <div class="flex justify-between">
+            <!-- <div class="flex justify-between">
                 <p class="text-[14px] font-inter text-gray">Subtotal</p>
                 <p class="text-[14px] font-inter text-gray">{{ props.formatPrice(props.subTotal) }}</p>
-            </div>
-            <div class="flex justify-between">
+            </div> -->
+            <!-- <div class="flex justify-between">
                 <p class="text-[14px] font-inter text-gray">Packaging Cost Total</p>
                 <p class="text-[14px] font-inter text-gray"> {{ props.formatPrice(packagingTotal) }} </p>
-            </div>
+            </div> -->
             <div class="flex justify-between">
                 <p class="text-[14px] font-bold font-inter">Order Total</p>
-                <p class="text-[14px] font-bold font-inter">{{ props.formatPrice(packagingTotal + props.subTotal) }}</p>
+                <p class="text-[14px] font-bold font-inter">{{ props.formatPrice(props.subTotal) }}</p>
             </div>
         </div>
     </div>

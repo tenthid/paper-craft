@@ -1,6 +1,6 @@
 <template>
   
-  <div class="w-[100%] bg-[#ECF3F7] py-[166px] px-[60px] pb-[50px] flex flex-col gap-[40px]">
+  <div v-if="dataLoaded" class="w-[100%] bg-[#ECF3F7] py-[166px] px-[60px] pb-[50px] flex flex-col gap-[40px]">
     <div class="text-primary flex flex-col gap-[20px] text-center font-maitree text-[35px] font-normal items-center">
       <p>
         All Products
@@ -26,6 +26,9 @@
       <!-- Pagination -->
       <Pagination v-if="dataLoaded" :pagination-data="pagination" />
     </div>
+  </div>
+  <div v-else class="flex justify-center items-center h-[100vh] bg-primary-background">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
   </div>
 </template>
 

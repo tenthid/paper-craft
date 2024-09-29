@@ -218,6 +218,7 @@ const handleDrop = (event) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       imageTemp.value = e.target.result;
+      userInput.image_url = true
     };
     reader.readAsDataURL(fileInput.value);
   }
