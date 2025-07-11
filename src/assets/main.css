@@ -1,8 +1,25 @@
-/* @import './base.css'; */
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kaushan+Script&family=Pattaya&family=Syne&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Noto+Serif+Khitan+Small+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Maitree:wght@200;300;400;500;600;700&family=Noto+Serif+Khitan+Small+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Maitree:wght@200;300;400;500;600;700&family=Noto+Serif+Khitan+Small+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+img {
+  max-width: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    display: none;
+}
 
 @layer components {
   .btn {
@@ -10,5 +27,178 @@
     padding: 8px 16px;
     justify-content: center;
     align-items: center;
+  }
+
+  .input-group {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    padding: 8px 14px;
+    gap: 14px;
+  }
+
+  .group-span {
+    display: flex;
+    align-items: center;
+  }
+
+  .group-controll {
+    width: 100%;
+  }
+
+  .form-card {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 8px;
+    align-items: center;
+  }
+
+  .form-card-body {
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 16px;
+  }
+
+  .form-card-footer {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .input-check {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    vertical-align: top;
+    width: 16px;
+    height: 16px;
+    background-color: #ECF3F7;
+    border-radius: 3px;
+  }
+
+  
+  .input-check:checked {
+    background: #006989 ;
+    border-color: #006989 ;
+    content: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/></svg>");
+  }
+  
+  .input-check:focus {
+    border-color: #006989;
+    outline: 0 ;
+    box-shadow: 0 0 0 0.25rem rgba(0, 105, 137, 0.25);
+  }
+
+  .profile-card {
+ 
+    border-radius: 10px;
+    overflow: hidden;
+    flex: 1;
+    background-color: white;
+    height: fit-content;
+  }
+
+  .profile-card-body {
+    padding: 23px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+  }
+  
+  .profile-card-title {
+    padding: 23px;
+    border-bottom: 0.5px solid lightgray;
+    font-size: 20px;
+    color: #005C78;
+  }
+  
+  .profile-card-footer {
+    border-top: 0.5px solid lightgray;
+    padding: 23px;
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+  }
+
+  .input-select {
+    border: solid 1px gray;
+    padding: 11px;
+  }
+
+  .input-select:focus {
+    outline: none;
+  }
+
+  .disabled {
+    background-color: #9199a3;
+    color: white;
+  }
+
+  .lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #0D6B6F;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #0D6B6F transparent transparent transparent;
+  }
+
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  
+}
+
+@layer utilities {
+  .input-no-focus:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .container-page {
+    padding: 0px 60px;
+    background-color: #ECF3F7;
+  }
+
+  @media (max-width: 768px) {
+    .container-page {
+      padding: 0px 30px;
+    }
+  }
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

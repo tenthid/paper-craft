@@ -1,95 +1,149 @@
 <template>
-  <footer>
+  <div
+    class="w-full px-[20px] tablet:px-[40px] laptop:px-[60px] py-[50px] bg-primary flex flex-col gap-10 font-inter"
+  >
     <div
-      class="max-w-screen-xl mx-auto p-10 bg-primary-background flex flex-col gap-10"
+      class="flex laptop:flex-row justify-between gap-8 laptop:gap-10 tablet:flex-col phone-s:flex-col"
     >
-      <div class="flex justify-between">
-        <!-- Desc Section -->
-        <div class="space-y-6">
-          <div
-            class="flex items-center space-x-2 text-white text-2xl font-bold"
-          >
-            <span>Paper</span><span>Craft</span>
+      <!-- Desc Section -->
+      <div class="space-y-4 tablet:space-y-6 max-w-md">
+        <div
+          class="flex items-center space-x-2 text-white text-[24px] phone-m:text-[26px] tablet:text-[30px] font-bold"
+        >
+          <div style="display: flex; gap: 0">
+            <span>Paper</span>
+            <span>Craft</span>
           </div>
-          <p class="text-white text-sm leading-7 max-w-sm">
-            Papercraft menyediakan berbagai perlengkapan alat tulis kantor dan
-            bahan kerajinan kertas. Temukan kertas, pensil, pena, dan alat
-            papercraft berkualitas tinggi untuk memenuhi kebutuhan kantor dan
-            hobi kreatif Anda.
-          </p>
         </div>
-
-        <!-- Contact Section -->
-        <div class="space-y-3">
-          <h3 class="text-white text-xl font-medium">Contact</h3>
-          <p class="text-white text-lg leading-7">
-            Call now:
-            <span class="text-[#9199a3] font-medium">(0361) 555-0115</span>
-          </p>
-          <p class="text-white text-lg leading-7">
-            Email:
-            <span class="text-[#9199a3] font-medium">papercraft@gmail.com</span>
-          </p>
-          <p class="text-white text-sm leading-tight">
-            Jln Singosari Gg.Bebek No.6
-          </p>
-        </div>
-
-        <!-- Categories Section -->
-        <div class="space-y-4">
-          <h3 class="text-white text-xl font-medium">Categories</h3>
-          <ul class="space-y-1">
-            <li class="text-[#9199a3] text-base">Alat Tulis</li>
-            <li class="text-[#9199a3] text-base">Perlengkapan Sekolah</li>
-            <li class="text-[#9199a3] text-base">Perlengkapan Pramuka</li>
-            <li class="text-[#9199a3] text-base">Perlengkapan Kantor</li>
-            <li class="text-[#9199a3] text-base">Perlengkapan Seni</li>
-            <li class="text-[#9199a3] text-base">Kertas dan Buku</li>
-          </ul>
-        </div>
-
-        <!-- Support Section -->
-        <div class="space-y-4">
-          <h3 class="text-white text-xl font-medium">Support</h3>
-          <ul class="space-y-1">
-            <li class="text-[#9199a3] text-base">Privacy Policy</li>
-            <li class="text-[#9199a3] text-base">Terms & Conditions</li>
-          </ul>
-        </div>
+        <p
+          class="text-white text-[14px] phone-m:text-[16px] tablet:text-[14px] text-justify"
+        >
+          Papercraft menyediakan berbagai perlengkapan alat tulis kantor dan
+          bahan kerajinan kertas. Temukan kertas, pensil, pena, dan alat
+          papercraft berkualitas tinggi untuk memenuhi kebutuhan kantor dan hobi
+          kreatif Anda.
+        </p>
       </div>
 
-      <div class="border-t border-white"></div>
+      <!-- Contact Section -->
+      <div class="space-y-2 tablet:space-y-3 mt-6 tablet:mt-0">
+        <h3
+          class="text-white text-[18px] phone-m:text-[20px] tablet:text-[20px] font-medium"
+        >
+          Contact
+        </h3>
+        <p
+          class="text-white text-[16px] phone-m:text-[18px] tablet:text-[18px] leading-7"
+        >
+          Call now:
+          <span class="text-gray font-medium">(0361) 555-0115</span>
+        </p>
+        <p
+          class="text-white text-[16px] phone-m:text-[18px] tablet:text-[18px] leading-7"
+        >
+          Email:
+          <span class="text-gray font-medium">papercraft@gmail.com</span>
+        </p>
+        <p class="text-white text-[18px] leading-tight">
+          Jln Singosari Gg.Bebek No.6
+        </p>
+      </div>
 
-      <div class="flex justify-between items-center">
-        <p class="text-white text-xl">© 2024 Papercraft</p>
-        <div class="flex space-x-5">
-          <!-- Social Media Icons -->
-          <div
-            class="w-8 h-8 bg-white rounded-full flex items-center justify-center"
-          >
-            <img src="../icons/IconFacebook.vue" alt="Facebook" />
-          </div>
-          <div
-            class="w-8 h-8 bg-white rounded-full flex items-center justify-center"
-          >
-            <img src="../icons/IconYtb.vue" alt="YouTube" />
-          </div>
-          <div
-            class="w-8 h-8 bg-white rounded-full flex items-center justify-center"
-          >
-            <img src="../icons/IconInstagram.vue" alt="Instagram" />
-          </div>
-          <div
-            class="w-8 h-8 bg-white rounded-full flex items-center justify-center"
-          >
-            <img src="../icons/IconTwitter.vue" alt="Instagram" />
-          </div>
-        </div>
+      <!-- Categories Section -->
+      <div class="space-y-2 tablet:space-y-4 mt-6 tablet:mt-0">
+        <h3
+          class="text-white text-[18px] phone-m:text-[20px] tablet:text-[20px] font-medium"
+        >
+          Categories
+        </h3>
+        <FooterCategory />
+      </div>
+
+      <!-- Support Section -->
+      <div class="space-y-2 tablet:space-y-4 mt-6 tablet:mt-0">
+        <h3
+          class="text-white text-[18px] phone-m:text-[20px] tablet:text-[20px] font-medium"
+        >
+          Support
+        </h3>
+        <ul class="space-y-1">
+          <router-link to="/">
+            <li class="text-gray text-[16px] tablet:text-[16px] mb-2 hover:text-white">
+              Privacy Policy
+            </li>
+          </router-link>
+          <router-link to="/">
+            <li class="text-gray text-[16px] tablet:text-[16px] hover:text-white">
+              Terms & Conditions
+            </li>
+          </router-link>
+        </ul>
       </div>
     </div>
-  </footer>
+
+    <div class="border-t border-white"></div>
+
+    <!-- Social Media and Copyright Section -->
+    <div
+      class="flex laptop:flex-row justify-between items-center space-y-4 laptop:space-y-0 phone-s:flex-col phone-l:flex-col"
+    >
+      <p class="text-white text-[16px] phone-m:text-[18px] tablet:text-[20px]">
+        © 2024 Papercraft
+      </p>
+      <div
+        class="flex flex-wrap justify-center laptop:justify-end space-x-2 laptop:space-x-4 mt-4 laptop:mt-0"
+      >
+        <a
+          href="https://www.facebook.com"
+          target="_blank"
+          class="flex items-center justify-center"
+        >
+          <img
+            src="/images/fb-logo.svg"
+            alt="Facebook"
+            class="w-[20px] h-[30px]"
+          />
+        </a>
+        <a
+          href="https://www.youtube.com"
+          target="_blank"
+          class="flex items-center justify-center"
+        >
+          <img
+            src="/images/ytb-logo.svg"
+            alt="YouTube"
+            class="w-[37px] h-[37px]"
+          />
+        </a>
+        <a
+          href="https://www.instagram.com"
+          target="_blank"
+          class="flex items-center justify-center"
+        >
+          <img
+            src="/images/ig-logo.svg"
+            alt="Instagram"
+            class="w-[30px] h-[30px]"
+          />
+        </a>
+        <a
+          href="https://x.com"
+          target="_blank"
+          class="flex items-center justify-center"
+        >
+          <img
+            src="/images/X-logo.svg"
+            alt="Twitter"
+            class="w-[25px] h-[25px]"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+import FooterCategory from './FooterCategory.vue';
+</script>
 
 <style lang="scss" scoped></style>
