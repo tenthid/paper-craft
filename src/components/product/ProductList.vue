@@ -10,7 +10,7 @@
       <img
         class="self-stretch relative rounded-sm max-w-full overflow-hidden h-[250px] shrink-0 object-cover "
         :alt="product.product_name"
-        :src="product.image_url? `https://tenth.run.place:90/storage/${product.image_url}` : '/images/tas.jpg'"
+        :src="product.image_url? `${globalImgPath}storage/${product.image_url}` : '/images/tas.jpg'"
       />
       <div
         class="self-stretch bg-white overflow-hidden flex flex-col items-start justify-start gap-[3px]"
@@ -128,6 +128,7 @@
   const route = useRoute()
   const isLogin = computed(() => store.state.user.isLogin)
   const message = computed(() => store.state.product.message)
+  const globalImgPath = import.meta.env.VITE_IMAGE_URL
 
   defineProps({
     products: {type: Array},

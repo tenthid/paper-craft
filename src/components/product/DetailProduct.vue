@@ -1,7 +1,7 @@
 <template>
   <div class="flex phone-s:flex-col laptop:flex-row w-full gap-[20px]">
     <div class="p-[25px] flex items-center w-full bg-white rounded-[10px]">
-      <img class="h-auto w-full border-[1px] border-light-gray rounded-[10px]" :src="productDetail.image_url? `https://tenth.run.place:90/storage/${productDetail.image_url}` : '/images/tas.jpg'" alt="detail-img">
+      <img class="h-auto w-full border-[1px] border-light-gray rounded-[10px]" :src="productDetail.image_url? `${globalImagePath}storage/${productDetail.image_url}` : '/images/tas.jpg'" alt="detail-img">
     </div>
     <div class="relative overflow-hidden flex flex-col px-[25px] py-[30px] laptop:h-full w-full bg-white rounded-[10px] justify-between gap-[20px]">
       <div class="flex flex-col gap-[20px]">
@@ -39,7 +39,10 @@
 
 <script setup>
   import { ref, defineProps } from 'vue';
+  import { useStore } from 'vuex';
   
+  const store = useStore();
+  const globalImagePath = import.meta.env.VITE_IMAGE_URL
   const dummyDesc = 'Tas Sekolah kami dirancang untuk memberikan kenyamanan dan gaya bagi para pelajar. Dengan bahan berkualitas tinggi, desain ergonomis, dan banyak ruang penyimpanan, tas ini ideal untuk membawa buku, laptop, dan perlengkapan sekolah lainnya. Tersedia dalam berbagai warna dan motif menarik, Tas Sekolah kami adalah pilihan sempurna untuk mendukung aktivitas belajar Anda.'
 
   defineProps({

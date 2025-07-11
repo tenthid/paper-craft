@@ -28,7 +28,7 @@
           >
             <img
               v-if="imageTemp"
-              :src="userInput.image_url? typeof imageTemp === 'string'? imageTemp : false || `https://tenth.run.place:90/storage/${userInput.image_url}` : '/images/tas.jpg'"
+              :src="userInput.image_url? typeof imageTemp === 'string'? imageTemp : false || `${globalImagePath}storage/${userInput.image_url}` : '/images/tas.jpg'"
               alt="Uploaded Image"
               class="object-cover w-full h-full"
             />
@@ -172,6 +172,7 @@ import { useRoute, useRouter } from "vue-router";
 const store = useStore();
 const route = useRoute()
 const router = useRouter()
+const globalImagePath = import.meta.env.VITE_IMAGE_URL
 
 const brands = computed(() => store.state.brand.brands);
 const categories = computed(() => store.state.category.categories);

@@ -72,7 +72,6 @@ export default {
 
       async makeOrder({state, commit, rootState}, payload) {
         let api = `${state.apiUrl}checkout`
-        console.log(payload)
         try {
           const { data } = await axios.post(api, payload, {
             headers: {

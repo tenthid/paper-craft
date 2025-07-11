@@ -285,16 +285,17 @@ router.beforeEach(async (to, from, next) => {
     return next(from)
   }
 
-  if(auth.checkAuth()) {
-    if(!to.meta.isAdmin) return !auth.checkRole('user')? next('/products-admin') : next()
-  }
-
+  
   if(to.meta.requireAuth) {
     return auth.checkAuth()? next() : next('/login')
   }
   
   if(to.meta.authPage) {
     return auth.checkAuth()? next(from) : next()
+  }
+  
+  if(auth.checkAuth()) {
+    if(!to.meta.isAdmin) return !auth.checkRole('user')? next('/products-admin') : next()
   }
 
   next()

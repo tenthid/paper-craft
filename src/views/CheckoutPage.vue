@@ -134,7 +134,7 @@
                 let items = {}
                 let productIds = []
                 checkoutItems.value.forEach(item => {
-                    if(items.buy) {
+                    if(route.query.buy) {
                         productIds.push({
                             id: item.id,
                             quantity: item.quantity
@@ -143,13 +143,9 @@
                         productIds.push(item.id)
                     }
                 })
-                if(!route.query.buy)  {
-                    items.reorder = true
-                    items.itemIds = productIds
-                } else {
-                    items.buy = true
-                    items.items = productIds
-                }
+                items.buy = route.query.buy
+                items.reorder = route.query.reorder
+                items.itemIds = productIds
                 const isSuccess = await store.dispatch('order/makeOrder', items)
                 if(isSuccess) {
                     store.dispatch('ui/showNotif', {message: message.value})
